@@ -134,6 +134,23 @@ We will make use of the contact details provided to initiate contact so that we 
 
 Finally, we have also created a Slack group to manage the project team for the duration of the project. The clients will be extended the offer to join the group to be more directly related to intra-team communications.
 \paragraph{Initial Ideas in response to Technical Challenges}
+There is one fundamental core technical challenge to this project, namely how to develop a means to perform reliable, efficient and fast recognition of humans in images, across a wide variety of contexts and situations.
+This, singular fundamental problem, however, can be further subdivided into various smaller problems whose potential solutions will be explored further.
+
+\begin{enumerate}
+\item Feature Analysis: The first and most important problem will be Feature Analysis which is the process whereby an image is reduced into a base set of numerical, or otherwise quantifiable, values that represent the original picture in terms of clustering together aspects of the picture into data and then making predictions from this. One potential approach to this would be to make use of a genetic algorithm that will evolve features for us which will require us to analyze and derive some base approximation of a "human" and then evolve a more appropriate value that will then examine pictures from the server and extract features from it as best as it can.
+
+\item Classification: The next issue is how to classify humans from non-humans. The classification could be done via the implementation of a neural network but in order for it to be reliable at making predictions, we will have to construct a suitably large set of training data for it to train on. This will, in theory, involve combing through all of the provided information by the client and using the aforementioned approximation algorithm to extract features for construction of training sets and so on that will train the network.
+
+\end{enumerate}
+
 \paragraph{Potential Technologies for use where not specified by client}
+
+The first and most important technology to investigate will be the neural network itself. To this end, the possibility exists to make use of the Java Neural Network framework, Neuroph. This would then be extended to provide the functionality required of the client.
+
+The second technology to consider would be JGAP: Java Genetic Algorithms Package to provide us with the basic building blocks required to formulate the genetic algorithm to derive features with.
+
 \paragraph{Deliverable to Client}
+
+The deliverable to the client will consist of a deployable program that once deployed on the Willburg server, will be able to respond to requests for human image recognition within a timely manner.
 \end{document}
