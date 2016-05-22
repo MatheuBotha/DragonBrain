@@ -10,6 +10,7 @@ Swarm Visualiser - COS 301 Main Project
 \\
 Architecture Requirements and Software Architecture
 \begin{small}
+\\
 Team: Dragon Brain
 \\
 Members:
@@ -34,16 +35,49 @@ Gerard van Wyk u14101263
 
 \pagebreak
 \section{Vision of System}
+The vision of the system, as expressed by the client, would be to create a standalone, fully functioning, experimental and teaching tool that brings to life, the functioning of a Particle Swarm Optimisation problem solver coupled to a real time graphical visualiser to display the workings of the Particle Swarm Optimisation problem solver to the user.
+
 \section{Scope of System}
+The Swarm Visualiser, as commissioned by Mr Christopher Cleghorn, has two fundamental responsibilities that are encapsulated within a single software program that is deployed to and used from a single computer at a time.
+
+The first responsibility is to provide a underlying, adaptable and fully functioning Particle Swarm Optimisation System that makes use of the Particlce Swarm Optimisation Model or PSO Model to solve problems.
+
+The second responsbility, and the more important one, is to provide a real time graphical visualisation of the PSO as it functions in terms of visualising all essential elements of the PSO as it performs problem solving and then presenting this information to the user in a real time and understandable manner.
+
+To this end, our system is ultimately responsible for providing both the underlying infrastructure in which the PSO will operate but also for providing the interface infrastructure through which the user will access the underlying PSO functionality.
+
+
 \section{Architectural Requirements}
 \subsection{Scope}
 \subsection{Quality Requirements}
+
+\paragraph{Flexibility}
+Flexibility is a very important quality requirement for the system. Various pieces of the underlying PSO or Particle Swarm Optimisation system that the Swarm Visualiser is meant to be visualising are dependent on configuration parameters and pluggable components such as Objective Functions. It is important that the system be flexible enough so that users can modify the operational parameters of the system without having to perform major code changes, ideally without having to perform code changes at all.
+\paragraph{•}
+This is particularly important when you consider that the system should not depend heavily on hard-coded components like objective functions but must rather be able to switch to new ones as and when the client requires it.
+
+\paragraph{Usability}
+Usability is another important quality requirement. Ultimately, the system is meant to be used in some capacity as both an experimental tool and a tool for aiding in teaching. Both of these would therefore require that the system be fundamentally easy to use. Some degree of technical competence is assumed on the part of the users,but for the most part, interfacing with the system to access core functionality should not be unintuitive or frustrating. 
+
+\paragraph{•}
+An additional aspect of this usability is defined in terms of how usable the interface to perform modifications to the system must be. The system, as envisioned, is meant to be highly configurable and the means by which this is accomplished must be as simple as possible. 
+
+\paragraph{•}
+Although not strictly mandated, traditional values of usability design will be considered in order to deliver on a user-friendly interface that supports maximum usability without sacrificing functionality.
 \subsection{Integration and Access Channels}
+\paragraph{•}
+The Swarm Visualiser or Particle Swarm Visualisation System that we are developing has very little in the way of integration requirements in terms of needing to interface and integrate with external services and programs. Rather, the client has expressed a desire for the system to function largely as a self-dependent and standalone system meaning that all of the functionality required by the system will be provided on-site by the program.
+
+\paragraph{•}
+That being said, the requirements for the system in terms of access channels is much more important. The client has specified that they wish for a single-point-of-access system. This translates to the provision of a single user interface that the client(s) will use to interact with and express the system's functionality. This single user interface must be designed such that it provides the graphical/visualisation requirements as specified as by the client, such as 4-screen display and support for various screen resolutions, but also must provide an interface through which the client can interact with and access the underlying system.
+
+\paragraph{•}
+Further provision for alternative deployment systems, beyond deployment of a single computer-based application, is limited due to the existing hardware demands that are contiguous to the performance requirements of the system.
 
 \section{Software Architecture Design}
 \subsection{Architectural Tactics}
 \subsection{Architectural Components}
 \subsection{Infrastructure}
-
+\subsubsection{Technologies}
 
 \end{document}
