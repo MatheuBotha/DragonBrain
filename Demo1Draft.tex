@@ -42,14 +42,31 @@ The Swarm Visualiser, as commissioned by Mr Christopher Cleghorn, has two fundam
 
 The first responsibility is to provide a underlying, adaptable and fully functioning Particle Swarm Optimisation System that makes use of the Particlce Swarm Optimisation Model or PSO Model to solve problems.
 
-The second responsbility, and the more important one, is to provide a real time graphical visualisation of the PSO as it functions in terms of visualising all essential elements of the PSO as it performs problem solving and then presenting this information to the user in a real time and understandable manner.
+The second responsibility, and the more important one, is to provide a real time graphical visualisation of the PSO as it functions in terms of visualising all essential elements of the PSO as it performs problem solving and then presenting this information to the user in a real time and understandable manner.
 
 To this end, our system is ultimately responsible for providing both the underlying infrastructure in which the PSO will operate but also for providing the interface infrastructure through which the user will access the underlying PSO functionality.
 
 
 \section{Architectural Requirements}
 \subsection{Scope}
+In terms of the Architectural Scope of the project, we have a task that requires a minimal reliance on extremal frameworks and APIs. This is on account of the fact that our product is at its core a desktop application designed to be run in an isolated environment. Additionally, the focus on minimal interference requires that we design the system in such a manner that there is as low a possibility of bottlenecking as possible. As such, we will (as far as possible) minimize the technologies being used to standard C++ and OpenGL. Additionally, the system must be designed in such a manner that the Visualizer and the underlying PSO are not tightly coupled. It should be easy to adjust one or the other without making adjustments throughout.
 \subsection{Quality Requirements}
+\paragraph{Performance}
+Performance is arguably the most vital requirement in the system that in the Visualizer's functionality. It can be defined as follows:
+\newline\textit{The amount of work accomplished in a measured time interval.}
+\newline In our case, we are going to make use of reference to \textbf{latency} and \textbf{frames per second} as a measure of performance, where latency is defined as \textit{a time interval during which a response is achieved given some request} and frames per second, or fps, is defined as \textit{a measurement of how many unique consecutive images can be shown in a graphical context per second}. It should be noted that due to the graphical implications of our task, an important factor in performance is rendering resolution.
+\paragraph{•}
+As such, the following requirements are set:
+\begin{itemize}
+	\item The architecture of the design should be efficiently designed such that when a request is issued to the Visualizer, such as changing the objective function, there is a minimal latency involved in generating a response.
+	\item The visualizer should be allow at least the following resolutions: 800x600, 1024x789, 1920x1080
+	\item Given the maximum resolution 1920x1080, the Visualizer should be capable of running at a consistent 60fps or greater when being run using a mid-tier or above Graphical Processing Unit (for example).
+	\item Given the fact that split-screen functionality is to be implemented, this must be done in a manner such that performance is not hindered dramaticall (hence, do not render multiple full resolution images and shrink them post-rendering).
+\end{itemize}
+
+\paragraph{Scalability}
+Scalability refers to the project's ability to handle a large workload for extended time periods and the methods through which this is dealt. Being an isolated application, the only workloads to be experienced are in terms of internal utilization. Hence, in terms of the task described, potential scalability issues lie within the task of assigning a large number of particles in a particular instance of running. 
+\newline However, the system must still be capable of handling a large number of particles in order to achieve a satisfactory result. As such, the requirement in place is that the system should be capable of handling a large (with some upper limit based on hardware limitations) number of particles while still obtaining a good performance result. This will be achieved through effective use of object memory management and design patterns.
 
 \paragraph{Flexibility}
 Flexibility is a very important quality requirement for the system. Various pieces of the underlying PSO or Particle Swarm Optimisation system that the Swarm Visualiser is meant to be visualising are dependent on configuration parameters and pluggable components such as Objective Functions. It is important that the system be flexible enough so that users can modify the operational parameters of the system without having to perform major code changes, ideally without having to perform code changes at all.
