@@ -93,21 +93,26 @@ Further provision for alternative deployment systems, beyond deployment of a sin
 
 \section{Architecture Design}
 \subsection{Architectural Components}
-
 \subsection{Infrastructure}
 \paragraph{•}
 When considering architectures the ones that stood out were the layered, microservices, and monolithic architectures.
 We decided on a monolithic approach. We consider this the best approach for the following reasons:
 \begin{itemize}
 	\item{High Performance Graphical Programming} 
-		Graphical programming often doesnt make use of convention OOP but instead relies on a more procedural style of programming. This is due to the fact that you want to reduce data access and layers of abstraction as much as possible so that there is less overhead when getting to the actual data processing. This lends itself to a monolithic system as it will allow the graphics pipeling direct access to the data elements without the need to go through an access layer.
+		Graphical programming often doesnt make use of conventional OOP but instead relies on a more procedural style of programming. This is due to the fact that you want to reduce data access and layers of abstraction as much as possible so that there is less overhead when getting to the actual data processing. This lends itself to a monolithic system as it will allow the graphics pipeling direct access to the data elements without the need to go through an access layer.
 	\item{No Database Persistence}
 		As there is not persistence required in the form of a data base this eliminates the need to seperate persistance from buisness logic. Once again favouring the monolithic system.
 \end{itemize}
 
 \paragraph{•}
+This means that following a monolithic pattern we can develop a comprehensive graphics pipeline along side the necessary particle swarm implementations and then simply parse the data from one to the other as quickly as possible. This is essential as performance is a key point in the specification.
 
 
 \subsubsection{Technologies}
-*ODB
+\paragraph{•}
+OpenGL was chosen as the graphics engine due to the fact that it will work crossplatform, as opposed to DirectX, and many of the CIRG member run linux machines. Since this programn is primarily going to be used by them it makes sense to cater for the target market. 
+\paragraph{•}
+Fruit is a dependency injection framework for C++, loosely inspired by the Guice framework for Java. It uses C++ metaprogramming together with some new C++11 features to detect most injection problems at compile-time. It allows to split the implementation code in "components" (aka modules) that can be assembled to form other components. From a component with no requirements it's then possible to create an injector, that provides an instance of the interfaces exposed by the component. This is a good option for the DI framework as unlike other c++ DI frameworks most of the checks are done at compile-time to try catch the errors early. Another bonus is that the syntax is similar to jUnit so it will be more comfotable to work with initially.
+
+\paragraph{•}
 \end{document}
