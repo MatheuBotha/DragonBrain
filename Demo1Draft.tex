@@ -74,10 +74,23 @@ That being said, the requirements for the system in terms of access channels is 
 \paragraph{•}
 Further provision for alternative deployment systems, beyond deployment of a single computer-based application, is limited due to the existing hardware demands that are contiguous to the performance requirements of the system.
 
-\section{Software Architecture Design}
-\subsection{Architectural Tactics}
+\section{Architecture Design}
 \subsection{Architectural Components}
-\subsection{Infrastructure}
-\subsubsection{Technologies}
 
+\subsection{Infrastructure}
+\paragraph{•}
+When considering architectures the ones that stood out were the layered, microservices, and monolithic architectures.
+We decided on a monolithic approach. We consider this the best approach for the following reasons:
+\begin{itemize}
+	\item{High Performance Graphical Programming} 
+		Graphical programming often doesnt make use of convention OOP but instead relies on a more procedural style of programming. This is due to the fact that you want to reduce data access and layers of abstraction as much as possible so that there is less overhead when getting to the actual data processing. This lends itself to a monolithic system as it will allow the graphics pipeling direct access to the data elements without the need to go through an access layer.
+	\item{No Database Persistence}
+		As there is not persistence required in the form of a data base this eliminates the need to seperate persistance from buisness logic. Once again favouring the monolithic system.
+\end{itemize}
+
+\paragraph{•}
+
+
+\subsubsection{Technologies}
+*ODB
 \end{document}
