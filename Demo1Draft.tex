@@ -91,26 +91,17 @@ That being said, the requirements for the system in terms of access channels is 
 \paragraph{•}
 Further provision for alternative deployment systems, beyond deployment of a single computer-based application, is limited due to the existing hardware demands that are contiguous to the performance requirements of the system.
 
-\section{Architecture Design}
-\subsection{Architectural Components}
-\subsection{Infrastructure}
+\section{Architecture Patterns}
+\subsection{Layered System}
 \paragraph{•}
-When considering architectures the ones that stood out were the layered, microservices, and monolithic architectures.
-We decided on a monolithic approach. We consider this the best approach for the following reasons:
-\begin{itemize}
-	\item{High Performance Graphical Programming} 
-		Graphical programming often does not make use of conventional OOP but instead relies on a more procedural style of programming. This is due to the fact that you want to reduce data access and layers of abstraction as much as possible so that there is less overhead when getting to the actual data processing. This lends itself to a monolithic system as it will allow the graphics pipe-lining direct access to the data elements without the need to go through an access layer.
-	\item{No Database Persistence}
-		As there is no persistence required in the form of a database, this eliminates the need to separate persistence from business logic. Once again favouring the monolithic system.
-	\item{Real Time Visualisation}
-	Due to the real time nature of program, that is visualisations are displayed to the user as they are computed by the underlying PSO system, increasing the layering of the system only increases the computational overhead required for the PSO system to communicate to the Rendering module. Instead of a fully layered hierarchy, modular access channels between Rendering and PSO can provide better performance without greatly increasing the computational overhead of message passing.	
-\end{itemize}
-
-\paragraph{•}
-This means that following a monolithic pattern we can develop a comprehensive graphics pipeline along side the necessary particle swarm implementations and then simply parse the data from one to the other as quickly as possible. This is essential as performance is a key point in the specification.
-
-
-\subsubsection{Technologies}
+*Why layered?*
+\subsubsection{Optimiser layer}
+*Explain Approach to this layer*
+\subsubsection{Graphics Layer}
+*Why layered?*
+\subsubsection{Client Layer}
+*Why layered?*
+\subsection{Technologies}
 \paragraph{•}
 OpenGL was chosen as the graphics engine due to the fact that it will work cross-platform, as opposed to DirectX, and many of the CIRG members run Linux machines, as per client stipulations. Since this program is primarily going to be used by them it makes sense to cater for the target market. 
 \paragraph{•}
