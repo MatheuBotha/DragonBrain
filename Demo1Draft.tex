@@ -94,13 +94,17 @@ Further provision for alternative deployment systems, beyond deployment of a sin
 \section{Architecture Patterns}
 \subsection{Layered System}
 \paragraph{•}
-*Why layered?*
+Why use a layered system?
+\item It simplifies the design considerably.
+\item It enables different team members to work on different components without being dependant on the progress of the other components.
+\item It enables different team members to work at various levels of abstraction.
+\item It supports the portability of software artifacts.
 \subsubsection{Optimiser layer}
-*Explain Approach to this layer*
+The Optimiser layer will encompass all the functions performed by the generic interchangeable optimisation algorithm that is being visualised. The graphics layer will request information from the optimiser layer at regular intervals in order to render the particles representing the optimiser's current sample points onto the current fitness landscape. The optimiser will act according to what type of optimiser has been selected by the user.
 \subsubsection{Graphics Layer}
-*Why layered?*
+The Graphics Layer is responsible for using requests from the client layer and the output of the Optimiser Layer to construct a 2D image frames of the 3D scene to be displayed. 
 \subsubsection{Client Layer}
-*Why layered?*
+The client layer will handle Graphical User Interface elements that the software user will interact with, and will present the output of the Graphics layer(and implicitly the Optimiser layer) to the user. The user will also use the client layer to set parameters of the optimiser layer to determine which fitness landscape will be used, which optimisation algorithm will be used, and also let the user set the optimiser's parameters.
 \subsection{Technologies}
 \paragraph{•}
 OpenGL was chosen as the graphics engine due to the fact that it will work cross-platform, as opposed to DirectX, and many of the CIRG members run Linux machines, as per client stipulations. Since this program is primarily going to be used by them it makes sense to cater for the target market. 
