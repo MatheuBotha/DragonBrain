@@ -116,13 +116,30 @@ The Optimiser layer will encompass all the functions performed by the generic in
 The Graphics Layer is responsible for using requests from the client layer and the output of the Optimiser Layer to render the scene and pass it back to the client interface.
 \subsubsection{Approach}
 \paragraph{•}
-Graphics engine are not traditionally developed under the traditional OO approach. This is mainly due to various performance issue that graphical processing encounters with Object Orientation. Instead a more effective approach is data-driven design. 
-Its basic premise is simple: construct your code around the data structures, and describe what you want to achieve in terms of manipulations of these structures.
-\subsection{Unit Testing}
+Graphics engine are not traditionally developed under the traditional OO approach. This is mainly due to various performance issue that graphical processing encounters with Object Orientation. Instead a more effective approach is data-driven design. Its basic premise is simple: construct your code around the data structures, and describe what you want to achieve in terms of manipulations of these structures.
+
+\paragraph{•}
+Functional Reactive Programming is one such programming style that promotes data driven design. There are 3 common divisions of FRP:
+\begin{itemize}
+\item Discrete - Formulations such as Event-Driven FRP and Elm require that updates are discrete and event-driven. These formulations have pushed for practical FRP, focusing on semantics that have a simple API that can be implemented efficiently in a setting such as robotics or in a web-browser.
+
+In these formulations, it is common that the ideas of behaviors and events are combined into signals that always have a current value, but change discretely.
+
+\item Continuous - The earliest formulation of FRP used continuous semantics, aiming to abstract over many operational details that are not important to the meaning of a program. The key properties of this formulation are:
+\begin{itemize}
+\item Modeling values that vary over continuous time, called "behaviors" and later "signals".
+\item Modeling "events" which have occurrences at discrete points in time.
+\item The system can be changed in response to events, generally termed "switching."
+\item The separation of evaluation details such as sampling rate from the reactive model.
+\end{itemize}
+
+This semantic model of FRP in side-effect free languages is typically in terms of continuous functions, and typically over time.
+\end{itemize}
+\subsubsection{Unit Testing}
 \paragraph{•}
 With a data orientated approach, your aim is to create a compartment of code that contains functions that will typically only have a single use. i.e. no decisions will ever be made in the functions, the decisions will be made the the graphics engine and the graphics engine will use this grab bag of functions to execute whatever it has decided. This approach allows for powerful, comprehensive unit testing due to the fact that the functions are minimalistic in nature. This is especially useful when debugging a graphical applications as you can unit test an image output, but if you have a comprehensive unit testing backbone for the functions then it can make it easier to see logical mistakes.
 \paragraph{•}
-The basic premise of data orientated design is to design the code around the data, instead of abstracting the data behind models.while this may seem counter intuitive it is still possible to achieve 
+The basic premise of data orientated design is to design the code around the data, instead of abstracting the data behind models. While this may seem counter intuitive it is still possible to achieve a familiar level of abstraction while still making use of the performance increases that come with the approach.
 \subsection{Client Layer}
 The client layer will handle Graphical User Interface elements that the software user will interact with, and will present the output of the Graphics layer(and implicitly the Optimiser layer) to the user. The user will also use the client layer to set parameters of the optimiser layer to determine which fitness landscape will be used, which optimisation algorithm will be used, and also let the user set the optimiser's parameters.
 \subsection{Technologies}
@@ -138,4 +155,7 @@ The graphics layer will make use of the OpenGL Mathematics(GLM) framework. This 
 The client Layer will make use of the GLFW. GLFW is an Open Source, multi-platform library for creating windows with OpenGL contexts and receiving input and events. It is easy to integrate into existing applications and does not lay claim to the main loop.
 \subsubsection{CMake}
 CMake is an open-source, cross-platform family of tools designed to build, test and package software. CMake is used to control the software compilation process using simple platform and compiler independent configuration files.
+\subsubsection{Fraps}
+Fraps is a universal Windows application that can be used with games using DirectX or OpenGL graphic technology. For our purposes it will be used as the benchmarking software as it can how how many Frames Per Second (FPS) you are getting in a corner of your screen.  Perform custom benchmarks and measure the frame rate between any two points. It can also save the statistics out to disk and use them for your own reviews and applications. It also has useful Screen Capture Software as well as Realtime Video Capture Software which can be useful for demoing purposes.
+
 \end{document}
