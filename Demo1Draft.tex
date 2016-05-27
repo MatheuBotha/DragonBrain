@@ -114,7 +114,7 @@ The Model View Controller design is structured as follows: The Model handles bus
 \begin{itemize}
 \item Model: The Model in our system here would be a shared data storage pool that would be used by the optimiser to push data to as it performs its operations. Furthermore, the Rendering layer will be polling, or pulling data, from the model to satisfy rendering demands. The great benefit of this is that because both components can perform pushes and pulls to the shared data source, and synchronisation can be applied to ensure data integrity, we can decouple the Rendering Layer from the Optimiser layer and cater for various differences such as latency or frames per second. The rendering layer will always render what it can get from the Model at the point of call, and the Optimiser layer will always push what it has currently done. From this, we can apply various synchronisation points that allow us to stagger/bridge the gaps between both layers.
 
-\item View: The View in our system is representative of the Client or Interface Layer. The user will be using this layer to view the results of visualisations but it also serves as the primary input point for configuring the Optimiser and the Rendering Layers.
+\item View: The View in our system is representative of the Client or Interface Layer (often referred to as the Client component throughout this text). The user will be using this layer to view the results of visualisations but it also serves as the primary input point for configuring the Optimiser and the Rendering Layers.
 
 \item Layered Controller: The Controller in our system is split into two sub-sections designed in a layered architecture (bound to the local scope). The two sections are the Rendering Layer and the Optimiser layer.
 \begin{enumerate}
@@ -171,9 +171,9 @@ This semantic model of FRP in side-effect free languages is typically in terms o
 There are two common usages of FRP in systems: push-based and pull-based systems. Both have potential advantages and disadvantages within the context of the system.
 
 \begin{itemize}
-\item Push-based systems take events and push them through a signal network to achieve a result. This would be then that events created by the optimiser layer would then be pushed through the signal network such that they were delivered to the client layer via the Rendering layer.
+\item Push-based systems take events and push them through a signal network to achieve a result. This would be then that events created by the optimiser layer would then be pushed through the signal network such that they were delivered to the client component via the Rendering layer.
 
-\item Pull-based systems wait until the result is demanded, and work backwards through the network to retrieve the value demanded. This would be the opposite in that the client layer would demand certain results/services and the request would be filtered down towards the optimiser layer and then delivered back to the Client layer via the Rendering layer.
+\item Pull-based systems wait until the result is demanded, and work backwards through the network to retrieve the value demanded. This would be the opposite in that the client component would demand certain results/services and the request would be filtered down towards the optimiser layer and then delivered back to the Client component via the Rendering layer.
 \end{itemize}
 
 By making use of a shared data pool, to which both the Rendering and Optimiser layer are able to pull and push data from, we obviate the need for an explicit message passing framework.
