@@ -100,14 +100,37 @@ That being said, the requirements for the system in terms of access channels is 
 Further provision for alternative deployment systems, beyond deployment of a single computer-based application, is limited due to the existing hardware demands that are contiguous to the performance requirements of the system.
 
 \section{Architecture Patterns}
+\subsection{Variant MVC with Layered Controller}
+\paragraph{Motivations}
+\begin{itemize}
+\item We separate the Graphical engine from the optimisation algorithm
+\item We enable concurrent development of system components as each component is largely independent 
+\item It enables different team members to work on different components without being dependent on the progress of the other components.
+\item It enables components of the system to be modified and updated without requiring system wide updates.
+\end{itemize}
+
+\paragraph{Components}
+\begin{itemize}
+\item Model:
+\item View:
+\item Layered Controller:
+\end{itemize}
+
+\pagebreak
+
+\begin{figure}
+\includegraphics[scale=0.4]{arch}
+\caption{A diagram to indicate the proposed system architecture}
+\end{figure}
+
 \subsection{Layered System}
 \paragraph{•}
 Why use a layered system?
 \begin{itemize}
 \item It simplifies the design considerably.
-\item It enables different team members to work on different components without being dependant on the progress of the other components.
+\item It enables different team members to work on different components without being dependent on the progress of the other components.
 \item It enables different team members to work at various levels of abstraction.
-\item It supports the portability of software artefacts.
+\item It supports the portability of software artifacts.
 \end{itemize}
 \includegraphics{Overview}
 \subsection{Optimiser layer}
@@ -135,6 +158,17 @@ In these formulations, it is common that the ideas of behaviors and events are c
 
 This semantic model of FRP in side-effect free languages is typically in terms of continuous functions, and typically over time.
 \end{itemize}
+
+\paragraph{}
+There are two common usages of FRP in systems: push-based and pull-based systems. Both have potential advantages and disadvantages within the context of the system.
+
+\begin{itemize}
+\item Push-based systems take events and push them through a signal network to achieve a result. This would be then that events created by the optimiser layer would then be pushed through the signal network such that they were delivered to the client layer via the Rendering layer.
+
+\item Pull-based systems wait until the result is demanded, and work backwards through the network to retrieve the value demanded. This would be the opposite in that the client layer would demand certain results/services and the request would be filtered down towards the optimiser layer and then delivered back to the Client layer via the Rendering layer.
+\end{itemize}
+
+By making use of a shared data pool, to which both the Rendering and Optimiser layer are able to pull and push data from, we obviate the need for an explicit message passing framework.
 \subsubsection{Unit Testing}
 \paragraph{•}
 With a data orientated approach, your aim is to create a compartment of code that contains functions that will typically only have a single use. i.e. no decisions will ever be made in the functions, the decisions will be made the the graphics engine and the graphics engine will use this grab bag of functions to execute whatever it has decided. This approach allows for powerful, comprehensive unit testing due to the fact that the functions are minimalistic in nature. This is especially useful when debugging a graphical applications as you can unit test an image output, but if you have a comprehensive unit testing backbone for the functions then it can make it easier to see logical mistakes.
