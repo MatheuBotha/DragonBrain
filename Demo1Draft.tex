@@ -111,8 +111,9 @@ Further provision for alternative deployment systems, beyond deployment of a sin
 
 \paragraph{Components}
 \begin{itemize}
-\item Model:
-\item View:
+\item Model: The Model in our system here would be a shared data storage pool that would be used by the optimiser to push data to as it performs its operations. Furthermore, the Rendering layer will be polling, or pulling data, from the model to satisfy rendering demands. The great benefit of this is that because both components can perform pushes and pulls to the shared data source, and synchronisation can be applied to ensure data integrity, we can decouple the Rendering Layer from the Optimiser layer and cater for various differences such as latency or frames per second. The rendering layer will always render what it can get from the Model at the point of call, and the Optimiser layer will always push what it has currently done. From this, we can apply various synchronisation points that allow us to stagger/bridge the gaps between both layers.
+
+\item View: The View in our system is representative of the Client or Interface Layer. The user will be using this layer to view the results of visualisations but it also serves as the primary input point for configuring the Optimiser and the Rendering Layers.
 \item Layered Controller:
 \end{itemize}
 
