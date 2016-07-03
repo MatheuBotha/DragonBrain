@@ -134,7 +134,7 @@ Page1Form {
         x: 31
         y: 119
         color: "#ffffff"
-        visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm optimization" ||
+        visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm Optimization" ||
                   algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
         text: qsTr("PSO Mode")
         font.pixelSize: 15
