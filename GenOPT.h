@@ -30,12 +30,15 @@
 #include "../OPT_Algorithms/RandomSearch.h"
 #include "../Obj_Functions/DummyFunction.h"
 #include "../Obj_Functions/ObjectiveFunction.h"
+
+#include <climits>
 #include <string>
 #include <random>
 #include <sstream>
 #include <ctime>
 #include <cstdio>
-#include <cstring>
+#include <cstring>`
+#include <vector>
 
 using namespace std;
 
@@ -46,7 +49,9 @@ public:
     /// Creates a blank, unconfigured GenOPT
     GenOPT() { }
 
-    /** @brief The Configuration Constructor
+    virtual ~GenOPT();
+
+/** @brief The Configuration Constructor
      *
      * @param OTP An integer indicating which Optimisation Strategy to configure for this GenOPT
      * @param OF An integer indicating which Objective Function to configure for this GenOPT
@@ -60,9 +65,9 @@ public:
      * associated parameters.
      *
      * */
-    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight, int swarmSize, int neighbourhoodSize, bool gBest) : maxVelocity(
+    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight, int swarmSize, int neighbourhoodSize, bool gBest,double cOne,double cTwo) : maxVelocity(
             maxVelocity), inertiaWeight(inertiaWeight), swarmSize(swarmSize), neighbourhoodSize(neighbourhoodSize),
-                                                                                                         gBest(gBest) {
+                                                                                                         gBest(gBest),c1(cOne),c2(cTwo) {
 
         swarm=new Particle[swarmSize];
 
@@ -86,6 +91,20 @@ public:
             default: solvingProcess=new RandomSearch();
         }
 
+    neighbourhoodMatrix=new int * [swarmSize];
+
+        for (int i = 0; i < swarmSize; ++i)
+        {
+            neighbourhoodMatrix[i]=new int[swarmSize];
+        }
+    for (int i=0;i<swarmSize;i++)
+    {
+        for(int j=0;j<swarmSize;j++)
+        {
+            neighbourhoodMatrix[i][j]=-1;
+        }
+    }
+    generateSwarmNMatrix();
     }
 
     /*A method that receives all of the positions of the configured particles and instantiates the swarm accordingly.
@@ -113,6 +132,7 @@ public:
      *
      *      Example output for 3 dimensions: 7;4;2
      * */
+
     string generateParticleCoordinates(int ** arr,int dimensions);
     /*This method will take dimensions and generate an array containing all of the initial positions for the
      * all particles in the swarm
@@ -122,6 +142,19 @@ public:
      * 0:[5;4;3],1:[3;2;1]
     */
     string * generateSwarmInitialConfiguration(int ** arr,int dimensions);
+
+
+    /*
+     * This method will generate the swarm linkages between all of the particles.
+     * This is accomplished by randomly assigning, uniquely, particles to neighbourhoods, based on a given size,
+     * until that neighbourhood is fully completed. Particles are allowed to have overlapping neighbourhoods in terms
+     * of neighbourhoods having particles that are already in other neighbourhoods but a particle will only view
+     * the local scope of its own neighbourhood.
+     *
+     * This method also helps to account for a global scope since it will mean that if global best is chosen, it will
+     * then assign all of the particles per neighbourhood to all others.
+     * */
+    void generateSwarmNMatrix();
 
     ///Getter for Swarm Size
     int getSwarmSize() const {
@@ -204,6 +237,26 @@ public:
         GenOPT::swarm = swarm;
     }
 
+    ///Getter for C1
+    double getC1() const {
+        return c1;
+    }
+
+    ///Setter for C1
+    void setC1(double c1) {
+        GenOPT::c1 = c1;
+    }
+
+    ///Getter for C2
+    double getC2() const {
+        return c2;
+    }
+
+    ///Setter for C2
+    void setC2(double c2) {
+        GenOPT::c2 = c2;
+    }
+
 private:
 
     OPT_Process * solvingProcess; ///> The pointer to the solving process specific to this instance of the GenOPT
@@ -211,6 +264,32 @@ private:
     ObjectiveFunction * objFunction; ///> The pointer to the Objective Function specific to this instance of the GenOPT
 
     Particle * swarm;///>A pointer to an array used to hold the swarm
+
+    /* Swarm Configuration Structure that stores the links between particles in the swarm.
+     *
+     * The neighbourhood matrix is a 2D integer matrix structure that represents the links between the particles in the
+     * swarm by use of integer values in the matrix representing a relationship between the specific index and its
+     * row/column index which represents the particles.
+     *
+     * For example,
+     *   0 1 2
+     * 0 x 1 -1
+     * 1 1 x -1
+     * 2 1 1 x
+     *
+     * In the above example, we have 3 particles, 0-2. Obviously, a particle cannot be in a neighbourhood with itself
+     * so x, INT_MAX, is used to denote this when a particle's coordinates are symmetrical. In other cases, the use
+     * of 1 or -1 is to denote either that those particles are in a neighbourhood or not, with 1 being yes and -1 being
+     * no.
+     *
+     * Note that this relationship only works row wise due to the possibility of neighbourhood overlap. So for instance,
+     * we can see that particle 0 has only particle 1 in its neighbourhood. Particle 1, has particle 0 in its neighbourhood
+     * but this is a case of neighbourhood overlap and both these neighbourhoods are separate entities which overlap
+     * rather than bi-directional relationships although a column wise reading will indicate which of the particles
+     * are in a neighbourhood with a given particle.
+     *
+     * */
+    int ** neighbourhoodMatrix;
 
     int swarmSize;///>The size of the swarm
 
@@ -221,6 +300,9 @@ private:
     int neighbourhoodSize;///> The size of the neighbourhoods for consideration. Neighbourhoods of max size are Global Best Solutions
 
     bool gBest; ///< The variable used to indicate if Global Best solving is in play
+
+    double c1; ///< The variable used to store the value of the Cognitive Acceleration coefficient
+    double c2; ///< The variable used to store the value of the Social Acceleration coefficient
 };
 
 
