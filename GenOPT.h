@@ -65,9 +65,20 @@ public:
      * associated parameters.
      *
      * */
-    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight, int swarmSize, int neighbourhoodSize, bool gBest,double cOne,double cTwo,SnapshotManager & snaps) : maxVelocity(
+    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight,double transA,double transB,double transC, int swarmSize, int neighbourhoodSize,int ** dimensionBounds, string * placements,int dimensions,bool gBest,double cOne,double cTwo,SnapshotManager & snaps) : maxVelocity(
             maxVelocity), inertiaWeight(inertiaWeight), swarmSize(swarmSize), neighbourhoodSize(neighbourhoodSize),
                                                                                                          gBest(gBest),c1(cOne),c2(cTwo) {
+
+        string * tmpPlacements;
+        if (placements[0].compare("-")==0)
+        {
+            tmpPlacements=new string[swarmSize];
+            tmpPlacements=generateSwarmInitialConfiguration(dimensionBounds,dimensions);
+            initialSetupOfSwarm(tmpPlacements,dimensions);
+        } else
+            {
+                initialSetupOfSwarm(placements,dimensions);
+            }
 
         swarm=new Particle[swarmSize];
 
@@ -105,6 +116,10 @@ public:
         }
     }
     generateSwarmNMatrix();
+
+    transformationA=transA;
+    transformationB=transB;
+    transformationC=transC;
     }
 
     /*A method that receives all of the positions of the configured particles and instantiates the swarm accordingly.
@@ -304,6 +319,9 @@ private:
     double c1; ///< The variable used to store the value of the Cognitive Acceleration coefficient
     double c2; ///< The variable used to store the value of the Social Acceleration coefficient
 
+    double transformationA;
+    double transformationB;
+    double transformationC;
     SnapshotManager & snappy;
 };
 
