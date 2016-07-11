@@ -10,6 +10,10 @@ private:
 
 public:
     Snapshot(Particle *ParticleList, int **ParticleLinks);
+    void setParticleList(Particle *ParticleList);
+    void setParticleLinks(int **ParticleLinks);
+    Particle* getParticleList();
+    int** getParticleLinks();
 };
 
 #endif //DRAGONBRAIN_SNAPSHOT_H
