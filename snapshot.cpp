@@ -9,7 +9,7 @@
  * The sequence of snapshots has multiple uses, primarily to be used the graphics system to visualize the locations of
  * the particles.
  *
- * @note Still in Progress
+ * @note In Progress
  *
  * @author Gerard van wyk u14101263
  *
@@ -32,6 +32,22 @@ public:
     Snapshot(Particle* ParticleList, int** ParticleLinks){
         this->ParticleList = ParticleList;
         this->ParticleLinks = ParticleLinks;
+    }
+    
+    void setParticleList(Particle *ParticleList){
+        this->ParticleList = ParticleList;
+    }
+    
+    void setParticleLinks(int **ParticleLinks){
+        this->ParticleLinks = ParticleLinks;
+    }
+    
+    Particle* getParticleList(){
+        return this->ParticleList;
+    }
+    
+    int** getParticleLinks(){
+        return this->ParticleLinks;
     }
 
 };
