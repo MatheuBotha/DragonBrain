@@ -65,7 +65,7 @@ public:
      * associated parameters.
      *
      * */
-    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight, int swarmSize, int neighbourhoodSize, bool gBest,double cOne,double cTwo) : maxVelocity(
+    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight, int swarmSize, int neighbourhoodSize, bool gBest,double cOne,double cTwo,SnapshotManager & snaps) : maxVelocity(
             maxVelocity), inertiaWeight(inertiaWeight), swarmSize(swarmSize), neighbourhoodSize(neighbourhoodSize),
                                                                                                          gBest(gBest),c1(cOne),c2(cTwo) {
 
@@ -303,6 +303,8 @@ private:
 
     double c1; ///< The variable used to store the value of the Cognitive Acceleration coefficient
     double c2; ///< The variable used to store the value of the Social Acceleration coefficient
+
+    SnapshotManager & snappy;
 };
 
 
