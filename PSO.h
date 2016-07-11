@@ -8,7 +8,6 @@
  * @note Still in Progress
  *
  * @author Emilio Singh u14006512
- * @author Gerard van Wyk u14101263
  *
  * @version 0.1
  *
