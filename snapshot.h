@@ -7,6 +7,9 @@
 
 class Snapshot {
 private:
+    Snapshot* next;
+    Particle* ParticleList;
+    int** ParticleLinks;
 
 public:
     Snapshot(Particle *ParticleList, int **ParticleLinks);
