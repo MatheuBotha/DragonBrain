@@ -20,6 +20,8 @@
 #ifndef OPT_PARTICLE_H
 #define OPT_PARTICLE_H
 
+#include <cstdlib>
+using namespace std;
 
 class Particle {
 
@@ -32,6 +34,43 @@ public:
     ///Sets the velocity of the particle
     void setVelocity(double *velocity) {
         Particle::velocity = velocity;
+    }
+
+    void setVelocitybyNumber(double v){
+        *velocity=v;
+    }
+
+    ///Sets the position of the particle based on an array input
+    void setParticlePosition(double * positions,int dimensions){
+
+        if (positionArray!= nullptr)
+        {
+            delete positionArray;
+        }
+
+
+        positionArray=new double[dimensions];
+
+        for(int i=0;i<dimensions;i++)
+        {
+            positionArray[i]=positions[i];
+        }
+    }
+
+    ///Sets particle positions based on fixed size array
+    void setParticlePositionByArray(double positions[],int dimensions){
+
+        if (positionArray!= nullptr)
+        {
+            delete positionArray;
+        }
+
+        positionArray=new double[dimensions];
+
+        for(int i=0;i<dimensions;i++)
+        {
+            positionArray[i]=positions[i];
+        }
     }
 
     ///Sets a value at dimension to positionValue in the position array
@@ -92,11 +131,19 @@ public:
 
     }
 
+    double getFitnessValue() const {
+        return fitnessValue;
+    }
+
+    void setFitnessValue(double fitnessValue) {
+        Particle::fitnessValue = fitnessValue;
+    }
+
 private:
     double * positionArray; ///> the array of double values holding the positions per dimension of the particle
 
     double * velocity; ///> the velocity of the particle
-
+    double fitnessValue=0; ///> The fitness value of the particle in relation to an objective function
 
 };
 
