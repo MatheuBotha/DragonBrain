@@ -2,7 +2,8 @@ QT += qml quick
 
 CONFIG += c++11
 
-SOURCES += Interface.cpp
+SOURCES += Interface.cpp \
+    settingspackage.cpp
 
 RESOURCES += qml.qrc
 
@@ -12,4 +13,7 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-HEADERS +=
+HEADERS += \
+    settingspackage.h
+
+DISTFILES +=

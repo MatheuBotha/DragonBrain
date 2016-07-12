@@ -15,6 +15,7 @@ ApplicationWindow {
     property alias swipeView: swipeView
     property alias page1: page1
     property alias page2: page2
+    property alias page3: page3
     flags: Qt.FramelessWindowHint | Qt.Window
 
 
@@ -40,6 +41,14 @@ ApplicationWindow {
             rotation: 0
         }
 
+        Page3 {
+            id: page3
+            x: 0
+            y: 0
+            clip: true
+            rotation: 0
+        }
+
     }
 
     footer: TabBar {
@@ -50,6 +59,9 @@ ApplicationWindow {
         }
         TabButton {
             text: qsTr("Environmental Config")
+        }
+        TabButton {
+            text: qsTr("System Config")
         }
     }
 

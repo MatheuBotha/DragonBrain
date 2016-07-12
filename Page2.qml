@@ -7,6 +7,16 @@ import QtQuick.Controls.Styles 1.0
 import QtQuick.Dialogs 1.2
 
 Page2Form {
+    property alias swarmSize: swarmSize
+    property alias x1_min: x1_min
+    property alias x1_max: x1_max
+    property alias x2_min: x2_min
+    property alias x2_max: x2_max
+    property alias oneD_button: oneD_button
+    property alias twoD_button: twoD_button
+    property alias randomPosbutton: randomPosbutton
+    property alias userPosbutton: userPosbutton
+
     SpinBox {
         id: swarmSize
         x: 44
@@ -15,7 +25,7 @@ Page2Form {
         height: 40
         opacity: 0.7
         editable: true
-        from: -2147483647
+        from: 0
         to: 2147483647
     }
 
@@ -32,45 +42,72 @@ Page2Form {
 
     GroupBox {
         id: groupBox1
-        x: 234
-        y: 35
+        x: 217
+        y: 40
         width: 398
-        height: 278
+        height: 231
         clip: false
         visible: true
         font.bold: true
         font.pixelSize: 15
 
-        SpinBox {
+        TextField {
             id: x1_min
             x: -3
             y: 88
-            opacity: 0.7
-            editable: true
-            from: -2147483647
-            to: 2147483647
+            validator: DoubleValidator {
+                locale: "English"
+                decimals: 4
+            }
+            width: 169
+            height: 40
+            clip: true
+            color: "#000"
+            background: Rectangle
+            {
+                color: "#DDD"
+            }
+            text: "0.0"
         }
 
-        SpinBox {
+        TextField {
             id: x1_max
             x: 192
             y: 88
-            opacity: 0.7
-            editable: true
-            from: -2147483647
-            to: 2147483647
+            validator: DoubleValidator {
+                locale: "English"
+                decimals: 4
+            }
+            width: 169
+            height: 40
+            clip: true
+            color: "#000"
+            background: Rectangle
+            {
+                color: "#DDD"
+            }
+            text: "0.0"
         }
 
 
 
-        SpinBox {
+        TextField {
             id: x2_max
             x: 192
-            y: 210
-            opacity: 0.7
-            editable: true
-            from: -2147483647
-            to: 2147483647
+            y: 158
+            validator: DoubleValidator {
+                locale: "English"
+                decimals: 4
+            }
+            width: 169
+            height: 40
+            clip: true
+            color: "#000"
+            background: Rectangle
+            {
+                color: "#DDD"
+            }
+            text: "0.0"
             visible: twoD_button.checked
         }
 
@@ -101,8 +138,8 @@ Page2Form {
 
         Label {
             id: x2_maxlabel
-            x: 192
-            y: 186
+            x: 190
+            y: 134
             text: qsTr("Max of dimension 2 (x2)")
             color: "#ffffff"
             font.bold: true
@@ -112,8 +149,8 @@ Page2Form {
 
         Label {
             id: x2_minlabel
-            x: -5
-            y: 186
+            x: -2
+            y: 134
             text: qsTr("Min of dimension 2 (x2)")
             color: "#ffffff"
             font.bold: true
@@ -162,15 +199,24 @@ Page2Form {
             }
         }
 
-        SpinBox {
+        TextField {
             id: x2_min
             x: -3
-            y: 210
-            to: 2147483647
-            opacity: 0.7
-            editable: true
+    y: 158
+            validator: DoubleValidator {
+                locale: "English"
+                decimals: 4
+            }
+            width: 169
+            height: 40
+            clip: true
+            color: "#000"
+            background: Rectangle
+            {
+                color: "#DDD"
+            }
+            text: "0.0"
             visible: twoD_button.checked
-            from: -2147483647
         }
     }
 
@@ -179,9 +225,9 @@ Page2Form {
     GroupBox {
         id: groupBox2
         x: 44
-        y: 113
+        y: 110
         width: 157
-        height: 200
+        height: 161
 
         Label {
             id: startPosLabel
@@ -228,10 +274,108 @@ Page2Form {
 
     }
 
+    TextField {
+        id: transformationA
+        validator: DoubleValidator {
+            locale: "English"
+            decimals: 4
+        }
+        x: 44
+        y: 334
+        width: 169
+        height: 40
+        clip: true
+        color: "#000"
+        background: Rectangle
+        {
+            color: "#DDD"
+        }
+        text: "1.0"
+    }
+
+    TextField {
+        id: transformationB
+        validator: DoubleValidator {
+            locale: "English"
+            decimals: 4
+        }
+        x: 244
+        y: 334
+        width: 169
+        height: 40
+        clip: true
+        color: "#000"
+        background: Rectangle
+        {
+            color: "#DDD"
+        }
+        text: "0.0"
+    }
+
+    TextField {
+        id: transformationC
+        validator: DoubleValidator {
+            locale: "English"
+            decimals: 4
+        }
+
+        x: 444
+        y: 334
+        width: 169
+        height: 40
+        clip: true
+        color: "#000"
+        background: Rectangle
+        {
+            color: "#DDD"
+        }
+        text: "0.0"
+    }
+
+    Label {
+        id: transALabel
+        x: 44
+        y: 292
+        width: 180
+        color: "#ffffff"
+        text: qsTr("Growth/Shrink rate (default:1)")
+        horizontalAlignment: Text.AlignLeft
+        wrapMode: Text.WordWrap
+        font.pixelSize: 15
+        font.bold: true
+
+
+
+    }
+
+    Label {
+        id: transBLabel
+        x: 253
+        y: 292
+        width: 180
+        color: "#ffffff"
+        text: qsTr("Horizontal Shift (default:0)")
+        wrapMode: Text.WordWrap
+        font.pixelSize: 15
+        font.bold: true
+    }
+
+    Label {
+        id: transCLabel
+    x: 446
+    y: 292
+    width: 180
+    color: "#ffffff"
+    text: qsTr("Vertical Shift    (default:0)")
+    wrapMode: Text.WordWrap
+    font.pixelSize: 15
+    font.bold: true
+}
+
     Button {
         id: positionFile
         x: 44
-        y: 340
+        y: 395
         width: 157
         height: 40
         text: qsTr("Positions Text File")
@@ -242,8 +386,8 @@ Page2Form {
 
     TextField {
         id: positionText
-        x: 234
-        y: 340
+        x: 217
+        y: 395
         width: 398
         height: 40
         color: "#ffffff"
