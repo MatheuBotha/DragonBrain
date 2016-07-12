@@ -25,6 +25,7 @@
 class Snapshot{
 
 private:
+    Snapshot* next;
     Particle* ParticleList;
     int** ParticleLinks;
 
