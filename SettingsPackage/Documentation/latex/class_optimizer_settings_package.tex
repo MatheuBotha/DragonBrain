@@ -1,0 +1,176 @@
+\hypertarget{class_optimizer_settings_package}{}\section{Optimizer\+Settings\+Package Class Reference}
+\label{class_optimizer_settings_package}\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+
+
+{\ttfamily \#include $<$graphicssettingspackage.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_optimizer_settings_package_a9562747ebfbde1cbda03fee425d886af}{Optimizer\+Settings\+Package} ()\hypertarget{class_optimizer_settings_package_a9562747ebfbde1cbda03fee425d886af}{}\label{class_optimizer_settings_package_a9562747ebfbde1cbda03fee425d886af}
+
+\begin{DoxyCompactList}\small\item\em The default constructor for an \hyperlink{class_optimizer_settings_package}{Optimizer\+Settings\+Package}. \end{DoxyCompactList}\item 
+\hyperlink{class_optimizer_settings_package_a69a8c18448ba70702fc6fa3dd87848b4}{Optimizer\+Settings\+Package} (std\+::string $\ast$, double, double, double)
+\begin{DoxyCompactList}\small\item\em Creates a \hyperlink{class_optimizer_settings_package}{Optimizer\+Settings\+Package} with specified settings (currently unused) \end{DoxyCompactList}\item 
+std\+::string $\ast$ \hyperlink{class_optimizer_settings_package_abbc65564f1d7fae597e36f64c0ba4846}{get\+Particle\+Placement\+String} ()
+\item 
+double \hyperlink{class_optimizer_settings_package_af914190cf768d01151748918824caadc}{get\+Inertia\+Weight} ()
+\item 
+double \hyperlink{class_optimizer_settings_package_af760320d4abd50d7202d174064c0081d}{get\+Cognitive\+Coefficient} ()
+\item 
+double \hyperlink{class_optimizer_settings_package_a1c9c6216fdc974d98240a0ed5a935ab5}{get\+Social\+Coefficient} ()
+\item 
+void \hyperlink{class_optimizer_settings_package_ae0b23faba2bbc26bd43b2a39077524cf}{set\+Particle\+Placement\+String} (std\+::string $\ast$)
+\begin{DoxyCompactList}\small\item\em Sets the Particle Placement. \end{DoxyCompactList}\item 
+void \hyperlink{class_optimizer_settings_package_a00f4ac2ec3d1b11b2c0c056dc20e902b}{set\+Inertia\+Weight} (double)
+\begin{DoxyCompactList}\small\item\em Sets the Inertia Weight. \end{DoxyCompactList}\item 
+void \hyperlink{class_optimizer_settings_package_a5af2e5d9a2b5f7f344e7f840b609c33f}{set\+Cognitive\+Coefficient} (double)
+\begin{DoxyCompactList}\small\item\em Sets the Cognitive Coefficient. \end{DoxyCompactList}\item 
+void \hyperlink{class_optimizer_settings_package_aa45136551d680be4eca1f647c327e79f}{set\+Social\+Coefficient} (double)
+\begin{DoxyCompactList}\small\item\em Sets the Social Coefficient. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is a wrapper for all the settings related to the Graphics Processor The contents are rather simplistic, only getters and setters.
+
+This class is a wrapper for all the settings related to the Optimizer The contents are rather simplistic, only getters and setters. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{Optimizer\+Settings\+Package(std\+::string $\ast$, double, double, double)}{OptimizerSettingsPackage(std::string *, double, double, double)}}]{\setlength{\rightskip}{0pt plus 5cm}Optimizer\+Settings\+Package\+::\+Optimizer\+Settings\+Package (
+\begin{DoxyParamCaption}
+\item[{std\+::string $\ast$}]{particles, }
+\item[{double}]{inertia, }
+\item[{double}]{cogn, }
+\item[{double}]{social}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_a69a8c18448ba70702fc6fa3dd87848b4}{}\label{class_optimizer_settings_package_a69a8c18448ba70702fc6fa3dd87848b4}
+
+
+Creates a \hyperlink{class_optimizer_settings_package}{Optimizer\+Settings\+Package} with specified settings (currently unused) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em particle\+Placement} & (string pointer) \\
+\hline
+{\em inertia\+Weight} & (double) \\
+\hline
+{\em cognitive\+Coefficient} & (double) \\
+\hline
+{\em social\+Coefficient} & (double) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!get\+Cognitive\+Coefficient@{get\+Cognitive\+Coefficient}}
+\index{get\+Cognitive\+Coefficient@{get\+Cognitive\+Coefficient}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Cognitive\+Coefficient()}{getCognitiveCoefficient()}}]{\setlength{\rightskip}{0pt plus 5cm}double Optimizer\+Settings\+Package\+::get\+Cognitive\+Coefficient (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_af760320d4abd50d7202d174064c0081d}{}\label{class_optimizer_settings_package_af760320d4abd50d7202d174064c0081d}
+\begin{DoxyReturn}{Returns}
+Returns a double containing the cognitive coefficient 
+\end{DoxyReturn}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!get\+Inertia\+Weight@{get\+Inertia\+Weight}}
+\index{get\+Inertia\+Weight@{get\+Inertia\+Weight}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Inertia\+Weight()}{getInertiaWeight()}}]{\setlength{\rightskip}{0pt plus 5cm}double Optimizer\+Settings\+Package\+::get\+Inertia\+Weight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_af914190cf768d01151748918824caadc}{}\label{class_optimizer_settings_package_af914190cf768d01151748918824caadc}
+\begin{DoxyReturn}{Returns}
+Returns a double containing the inertia weight 
+\end{DoxyReturn}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!get\+Particle\+Placement\+String@{get\+Particle\+Placement\+String}}
+\index{get\+Particle\+Placement\+String@{get\+Particle\+Placement\+String}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Particle\+Placement\+String()}{getParticlePlacementString()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string $\ast$ Optimizer\+Settings\+Package\+::get\+Particle\+Placement\+String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_abbc65564f1d7fae597e36f64c0ba4846}{}\label{class_optimizer_settings_package_abbc65564f1d7fae597e36f64c0ba4846}
+\begin{DoxyReturn}{Returns}
+Returns the string containing the user specified particle placement (or null) 
+\end{DoxyReturn}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!get\+Social\+Coefficient@{get\+Social\+Coefficient}}
+\index{get\+Social\+Coefficient@{get\+Social\+Coefficient}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Social\+Coefficient()}{getSocialCoefficient()}}]{\setlength{\rightskip}{0pt plus 5cm}double Optimizer\+Settings\+Package\+::get\+Social\+Coefficient (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_a1c9c6216fdc974d98240a0ed5a935ab5}{}\label{class_optimizer_settings_package_a1c9c6216fdc974d98240a0ed5a935ab5}
+\begin{DoxyReturn}{Returns}
+Returns a double containing the social coefficient 
+\end{DoxyReturn}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!set\+Cognitive\+Coefficient@{set\+Cognitive\+Coefficient}}
+\index{set\+Cognitive\+Coefficient@{set\+Cognitive\+Coefficient}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{set\+Cognitive\+Coefficient(double)}{setCognitiveCoefficient(double)}}]{\setlength{\rightskip}{0pt plus 5cm}void Optimizer\+Settings\+Package\+::set\+Cognitive\+Coefficient (
+\begin{DoxyParamCaption}
+\item[{double}]{cogn}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_a5af2e5d9a2b5f7f344e7f840b609c33f}{}\label{class_optimizer_settings_package_a5af2e5d9a2b5f7f344e7f840b609c33f}
+
+
+Sets the Cognitive Coefficient. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cognitive\+Coefficient} & (double) \\
+\hline
+\end{DoxyParams}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!set\+Inertia\+Weight@{set\+Inertia\+Weight}}
+\index{set\+Inertia\+Weight@{set\+Inertia\+Weight}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{set\+Inertia\+Weight(double)}{setInertiaWeight(double)}}]{\setlength{\rightskip}{0pt plus 5cm}void Optimizer\+Settings\+Package\+::set\+Inertia\+Weight (
+\begin{DoxyParamCaption}
+\item[{double}]{inertia}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_a00f4ac2ec3d1b11b2c0c056dc20e902b}{}\label{class_optimizer_settings_package_a00f4ac2ec3d1b11b2c0c056dc20e902b}
+
+
+Sets the Inertia Weight. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Inertia\+Weight} & (double) \\
+\hline
+\end{DoxyParams}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!set\+Particle\+Placement\+String@{set\+Particle\+Placement\+String}}
+\index{set\+Particle\+Placement\+String@{set\+Particle\+Placement\+String}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{set\+Particle\+Placement\+String(std\+::string $\ast$)}{setParticlePlacementString(std::string *)}}]{\setlength{\rightskip}{0pt plus 5cm}void Optimizer\+Settings\+Package\+::set\+Particle\+Placement\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::string $\ast$}]{particle\+String}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_ae0b23faba2bbc26bd43b2a39077524cf}{}\label{class_optimizer_settings_package_ae0b23faba2bbc26bd43b2a39077524cf}
+
+
+Sets the Particle Placement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Particle\+Placement} & (string pointer) \\
+\hline
+\end{DoxyParams}
+\index{Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}!set\+Social\+Coefficient@{set\+Social\+Coefficient}}
+\index{set\+Social\+Coefficient@{set\+Social\+Coefficient}!Optimizer\+Settings\+Package@{Optimizer\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{set\+Social\+Coefficient(double)}{setSocialCoefficient(double)}}]{\setlength{\rightskip}{0pt plus 5cm}void Optimizer\+Settings\+Package\+::set\+Social\+Coefficient (
+\begin{DoxyParamCaption}
+\item[{double}]{social}
+\end{DoxyParamCaption}
+)}\hypertarget{class_optimizer_settings_package_aa45136551d680be4eca1f647c327e79f}{}\label{class_optimizer_settings_package_aa45136551d680be4eca1f647c327e79f}
+
+
+Sets the Social Coefficient. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em social\+Coefficient} & (double) \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Settings\+Package/optimizersettingspackage.\+h\item 
+Settings\+Package/optimizersettingspackage.\+cpp\end{DoxyCompactItemize}
