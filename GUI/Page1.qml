@@ -67,12 +67,12 @@ Page1Form {
         width: 165
         height: 159
         text: qsTr("Optimizer On")
-    //    onClicked: {
-    //               //  setPkg.generatePackageGeneral(page2.swarmSize.value);
+        onClicked: {
+                   //  setPkg.generatePackageGeneral(page2.swarmSize.value);
                      //setPkg.generatePackageGraphics(resolutionChoice.textAt(resolutionChoice.currentIndex));
-                  //   setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), page2.x1_min.value, page2.x1_max.value, page2.x2_min.value,
-                   //                                page2.x2_max.value, 1, 0, 0)
-       //            }
+                     setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), page2.x1_min.value, page2.x1_max.value, page2.x2_min.value,
+                                                   page2.x2_max.value, 1, 0, 0)
+                   }
 
     }
 
@@ -108,7 +108,7 @@ Page1Form {
             decimals: 4
         }
         x: 231
-        y: 144
+        y: 143
         width: 180
         height: 40
         clip: true
@@ -159,8 +159,8 @@ Page1Form {
 
     Label {
         id: inertiaLabel
-        x: 418
-        y: 119
+        x: 431
+        y: 120
         color: "#ffffff"
         text: qsTr("Inertia")
         visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm Optimization" ||
@@ -171,7 +171,7 @@ Page1Form {
 
     Label {
         id: socialLabel1
-        x: 227
+        x: 231
         y: 119
         color: "#ffffff"
         text: qsTr("Social Coefficient")
@@ -233,6 +233,7 @@ SpinBox {
     height: 40
     from: 1
     to: 2147483647
+    value: 1
 }
 
 SpinBox {
@@ -243,6 +244,7 @@ SpinBox {
     height: 40
     from: 1
     to: 100
+    value: 1
 }
 
 Label {

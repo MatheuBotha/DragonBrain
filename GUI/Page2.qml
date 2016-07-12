@@ -7,6 +7,7 @@ import QtQuick.Controls.Styles 1.0
 import QtQuick.Dialogs 1.2
 
 Page2Form {
+
     property alias swarmSize: swarmSize
     property alias x1_min: x1_min
     property alias x1_max: x1_max
@@ -48,8 +49,7 @@ Page2Form {
         height: 231
         clip: false
         visible: true
-        font.bold: true
-        font.pixelSize: 15
+
 
         TextField {
             id: x1_min
@@ -116,7 +116,7 @@ Page2Form {
 
 
         Label {
-            id: x1_min2
+            id: dimensionsLabel
             x: 54
             y: -5
             text: qsTr("Number of dimensions")
@@ -127,8 +127,8 @@ Page2Form {
 
         Label {
             id: x1_maxlabel
-            x: 194
-            y: 63
+            x: 192
+            y: 64
             text: qsTr("Max of dimension 1 (x1)")
             color: "#ffffff"
             font.bold: true
@@ -138,7 +138,7 @@ Page2Form {
 
         Label {
             id: x2_maxlabel
-            x: 190
+            x: 192
             y: 134
             text: qsTr("Max of dimension 2 (x2)")
             color: "#ffffff"
@@ -162,9 +162,9 @@ Page2Form {
 
         Label {
             id: x1_minlabel
-            x: -2
-            y: 63
-            text: qsTr("Min of dimension 1 (x1)")
+            x: 0
+    y: 65
+    text: qsTr("Min of dimension 1 (x1)")
             color: "#ffffff"
             font.bold: true
             font.pixelSize: 15
@@ -350,7 +350,7 @@ Page2Form {
 
     Label {
         id: transBLabel
-        x: 253
+        x: 244
         y: 292
         width: 180
         color: "#ffffff"
