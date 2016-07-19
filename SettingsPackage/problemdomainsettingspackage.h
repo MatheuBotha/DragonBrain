@@ -18,7 +18,7 @@ private:
     std::string objectiveFunction;
     int dimensions;
     int boundaries[4];
-    int transformations[3];
+    double transformations[3];
 public:
     /**
      * @brief The default constructor for a ProblemDomainSettingsPackage
@@ -31,7 +31,7 @@ public:
      * @param Boundaries (int[4])
      * @param Transformations (int[3])
      */
-    ProblemDomainSettingsPackage(std::string, int, int[4], int[3]);
+    ProblemDomainSettingsPackage(std::string, int, int[4], double[3]);
     /**
      * @brief
      * @return Returns the objective function (currently as a string)
@@ -51,7 +51,7 @@ public:
      * @brief Takes an array in and copies the transformations array into it
      * @param inArray
      */
-    void getTransformations(int inArray[3]);
+    void getTransformations(double inArray[3]);
 
     /**
      * @brief Sets the objective function
@@ -72,7 +72,7 @@ public:
      * @brief Sets the transformation values for the problem
      * @param An integer array of size 3.
      */
-    void setTransformations(int[3]);
+    void setTransformations(double[3]);
 
 };
 

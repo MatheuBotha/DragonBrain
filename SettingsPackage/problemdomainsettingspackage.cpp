@@ -5,7 +5,7 @@ ProblemDomainSettingsPackage::ProblemDomainSettingsPackage()
 
 }
 
-ProblemDomainSettingsPackage::ProblemDomainSettingsPackage(std::string objF, int n, int bounds[4], int trans[3])
+ProblemDomainSettingsPackage::ProblemDomainSettingsPackage(std::string objF, int n, int bounds[4], double trans[3])
 {
     objectiveFunction = objF;
     dimensions = n;
@@ -37,7 +37,7 @@ void ProblemDomainSettingsPackage::getBoundaries(int inArray[])
     inArray[3] = boundaries[3];
 }
 
-void ProblemDomainSettingsPackage::getTransformations(int inArray[])
+void ProblemDomainSettingsPackage::getTransformations(double inArray[])
 {
     inArray[0] = transformations[0];
     inArray[1] = transformations[1];
@@ -63,7 +63,7 @@ void ProblemDomainSettingsPackage::setBoundaries(int newBounds[4])
     boundaries[3] = newBounds[3];
 }
 
-void ProblemDomainSettingsPackage::setTransformations(int newTrans[3])
+void ProblemDomainSettingsPackage::setTransformations(double newTrans[3])
 {
     transformations[0] = newTrans[0];
     transformations[1] = newTrans[1];

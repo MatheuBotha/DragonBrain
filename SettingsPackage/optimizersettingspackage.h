@@ -17,6 +17,8 @@ private:
     double inertiaWeight;
     double cognitiveCoefficient;
     double socialCoefficient;
+    int maxIterations;
+    int cutoffAcc;
 public:
     /**
      * @brief The default constructor for an OptimizerSettingsPackage
@@ -28,8 +30,10 @@ public:
      * @param inertiaWeight (double)
      * @param cognitiveCoefficient (double)
      * @param socialCoefficient (double)
+     * @param maxIterations (int)
+     * @param cutoffAcc (int)
      */
-    OptimizerSettingsPackage(std::string*, double, double, double);
+    OptimizerSettingsPackage(std::string*, double, double, double, int, int);
 
     /**
      * @brief
@@ -51,7 +55,18 @@ public:
      * @return Returns a double containing the social coefficient
      */
     double getSocialCoefficient();
-
+    /**
+     * @brief
+     * @return Returns an int containing the maximum number of iterations
+     */
+    int getMaxIterations();
+    /**
+     * @brief
+     * @return Returns an int containing the accuracy at which to halt the optimizer
+     */
+    int getCutoffAcc();
+    
+    
     /**
      * @brief Sets the Particle Placement
      * @param ParticlePlacement (string pointer)
@@ -72,6 +87,21 @@ public:
      * @param socialCoefficient (double)
      */
     void setSocialCoefficient(double);
+    /**
+     * @brief Sets the maximum number of iterations for the optimizer
+     * @param maxIterations (int)
+     */
+    void setMaxIterations(int);
+    /**
+     * @brief Sets the accuracy level at which to halt the optimizer
+     * @param cutoffAcc (int)
+     */
+    void setCutoffAcc(int);
+    
+    
+    
+    
+    
 };
 
 #endif // OPTIMIZERSETTINGSPACKAGE_H

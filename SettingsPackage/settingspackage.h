@@ -2,8 +2,6 @@
 #define SETTINGSPACKAGE_H
 
 #include <QObject>
-#include <QQmlApplicationEngine>
-#include <QQmlComponent>
 #include <QString>
 #include "graphicssettingspackage.h"
 #include "optimizersettingspackage.h"
@@ -64,7 +62,7 @@ public:
     /**
       * @brief Generates a OptimizerSettingsPackage using input from the GUI
       */
-    Q_INVOKABLE void generateSettingsOptimizer(QString*, double, double, double);
+    Q_INVOKABLE void generateSettingsOptimizer(QString*, double, double, double, int ,int);
     /**
       * @brief Generates a ProblemDomainSettingsPackage using input from the GUI
       */
