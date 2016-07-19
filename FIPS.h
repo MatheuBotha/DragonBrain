@@ -24,7 +24,7 @@
 class FIPS:public PSO{
 
 public:
-    ///The overrid method for solve
+    ///The override method for solve
     virtual void solve() override;
 
     ///Creates a new FIPS

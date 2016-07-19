@@ -130,21 +130,33 @@ public:
         }
 
     }
-
+    ///Getter for the fitness value
     double getFitnessValue() const {
         return fitnessValue;
     }
 
+    ///Getter for the Personal Best value
+    double getPersonalBest() const {
+        return personalBest;
+    }
+
+    ///Setter for the Personal Best Value
+    void setPersonalBest(double personalBest) {
+        Particle::personalBest = personalBest;
+    }
+
+    ///Setter for the fitness value
     void setFitnessValue(double fitnessValue) {
         Particle::fitnessValue = fitnessValue;
     }
-
 private:
+
+
     double * positionArray; ///> the array of double values holding the positions per dimension of the particle
 
     double * velocity; ///> the velocity of the particle
     double fitnessValue=0; ///> The fitness value of the particle in relation to an objective function
-
+    double personalBest=0; ///> The personal best or memory of each particle
 };
 
 

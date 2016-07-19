@@ -51,6 +51,13 @@ public:
 
     virtual ~GenOPT();
 
+    /*Constructor for GenOPT that makes use of the snapshot manager
+     * and settings package in order to configure a GenOPT
+     * */
+    GenOPT(SettingsPackage package,SnapshotManager &snappy)
+    {
+
+    }
 /** @brief The Configuration Constructor
      *
      * @param OTP An integer indicating which Optimisation Strategy to configure for this GenOPT
@@ -65,9 +72,11 @@ public:
      * associated parameters.
      *
      * */
-    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight,double transA,double transB,double transC, int swarmSize, int neighbourhoodSize,int ** dimensionBounds, string * placements,int dimensions,bool gBest,double cOne,double cTwo,SnapshotManager & snaps) : maxVelocity(
+    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight,double transA,double transB,double transC, int swarmSize, int neighbourhoodSize,
+           int ** dimensionBounds, string * placements,int dimensions,bool gBest,
+           double cOne,double cTwo,SnapshotManager & snaps) : maxVelocity(
             maxVelocity), inertiaWeight(inertiaWeight), swarmSize(swarmSize), neighbourhoodSize(neighbourhoodSize),
-                                                                                                         gBest(gBest),c1(cOne),c2(cTwo) {
+            gBest(gBest),c1(cOne),c2(cTwo) {
 
         string * tmpPlacements;
         if (placements[0].compare("-")==0)
@@ -272,6 +281,66 @@ public:
         GenOPT::c2 = c2;
     }
 
+    /* The function solveProblem encapsulates the problem solving capacities
+     * of the General Purpose Optimiser into 1 function that will rely
+     * on other functions, as well as pre-configured parameters in order
+     * to function. This function will also then be the one that
+     * makes direct use of the Snapshot manager's ability to enqueue
+     * system snapshots.
+     *
+     * */
+    void solveProblem();
+
+    ///Getter for TransformA
+    double getTransformationA() const {
+        return transformationA;
+    }
+
+    ///Setter for TransformA
+    void setTransformationA(double transformationA) {
+        GenOPT::transformationA = transformationA;
+    }
+
+    ///Getter for TransformB
+    double getTransformationB() const {
+        return transformationB;
+    }
+
+    ///Setter for TransformB
+    void setTransformationB(double transformationB) {
+        GenOPT::transformationB = transformationB;
+    }
+
+    ///Getter for TransformC
+    double getTransformationC() const {
+        return transformationC;
+    }
+
+    ///Setter for TransformC
+    void setTransformationC(double transformationC) {
+        GenOPT::transformationC = transformationC;
+    }
+
+    ///Getter for maxIterations
+    int getMaxIterations() const {
+        return maxIterations;
+    }
+
+    ///Setter for maxIterations
+    void setMaxIterations(int maxIterations) {
+        GenOPT::maxIterations = maxIterations;
+    }
+
+    ///Getter for Accuracy Requirement value
+    double getAccuracyRequirement() const {
+        return accuracyRequirement;
+    }
+
+    ///Setter for Accuracy Requirement value
+    void setAccuracyRequirement(double accuracyRequirement) {
+        GenOPT::accuracyRequirement = accuracyRequirement;
+    }
+
 private:
 
     OPT_Process * solvingProcess; ///> The pointer to the solving process specific to this instance of the GenOPT
@@ -319,10 +388,14 @@ private:
     double c1; ///< The variable used to store the value of the Cognitive Acceleration coefficient
     double c2; ///< The variable used to store the value of the Social Acceleration coefficient
 
-    double transformationA;
-    double transformationB;
-    double transformationC;
-    SnapshotManager & snappy;
+    double transformationA; ///>The a*f(X) transform value
+    double transformationB; ///>The f(X+-B) transform value
+    double transformationC; ///>The f(X)+-C transform value
+
+    int maxIterations; ///> The maximum number of iterations allowed for the Optimiser
+    double accuracyRequirement; ///> The target fitness value to halt on
+
+    SnapshotManager snappy;
 };
 
 

@@ -19,13 +19,17 @@
 
 #ifndef OPT_HILLCLIMBER_H
 #define OPT_HILLCLIMBER_H
-#include "OTP_Process.h"
+#include "OPT_Process.h"
 
-class HillClimber:public OTP_Process {
+class HillClimber:public OPT_Process {
 
 public:
 
-    ///The overrid method for solve
+    virtual double updatePosition() override;
+
+    virtual double updateVelocity() override;
+
+    ///The override method for solve
     virtual void solve() override;
 
     HillClimber() { }

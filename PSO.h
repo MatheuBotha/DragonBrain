@@ -19,9 +19,9 @@
 #ifndef OPT_PSO_H
 #define OPT_PSO_H
 
-#include "OTP_Process.h"
+#include "OPT_Process.h"
 
-class PSO: public OTP_Process {
+class PSO: public OPT_Process {
 
 };
 

@@ -24,7 +24,7 @@
 class GCPSO: public PSO{
 
 public:
-    ///The overrid method for solve
+    ///The override method for solve
     virtual void solve() override;
 
     virtual ~GCPSO() { }
