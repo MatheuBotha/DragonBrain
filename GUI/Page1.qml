@@ -234,6 +234,7 @@ SpinBox {
     opacity: 0.7
     from: 1
     value: 1
+    editable: true
     to: 2147483647
 }
 
@@ -246,6 +247,7 @@ SpinBox {
     opacity: 0.7
     from: 1
     value: 1
+    editable: true
     to: 100
 }
 
