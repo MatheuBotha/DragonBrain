@@ -39,6 +39,7 @@
 #include <cstdio>
 #include <cstring>`
 #include <vector>
+#include <array>
 
 using namespace std;
 
@@ -58,6 +59,7 @@ public:
     {
 
     }
+
 /** @brief The Configuration Constructor
      *
      * @param OTP An integer indicating which Optimisation Strategy to configure for this GenOPT
@@ -288,6 +290,38 @@ public:
      * makes direct use of the Snapshot manager's ability to enqueue
      * system snapshots.
      *
+     * General Algorithm
+     * Pre-Conditions:
+     * 1) Swarm must be initialised
+     * 2) Swarm must have a placement
+     * 3) All particles must have a starting velocity
+     *
+     * 1) Check for stopping conditions
+     *      1) Sufficient Iterations
+     *      2) Ideal Solution found
+     *      3) Normalised swarm radius?
+     *      4) Pre-mature Halt
+     * 2) If (no stopping condition is true)
+     *     A) For each particle
+     *            1) Update best positions {Function of GenOPT}
+     *           [2)] update a global best position {Function of GenOPT}
+     *     B) For each particle
+     *          ->Update Velocity {Function of OPT_Algorithm}
+     *          ->Update Position {Function of OPT_Algorithm}
+     *
+     * Repeat
+     *  for each particle do
+     *      evaluate particle fitness
+     *      update particle's personal best position
+     *      update particle's neighbourhood best position
+     *  end
+     *
+     *  for each particle do
+     *      update particle's velocity
+     *      update particle's position
+     *  end
+     *
+     *  while stopping conditions false
      * */
     void solveProblem();
 
