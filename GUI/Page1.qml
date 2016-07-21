@@ -226,12 +226,15 @@ CheckBox {
 }
 
 SpinBox {
-    id: maxEpochs
+    id: maxIterations
     x: 31
     y: 220
     width: 230
     height: 40
+    opacity: 0.7
     from: 1
+    value: 1
+    editable: true
     to: 2147483647
     value: 1
 }
@@ -242,18 +245,21 @@ SpinBox {
     y: 220
     width: 230
     height: 40
+    opacity: 0.7
     from: 1
+    value: 1
+    editable: true
     to: 100
     value: 1
 }
 
 Label {
-    id: epochLabel
+    id: iterationLabel
     x: 31
     y: 196
     width: 180
     color: "#ffffff"
-    text: qsTr("Max Epochs")
+    text: qsTr("Max Iterations")
     horizontalAlignment: Text.AlignLeft
     font.pixelSize: 15
     font.bold: true
@@ -266,7 +272,7 @@ Label {
     y: 196
     width: 180
     color: "#ffffff"
-    text: qsTr("Target Accuracy")
+    text: qsTr("Accuracy cutoff (%)")
     horizontalAlignment: Text.AlignLeft
     font.pixelSize: 15
     font.bold: true
