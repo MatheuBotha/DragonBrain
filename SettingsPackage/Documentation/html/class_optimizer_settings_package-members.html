@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -62,10 +70,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_optimizer_settings_package.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -80,7 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">OptimizerSettingsPackage Member List</div>  </div>
@@ -90,21 +111,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>This is the complete list of members for <a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#af760320d4abd50d7202d174064c0081d">getCognitiveCoefficient</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#af914190cf768d01151748918824caadc">getInertiaWeight</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#abbc65564f1d7fae597e36f64c0ba4846">getParticlePlacementString</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a72c8309b58d3fd636dc4b63c775d6499">getCutoffAcc</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#af914190cf768d01151748918824caadc">getInertiaWeight</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a222941151a918db93f03c6324bf7b470">getMaxIterations</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a0aef1b99ba5028bc5dc7724f987d7ec8">getParticlePlacementString</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a1c9c6216fdc974d98240a0ed5a935ab5">getSocialCoefficient</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a9562747ebfbde1cbda03fee425d886af">OptimizerSettingsPackage</a>()</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a69a8c18448ba70702fc6fa3dd87848b4">OptimizerSettingsPackage</a>(std::string *, double, double, double)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a88816e4c428f667ecc6f705914fae6e6">OptimizerSettingsPackage</a>(std::string, double, double, double, int, int)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a5af2e5d9a2b5f7f344e7f840b609c33f">setCognitiveCoefficient</a>(double)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a00f4ac2ec3d1b11b2c0c056dc20e902b">setInertiaWeight</a>(double)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#ae0b23faba2bbc26bd43b2a39077524cf">setParticlePlacementString</a>(std::string *)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#ac203e040df2778fb0f0ada6574c4894c">setCutoffAcc</a>(int)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a00f4ac2ec3d1b11b2c0c056dc20e902b">setInertiaWeight</a>(double)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#a09a53052a9146e9ccbf581ffc62d4cbc">setMaxIterations</a>(int)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_optimizer_settings_package.html#adec7fd22b8ab361a3178be9d38e7c70c">setParticlePlacementString</a>(std::string)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_optimizer_settings_package.html#aa45136551d680be4eca1f647c327e79f">setSocialCoefficient</a>(double)</td><td class="entry"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.11
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
+  </ul>
+</div>
 </body>
 </html>

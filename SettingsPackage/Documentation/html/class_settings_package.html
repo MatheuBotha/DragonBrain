@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -62,10 +70,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_settings_package.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -80,7 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -89,14 +110,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">SettingsPackage Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for SettingsPackage:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_settings_package.png" usemap="#SettingsPackage_map" alt=""/>
-  <map id="SettingsPackage_map" name="SettingsPackage_map">
-</map>
- </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -104,27 +117,29 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a387aa321903917fad11b1897f7c4d357">SettingsPackage</a> ()</td></tr>
 <tr class="memdesc:a387aa321903917fad11b1897f7c4d357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default <a class="el" href="class_settings_package.html">SettingsPackage</a> Constructor, calls default constructors for a Graphics, Optimizer and ProblemDomain <a class="el" href="class_settings_package.html">SettingsPackage</a>. <br /></td></tr>
 <tr class="separator:a387aa321903917fad11b1897f7c4d357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ea450e25107e41782206c5fc58c33f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a2ea450e25107e41782206c5fc58c33f3">getSwarmSize</a> ()</td></tr>
+<tr class="separator:a2ea450e25107e41782206c5fc58c33f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eb1432a2fbda1d204ef73b47b46d1e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graphics_settings_package.html">GraphicsSettingsPackage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a7eb1432a2fbda1d204ef73b47b46d1e2">getGraphicsSettingsPackage</a> ()</td></tr>
 <tr class="separator:a7eb1432a2fbda1d204ef73b47b46d1e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fa4b42272cf9c8d3847c038bf591914"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a6fa4b42272cf9c8d3847c038bf591914">getOptimizerSettingsPackage</a> ()</td></tr>
 <tr class="separator:a6fa4b42272cf9c8d3847c038bf591914"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a343a97ef7424b400ab17480b77051466"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_problem_domain_settings_package.html">ProblemDomainSettingsPackage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a343a97ef7424b400ab17480b77051466">getProblemDomainSettingsPackage</a> ()</td></tr>
 <tr class="separator:a343a97ef7424b400ab17480b77051466"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2c0392e2df98086e2ef64b640e2aab4"><td class="memItemLeft" align="right" valign="top">Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#aa2c0392e2df98086e2ef64b640e2aab4">generateSettingsGeneral</a> (int)</td></tr>
+<tr class="memitem:aa2c0392e2df98086e2ef64b640e2aab4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#aa2c0392e2df98086e2ef64b640e2aab4">generateSettingsGeneral</a> (int)</td></tr>
 <tr class="memdesc:aa2c0392e2df98086e2ef64b640e2aab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the swarm size (given by GUI)  <a href="#aa2c0392e2df98086e2ef64b640e2aab4">More...</a><br /></td></tr>
 <tr class="separator:aa2c0392e2df98086e2ef64b640e2aab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c2aabf66f20e3240c6e35e9e3385081"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c2aabf66f20e3240c6e35e9e3385081"></a>
-Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a1c2aabf66f20e3240c6e35e9e3385081">generateSettingsGraphics</a> (QString, int, bool, bool, int)</td></tr>
-<tr class="memdesc:a1c2aabf66f20e3240c6e35e9e3385081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a <a class="el" href="class_graphics_settings_package.html">GraphicsSettingsPackage</a> using input from the GUI. <br /></td></tr>
-<tr class="separator:a1c2aabf66f20e3240c6e35e9e3385081"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abab2f666693f6a074e825ef821f5160a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abab2f666693f6a074e825ef821f5160a"></a>
-Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#abab2f666693f6a074e825ef821f5160a">generateSettingsOptimizer</a> (QString *, double, double, double)</td></tr>
-<tr class="memdesc:abab2f666693f6a074e825ef821f5160a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a <a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a> using input from the GUI. <br /></td></tr>
-<tr class="separator:abab2f666693f6a074e825ef821f5160a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e0fa6d7c66966afa3b224977b1be723"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e0fa6d7c66966afa3b224977b1be723"></a>
-Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a9e0fa6d7c66966afa3b224977b1be723">generateSettingsDomain</a> (QString, int, int, int, int, int, double, double, double)</td></tr>
-<tr class="memdesc:a9e0fa6d7c66966afa3b224977b1be723"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a <a class="el" href="class_problem_domain_settings_package.html">ProblemDomainSettingsPackage</a> using input from the GUI. <br /></td></tr>
-<tr class="separator:a9e0fa6d7c66966afa3b224977b1be723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47d46d976eb64fb341a3c49d65936ea8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47d46d976eb64fb341a3c49d65936ea8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a47d46d976eb64fb341a3c49d65936ea8">generateSettingsGraphics</a> (std::string, int, bool, bool, int)</td></tr>
+<tr class="memdesc:a47d46d976eb64fb341a3c49d65936ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a <a class="el" href="class_graphics_settings_package.html">GraphicsSettingsPackage</a> using input from the GUI. <br /></td></tr>
+<tr class="separator:a47d46d976eb64fb341a3c49d65936ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87afc64ad171caa0d7018ebe0ea56c15"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a87afc64ad171caa0d7018ebe0ea56c15"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a87afc64ad171caa0d7018ebe0ea56c15">generateSettingsOptimizer</a> (std::string, double, double, double, int, int)</td></tr>
+<tr class="memdesc:a87afc64ad171caa0d7018ebe0ea56c15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a <a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a> using input from the GUI. <br /></td></tr>
+<tr class="separator:a87afc64ad171caa0d7018ebe0ea56c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4131fe7380fee002a4ef6e5eabcb0ef0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4131fe7380fee002a4ef6e5eabcb0ef0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_package.html#a4131fe7380fee002a4ef6e5eabcb0ef0">generateSettingsDomain</a> (std::string, int, int, int, int, int, double, double, double)</td></tr>
+<tr class="memdesc:a4131fe7380fee002a4ef6e5eabcb0ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a <a class="el" href="class_problem_domain_settings_package.html">ProblemDomainSettingsPackage</a> using input from the GUI. <br /></td></tr>
+<tr class="separator:a4131fe7380fee002a4ef6e5eabcb0ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="aa2c0392e2df98086e2ef64b640e2aab4"></a>
@@ -199,16 +214,36 @@ Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 
 </div>
 </div>
+<a class="anchor" id="a2ea450e25107e41782206c5fc58c33f3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SettingsPackage::getSwarmSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Returns the swarmsize associated with the entire system </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>SettingsPackage/<a class="el" href="settingspackage_8h_source.html">settingspackage.h</a></li>
-<li>SettingsPackage/settingspackage.cpp</li>
+<li>C:/Users/rento/Documents/DragonBrain/SettingsPackage/src/<a class="el" href="settingspackage_8h_source.html">settingspackage.h</a></li>
+<li>C:/Users/rento/Documents/DragonBrain/SettingsPackage/src/settingspackage.cpp</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.11
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_settings_package.html">SettingsPackage</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
+  </ul>
+</div>
 </body>
 </html>

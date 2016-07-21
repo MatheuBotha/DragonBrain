@@ -1,32 +1,28 @@
 \hypertarget{class_settings_package}{}\section{Settings\+Package Class Reference}
 \label{class_settings_package}\index{Settings\+Package@{Settings\+Package}}
-Inheritance diagram for Settings\+Package\+:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{class_settings_package}
-\end{center}
-\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{class_settings_package_a387aa321903917fad11b1897f7c4d357}{Settings\+Package} ()\hypertarget{class_settings_package_a387aa321903917fad11b1897f7c4d357}{}\label{class_settings_package_a387aa321903917fad11b1897f7c4d357}
 
 \begin{DoxyCompactList}\small\item\em Default \hyperlink{class_settings_package}{Settings\+Package} Constructor, calls default constructors for a Graphics, Optimizer and Problem\+Domain \hyperlink{class_settings_package}{Settings\+Package}. \end{DoxyCompactList}\item 
+int \hyperlink{class_settings_package_a2ea450e25107e41782206c5fc58c33f3}{get\+Swarm\+Size} ()
+\item 
 \hyperlink{class_graphics_settings_package}{Graphics\+Settings\+Package} $\ast$ \hyperlink{class_settings_package_a7eb1432a2fbda1d204ef73b47b46d1e2}{get\+Graphics\+Settings\+Package} ()
 \item 
 \hyperlink{class_optimizer_settings_package}{Optimizer\+Settings\+Package} $\ast$ \hyperlink{class_settings_package_a6fa4b42272cf9c8d3847c038bf591914}{get\+Optimizer\+Settings\+Package} ()
 \item 
 \hyperlink{class_problem_domain_settings_package}{Problem\+Domain\+Settings\+Package} $\ast$ \hyperlink{class_settings_package_a343a97ef7424b400ab17480b77051466}{get\+Problem\+Domain\+Settings\+Package} ()
 \item 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \hyperlink{class_settings_package_aa2c0392e2df98086e2ef64b640e2aab4}{generate\+Settings\+General} (int)
+void \hyperlink{class_settings_package_aa2c0392e2df98086e2ef64b640e2aab4}{generate\+Settings\+General} (int)
 \begin{DoxyCompactList}\small\item\em Sets the swarm size (given by G\+UI) \end{DoxyCompactList}\item 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \hyperlink{class_settings_package_a1c2aabf66f20e3240c6e35e9e3385081}{generate\+Settings\+Graphics} (Q\+String, int, bool, bool, int)\hypertarget{class_settings_package_a1c2aabf66f20e3240c6e35e9e3385081}{}\label{class_settings_package_a1c2aabf66f20e3240c6e35e9e3385081}
+void \hyperlink{class_settings_package_a47d46d976eb64fb341a3c49d65936ea8}{generate\+Settings\+Graphics} (std\+::string, int, bool, bool, int)\hypertarget{class_settings_package_a47d46d976eb64fb341a3c49d65936ea8}{}\label{class_settings_package_a47d46d976eb64fb341a3c49d65936ea8}
 
 \begin{DoxyCompactList}\small\item\em Generates a \hyperlink{class_graphics_settings_package}{Graphics\+Settings\+Package} using input from the G\+UI. \end{DoxyCompactList}\item 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \hyperlink{class_settings_package_abab2f666693f6a074e825ef821f5160a}{generate\+Settings\+Optimizer} (Q\+String $\ast$, double, double, double)\hypertarget{class_settings_package_abab2f666693f6a074e825ef821f5160a}{}\label{class_settings_package_abab2f666693f6a074e825ef821f5160a}
+void \hyperlink{class_settings_package_a87afc64ad171caa0d7018ebe0ea56c15}{generate\+Settings\+Optimizer} (std\+::string, double, double, double, int, int)\hypertarget{class_settings_package_a87afc64ad171caa0d7018ebe0ea56c15}{}\label{class_settings_package_a87afc64ad171caa0d7018ebe0ea56c15}
 
 \begin{DoxyCompactList}\small\item\em Generates a \hyperlink{class_optimizer_settings_package}{Optimizer\+Settings\+Package} using input from the G\+UI. \end{DoxyCompactList}\item 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \hyperlink{class_settings_package_a9e0fa6d7c66966afa3b224977b1be723}{generate\+Settings\+Domain} (Q\+String, int, int, int, int, int, double, double, double)\hypertarget{class_settings_package_a9e0fa6d7c66966afa3b224977b1be723}{}\label{class_settings_package_a9e0fa6d7c66966afa3b224977b1be723}
+void \hyperlink{class_settings_package_a4131fe7380fee002a4ef6e5eabcb0ef0}{generate\+Settings\+Domain} (std\+::string, int, int, int, int, int, double, double, double)\hypertarget{class_settings_package_a4131fe7380fee002a4ef6e5eabcb0ef0}{}\label{class_settings_package_a4131fe7380fee002a4ef6e5eabcb0ef0}
 
 \begin{DoxyCompactList}\small\item\em Generates a \hyperlink{class_problem_domain_settings_package}{Problem\+Domain\+Settings\+Package} using input from the G\+UI. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -78,9 +74,19 @@ Returns the associated \hyperlink{class_optimizer_settings_package}{Optimizer\+S
 \begin{DoxyReturn}{Returns}
 Returns the associated \hyperlink{class_problem_domain_settings_package}{Problem\+Domain\+Settings\+Package} 
 \end{DoxyReturn}
+\index{Settings\+Package@{Settings\+Package}!get\+Swarm\+Size@{get\+Swarm\+Size}}
+\index{get\+Swarm\+Size@{get\+Swarm\+Size}!Settings\+Package@{Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Swarm\+Size()}{getSwarmSize()}}]{\setlength{\rightskip}{0pt plus 5cm}int Settings\+Package\+::get\+Swarm\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_settings_package_a2ea450e25107e41782206c5fc58c33f3}{}\label{class_settings_package_a2ea450e25107e41782206c5fc58c33f3}
+\begin{DoxyReturn}{Returns}
+Returns the swarmsize associated with the entire system 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Settings\+Package/settingspackage.\+h\item 
-Settings\+Package/settingspackage.\+cpp\end{DoxyCompactItemize}
+C\+:/\+Users/rento/\+Documents/\+Dragon\+Brain/\+Settings\+Package/src/settingspackage.\+h\item 
+C\+:/\+Users/rento/\+Documents/\+Dragon\+Brain/\+Settings\+Package/src/settingspackage.\+cpp\end{DoxyCompactItemize}

@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -62,10 +70,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_settings_package.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -80,7 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">SettingsPackage Member List</div>  </div>
@@ -89,20 +110,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="class_settings_package.html">SettingsPackage</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_settings_package.html#a9e0fa6d7c66966afa3b224977b1be723">generateSettingsDomain</a>(QString, int, int, int, int, int, double, double, double)</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_settings_package.html#a4131fe7380fee002a4ef6e5eabcb0ef0">generateSettingsDomain</a>(std::string, int, int, int, int, int, double, double, double)</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_settings_package.html#aa2c0392e2df98086e2ef64b640e2aab4">generateSettingsGeneral</a>(int)</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_settings_package.html#a1c2aabf66f20e3240c6e35e9e3385081">generateSettingsGraphics</a>(QString, int, bool, bool, int)</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_settings_package.html#abab2f666693f6a074e825ef821f5160a">generateSettingsOptimizer</a>(QString *, double, double, double)</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_settings_package.html#a47d46d976eb64fb341a3c49d65936ea8">generateSettingsGraphics</a>(std::string, int, bool, bool, int)</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_settings_package.html#a87afc64ad171caa0d7018ebe0ea56c15">generateSettingsOptimizer</a>(std::string, double, double, double, int, int)</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_settings_package.html#a7eb1432a2fbda1d204ef73b47b46d1e2">getGraphicsSettingsPackage</a>()</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_settings_package.html#a6fa4b42272cf9c8d3847c038bf591914">getOptimizerSettingsPackage</a>()</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_settings_package.html#a343a97ef7424b400ab17480b77051466">getProblemDomainSettingsPackage</a>()</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_settings_package.html#a387aa321903917fad11b1897f7c4d357">SettingsPackage</a>()</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_settings_package.html#a2ea450e25107e41782206c5fc58c33f3">getSwarmSize</a>()</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_settings_package.html#a387aa321903917fad11b1897f7c4d357">SettingsPackage</a>()</td><td class="entry"><a class="el" href="class_settings_package.html">SettingsPackage</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.11
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -62,10 +70,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_optimizer_settings_package.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -80,7 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -98,20 +119,24 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a9562747ebfbde1cbda03fee425d886af">OptimizerSettingsPackage</a> ()</td></tr>
 <tr class="memdesc:a9562747ebfbde1cbda03fee425d886af"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor for an <a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a>. <br /></td></tr>
 <tr class="separator:a9562747ebfbde1cbda03fee425d886af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69a8c18448ba70702fc6fa3dd87848b4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a69a8c18448ba70702fc6fa3dd87848b4">OptimizerSettingsPackage</a> (std::string *, double, double, double)</td></tr>
-<tr class="memdesc:a69a8c18448ba70702fc6fa3dd87848b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a> with specified settings (currently unused)  <a href="#a69a8c18448ba70702fc6fa3dd87848b4">More...</a><br /></td></tr>
-<tr class="separator:a69a8c18448ba70702fc6fa3dd87848b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbc65564f1d7fae597e36f64c0ba4846"><td class="memItemLeft" align="right" valign="top">std::string *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#abbc65564f1d7fae597e36f64c0ba4846">getParticlePlacementString</a> ()</td></tr>
-<tr class="separator:abbc65564f1d7fae597e36f64c0ba4846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88816e4c428f667ecc6f705914fae6e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a88816e4c428f667ecc6f705914fae6e6">OptimizerSettingsPackage</a> (std::string, double, double, double, int, int)</td></tr>
+<tr class="memdesc:a88816e4c428f667ecc6f705914fae6e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a> with specified settings (currently unused)  <a href="#a88816e4c428f667ecc6f705914fae6e6">More...</a><br /></td></tr>
+<tr class="separator:a88816e4c428f667ecc6f705914fae6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aef1b99ba5028bc5dc7724f987d7ec8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a0aef1b99ba5028bc5dc7724f987d7ec8">getParticlePlacementString</a> ()</td></tr>
+<tr class="separator:a0aef1b99ba5028bc5dc7724f987d7ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af914190cf768d01151748918824caadc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#af914190cf768d01151748918824caadc">getInertiaWeight</a> ()</td></tr>
 <tr class="separator:af914190cf768d01151748918824caadc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af760320d4abd50d7202d174064c0081d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#af760320d4abd50d7202d174064c0081d">getCognitiveCoefficient</a> ()</td></tr>
 <tr class="separator:af760320d4abd50d7202d174064c0081d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c9c6216fdc974d98240a0ed5a935ab5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a1c9c6216fdc974d98240a0ed5a935ab5">getSocialCoefficient</a> ()</td></tr>
 <tr class="separator:a1c9c6216fdc974d98240a0ed5a935ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0b23faba2bbc26bd43b2a39077524cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#ae0b23faba2bbc26bd43b2a39077524cf">setParticlePlacementString</a> (std::string *)</td></tr>
-<tr class="memdesc:ae0b23faba2bbc26bd43b2a39077524cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Particle Placement.  <a href="#ae0b23faba2bbc26bd43b2a39077524cf">More...</a><br /></td></tr>
-<tr class="separator:ae0b23faba2bbc26bd43b2a39077524cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a222941151a918db93f03c6324bf7b470"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a222941151a918db93f03c6324bf7b470">getMaxIterations</a> ()</td></tr>
+<tr class="separator:a222941151a918db93f03c6324bf7b470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c8309b58d3fd636dc4b63c775d6499"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a72c8309b58d3fd636dc4b63c775d6499">getCutoffAcc</a> ()</td></tr>
+<tr class="separator:a72c8309b58d3fd636dc4b63c775d6499"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec7fd22b8ab361a3178be9d38e7c70c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#adec7fd22b8ab361a3178be9d38e7c70c">setParticlePlacementString</a> (std::string)</td></tr>
+<tr class="memdesc:adec7fd22b8ab361a3178be9d38e7c70c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Particle Placement.  <a href="#adec7fd22b8ab361a3178be9d38e7c70c">More...</a><br /></td></tr>
+<tr class="separator:adec7fd22b8ab361a3178be9d38e7c70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00f4ac2ec3d1b11b2c0c056dc20e902b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a00f4ac2ec3d1b11b2c0c056dc20e902b">setInertiaWeight</a> (double)</td></tr>
 <tr class="memdesc:a00f4ac2ec3d1b11b2c0c056dc20e902b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Inertia Weight.  <a href="#a00f4ac2ec3d1b11b2c0c056dc20e902b">More...</a><br /></td></tr>
 <tr class="separator:a00f4ac2ec3d1b11b2c0c056dc20e902b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,19 +146,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa45136551d680be4eca1f647c327e79f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#aa45136551d680be4eca1f647c327e79f">setSocialCoefficient</a> (double)</td></tr>
 <tr class="memdesc:aa45136551d680be4eca1f647c327e79f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Social Coefficient.  <a href="#aa45136551d680be4eca1f647c327e79f">More...</a><br /></td></tr>
 <tr class="separator:aa45136551d680be4eca1f647c327e79f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a53052a9146e9ccbf581ffc62d4cbc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#a09a53052a9146e9ccbf581ffc62d4cbc">setMaxIterations</a> (int)</td></tr>
+<tr class="memdesc:a09a53052a9146e9ccbf581ffc62d4cbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the maximum number of iterations for the optimizer.  <a href="#a09a53052a9146e9ccbf581ffc62d4cbc">More...</a><br /></td></tr>
+<tr class="separator:a09a53052a9146e9ccbf581ffc62d4cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac203e040df2778fb0f0ada6574c4894c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_optimizer_settings_package.html#ac203e040df2778fb0f0ada6574c4894c">setCutoffAcc</a> (int)</td></tr>
+<tr class="memdesc:ac203e040df2778fb0f0ada6574c4894c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the accuracy level at which to halt the optimizer.  <a href="#ac203e040df2778fb0f0ada6574c4894c">More...</a><br /></td></tr>
+<tr class="separator:ac203e040df2778fb0f0ada6574c4894c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is a wrapper for all the settings related to the Graphics Processor The contents are rather simplistic, only getters and setters.</p>
 <p>This class is a wrapper for all the settings related to the Optimizer The contents are rather simplistic, only getters and setters. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a69a8c18448ba70702fc6fa3dd87848b4"></a>
+<a class="anchor" id="a88816e4c428f667ecc6f705914fae6e6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">OptimizerSettingsPackage::OptimizerSettingsPackage </td>
           <td>(</td>
-          <td class="paramtype">std::string *&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>particles</em>, </td>
         </tr>
         <tr>
@@ -152,7 +183,19 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>social</em>&#160;</td>
+          <td class="paramname"><em>social</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>acc</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -169,6 +212,8 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">inertiaWeight</td><td>(double) </td></tr>
     <tr><td class="paramname">cognitiveCoefficient</td><td>(double) </td></tr>
     <tr><td class="paramname">socialCoefficient</td><td>(double) </td></tr>
+    <tr><td class="paramname">maxIterations</td><td>(int) </td></tr>
+    <tr><td class="paramname">cutoffAcc</td><td>(int) </td></tr>
   </table>
   </dd>
 </dl>
@@ -192,6 +237,22 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a72c8309b58d3fd636dc4b63c775d6499"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OptimizerSettingsPackage::getCutoffAcc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Returns an int containing the accuracy at which to halt the optimizer </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="af914190cf768d01151748918824caadc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -208,12 +269,28 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abbc65564f1d7fae597e36f64c0ba4846"></a>
+<a class="anchor" id="a222941151a918db93f03c6324bf7b470"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string * OptimizerSettingsPackage::getParticlePlacementString </td>
+          <td class="memname">int OptimizerSettingsPackage::getMaxIterations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Returns an int containing the maximum number of iterations </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0aef1b99ba5028bc5dc7724f987d7ec8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string OptimizerSettingsPackage::getParticlePlacementString </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -264,6 +341,30 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac203e040df2778fb0f0ada6574c4894c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OptimizerSettingsPackage::setCutoffAcc </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>acc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the accuracy level at which to halt the optimizer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cutoffAcc</td><td>(int) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a00f4ac2ec3d1b11b2c0c056dc20e902b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -288,14 +389,38 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae0b23faba2bbc26bd43b2a39077524cf"></a>
+<a class="anchor" id="a09a53052a9146e9ccbf581ffc62d4cbc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OptimizerSettingsPackage::setMaxIterations </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the maximum number of iterations for the optimizer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxIterations</td><td>(int) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="adec7fd22b8ab361a3178be9d38e7c70c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void OptimizerSettingsPackage::setParticlePlacementString </td>
           <td>(</td>
-          <td class="paramtype">std::string *&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>particleString</em></td><td>)</td>
           <td></td>
         </tr>
@@ -337,15 +462,19 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>SettingsPackage/<a class="el" href="optimizersettingspackage_8h_source.html">optimizersettingspackage.h</a></li>
-<li>SettingsPackage/optimizersettingspackage.cpp</li>
+<li>C:/Users/rento/Documents/DragonBrain/SettingsPackage/src/<a class="el" href="optimizersettingspackage_8h_source.html">optimizersettingspackage.h</a></li>
+<li>C:/Users/rento/Documents/DragonBrain/SettingsPackage/src/optimizersettingspackage.cpp</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.11
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_optimizer_settings_package.html">OptimizerSettingsPackage</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
+  </ul>
+</div>
 </body>
 </html>

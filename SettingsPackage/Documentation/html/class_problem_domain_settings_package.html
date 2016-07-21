@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -62,10 +70,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_problem_domain_settings_package.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -80,7 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -98,9 +119,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#acba5f13f17058d9182f23f7e79dfdb53">ProblemDomainSettingsPackage</a> ()</td></tr>
 <tr class="memdesc:acba5f13f17058d9182f23f7e79dfdb53"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor for a <a class="el" href="class_problem_domain_settings_package.html">ProblemDomainSettingsPackage</a>. <br /></td></tr>
 <tr class="separator:acba5f13f17058d9182f23f7e79dfdb53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02eab8199d5811638c3fd891d9f25a30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#a02eab8199d5811638c3fd891d9f25a30">ProblemDomainSettingsPackage</a> (std::string, int, int[4], int[3])</td></tr>
-<tr class="memdesc:a02eab8199d5811638c3fd891d9f25a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_problem_domain_settings_package.html">ProblemDomainSettingsPackage</a> with specified settings (currently unused)  <a href="#a02eab8199d5811638c3fd891d9f25a30">More...</a><br /></td></tr>
-<tr class="separator:a02eab8199d5811638c3fd891d9f25a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2c7252d5998c4b2d77f1dca25d030e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#ab2c7252d5998c4b2d77f1dca25d030e3">ProblemDomainSettingsPackage</a> (std::string, int, int[4], double[3])</td></tr>
+<tr class="memdesc:ab2c7252d5998c4b2d77f1dca25d030e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_problem_domain_settings_package.html">ProblemDomainSettingsPackage</a> with specified settings (currently unused)  <a href="#ab2c7252d5998c4b2d77f1dca25d030e3">More...</a><br /></td></tr>
+<tr class="separator:ab2c7252d5998c4b2d77f1dca25d030e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a858c5f6501fe46a6469422ca87cbc227"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#a858c5f6501fe46a6469422ca87cbc227">getObjectiveFunction</a> ()</td></tr>
 <tr class="separator:a858c5f6501fe46a6469422ca87cbc227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ff00f66433a26e87176915159207a53"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#a1ff00f66433a26e87176915159207a53">getDimensions</a> ()</td></tr>
@@ -108,9 +129,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a004beb40525bd9254a1e9cbb60aac7c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#a004beb40525bd9254a1e9cbb60aac7c9">getBoundaries</a> (int inArray[4])</td></tr>
 <tr class="memdesc:a004beb40525bd9254a1e9cbb60aac7c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes an array in and copies the boundary array into it.  <a href="#a004beb40525bd9254a1e9cbb60aac7c9">More...</a><br /></td></tr>
 <tr class="separator:a004beb40525bd9254a1e9cbb60aac7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c3955959c0d222493362fe1ebad8885"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#a8c3955959c0d222493362fe1ebad8885">getTransformations</a> (int inArray[3])</td></tr>
-<tr class="memdesc:a8c3955959c0d222493362fe1ebad8885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes an array in and copies the transformations array into it.  <a href="#a8c3955959c0d222493362fe1ebad8885">More...</a><br /></td></tr>
-<tr class="separator:a8c3955959c0d222493362fe1ebad8885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a354779476d267a4a5cc39c55c6655a14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#a354779476d267a4a5cc39c55c6655a14">getTransformations</a> (double inArray[3])</td></tr>
+<tr class="memdesc:a354779476d267a4a5cc39c55c6655a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes an array in and copies the transformations array into it.  <a href="#a354779476d267a4a5cc39c55c6655a14">More...</a><br /></td></tr>
+<tr class="separator:a354779476d267a4a5cc39c55c6655a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad08819f63bb7d05409489ba9c6049f92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#ad08819f63bb7d05409489ba9c6049f92">setObjectiveFunction</a> (std::string inObjF)</td></tr>
 <tr class="memdesc:ad08819f63bb7d05409489ba9c6049f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the objective function.  <a href="#ad08819f63bb7d05409489ba9c6049f92">More...</a><br /></td></tr>
 <tr class="separator:ad08819f63bb7d05409489ba9c6049f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,15 +141,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac619791d99b6e9bfea96329605997140"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#ac619791d99b6e9bfea96329605997140">setBoundaries</a> (int[4])</td></tr>
 <tr class="memdesc:ac619791d99b6e9bfea96329605997140"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the boundary values for the dimensions.  <a href="#ac619791d99b6e9bfea96329605997140">More...</a><br /></td></tr>
 <tr class="separator:ac619791d99b6e9bfea96329605997140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a023db335b5ef4f446713167eeb31531f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#a023db335b5ef4f446713167eeb31531f">setTransformations</a> (int[3])</td></tr>
-<tr class="memdesc:a023db335b5ef4f446713167eeb31531f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the transformation values for the problem.  <a href="#a023db335b5ef4f446713167eeb31531f">More...</a><br /></td></tr>
-<tr class="separator:a023db335b5ef4f446713167eeb31531f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4f9e9f0656b341549e9e555069735a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_problem_domain_settings_package.html#ab4f9e9f0656b341549e9e555069735a2">setTransformations</a> (double[3])</td></tr>
+<tr class="memdesc:ab4f9e9f0656b341549e9e555069735a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the transformation values for the problem.  <a href="#ab4f9e9f0656b341549e9e555069735a2">More...</a><br /></td></tr>
+<tr class="separator:ab4f9e9f0656b341549e9e555069735a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is a wrapper for all the settings related to the problem Domain The contents are rather simplistic, only getters and setters.</p>
 <p>This class is a general <a class="el" href="class_settings_package.html">SettingsPackage</a> which contains other, more specific SettingsPackages and extracts settings from the GUI </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a02eab8199d5811638c3fd891d9f25a30"></a>
+<a class="anchor" id="ab2c7252d5998c4b2d77f1dca25d030e3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -153,7 +174,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>trans</em>[3]&#160;</td>
         </tr>
         <tr>
@@ -234,14 +255,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8c3955959c0d222493362fe1ebad8885"></a>
+<a class="anchor" id="a354779476d267a4a5cc39c55c6655a14"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ProblemDomainSettingsPackage::getTransformations </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>inArray</em>[3]</td><td>)</td>
           <td></td>
         </tr>
@@ -330,14 +351,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a023db335b5ef4f446713167eeb31531f"></a>
+<a class="anchor" id="ab4f9e9f0656b341549e9e555069735a2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ProblemDomainSettingsPackage::setTransformations </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>newTrans</em>[3]</td><td>)</td>
           <td></td>
         </tr>
@@ -355,15 +376,19 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>SettingsPackage/<a class="el" href="problemdomainsettingspackage_8h_source.html">problemdomainsettingspackage.h</a></li>
-<li>SettingsPackage/problemdomainsettingspackage.cpp</li>
+<li>C:/Users/rento/Documents/DragonBrain/SettingsPackage/src/<a class="el" href="problemdomainsettingspackage_8h_source.html">problemdomainsettingspackage.h</a></li>
+<li>C:/Users/rento/Documents/DragonBrain/SettingsPackage/src/problemdomainsettingspackage.cpp</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.11
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_problem_domain_settings_package.html">ProblemDomainSettingsPackage</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
+  </ul>
+</div>
 </body>
 </html>

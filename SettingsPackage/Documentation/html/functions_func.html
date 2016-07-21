@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -62,7 +70,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li class="current"><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -81,6 +88,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_func.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -100,22 +121,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
 <li>generateSettingsDomain()
-: <a class="el" href="class_settings_package.html#a9e0fa6d7c66966afa3b224977b1be723">SettingsPackage</a>
+: <a class="el" href="class_settings_package.html#a4131fe7380fee002a4ef6e5eabcb0ef0">SettingsPackage</a>
 </li>
 <li>generateSettingsGeneral()
 : <a class="el" href="class_settings_package.html#aa2c0392e2df98086e2ef64b640e2aab4">SettingsPackage</a>
 </li>
 <li>generateSettingsGraphics()
-: <a class="el" href="class_settings_package.html#a1c2aabf66f20e3240c6e35e9e3385081">SettingsPackage</a>
+: <a class="el" href="class_settings_package.html#a47d46d976eb64fb341a3c49d65936ea8">SettingsPackage</a>
 </li>
 <li>generateSettingsOptimizer()
-: <a class="el" href="class_settings_package.html#abab2f666693f6a074e825ef821f5160a">SettingsPackage</a>
+: <a class="el" href="class_settings_package.html#a87afc64ad171caa0d7018ebe0ea56c15">SettingsPackage</a>
 </li>
 <li>getBoundaries()
 : <a class="el" href="class_problem_domain_settings_package.html#a004beb40525bd9254a1e9cbb60aac7c9">ProblemDomainSettingsPackage</a>
 </li>
 <li>getCognitiveCoefficient()
 : <a class="el" href="class_optimizer_settings_package.html#af760320d4abd50d7202d174064c0081d">OptimizerSettingsPackage</a>
+</li>
+<li>getCutoffAcc()
+: <a class="el" href="class_optimizer_settings_package.html#a72c8309b58d3fd636dc4b63c775d6499">OptimizerSettingsPackage</a>
 </li>
 <li>getDimensions()
 : <a class="el" href="class_problem_domain_settings_package.html#a1ff00f66433a26e87176915159207a53">ProblemDomainSettingsPackage</a>
@@ -125,6 +149,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>getInertiaWeight()
 : <a class="el" href="class_optimizer_settings_package.html#af914190cf768d01151748918824caadc">OptimizerSettingsPackage</a>
+</li>
+<li>getMaxIterations()
+: <a class="el" href="class_optimizer_settings_package.html#a222941151a918db93f03c6324bf7b470">OptimizerSettingsPackage</a>
 </li>
 <li>getMaxRam()
 : <a class="el" href="class_graphics_settings_package.html#aa6cc824f2ba164264dd79d766f6ed0da">GraphicsSettingsPackage</a>
@@ -136,7 +163,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_settings_package.html#a6fa4b42272cf9c8d3847c038bf591914">SettingsPackage</a>
 </li>
 <li>getParticlePlacementString()
-: <a class="el" href="class_optimizer_settings_package.html#abbc65564f1d7fae597e36f64c0ba4846">OptimizerSettingsPackage</a>
+: <a class="el" href="class_optimizer_settings_package.html#a0aef1b99ba5028bc5dc7724f987d7ec8">OptimizerSettingsPackage</a>
 </li>
 <li>getProblemDomainSettingsPackage()
 : <a class="el" href="class_settings_package.html#a343a97ef7424b400ab17480b77051466">SettingsPackage</a>
@@ -159,8 +186,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>getSocialCoefficient()
 : <a class="el" href="class_optimizer_settings_package.html#a1c9c6216fdc974d98240a0ed5a935ab5">OptimizerSettingsPackage</a>
 </li>
+<li>getSwarmSize()
+: <a class="el" href="class_settings_package.html#a2ea450e25107e41782206c5fc58c33f3">SettingsPackage</a>
+</li>
 <li>getTransformations()
-: <a class="el" href="class_problem_domain_settings_package.html#a8c3955959c0d222493362fe1ebad8885">ProblemDomainSettingsPackage</a>
+: <a class="el" href="class_problem_domain_settings_package.html#a354779476d267a4a5cc39c55c6655a14">ProblemDomainSettingsPackage</a>
 </li>
 <li>GraphicsSettingsPackage()
 : <a class="el" href="class_graphics_settings_package.html#a52641ab244a183d2c77519b21bf33f26">GraphicsSettingsPackage</a>
@@ -189,11 +219,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setCognitiveCoefficient()
 : <a class="el" href="class_optimizer_settings_package.html#a5af2e5d9a2b5f7f344e7f840b609c33f">OptimizerSettingsPackage</a>
 </li>
+<li>setCutoffAcc()
+: <a class="el" href="class_optimizer_settings_package.html#ac203e040df2778fb0f0ada6574c4894c">OptimizerSettingsPackage</a>
+</li>
 <li>setDimensions()
 : <a class="el" href="class_problem_domain_settings_package.html#a99993d6577bd93023adb2cdad0443069">ProblemDomainSettingsPackage</a>
 </li>
 <li>setInertiaWeight()
 : <a class="el" href="class_optimizer_settings_package.html#a00f4ac2ec3d1b11b2c0c056dc20e902b">OptimizerSettingsPackage</a>
+</li>
+<li>setMaxIterations()
+: <a class="el" href="class_optimizer_settings_package.html#a09a53052a9146e9ccbf581ffc62d4cbc">OptimizerSettingsPackage</a>
 </li>
 <li>setMaxRam()
 : <a class="el" href="class_graphics_settings_package.html#ac84e46d0a2780c49a785c2cfdda6ade8">GraphicsSettingsPackage</a>
@@ -202,7 +238,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_problem_domain_settings_package.html#ad08819f63bb7d05409489ba9c6049f92">ProblemDomainSettingsPackage</a>
 </li>
 <li>setParticlePlacementString()
-: <a class="el" href="class_optimizer_settings_package.html#ae0b23faba2bbc26bd43b2a39077524cf">OptimizerSettingsPackage</a>
+: <a class="el" href="class_optimizer_settings_package.html#adec7fd22b8ab361a3178be9d38e7c70c">OptimizerSettingsPackage</a>
 </li>
 <li>setRenderSpeed()
 : <a class="el" href="class_graphics_settings_package.html#af0e969ea73e1236bcf23cf6ea15e8fa5">GraphicsSettingsPackage</a>
@@ -226,15 +262,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_settings_package.html#a387aa321903917fad11b1897f7c4d357">SettingsPackage</a>
 </li>
 <li>setTransformations()
-: <a class="el" href="class_problem_domain_settings_package.html#a023db335b5ef4f446713167eeb31531f">ProblemDomainSettingsPackage</a>
+: <a class="el" href="class_problem_domain_settings_package.html#ab4f9e9f0656b341549e9e555069735a2">ProblemDomainSettingsPackage</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.11
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
+  </ul>
+</div>
 </body>
 </html>
