@@ -1,0 +1,136 @@
+This is XeTeX, Version 3.14159265-2.6-0.99992 (MiKTeX 2.9 64-bit) (preloaded format=xelatex 2016.4.23)  26 JUL 2016 14:38
+entering extended mode
+**./testing.tex
+(testing.tex
+LaTeX2e <2015/10/01> patch level 2
+Babel <3.9n> and hyphenation patterns for 69 languages loaded.
+
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.c
+ls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size11.cl
+o"
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+Requested font "cmr10" at 10.95pt
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graph
+icx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyva
+l.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graph
+ics.sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.
+sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\graph
+ics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: xetex.def on input line 94.
+
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\xelatex\xetex-def\xe
+tex.def"
+File: xetex.def 2016/04/06 v4.08 LaTeX color/graphics driver for XeTeX (TeX Liv
+e/RRM/JK)
+
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\inf
+warerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltx
+cmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lipsum\lipsum.
+sty"
+Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
+\c@lips@count=\count87
+) (testing.aux)
+\openout1 = `testing.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+Requested font "cmr17" at 20.74pt
+ [1
+
+]
+Requested font "cmr12" at 14.4pt
+Requested font "cmbx12" at 14.4pt
+ (testing.toc
+Requested font "cmbx10" at 10.95pt
+Requested font "cmr8" at 8.0pt
+Requested font "cmr6" at 6.0pt
+Requested font "cmmi10" at 10.95pt
+Requested font "cmmi8" at 8.0pt
+Requested font "cmmi6" at 6.0pt
+Requested font "cmsy10" at 10.95pt
+Requested font "cmsy8" at 8.0pt
+Requested font "cmsy6" at 6.0pt
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 2.
+)
+\tf@toc=\write3
+\openout3 = `testing.toc'.
+
+Requested font "cmr12" at 12.0pt
+Requested font "cmbx12" at 12.0pt
+ [1] [2] [3] [4] [5]
+Missing character: There is no • in font cmbx10!
+Missing character: There is no • in font cmbx10!
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 55.
+
+("C:\Users\Warmaster\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd
+"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 55.
+ [6] [7] [8] (testing.aux) ) 
+Here is how much of TeX's memory you used:
+ 978 strings out of 428721
+ 11907 string characters out of 3159746
+ 164313 words of memory out of 3000000
+ 4385 multiletter control sequences out of 15000+200000
+ 8196 words of font info for 29 fonts, out of 3000000 for 9000
+ 1096 hyphenation exceptions out of 8191
+ 27i,5n,19p,456b,167s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on testing.pdf (9 pages).
