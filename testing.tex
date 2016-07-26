@@ -47,12 +47,10 @@ Gerard van Wyk u14101263
 For our project, we are making use of Google Tests, a cross-platform Unit Testing library for C++. This is largely because our chosen standardised IDE, Jetbrains CLion has integrated support for the framework.
 
 \section{Testing Strategies}
->>>>>>> origin/documentation
+
 \subsection{Unit Tests}
-Our project's unit tests work primarily based on Assert-like mechanisms for Google Test, wherein we generate objects with particular data and assure that values are as they should be, and ensuring invalid states are properly detected. These are done using the Google Test macros "EXPECT_EQ" (tests equality), "EXPECT_TRUE", "EXPECT_FALSE", "EXPECT_NE" (tests for inequality) and so on.
+Our project's unit tests work primarily based on Assert-like mechanisms for Google Test, wherein we generate objects with particular data and assure that values are as they should be, and ensuring invalid states are properly detected. These are done using the Google Test EXPECT keyword macros.
 \newline Each test is defined within a TEST macro and can be run either individually or all together, via CLion. 
-
-
 
 
 \section{Integration Tests}
@@ -67,14 +65,15 @@ The Modules are:
 \item Graphics Pipeline: The Graphics Pipeline will be required to integrate with the Manager and Data Models Module. This integration will take the form of message passing,System Snapshots, which are consumed by the Pipeline as provided by the Manager. The Graphics Pipeline similarly affects the User Interface. The Graphics Pipeline will then make use of the system snapshot in order to render, on the User Interface, the implications realised internally by the General Optimiser.
 \item General Optimiser: The General Optimiser will produce System Snapshots which will be stored in Data Models inside the Manager Module. This General Optimiser, by the use of Settings Package, will then be configured to meet specific user requirements. 
 \item User Interface: The User Interface is going to communicate with the Manager Module. The user changing system parameters, or configuring them, will generate Settings Package objects and these will be sent to the Manager for use in adjusting configurations. The User Interface will also be receiving, and rendering, message packets from the Graphics Pipeline. These packets will result in new visual information being displayed to the user.
-\item Manager \& Data Models:
+\item Manager: The Manager Module will be the core and most important part of Integrating the Modules of the system. All of the other Modules will have to perform some manner of interaction with the Manager which will then perform some other form of interaction, on their behalf,to other Modules. This connectivity between all of the other Modules and this one, means that in order to successfully integrate the System Modules, we will require a Manager component that is capable of relaying, creating and receiving messages from all of the other System Modules.
+
 \end{itemize}
  
 \subsection{Strategies}
 
 \section{Areas of Concern}
 \subsection{Key Points of Failure}
-\lipsu
+\lipsum
 
 \section{Example Unit Test}
 
