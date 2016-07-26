@@ -10,6 +10,8 @@
 \contentsline {subsection}{\numberline {5.1}Integration Requirements}{5}
 \contentsline {paragraph}{•}{5}
 \contentsline {subsection}{\numberline {5.2}Strategies}{6}
-\contentsline {section}{\numberline {6}Areas of Concern}{6}
-\contentsline {subsection}{\numberline {6.1}Key Points of Failure}{6}
-\contentsline {section}{\numberline {7}Example Unit Test}{8}
+\contentsline {section}{\numberline {6}Areas of Major Concern}{6}
+\contentsline {subsection}{\numberline {6.1}Graphics Pipeline and General Optimiser}{6}
+\contentsline {subsection}{\numberline {6.2}User Interface}{7}
+\contentsline {section}{\numberline {7}Example Unit Test}{7}
+\contentsline {paragraph}{•}{7}

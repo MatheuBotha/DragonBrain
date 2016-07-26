@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (MiKTeX 2.9 64-bit) (preloaded format=xelatex 2016.4.23)  26 JUL 2016 15:06
+This is XeTeX, Version 3.14159265-2.6-0.99992 (MiKTeX 2.9 64-bit) (preloaded format=xelatex 2016.4.23)  26 JUL 2016 15:23
 entering extended mode
 **./testing.tex
 (testing.tex
@@ -123,14 +123,17 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
- [5] [6] [7] [8] (testing.aux) ) 
+ [5] [6]
+Missing character: There is no • in font cmbx10!
+File: GTest.png Graphic file (type QTm)
+ <use  "GTest.png" > [7] (testing.aux) ) 
 Here is how much of TeX's memory you used:
- 978 strings out of 428721
- 11907 string characters out of 3159746
+ 983 strings out of 428721
+ 11939 string characters out of 3159746
  164313 words of memory out of 3000000
- 4385 multiletter control sequences out of 15000+200000
+ 4386 multiletter control sequences out of 15000+200000
  8196 words of font info for 29 fonts, out of 3000000 for 9000
  1096 hyphenation exceptions out of 8191
- 27i,4n,19p,596b,169s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,7n,19p,604b,207s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on testing.pdf (9 pages).
+Output written on testing.pdf (8 pages).
