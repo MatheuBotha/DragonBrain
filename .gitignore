@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+*.toc
+testing.log
+*.aux
+*.gz
