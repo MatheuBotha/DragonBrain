@@ -71,10 +71,19 @@ The Modules are:
  
 \subsection{Strategies}
 
-\section{Areas of Concern}
-\subsection{Key Points of Failure}
-\lipsum
+\section{Areas of Major Concern}
+In terms of Areas of Concern, these can be defined within a number of potential Key Points of Failure within the Project. These can be split into subsections based on the Modules within the project.
+\subsection{Graphics Pipeline and General Optimiser}
+One of the major performance concerns of the project can be translated into a potential point of failure. This is the potential for either the Graphics Pipeline or the General Optimiser to work faster than the other, leaving the other part of the system waiting (or spinning) until the other provides work to complete. Theoretically, failure could occur if this situation is not handled correctly and the Graphics Pipeline attempts to access a Snapshot from the Queue which does not exist, or the General Optimiser attempts to add a Snapshot when the Queue is full (ie the Heap is full). 
+\newline To cover for this, tests must be run that ensure that both sub-systems are capable of correctly handling such situations by spinning until the Queue's state has changed.
+\subsection{User Interface}
+With regards to the User Interface, this is where potential for human error can occur at runtime. Theoretically a user will only submit relevant data via the User Interface, however it is not impossible that a user will accidentally enter some kind of invalid data. This would naturally cause problems for the entire system.
+\newline Thus, extensive testing must be done to ensure that the SettingsPackage generated does not have invalid data within and the system should attempt to correct any failures that occur.
+
 
 \section{Example Unit Test}
-
+Following is an example of a Test in the general SettingsPackage, using Google Tests.
+\begin{figure}
+\includegraphics[scale=0.5]{GTest.png}
+\end{figure}
 \end{document}
