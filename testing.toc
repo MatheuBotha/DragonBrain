@@ -1,17 +1,13 @@
 \contentsline {section}{\numberline {1}Frameworks and Mechanisms}{1}
-\contentsline {subsection}{\numberline {1.1}Testing Framework}{1}
-\contentsline {subsection}{\numberline {1.2}Unit Tests}{3}
-\contentsline {section}{\numberline {2}Testing Methodologies}{5}
-\contentsline {section}{\numberline {3}Frameworks and Mechanisms}{5}
-\contentsline {section}{\numberline {4}Testing Strategies}{5}
-\contentsline {subsection}{\numberline {4.1}Unit Tests}{5}
-\contentsline {section}{\numberline {5}Integration Tests}{5}
-\contentsline {paragraph}{•}{5}
-\contentsline {subsection}{\numberline {5.1}Integration Requirements}{5}
-\contentsline {paragraph}{•}{5}
-\contentsline {subsection}{\numberline {5.2}Strategies}{6}
-\contentsline {section}{\numberline {6}Areas of Major Concern}{6}
-\contentsline {subsection}{\numberline {6.1}Graphics Pipeline and General Optimiser}{6}
-\contentsline {subsection}{\numberline {6.2}User Interface}{7}
-\contentsline {section}{\numberline {7}Example Unit Test}{7}
-\contentsline {paragraph}{•}{7}
+\contentsline {section}{\numberline {2}Testing Strategies}{1}
+\contentsline {subsection}{\numberline {2.1}Unit Tests}{1}
+\contentsline {section}{\numberline {3}Integration Tests}{2}
+\contentsline {paragraph}{•}{2}
+\contentsline {subsection}{\numberline {3.1}Integration Requirements}{2}
+\contentsline {paragraph}{•}{2}
+\contentsline {subsection}{\numberline {3.2}Strategies}{3}
+\contentsline {section}{\numberline {4}Areas of Major Concern}{3}
+\contentsline {subsection}{\numberline {4.1}Graphics Pipeline and General Optimiser}{3}
+\contentsline {subsection}{\numberline {4.2}User Interface}{3}
+\contentsline {section}{\numberline {5}Example Unit Test}{4}
+\contentsline {paragraph}{•}{4}
