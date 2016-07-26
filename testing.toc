@@ -7,8 +7,7 @@
 \contentsline {paragraph}{•}{6}
 \contentsline {subsection}{\numberline {3.1}Integration Requirements}{6}
 \contentsline {paragraph}{•}{6}
-\contentsline {subsection}{\numberline {3.2}Integration Areas}{7}
-\contentsline {subsection}{\numberline {3.3}Strategies}{7}
+\contentsline {subsection}{\numberline {3.2}Strategies}{7}
 \contentsline {section}{\numberline {4}Areas of Concern}{7}
 \contentsline {subsection}{\numberline {4.1}Key Points of Failure}{7}
-\contentsline {section}{\numberline {5}Example Unit Test}{8}
+\contentsline {section}{\numberline {5}Example Unit Test}{9}

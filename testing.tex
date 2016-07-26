@@ -52,13 +52,12 @@ In terms specifying the Integration Requirements for the project, we identify Pr
 
 The Modules are:
 \begin{itemize}
-\item Graphics Pipeline:
-\item General Optimiser:
-\item User Interface:
-\item Manager:
+\item Graphics Pipeline: The Graphics Pipeline will be required to integrate with the Manager and Data Models Module. This integration will take the form of message passing,System Snapshots, which are consumed by the Pipeline as provided by the Manager. The Graphics Pipeline similarly affects the User Interface. The Graphics Pipeline will then make use of the system snapshot in order to render, on the User Interface, the implications realised internally by the General Optimiser.
+\item General Optimiser: The General Optimiser will produce System Snapshots which will be stored in Data Models inside the Manager Module. This General Optimiser, by the use of Settings Package, will then be configured to meet specific user requirements. 
+\item User Interface: The User Interface is going to communicate with the Manager Module. The user changing system parameters, or configuring them, will generate Settings Package objects and these will be sent to the Manager for use in adjusting configurations. The User Interface will also be receiving, and rendering, message packets from the Graphics Pipeline. These packets will result in new visual information being displayed to the user.
+\item Manager \& Data Models:
 \end{itemize}
  
-\subsection{Integration Areas}
 \subsection{Strategies}
 
 \section{Areas of Concern}
