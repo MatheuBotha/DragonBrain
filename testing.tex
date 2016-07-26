@@ -36,13 +36,17 @@ Gerard van Wyk u14101263
 \tableofcontents
 
 \section{Frameworks and Mechanisms}
-\subsection{Testing Framework}
-\lipsum
-\subsection{Unit Tests}
-\lipsum
+\section{Frameworks and Mechanisms}
+For our project, we are making use of Google Tests, a cross-platform Unit Testing library for C++. This is largely because our chosen standardised IDE, Jetbrains CLion has integrated support for the framework.
+
 \section{Testing Strategies}
 \subsection{Unit Tests}
-\lipsum
+Our project's unit tests work primarily based on Assert-like mechanisms for Google Test, wherein we generate objects with particular data and assure that values are as they should be, and ensuring invalid states are properly detected. These are done using the Google Test macros "EXPECT_EQ" (tests equality), "EXPECT_TRUE", "EXPECT_FALSE", "EXPECT_NE" (tests for inequality) and so on.
+\newline Each test is defined within a TEST macro and can be run either individually or all together, via CLion. 
+
+
+
+
 \section{Integration Tests}
 \paragraph{•}
 This section of the testing manual will contain all of the necessary details pertaining to the area of Integration Tests, and Integration Testing, as per project requirements and project dictates.
@@ -63,7 +67,7 @@ The Modules are:
 
 \section{Areas of Concern}
 \subsection{Key Points of Failure}
-\lipsum
+\lipsu
 
 \section{Example Unit Test}
 
