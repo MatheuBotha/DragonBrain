@@ -116,7 +116,34 @@ The scope for the Graphics Processor is presented below:
 
 \subsection{User Interface}
 \subsubsection{Scope}
-\subsubsection{Service Contracts}
+The scope of the User Interface is presented below.
+\begin{figure}[h]
+	\includegraphics[scale=0.45]{GUI_Scope.png}
+\end{figure}
+
+\paragraph{•}
+The User has 4 main capabilities
+\begin{itemize}
+	\item Changing the parameters of run environment
+	\item Starting the simulation with the currently configured parameters.
+	\item Updating the parameters of the current simulation based on the current (newly configured) parameters.
+	\item Stopping the current simulation.
+\end{itemize}
+
 \subsubsection{Functional Requirements}
-\subsubsection{Process Design}
+In terms of the Functional Requirements of the User Interface, the focus is as follows:
+\begin{itemize}
+	\item The user must be able to configure parameters for the system via the GUI.
+	\item The GUI should be capable of sending data to the SettingsPackage in order to generate a SettingsPackage.
+	\item The system should generate a SettingsPackage and start the simulation upon user request.
+	\item The user should be able to edit configuration mid-run
+\end{itemize}
+
+\subsubsection{Activity Diagram}
+Following is an activity diagram for the process involved in starting a run of the project.
+\begin{figure}[h]
+	\includegraphics[scale=0.45]{GUI_Activity.png}
+\end{figure}
+
+
 \end{document}
