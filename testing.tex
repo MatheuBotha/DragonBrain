@@ -63,6 +63,8 @@ The Modules are:
 \end{itemize}
  
 \subsection{Strategies}
+\paragraph{•}
+The general integration strategy will be to construct the Manager Module and then perform unit testing of it by creating fake objects/service requests and determining if the Manager Module is able to contractually fulfil those service requests and create the required objects/class instances as per need. Once this process has been finished, the next step will be to construct the actual Modules that communicate with the Manager and then perform testing where the test objects request services from the Manager and the Manager must again provide to these real objects, the requirements of the service contracts that bind them. Once this is completed, the final stage of the integration testing will require a stress testing component in order to identify system weaknesses in optimisation that would affect the performance of the system of a whole under serious load. This can only be determined by subjecting the system to higher-than-normal workloads which will have the effect of identifying the most stress-failure prone areas of the system.
 
 \section{Areas of Major Concern}
 In terms of Areas of Concern, these can be defined within a number of potential Key Points of Failure within the Project. These can be split into subsections based on the Modules within the project.
