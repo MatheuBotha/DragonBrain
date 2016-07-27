@@ -1,3 +1,4 @@
-project(SettingsPackageTest)
+add_executable(setTester test.cpp test.cpp)
 
-add_subdirectory(Tests)
+target_link_libraries(setTester gtest gtest_main)
+target_link_libraries(setTester SettingsPackageSRC)
