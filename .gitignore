@@ -26,8 +26,10 @@
 *.exe
 *.out
 *.app
-Demo1Draft.log
-Demo1Draft.aux
+
+# Latex compiled files
+*.log
+*.aux
 *.pdf
-Demo1Draft.synctex.gz
+*.synctex.gz
 *.toc
