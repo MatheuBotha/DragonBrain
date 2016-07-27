@@ -196,7 +196,25 @@ The graphics processor needs to be scalable the render capability can be scaled.
 \subsubsection{Reliability}
 The graphics processor should be able to recover if an error were to occur in either the message passing or optimiser. Correctly signalling the graphics processor should keep the user informed about what is happening in the system.
 \subsection{General Optimiser}
+\paragraph{•}
+The General Optimiser is much less performance bound than the other system modules because of the use of an intermediary. Generally speaking, the Graphics Processor will faster or slower than the General Optimiser, depending on a variety of factors. Typically, this means that the General Optimiser can afford to, with the appropriate measures, function at a slower speed than the Graphics Processor.
+\subsubsection{Quality Requirements}
+\begin{enumerate}
+\item Flexibility: The user is supposed to be able to configure operational parameters of the General Optimiser during problem solving, that is during the run. There is a limit to the degree that the Optimiser can be changed but in general, the General Optimiser must be flexibility enough in design such that a user parameter configuration change will be handled internally without requiring a program restart or recompile.
+\item Performance: As mentioned above, the performance requirements of the General Optimiser are not as stringently defined as with the Graphics Processor. However, the requirement is somewhat implicit in the fact that the optimiser will have to provide the graphics processor with enough data to allow it to animate the landscape smoothly but perhaps a more important performance condition would be the stopping conditions. Being able to accurately predict when a swarm has stagnated will allow for the simulation to exit in a timely manner so that a user does not have to wonder whether or not something is happening.
+\item Reliability: Reliability is an important concern in that the General Optimiser must be reliable in two ways: the first is the component itself should not fail often. In the event of failures, it must be able to recover without compromising the system. The second area, perhaps more critically, is that the results produced by the General Optimiser in terms of the particle positions and values etc must be consistent with the expected problem solving capabilities and capacities of Swarm-based problem solving methods. That is, we should not expect variance in results that would not be possible of a Swarm-based problem solving approach to produce.
+\item Scalability: Scalability is an important concern in that the user has the capacity to perform simultaneous problem solving methods on multiple screens. The General Optimiser must therefore be able to support multiple problem solving runs at the same time.
+\end{enumerate}
 \subsection{Manager}
+\paragraph{•}
+The Manager component is the high level component that is the core component that serves as the intermediary component between all other components in the system. All other components will pass messages to the Manager who will then pass further messages as needed, which establishes and integrates the system as a whole in terms of communication pathways.
+\subsubsection{Quality Requirements}
+\begin{enumerate}
+\item Integrability: The Manager component is the core of the integration efforts.No components directly interact with each other and as a result, all components direct interact with the Manager. This means that the Manager must be Integrable in terms of supporting communications between the other components.
+\item Reliability: Reliability is a core component of the Manager module in that it must be reliable in terms of the component failing as rarely as possible. Should the manager component fail, then the system as a whole will suffer a critical error that will not be recoverable.
+\item Scalability: The Manager will have to manage potentially multiple concurrent Optimisers and other components operating in concert to solve multiple problems. In this way, the Manager must be able to scale to function with as many as 4 concurrent problem solving and as few as 1.
+\end{enumerate}
+
 \subsection{User Interface}
 The purpose of the user interface component is to initially allow the user to create the necessary settings package and then allow the user to manipulate the settings packages.
 \subsubsection{Reliability}
