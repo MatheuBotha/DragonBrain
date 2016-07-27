@@ -28,3 +28,6 @@
 *.app
 Demo1Draft.log
 Demo1Draft.aux
+*.pdf
+Demo1Draft.synctex.gz
+*.toc

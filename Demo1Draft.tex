@@ -54,6 +54,11 @@ Below are some feature that extend on the core scope which would enhance the sys
 \item Functionality to export the results of an algorithm to a csv file.
 \end{itemize}
 
+\section{Software Architecture Overview}
+\begin{figure}[h]
+\includegraphics[scale=0.4]{arch}
+\caption{A diagram to indicate the proposed system architecture}
+\end{figure}
 
 \section{Architectural Requirements}
 \subsection{Scope}
@@ -126,29 +131,8 @@ The Model View Controller design is structured as follows: The Model handles bus
 
 \pagebreak
 
-\begin{figure}
-\includegraphics[scale=0.4]{arch}
-\caption{A diagram to indicate the proposed system architecture}
-\end{figure}
 
-\subsection{Layered System}
-\paragraph{•}
-Why use a layered system?
-\begin{itemize}
-\item It simplifies the design considerably.
-\item It enables different team members to work on different components without being dependent on the progress of the other components.
-\item It enables different team members to work at various levels of abstraction.
-\item It supports the portability of software artifacts.
-\end{itemize}
-\includegraphics{Overview}
-\subsection{Optimiser layer}
-The Optimiser layer will encompass all the functions performed by the generic interchangeable optimisation algorithm that is being visualised. The graphics layer will request information from the optimiser layer at regular intervals in order to render the particles representing the optimiser's current sample points onto the current fitness landscape. The optimiser will act according to what type of optimiser has been selected by the user.
-\subsection{Graphics Layer}
-The Graphics Layer is responsible for using requests from the client layer and the output of the Optimiser Layer to render the scene and pass it back to the client interface.
-\subsubsection{Approach}
-\paragraph{•}
-Graphics engine are not traditionally developed under the traditional OO approach. This is mainly due to various performance issue that graphical processing encounters with Object Orientation. Instead a more effective approach is data-driven design. Its basic premise is simple: construct your code around the data structures, and describe what you want to achieve in terms of manipulations of these structures.
-
+\section{Programming Paradigm}
 \paragraph{•}
 Functional Reactive Programming is one such programming style that promotes data driven design. There are 3 common divisions of FRP:
 \begin{itemize}
@@ -199,5 +183,12 @@ The interface will make use of the GLFW. GLFW is an Open Source, multi-platform 
 CMake is an open-source, cross-platform family of tools designed to build, test and package software. CMake is used to control the software compilation process using simple platform and compiler independent configuration files.
 \subsubsection{Fraps}
 Fraps is a universal Windows application that can be used with games using DirectX or OpenGL graphic technology. For our purposes it will be used as the benchmarking software as it can how how many Frames Per Second (FPS) you are getting in a corner of your screen.  Perform custom benchmarks and measure the frame rate between any two points. It can also save the statistics out to disk and use them for your own reviews and applications. It also has useful Screen Capture Software as well as Realtime Video Capture Software which can be useful for demoing purposes.
+\subsubsection{Cppcheck}
+Cppcheck an open source code analysis tool specifically for the C language. In terms of applicability, Cppcheck will be used to analyse the C++ code written for the project to ensure that a single consistent coding standard that will add in the maintenance of the project as well as provide a consistent standard that can be enforced across all of the system documentation.
 
+\section{Architectural Components}
+\subsection{Graphics Processor}
+\subsection{General Optimiser}
+\subsection{Manager}
+\subsection{User Interface}
 \end{document}
