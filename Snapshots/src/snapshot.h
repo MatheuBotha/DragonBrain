@@ -5,13 +5,17 @@
 #ifndef DRAGONBRAIN_SNAPSHOT_H
 #define DRAGONBRAIN_SNAPSHOT_H
 
+#include "../../OPT/src/Particle.h"
+
 class Snapshot {
 private:
-    Snapshot* next;
     Particle* ParticleList;
     int** ParticleLinks;
 
 public:
+    Snapshot* next;
+
+
     Snapshot(Particle *ParticleList, int **ParticleLinks);
     void setParticleList(Particle *ParticleList);
     void setParticleLinks(int **ParticleLinks);
