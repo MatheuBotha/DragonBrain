@@ -4,13 +4,13 @@
 SnapshotManager::SnapshotManager(int Bound){
         queueSize = 0;
         bound = Bound;
+        head = NULL;
     }
 
 
 bool SnapshotManager::enqueue(Snapshot* snapshot){
-        queueSize++;
 
-        if(queueSize>bound){
+        if(queueSize>=bound){
             return false;
         }
 
@@ -27,16 +27,12 @@ bool SnapshotManager::enqueue(Snapshot* snapshot){
         if(head==NULL){
             return false;
         }else{
+            queueSize++;
             return true;
         }
 }
 
 Snapshot* SnapshotManager::dequeue(){
-        queueSize--;
-
-        if(queueSize>bound){
-            return NULL;
-        }
 
         temp = head;
 
@@ -46,8 +42,10 @@ Snapshot* SnapshotManager::dequeue(){
             if(head->next!=NULL){
                 head = head->next;
             }
+            else head = NULL;
 
         }
 
-        return head;
+        queueSize--;
+        return temp;
 }

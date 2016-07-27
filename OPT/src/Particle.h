@@ -44,7 +44,7 @@ public:
     ///Sets the position of the particle based on an array input
     void setParticlePosition(double * positions,int dimensions){
 
-        if (positionArray!= nullptr)
+        if (positionArray!= NULL)
         {
             delete positionArray;
         }
@@ -61,7 +61,7 @@ public:
     ///Sets particle positions based on fixed size array
     void setParticlePositionByArray(double positions[],int dimensions){
 
-        if (positionArray!= nullptr)
+        if (positionArray!= NULL)
         {
             delete positionArray;
         }
@@ -114,14 +114,14 @@ public:
      * */
     Particle(double initV,double* pos,int dimensions) {
 
-        if (velocity== nullptr)
+        if (velocity== NULL)
         {
             velocity=new double;
         }
 
         *velocity=initV;
 
-        if (positionArray== nullptr)
+        if (positionArray== NULL)
         {
             positionArray=new double[dimensions];
         }
