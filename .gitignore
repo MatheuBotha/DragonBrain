@@ -33,3 +33,5 @@
 *.pdf
 *.synctex.gz
 *.toc
+*.xml
+*.iml
