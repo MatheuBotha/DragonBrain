@@ -62,20 +62,30 @@ Page1Form {
 
     ToggleButton {
         id: toggleRunning
-        x: 238
+        x: 252
         y: 266
-        width: 165
-        height: 159
+        width: 138
+        height: 119
         text: qsTr("Optimizer On")
         onClicked: {
                    //  setPkg.generatePackageGeneral(page2.swarmSize.value);
                      //setPkg.generatePackageGraphics(resolutionChoice.textAt(resolutionChoice.currentIndex));
-                     setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), page2.x1_min.value, page2.x1_max.value, page2.x2_min.value,
-                                                   page2.x2_max.value, 1, 0, 0)
+                     //setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), page2.x1_min.value, page2.x1_max.value, page2.x2_min.value,
+                       //                            page2.x2_max.value, 1, 0, 0)
                    }
 
     }
 
+
+    Button {
+        id: updateButton
+        x: 242
+        y: 391
+        width: 157
+        height: 40
+        text: qsTr("Update Parameters")
+        opacity: 0.7
+    }
 
 
 
@@ -236,7 +246,6 @@ SpinBox {
     value: 1
     editable: true
     to: 2147483647
-    value: 1
 }
 
 SpinBox {
@@ -250,7 +259,6 @@ SpinBox {
     value: 1
     editable: true
     to: 100
-    value: 1
 }
 
 Label {

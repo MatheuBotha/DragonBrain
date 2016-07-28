@@ -27,3 +27,5 @@
 *.out
 *.app
 GUI/SwarmVisInterface.pro.user
+*.xml
+*.iml
