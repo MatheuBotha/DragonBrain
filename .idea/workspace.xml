@@ -48,8 +48,8 @@
       <file leaf-file-name="test.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Snapshots/test/test.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state relative-caret-position="341">
+              <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
               <folding>
                 <element signature="e#1#25#0" expanded="true" />
               </folding>
@@ -60,7 +60,7 @@
       <file leaf-file-name="SnapshotManager.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Snapshots/src/SnapshotManager.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="595">
               <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
@@ -70,7 +70,7 @@
       <file leaf-file-name="SnapshotManager.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Snapshots/src/SnapshotManager.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
+            <state relative-caret-position="357">
               <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
@@ -80,9 +80,28 @@
       <file leaf-file-name="Particle.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OPT/src/Particle.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="65" column="14" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
-              <folding />
+            <state relative-caret-position="2193">
+              <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+              <folding>
+                <marker date="1469689821656" expanded="true" signature="557:5367" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="1061:1310" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="1439:1687" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="1828:1883" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="1953:1990" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="2049:2081" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="2187:2235" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="2510:2796" ph="/**...*/" />
+                <marker date="1469689821656" expanded="true" signature="3292:3328" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="3407:3443" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="3533:3587" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="3671:3725" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="3824:3869" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="3988:4060" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="4143:4184" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="4283:4347" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="4454:4503" ph="{...}" />
+                <marker date="1469689821656" expanded="true" signature="4634:4714" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -91,7 +110,7 @@
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -100,8 +119,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+            <state relative-caret-position="187">
+              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -111,7 +130,7 @@
         <entry file="file://$PROJECT_DIR$/Snapshots/src/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -120,7 +139,7 @@
       <file leaf-file-name="snapshot.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Snapshots/src/snapshot.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
+            <state relative-caret-position="323">
               <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
               <folding />
             </state>
@@ -150,12 +169,12 @@
         <option value="$PROJECT_DIR$/SnapshotManager.cpp" />
         <option value="$PROJECT_DIR$/snapshot.cpp" />
         <option value="$PROJECT_DIR$/Snapshots/src/snapshot.h" />
-        <option value="$PROJECT_DIR$/OPT/src/Particle.h" />
         <option value="$PROJECT_DIR$/Snapshots/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/Snapshots/src/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Snapshots/test/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Snapshots/src/SnapshotManager.cpp" />
+        <option value="$PROJECT_DIR$/OPT/src/Particle.h" />
+        <option value="$PROJECT_DIR$/Snapshots/src/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Snapshots/test/test.cpp" />
       </list>
     </option>
@@ -526,6 +545,7 @@
       <option name="presentableId" value="Default" />
       <updated>1468221627718</updated>
       <workItem from="1469618252293" duration="10418000" />
+      <workItem from="1469689330957" duration="793000" />
     </task>
     <task id="LOCAL-00001" summary="testing CLion commit">
       <created>1468237743334</created>
@@ -538,9 +558,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="snapTester - 2016.07.27 at 16h 06m 34s.xml">
-      <configuration name="snapTester" configurationId="CMakeGoogleTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="snapTester - 2016.07.27 at 16h 08m 11s.xml">
       <configuration name="snapTester" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
@@ -568,12 +585,15 @@
     <history-entry file="snapTester - 2016.07.27 at 16h 17m 09s.xml">
       <configuration name="snapTester" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="snapTester - 2016.07.28 at 09h 10m 38s.xml">
+      <configuration name="snapTester" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10418000" />
+    <option name="totallyTimeSpent" value="11211000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25297618" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -582,7 +602,7 @@
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33438486" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34042552" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34042552" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -616,22 +636,101 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/snapshot.cpp">
+    <entry file="file://$PROJECT_DIR$/Snapshots/test/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="9" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="51">
+          <caret line="3" column="50" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snapshot.h">
+    <entry file="file://$PROJECT_DIR$/Snapshots/test/test.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Snapshots/src/SnapshotManager.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Snapshots/src/SnapshotManager.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OPT/src/Particle.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="65" column="14" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
+          <folding>
+            <marker date="1469689821656" expanded="true" signature="557:5367" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="1061:1310" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="1439:1687" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="1828:1883" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="1953:1990" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="2049:2081" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="2187:2235" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="2510:2796" ph="/**...*/" />
+            <marker date="1469689821656" expanded="true" signature="3292:3328" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3407:3443" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3533:3587" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3671:3725" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3824:3869" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3988:4060" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="4143:4184" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="4283:4347" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="4454:4503" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="4634:4714" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Snapshots/src/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Snapshots/src/snapshot.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snapshot.cpp" />
+    <entry file="file://$PROJECT_DIR$/snapshot.h" />
     <entry file="file://$PROJECT_DIR$/main.cpp" />
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -678,42 +777,14 @@
     <entry file="file://$PROJECT_DIR$/Renton.jpg" />
     <entry file="file://$PROJECT_DIR$/PSO.h" />
     <entry file="file://$PROJECT_DIR$/main.cpp" />
-    <entry file="file://$PROJECT_DIR$/SnapshotManager.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SnapshotManager.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snapshot.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snapshot.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/SnapshotManager.h" />
+    <entry file="file://$PROJECT_DIR$/SnapshotManager.cpp" />
+    <entry file="file://$PROJECT_DIR$/snapshot.cpp" />
+    <entry file="file://$PROJECT_DIR$/snapshot.h" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        <state relative-caret-position="187">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -728,24 +799,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Snapshots/src/snapshot.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
+        <state relative-caret-position="323">
           <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Snapshots/src/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/Snapshots/src/SnapshotManager.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/Snapshots/src/SnapshotManager.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state relative-caret-position="595">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -760,32 +831,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OPT/src/Particle.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="65" column="14" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
+        <state relative-caret-position="2193">
+          <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+          <folding>
+            <marker date="1469689821656" expanded="true" signature="557:5367" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="1061:1310" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="1439:1687" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="1828:1883" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="1953:1990" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="2049:2081" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="2187:2235" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="2510:2796" ph="/**...*/" />
+            <marker date="1469689821656" expanded="true" signature="3292:3328" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3407:3443" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3533:3587" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3671:3725" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3824:3869" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="3988:4060" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="4143:4184" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="4283:4347" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="4454:4503" ph="{...}" />
+            <marker date="1469689821656" expanded="true" signature="4634:4714" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Snapshots/src/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Snapshots/src/SnapshotManager.h">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Snapshots/src/SnapshotManager.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        <state relative-caret-position="68">
+          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Snapshots/test/test.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state relative-caret-position="341">
+          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding>
             <element signature="e#1#25#0" expanded="true" />
           </folding>
