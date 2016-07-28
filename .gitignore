@@ -27,3 +27,5 @@
 *.out
 *.app
 *.iml
+*.xml
+.idea/workspace.xml

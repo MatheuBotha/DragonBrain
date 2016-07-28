@@ -4,7 +4,7 @@
 
 
 #include "gtest/gtest.h"
-#include "../../src/settingspackage.h"
+#include "../src/settingspackage.h"
 
 
 TEST(basic_check, test_GeneralPackage) {
