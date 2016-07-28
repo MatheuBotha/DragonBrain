@@ -106,8 +106,20 @@ void GenOPT::generateSwarmNMatrix() {
 
     vector<int> indexPool;
     int randomIndex;
-    bool found=false;
+    bool found = false;
 
+    if (neighbourhoodMatrix== nullptr){
+    neighbourhoodMatrix = new int *[swarmSize];
+
+    for (int i = 0; i < swarmSize; ++i) {
+        neighbourhoodMatrix[i] = new int[swarmSize];
+    }
+    for (int i = 0; i < swarmSize; i++) {
+        for (int j = 0; j < swarmSize; j++) {
+            neighbourhoodMatrix[i][j] = -1;
+        }
+    }
+    }
     for(int i=0;i<swarmSize;i++)
     {
         neighbourhoodMatrix[i][i]=INT_MAX;
@@ -278,5 +290,14 @@ void GenOPT::solveProblem() {
     }
 
 
+}
+//Getter for neighbourhood matrix
+int **GenOPT::getNeighbourhoodMatrix() const {
+    return neighbourhoodMatrix;
+}
+
+//Setter for neighbourhoood matrix
+void GenOPT::setNeighbourhoodMatrix(int **neighbourhoodMatrix) {
+    GenOPT::neighbourhoodMatrix = neighbourhoodMatrix;
 }
 

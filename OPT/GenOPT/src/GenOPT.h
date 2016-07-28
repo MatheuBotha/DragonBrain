@@ -365,6 +365,10 @@ public:
         return maxIterations;
     }
 
+    int **getNeighbourhoodMatrix() const;
+
+    void setNeighbourhoodMatrix(int **neighbourhoodMatrix);
+
     ///Setter for maxIterations
     void setMaxIterations(int maxIterations) {
         GenOPT::maxIterations = maxIterations;
