@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
-project(GenOPT)
-add_subdirectory(src)
+project(OPT)
+
 add_subdirectory(Tests)
+add_subdirectory(src)
