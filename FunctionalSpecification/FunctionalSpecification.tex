@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{graphicx}
+\usepackage{float}
 \graphicspath{ {images/} }
 \begin{document}
 
@@ -49,7 +50,7 @@ The General Optimiser or OPT for short is the module that provides the problem s
 \subsubsection{Scope}
 \paragraph{•}
 The scope of the General Optimiser is presented below.
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.45]{Scope.png}
 \end{figure}
 
@@ -65,7 +66,7 @@ The User has 3 areas of general purpose use
 We will now specify the service contracts that importantly define the capacities of the General Optimiser Module
 
 \subsubsection{Create Optimiser}
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.4]{serviceContractOPT.png}
 \end{figure}
 
@@ -80,7 +81,7 @@ The exact conditions will be codified below:
 \end{enumerate}
 
 \subsubsection{Functional Requirements}
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.5]{functionalRequirementsOPT.png}
 \end{figure}
 
@@ -89,14 +90,14 @@ In terms of the functional requirements for the creation of an Optimiser object,
 \subsubsection{Process Design}
 \paragraph{•}
 The process specification defined here is for the process to create an Optimiser object.
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.5]{GeneralOptimiserActivity.png}
 \end{figure}
 
 \subsubsection{Domain Model}
 \paragraph{•}
 Presented below is the domain model of the General Optimiser.
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.2]{OPTModel.png}
 \end{figure}
 
@@ -105,7 +106,7 @@ The Graphics Processor is responsible for visualising the data that is generated
 
 \subsubsection{Scope}
 The scope for the Graphics Processor is presented below:
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.45]{GraphicsProcessor/Scope.jpg}
 \end{figure} 
 \paragraph{•}
@@ -120,20 +121,24 @@ The User has 2 areas of general purpose use
 \end{itemize}
 
 \subsubsection{Service Contracts}
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.45]{GraphicsProcessor/ServiceContract.jpg}
 \end{figure}
 The service contract for the graphics processor facilitates the creation of the processor. A graphics processor as a whole is a single entity which can then be associated with a optimiser. Once associated with that optimiser in the manager, the data from the optimiser will be visualised. 
 
 \subsubsection{Functional Requirements}
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.45]{GraphicsProcessor/FunctionalRequirements.jpg}
 \end{figure}
+The functional requirements for creating a graphics processor are defined as follows:
+It will recieve a settings package. Determine how many optimizers will be running which will inform it whether or not it needs a split screen functionality. And then simply pass the render settings to the shaders.
 
 \subsubsection{Process Design}
-\begin{figure}[h]
+\begin{figure}[H]
+The following is the process design for creating a graphical processor:
 \includegraphics[scale=0.45]{GraphicsProcessor/ProcessDesign.jpg}
 \end{figure}
+
 
 \subsection{Manager}
 \subsubsection{Scope}
@@ -144,8 +149,8 @@ The service contract for the graphics processor facilitates the creation of the 
 \subsection{User Interface}
 \subsubsection{Scope}
 The scope of the User Interface is presented below.
-\begin{figure}[h]
-	\includegraphics[scale=0.45]{Scope_UI.png}
+\begin{figure}[H]
+	\includegraphics[scale=0.45]{GUI_Scope.jpg}
 \end{figure}
 
 \paragraph{•}
@@ -168,8 +173,8 @@ In terms of the Functional Requirements of the User Interface, the focus is as f
 
 \subsubsection{Activity Diagram}
 Following is an activity diagram for the process involved in starting a run of the project.
-\begin{figure}[h]
-	\includegraphics[scale=0.45]{GUI.png}
+\begin{figure}[H]
+	\includegraphics[scale=0.45]{GUI_Activity.jpg}
 \end{figure}
 
 
