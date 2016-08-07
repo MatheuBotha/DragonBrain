@@ -143,7 +143,7 @@ void GenOPT::generateSwarmNMatrix() {
                 }
             }
 
-            if (!found)
+            if (randomIndex!=i && !found )
             {
                 indexPool.push_back(randomIndex);
             }

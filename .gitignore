@@ -28,3 +28,8 @@
 *.app
 *.iml
 *.xml
+*.toc
+*.aux
+*.pdf
+*.log
+*.gz

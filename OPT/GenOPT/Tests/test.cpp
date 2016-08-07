@@ -33,19 +33,41 @@ TEST(basic_Constructor_Test_Particle_2,package_Test_Suite)
 
 }
 
-TEST(swarm_NMatrix_test,package_Test_Suite)
+TEST(swarm_NMatrix_creationTest,package_Test_Suite)
 {
+    int size=5;
     GenOPT * test=new GenOPT();
-    test->setSwarmSize(5);
+    test->setSwarmSize(size);
+    test->setNeighbourhoodSize(2);
     test->generateSwarmNMatrix();
 
     EXPECT_NE(test->getNeighbourhoodMatrix(), nullptr);
-    EXPECT_NE(test->getNeighbourhoodMatrix()[0][0],-1);
-    EXPECT_EQ(test->getNeighbourhoodMatrix()[0][0],INT_MAX);
-    EXPECT_NE(test->getNeighbourhoodMatrix()[0][1],INT_MAX);
-    EXPECT_EQ(test->getNeighbourhoodMatrix()[1][1],INT_MAX);
-    EXPECT_EQ(test->getNeighbourhoodMatrix()[2][2],INT_MAX);
-    EXPECT_EQ(test->getNeighbourhoodMatrix()[3][3],INT_MAX);
-    EXPECT_EQ(test->getNeighbourhoodMatrix()[4][4],INT_MAX);
+
+    for (int i=0;i<size;i++)
+    {
+     EXPECT_EQ(test->getNeighbourhoodMatrix()[i][i],INT_MAX);
+    }
+}
+
+TEST(swarm_NMatrix_valuesTest,package_Test_Suite)
+{
+    int size=10;
+    GenOPT * test=new GenOPT();
+
+    test->setSwarmSize(size);
+    test->setNeighbourhoodSize(2);
+    test->generateSwarmNMatrix();
+
+    for(int i=0;i<size;i++)
+    {
+        for(int j=0;j<size;j++)
+        {
+            if (i!=j)
+            {
+                EXPECT_NE(test->getNeighbourhoodMatrix()[i][j],INT_MAX);
+
+            }
+        }
+    }
 }
 
