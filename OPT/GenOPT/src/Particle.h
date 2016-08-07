@@ -85,8 +85,8 @@ public:
     }
 
     ///Gets the velocity
-    double *getVelocity() const {
-        return velocity;
+    double getVelocity() const {
+        return *velocity;
     }
 
     //Gets the value in the position array at dimension
