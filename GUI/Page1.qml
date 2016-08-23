@@ -68,11 +68,13 @@ Page1Form {
         height: 119
         text: qsTr("Optimizer On")
         onClicked: {
-                   //  setPkg.generatePackageGeneral(page2.swarmSize.value);
-                     //setPkg.generatePackageGraphics(resolutionChoice.textAt(resolutionChoice.currentIndex));
-                     //setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), page2.x1_min.value, page2.x1_max.value, page2.x2_min.value,
-                       //                            page2.x2_max.value, 1, 0, 0)
-                   }
+                     setPkg.generateSettingsGeneral(page2.swarmSize.value);
+                     setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), parseInt(page2.x1_min.text), parseInt(page2.x1_max.text), parseInt(page2.x2_min.text),
+                                           parseInt(page2.x2_max.text), parseFloat(page2.transformationA.text), parseFloat(page2.transformationB.text), parseFloat(page2.transformationC.text));
+                     setPkg.generateSettingsGraphics(page3.resolutionChoice.currentText, page3.renderSlider.value, showLinks.checked,
+                                           showPaths.checked, page3.ramSlider.value);
+                     setPkg.generateSettingsOptimizer(page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
+        }
 
     }
 
@@ -84,6 +86,14 @@ Page1Form {
         width: 157
         height: 40
         text: qsTr("Update Parameters")
+        onClicked: {
+                     setPkg.generateSettingsGeneral(page2.swarmSize.value);
+                     setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), parseInt(page2.x1_min.text), parseInt(page2.x1_max.text), parseInt(page2.x2_min.text),
+                                           parseInt(page2.x2_max.text), parseFloat(page2.transformationA.text), parseFloat(page2.transformationB.text), parseFloat(page2.transformationC.text));
+                     setPkg.generateSettingsGraphics(page3.resolutionChoice.currentText, page3.renderSlider.value, showLinks.checked,
+                                           showPaths.checked, page3.ramSlider.value);
+                     setPkg.generateSettingsOptimizer(page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
+        }
         opacity: 0.7
     }
 

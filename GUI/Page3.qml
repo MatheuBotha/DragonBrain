@@ -8,6 +8,11 @@ import QtQuick.Dialogs 1.2
 
 Page3Form {
 
+    property alias resolutionChoice: resolutionChoice
+    property alias numInstances: numInstances
+    property alias renderSlider: renderSlider
+    property alias ramSlider: ramSlider
+
     Label {
         id: resolutionLabel
         x: 31

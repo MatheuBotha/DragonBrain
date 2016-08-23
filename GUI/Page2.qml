@@ -17,6 +17,10 @@ Page2Form {
     property alias twoD_button: twoD_button
     property alias randomPosbutton: randomPosbutton
     property alias userPosbutton: userPosbutton
+    property alias transformationA: transformationA
+    property alias transformationB: transformationB
+    property alias transformationC: transformationC
+
 
     SpinBox {
         id: swarmSize
@@ -31,7 +35,7 @@ Page2Form {
     }
 
     Label {
-        id: sizeLabel
+        id: sizeLabrel
         x: 44
         y: 40
         color: "#ffffff"
@@ -55,9 +59,8 @@ Page2Form {
             id: x1_min
             x: -3
             y: 88
-            validator: DoubleValidator {
+            validator: IntValidator {
                 locale: "English"
-                decimals: 4
             }
             width: 169
             height: 40
@@ -67,16 +70,15 @@ Page2Form {
             {
                 color: "#DDD"
             }
-            text: "0.0"
+            text: "0"
         }
 
         TextField {
             id: x1_max
             x: 192
             y: 88
-            validator: DoubleValidator {
+            validator: IntValidator {
                 locale: "English"
-                decimals: 4
             }
             width: 169
             height: 40
@@ -86,7 +88,7 @@ Page2Form {
             {
                 color: "#DDD"
             }
-            text: "0.0"
+            text: "0"
         }
 
 
@@ -95,9 +97,8 @@ Page2Form {
             id: x2_max
             x: 192
             y: 158
-            validator: DoubleValidator {
+            validator: IntValidator {
                 locale: "English"
-                decimals: 4
             }
             width: 169
             height: 40
@@ -107,11 +108,29 @@ Page2Form {
             {
                 color: "#DDD"
             }
-            text: "0.0"
+            text: "0"
             visible: twoD_button.checked
         }
 
 
+        TextField {
+            id: x2_min
+            x: -3
+            y: 158
+            validator: IntValidator {
+                locale: "English"
+            }
+            width: 169
+            height: 40
+            clip: true
+            color: "#000"
+            background: Rectangle
+            {
+                color: "#DDD"
+            }
+            text: "0"
+            visible: twoD_button.checked
+        }
 
 
 
@@ -132,7 +151,7 @@ Page2Form {
             text: qsTr("Max of dimension 1 (x1)")
             color: "#ffffff"
             font.bold: true
-            font.pixelSize: 15
+            font.pixelSize: 14
         }
 
 
@@ -143,7 +162,7 @@ Page2Form {
             text: qsTr("Max of dimension 2 (x2)")
             color: "#ffffff"
             font.bold: true
-            font.pixelSize: 15
+            font.pixelSize: 14
             visible: twoD_button.checked
         }
 
@@ -154,7 +173,7 @@ Page2Form {
             text: qsTr("Min of dimension 2 (x2)")
             color: "#ffffff"
             font.bold: true
-            font.pixelSize: 15
+            font.pixelSize: 14
             visible: twoD_button.checked
         }
 
@@ -162,12 +181,12 @@ Page2Form {
 
         Label {
             id: x1_minlabel
-            x: 0
-    y: 65
-    text: qsTr("Min of dimension 1 (x1)")
+            x: -2
+            y: 65
+            text: qsTr("Min of dimension 1 (x1)")
             color: "#ffffff"
             font.bold: true
-            font.pixelSize: 15
+            font.pixelSize: 14
         }
 
         RadioButton {
@@ -199,25 +218,7 @@ Page2Form {
             }
         }
 
-        TextField {
-            id: x2_min
-            x: -3
-    y: 158
-            validator: DoubleValidator {
-                locale: "English"
-                decimals: 4
-            }
-            width: 169
-            height: 40
-            clip: true
-            color: "#000"
-            background: Rectangle
-            {
-                color: "#DDD"
-            }
-            text: "0.0"
-            visible: twoD_button.checked
-        }
+
     }
 
 

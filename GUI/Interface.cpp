@@ -1,13 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <iostream>
 
-//when settingspackage exists
-/*#include "settingspackage.h"
-    SettingsPackage *setts = new SettingsPackage();
-    engine.rootContext()->setContextProperty("setPkg", setts);
-    */
+#include "../SettingsPackage/src/settingspackage.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -18,8 +14,12 @@ int main(int argc, char *argv[])
 
 
 
+    SettingsPackage *setts = new SettingsPackage();
+    engine.rootContext()->setContextProperty("setPkg", setts);
 
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+
+
+    engine.load(QUrl("main.qml"));
 
     return app.exec();
 }
