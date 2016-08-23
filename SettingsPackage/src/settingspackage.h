@@ -4,7 +4,8 @@
 #include "graphicssettingspackage.h"
 #include "optimizersettingspackage.h"
 #include "problemdomainsettingspackage.h"
-
+#include <QObject>
+#include <QString>
 /**
  * @class ProblemDomainSettingsPackage
  *
@@ -13,9 +14,9 @@
  * from the GUI
  * */
 
-class SettingsPackage
+class SettingsPackage: public QObject
 {
-
+    Q_OBJECT
 private:
     int swarmSize;
     GraphicsSettingsPackage* gpPkg;
@@ -56,19 +57,20 @@ public:
       * @brief Sets the swarm size (given by GUI)
       * @param SwarmSize (int)
       */
-    void generateSettingsGeneral(int);
+    Q_INVOKABLE void generateSettingsGeneral(int);
     /**
       * @brief Generates a GraphicsSettingsPackage using input from the GUI
       */
-    void generateSettingsGraphics(std::string, int, bool, bool, int);
+    Q_INVOKABLE void generateSettingsGraphics(QString, int, bool, bool, int);
     /**
       * @brief Generates a OptimizerSettingsPackage using input from the GUI
       */
-    void generateSettingsOptimizer(std::string, double, double, double, int ,int);
+    Q_INVOKABLE void generateSettingsOptimizer(bool, QString, double, double, double, int ,int);
     /**
       * @brief Generates a ProblemDomainSettingsPackage using input from the GUI
       */
-    void generateSettingsDomain(std::string, int, int, int, int, int, double, double, double);
+    Q_INVOKABLE void generateSettingsDomain(QString, int, int, int, int, int, double, double, double);
+
 };
 
 #endif // SETTINGSPACKAGE_H

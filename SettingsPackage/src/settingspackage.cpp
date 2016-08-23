@@ -1,5 +1,4 @@
 #include "settingspackage.h"
-#include <iostream>
 
 
 SettingsPackage::SettingsPackage()
@@ -37,17 +36,24 @@ ProblemDomainSettingsPackage* SettingsPackage::getProblemDomainSettingsPackage()
 
 
 // Some manual labour to be done here, nothing special at all
-void SettingsPackage::generateSettingsGraphics(std::string resolution, int renderSpeed, bool showLinks, bool showPath, int maxRam)
+void SettingsPackage::generateSettingsGraphics(QString resolution, int renderSpeed, bool showLinks, bool showPath, int maxRam)
 {
+    std::string res = resolution.toStdString();
+    int resW = atof(res.substr(0,res.find('x')).c_str());
+    int resH = atof(res.substr(res.find('x')+1, res.length()).c_str());
     gpPkg->setMaxRam(maxRam);
     gpPkg->setRenderSpeed(renderSpeed);
     gpPkg->setShowLinks(showLinks);
     gpPkg->setShowPath(showPath);
+    gpPkg->setResolutionH(resH);
+    gpPkg->setResolutionW(resW);
 }
 
-void SettingsPackage::generateSettingsOptimizer(std::string particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc)
+void SettingsPackage::generateSettingsOptimizer(bool userInitialParticles, QString particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc)
 {
-    optPkg->setParticlePlacementString(particlePlacement);
+    if(userInitialParticles)
+        optPkg->setParticlePlacementString(particlePlacement.toStdString());
+    else optPkg->setParticlePlacementString("");
     optPkg->setInertiaWeight(InertiaWeight);
     optPkg->setCognitiveCoefficient(cognitiveCoefficient);
     optPkg->setSocialCoefficient(socialCoefficient);
@@ -55,9 +61,10 @@ void SettingsPackage::generateSettingsOptimizer(std::string particlePlacement, d
     optPkg->setCutoffAcc(cutoffAcc);
 }
 
-void SettingsPackage::generateSettingsDomain(std::string objFunction, int dimensions, int x1_min, int x1_max, int x2_min, int x2_max, double TransformationA, double TransformationB, double TransformationC)
+
+void SettingsPackage::generateSettingsDomain(QString objFunction, int dimensions, int x1_min, int x1_max, int x2_min, int x2_max, double TransformationA, double TransformationB, double TransformationC)
 {
-    probPkg->setObjectiveFunction(objFunction);
+    probPkg->setObjectiveFunction(objFunction.toStdString());
     probPkg->setDimensions(dimensions);
     int boundaries[4] = {x1_min, x1_max, x2_min, x2_max};
     probPkg->setBoundaries(boundaries);
