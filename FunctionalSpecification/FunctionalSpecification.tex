@@ -191,6 +191,104 @@ Following is an activity diagram for the process involved in starting a run of t
 
 \section{System Use Cases}
 \subsection{System Usage}
+\subsubsection{Startup}
+\subsubsection{In-Run}
 \section{Algorithm Service Contracts}
 \subsection{Algorithms}
+\subsubsection{Operations and Limitations}
+\paragraph{•}
+To clarify, we will define some terms below
+\begin{itemize}
+\item Swarm- A collection of particles that is used to solve an optimisation problem
+\item Particle- A single worker unit of the Swarm that contains a position reference and solution variables to the problem being solved.
+\item Run - A run refers to a single span of time that starts when an optimiser is configured by the user and started. The run ends when the user decides to terminate the visualisation or the stopping conditions of the optimiser bring it to an end.
+\item Iteration - An iteration is a single unit of work for an optimiser. An iteration consists of updating all of the particles in the swarm in terms of their positions and velocities and determining if an ideal solution has been worked out yet.
+\item Optimiser - A Swarm based manager component that contains a swarm, a problem and will then make use of iterations in order to produce solutions to the given problem
+\item Velocity - A rate of change used by the particle to quantify how far per iteration it is able to move. This can change and is influenced by many factors like other particles or previous histories.
+\item Position - A set of parameters that indicate where in the problem domain the particle is in terms of mapping a given set of parameters to a given result in the problem space based on the function given.
+\item Stopping Conditions- These are specific conditions with regards to system parameters that when reached, are used to terminate an optimiser's functioning and stop it from continuing indefinitely. Examples include
+\begin{itemize}
+\item Maximum Iterations Reached
+\item Sufficient solution accuracy reached
+\item Insufficient change of particle positions
+\item Approximate solution found
+\item Premature Halt signalled by operator
+\end{itemize}
+
+\end{itemize}
+
+
+\paragraph{•}
+Specific Functioning Limitations 
+\\
+The project offers functionality in terms of user interaction in two areas
+\begin{verbatim}
+1) Configuring an Optimiser Run
+
+	1. The system functioning takes place in terms of the user using the GUI to configure the initial settings for an optimiser.
+	2. Once configured, the user will then start the run which will begin the optimisation process.
+
+		1. The user can create and have up to 4 simultaneous runs at a given time depending on their hardware capacities and screen size.
+
+2) Viewing and Changing the Visualisation
+
+	1. Once the user has started the visualisation process, they can perform the following actions
+		1. Change specific optimiser parameters that will take effect either
+			1. During the next run: these will be configuration parameters such as Cognitive Coefficient
+			2. In real time: these will be visualisation parameters such as viewing links
+
+		2. Change viewing angle -This will happen by rotating the viewing plane or shifting the camera perspective focus
+
+		3. Stop the run and terminate the optimiser in progress
+
+There are some limitations to what the SwarmViz project can do.
+
+1. It can only visualise 2D and 1D problems those being problems with 1 or 2 dimensions or input variables. 
+2. It cannot in real time change the function being used
+3. Arbitrary functions cannot be inserted into the system during run time. New functions will have to be programmed into the system and the system recompiled. However the function framework is modular enough that new functions can be inserted into the system with minimal code changes/effects on the existing system.
+
+\end{verbatim}
+
+\paragraph{•}
+In general, the algorithm for an Optimiser is presented below.
+
+\begin{enumerate}
+\item Start of Run
+\item Initialise Particles in Swarm with:
+	\begin{enumerate}
+	\item Positions
+		\begin{itemize}
+		\item Random Positions within Domain
+		\item Specified Positions by user
+
+		\end{itemize}	 
+	\item Velocities as per random distribution
+		
+	\end{enumerate}
+	\item Evaluate particle fitness of each particle in Swarm
+		\begin{enumerate}
+		\item Fitness=fitnessFunctionEvaluation(Particle[x])
+		\end{enumerate}
+\item Find and update best history and global best
+\item Calculate and update each particle's new velocity
+\item Update position of all particles by new velocity  
+\item	Are any stopping conditions satisfied?
+	\begin{enumerate}
+	\item If so, HALT
+	\item Otherwise go back to 3
+		\begin{enumerate}
+		\item Output graphical updates to Snapshot Manager
+		\end{enumerate}
+	\end{enumerate}
+	
+\item Run Terminated	
+\end{enumerate}
+
+\paragraph{•}
+This process is also represented in the following flowchart
+\begin{figure}[H]
+	\includegraphics[scale=0.65]{flowchart.png}
+\end{figure}
+
+
 \end{document}
