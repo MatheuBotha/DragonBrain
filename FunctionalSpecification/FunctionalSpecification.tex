@@ -149,10 +149,13 @@ The following is the process design for creating a graphical processor:
 \begin{figure}[H]
 \includegraphics[scale=0.45]{Manager.png}
 \end{figure}
+\paragraph{•}
+The scope of the Manager model can be defined in the context of a single doRun operation. A run is defined as the interaction between an optimiser and a graphics process mediated by the snapshot manager serving as the intermediate storage unit. The doRun operation will create the requisite components who will then in turn perform their operation once notified by their partners in the communication.
 
-\subsubsection{Service Contracts}
-\subsubsection{Functional Requirements}
-\subsubsection{Process Design}
+\subsubsection{Domain Model}
+\begin{figure}[H]
+\includegraphics[scale=0.45]{ManagerModel.png}
+\end{figure}
 
 \subsection{User Interface}
 \subsubsection{Scope}
