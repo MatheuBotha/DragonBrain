@@ -156,7 +156,8 @@ The scope of the Manager model can be defined in the context of a single doRun o
 \begin{figure}[H]
 \includegraphics[scale=0.45]{ManagerModel.png}
 \end{figure}
-
+\paragraph{•}
+The Manager class encapsulates the core functioning integration unit of the system. The Manager class will contain references to specific Optimisers and Graphics Processors and Snapshot Managers. One set of the three components comprises the components needed to perform a run. Each of these components are tethered, or coupled, to each other for the duration of the run and cannot be uncoupled. This will end when the run is terminated with the components being destroyed and the resources allocated available for reuse after the fact.
 \subsection{User Interface}
 \subsubsection{Scope}
 The scope of the User Interface is presented below.
