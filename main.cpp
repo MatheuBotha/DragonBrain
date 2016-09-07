@@ -29,7 +29,7 @@ struct point {
 GLuint vbo;
 
 int init_resources() {
-    program = create_program("graph.v.glsl", "graph.f.glsl");
+    program = create_program("shaders/graph.v.glsl", "shaders/graph.f.glsl");
     if (program == 0)
         return 0;
 
