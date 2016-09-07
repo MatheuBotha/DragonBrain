@@ -1,180 +1,241 @@
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
-// GLEW
-#include "GLEW/include/glew.h"
+#include <GL/glew.h>
+#include <SDL2/SDL.h>
 
-// GLFW
-#include "GLFW/include/glfw3.h"
+#include "shader_utils.h"
 
+#include "res_texture.c"
 
-// Function prototypes
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+GLuint program;
+GLint attribute_coord2d;
+GLint uniform_offset_x;
+GLint uniform_scale_x;
+GLint uniform_sprite;
+GLuint texture_id;
+GLint uniform_mytexture;
 
-// Window dimensions
-const GLuint WIDTH = 800, HEIGHT = 600;
+float offset_x = 0.0;
+float scale_x = 1.0;
+int mode = 0;
 
-// Shaders
-const GLchar* vertexShaderSource = "#version 330 core\n"
-        "layout (location = 0) in vec3 position;\n"
-        "void main()\n"
-        "{\n"
-        "gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-        "}\0";
-const GLchar* fragmentShaderSource = "#version 330 core\n"
-        "out vec4 color;\n"
-        "void main()\n"
-        "{\n"
-        "color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-        "}\n\0";
+struct point {
+    GLfloat x;
+    GLfloat y;
+};
 
-// The MAIN function, from here we start the application and run the game loop
-int main()
-{
-    std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
-    // Init GLFW
-    glfwInit();
-    // Set all the required options for GLFW
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+GLuint vbo;
 
-    // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
-    glfwMakeContextCurrent(window);
+int init_resources() {
+    program = create_program("graph.v.glsl", "graph.f.glsl");
+    if (program == 0)
+        return 0;
 
-    // Set the required callback functions
-    glfwSetKeyCallback(window, key_callback);
+    attribute_coord2d = get_attrib(program, "coord2d");
+    uniform_offset_x = get_uniform(program, "offset_x");
+    uniform_scale_x = get_uniform(program, "scale_x");
+    uniform_sprite = get_uniform(program, "sprite");
+    uniform_mytexture = get_uniform(program, "mytexture");
 
-    // Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
-    glewExperimental = GL_TRUE;
-    // Initialize GLEW to setup the OpenGL Function pointers
-    glewInit();
+    if (attribute_coord2d == -1 || uniform_offset_x == -1 || uniform_scale_x == -1 || uniform_sprite == -1 || uniform_mytexture == -1)
+        return 0;
 
-    // Define the viewport dimensions
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-    glViewport(0, 0, width, height);
+    /* Enable blending */
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    /* Enable point sprites (not necessary for true OpenGL ES 2.0) */
+#ifndef GL_ES_VERSION_2_0
+    glEnable(GL_POINT_SPRITE);
+    glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+#endif
 
-    // Build and compile our shader program
-    // Vertex shader
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(vertexShader);
-    // Check for compile time errors
-    GLint success;
-    GLchar infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+    /* Upload the texture for our point sprites */
+    glActiveTexture(GL_TEXTURE0);
+    glGenTextures(1, &texture_id);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, res_texture.width, res_texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, res_texture.pixel_data);
+
+    // Create the vertex buffer object
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    // Create our own temporary buffer
+    point graph[2000];
+
+    // Fill it in just like an array
+    for (int i = 0; i < 2000; i++) {
+        float x = (i - 1000.0) / 100.0;
+
+        graph[i].x = x;
+        graph[i].y = sin(x * 10.0) / (1.0 + x * x);
     }
-    // Fragment shader
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fragmentShader);
-    // Check for compile time errors
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-    }
-    // Link shaders
-    GLuint shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-    // Check for linking errors
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-    }
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
 
+    // Tell OpenGL to copy our array to the buffer object
+    glBufferData(GL_ARRAY_BUFFER, sizeof graph, graph, GL_STATIC_DRAW);
 
-    // Set up vertex data (and buffer(s)) and attribute pointers
-    //GLfloat vertices[] = {
-    //  // First triangle
-    //   0.5f,  0.5f,  // Top Right
-    //   0.5f, -0.5f,  // Bottom Right
-    //  -0.5f,  0.5f,  // Top Left
-    //  // Second triangle
-    //   0.5f, -0.5f,  // Bottom Right
-    //  -0.5f, -0.5f,  // Bottom Left
-    //  -0.5f,  0.5f   // Top Left
-    //};
-    GLfloat vertices[] = {
-            0.5f,  0.5f, 0.0f,  // Top Right
-            0.5f, -0.5f, 0.0f,  // Bottom Right
-            -0.5f, -0.5f, 0.0f,  // Bottom Left
-            -0.5f,  0.5f, 0.0f   // Top Left
-    };
-    GLuint indices[] = {  // Note that we start from 0!
-            0, 1, 3,  // First Triangle
-            1, 2, 3   // Second Triangle
-    };
-    GLuint VBO, VAO, EBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-    // Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
-    glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
-
-
-    // Uncommenting this call will result in wireframe polygons.
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-    // Game loop
-    while (!glfwWindowShouldClose(window))
-    {
-        // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
-        glfwPollEvents();
-
-        // Render
-        // Clear the colorbuffer
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // Draw our first triangle
-        glUseProgram(shaderProgram);
-        glBindVertexArray(VAO);
-        //glDrawArrays(GL_TRIANGLES, 0, 6);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0);
-
-        // Swap the screen buffers
-        glfwSwapBuffers(window);
-    }
-    // Properly de-allocate all resources once they've outlived their purpose
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
-    // Terminate GLFW, clearing any resources allocated by GLFW.
-    glfwTerminate();
-    return 0;
+    return 1;
 }
 
-// Is called whenever a key is pressed/released via GLFW
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
+void free_resources() {
+    glDeleteProgram(program);
+}
+
+void display() {
+    glUseProgram(program);
+    glUniform1i(uniform_mytexture, 0);
+
+    glUniform1f(uniform_offset_x, offset_x);
+    glUniform1f(uniform_scale_x, scale_x);
+
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    /* Draw using the vertices in our vertex buffer object */
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    glEnableVertexAttribArray(attribute_coord2d);
+    glVertexAttribPointer(attribute_coord2d, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+    /* Push each element in buffer_vertices to the vertex shader */
+    switch (mode) {
+        case 0:
+            glUniform1f(uniform_sprite, 0);
+            glDrawArrays(GL_LINE_STRIP, 0, 2000);
+            break;
+        case 1:
+            glUniform1f(uniform_sprite, 1);
+            glDrawArrays(GL_POINTS, 0, 2000);
+            break;
+        case 2:
+            glUniform1f(uniform_sprite, res_texture.width);
+            glDrawArrays(GL_POINTS, 0, 2000);
+            break;
+    }
+}
+
+void keyDown(SDL_KeyboardEvent *ev) {
+    switch (ev->keysym.scancode) {
+        case SDL_SCANCODE_F1:
+            mode = 0;
+            printf("Now drawing using lines.\n");
+            break;
+        case SDL_SCANCODE_F2:
+            mode = 1;
+            printf("Now drawing using points.\n");
+            break;
+        case SDL_SCANCODE_F3:
+            mode = 2;
+            printf("Now drawing using point sprites.\n");
+            break;
+        case SDL_SCANCODE_LEFT:
+            offset_x -= 0.1;
+            break;
+        case SDL_SCANCODE_RIGHT:
+            offset_x += 0.1;
+            break;
+        case SDL_SCANCODE_UP:
+            scale_x *= 1.5;
+            break;
+        case SDL_SCANCODE_DOWN:
+            scale_x /= 1.5;
+            break;
+        case SDL_SCANCODE_HOME:
+            offset_x = 0.0;
+            scale_x = 1.0;
+            break;
+        default:
+            break;
+    }
+}
+
+void windowEvent(SDL_WindowEvent *ev) {
+    switch(ev->event) {
+        case SDL_WINDOWEVENT_SIZE_CHANGED:
+            glViewport(0, 0, ev->data1, ev->data2);
+            break;
+        default:
+            break;
+    }
+}
+
+void mainLoop(SDL_Window *window) {
+    while (true) {
+        display();
+        SDL_GL_SwapWindow(window);
+
+        bool redraw = false;
+
+        while (!redraw) {
+            SDL_Event ev;
+            if (!SDL_WaitEvent(&ev))
+                return;
+
+            switch (ev.type) {
+                case SDL_QUIT:
+                    return;
+                case SDL_KEYDOWN:
+                    keyDown(&ev.key);
+                    redraw = true;
+                    break;
+                case SDL_WINDOWEVENT:
+                    windowEvent(&ev.window);
+                    redraw = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+int main(int argc, char *argv[]) {
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Window *window = SDL_CreateWindow("My Graph",
+                                          SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                          640, 480,
+                                          SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+    SDL_GLContext context = SDL_GL_CreateContext(window);
+
+    GLenum glew_status = glewInit();
+
+    if (GLEW_OK != glew_status) {
+        fprintf(stderr, "Error: %s\n", glewGetErrorString(glew_status));
+        return 1;
+    }
+
+    if (!GLEW_VERSION_2_0) {
+        fprintf(stderr, "No support for OpenGL 2.0 found\n");
+        return 1;
+    }
+
+    GLfloat range[2];
+
+    glGetFloatv(GL_ALIASED_POINT_SIZE_RANGE, range);
+    if (range[1] < res_texture.width)
+        fprintf(stderr, "WARNING: point sprite range (%f, %f) too small\n", range[0], range[1]);
+
+    printf("Use left/right to move horizontally.\n");
+    printf("Use up/down to change the horizontal scale.\n");
+    printf("Press home to reset the position and scale.\n");
+    printf("Press F1 to draw lines.\n");
+    printf("Press F2 to draw points.\n");
+    printf("Press F3 to draw point sprites.\n");
+
+    if (!init_resources())
+        return EXIT_FAILURE;
+
+    mainLoop(window);
+
+    free_resources();
+
+    SDL_GL_DeleteContext(context);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return EXIT_SUCCESS;
 }
