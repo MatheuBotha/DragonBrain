@@ -12,18 +12,21 @@ else()
 
     include_directories(${GRAPHICSENGINE_INCLUDE_DIR})
 
-    set(LIBRARY_SOURCES
-
+    set(LIB_SRCS
             GLSLProgram.cpp
             GLSLProgram.h
-
             Errors.cpp
             Errors.h
-
             IOManager.cpp
             IOManager.h
+            Window.cpp
+            Window.h
+            Camera2D.cpp
+            Camera2D.h
+            InputManager.cpp
+            InputManager.h
             )
 
-    add_library(GraphicsEngine STATIC ${LIBRARY_SOURCES})
+    add_library(GraphicsEngine STATIC ${LIB_SRCS})
 
 endif()
