@@ -39,12 +39,12 @@ public:
 ///The override method for solve
     virtual void iterate() override;
 
-    HillClimber(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager){
+    HillClimber(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output) : OPT_Process(output)
+    {
 
         objectiveFunction = myObjectiveFunction;
         snapshotManager = mySnapshotManager;
         srand((unsigned)time(NULL));
-
     }
 
     void mutate(Particle *particle);

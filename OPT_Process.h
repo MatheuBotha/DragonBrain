@@ -31,11 +31,15 @@ class OPT_Process {
 protected:
     ObjectiveFunction *objectiveFunction;
     SnapshotManager *snapshotManager;
+    Particle* ideal;
+    bool printer;
 public:
 
     ///Creates a new OPT_Process
-    OPT_Process() { }
-
+    OPT_Process(bool output) {
+        ideal = nullptr;
+        printer = output; }
+    Particle* getBestSolution() { return ideal; }
 
     virtual ~OPT_Process() { }
 

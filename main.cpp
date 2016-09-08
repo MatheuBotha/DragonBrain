@@ -12,10 +12,10 @@ int main() {
     std::cout << "PROGRAM START\n\n";
 
     int maxIteration = 100;
-    int swarmSize = 10;
+    int swarmSize = 15;
     ObjectiveFunction *obj1 = new SinObjective();
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize);
-    OPT_Process *opt1 = new HillClimber(obj1, snap1);
+    OPT_Process *opt1 = new HillClimber(obj1, snap1, true);
 
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();

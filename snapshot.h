@@ -10,28 +10,32 @@
 
 class Snapshot {
 private:
-    Particle* swarm;
+    Particle** swarm;
     int swarmSize;
 
 public:
     Snapshot(int swarmSize){
+        next = nullptr;
         this->swarmSize = swarmSize;
         initialiseSwarm();
     }
-    Snapshot(Particle* swarm, int swarmSize){
+    Snapshot(Particle** swarm, int swarmSize){
+        next = nullptr;
         this->swarm = swarm;
     }
 
     Snapshot(Snapshot* other){
         swarmSize = other->swarmSize;
-        swarm = new Particle[swarmSize];
+
+        swarm = new Particle*[swarmSize];
+
         for(int i=0; i<swarmSize; i++){
             swarm[i] = new Particle(other->swarm[i]);
         }
     }
     Snapshot* next;
-    void setSwarm(Particle *swarm);
-    Particle* getSwarm();
+    void setSwarm(Particle **swarm);
+    Particle** getSwarm();
     void initialiseSwarm();
     int getSwarmSize();
 };

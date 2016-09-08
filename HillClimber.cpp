@@ -5,22 +5,28 @@ void HillClimber::iterate() {
 
     Snapshot *last;
     Snapshot *newIteration;
-    Particle *swarm;
+    Particle **swarm;
     int swarmSize;
 
     last = snapshotManager->getLast();
 
     newIteration = new Snapshot(last);
-    cout << "NEW ITERATION\n";
+  if(printer)  cout << "NEW ITERATION\n";
+
     swarm = newIteration->getSwarm();
+
     swarmSize = newIteration->getSwarmSize();
 
     for(int i=0; i<swarmSize; i++){
-        mutate(&swarm[i]);
+        if(printer)        std::cout << "Particle " << i;
+        mutate(swarm[i]);
+        if(printer)        std::cout << " is at coords (" << swarm[i]->getPositionArray()[0] << ", "
+                                     << swarm[i]->getPositionArray()[1] << ") has fitness of: "
+                                     << swarm[i]->getFitnessValue() << " and personal best of: "
+                                     << swarm[i]->getPersonalBest() << std::endl;
     }
-
+    std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     snapshotManager->enqueue(newIteration);
-
 }
 
 void HillClimber::mutate(Particle *particle) {
@@ -39,9 +45,11 @@ void HillClimber::mutate(Particle *particle) {
         //cout<<"BestFitness: "<<particle->getPersonalBest()<<endl;
         particle->setPersonalBestPosition(newPosition);
         particle->setPersonalBest(particle->getFitnessValue());
-        std::cout<<"New best: "<<fitness<<std::endl;
-    }else{
-        //cout<<"worse\n";
+//    if(printer)
+  //      std::cout<<"New best: "<<fitness<<std::endl;
+        if(ideal == nullptr ||
+                ideal != nullptr && particle->getPersonalBest() > ideal->getPersonalBest())
+            ideal = particle;
     }
     particle->setParticlePosition(particle->getPersonalBestPosition());
 }

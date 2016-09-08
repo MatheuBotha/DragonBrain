@@ -6,16 +6,16 @@
 
 
 
-void Snapshot::setSwarm(Particle *swarm){
+void Snapshot::setSwarm(Particle **swarm){
         this->swarm = swarm;
     }
     
-Particle* Snapshot::getSwarm(){
+Particle** Snapshot::getSwarm(){
         return this->swarm;
     }
 
 void Snapshot::initialiseSwarm(){
-    swarm = new Particle[swarmSize];
+    swarm = new Particle*[swarmSize];
     for(int i=0; i<swarmSize; i++){
         swarm[i] = new Particle();
     }

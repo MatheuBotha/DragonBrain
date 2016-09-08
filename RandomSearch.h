@@ -28,7 +28,7 @@ class RandomSearch: public OPT_Process {
 
 public:
     //Create a RandomSearch
-    RandomSearch() { }
+    RandomSearch(bool output): OPT_Process(output) { }
     ObjectiveFunction *objectiveFunction;
     SnapshotManager *snapshotManager;
 

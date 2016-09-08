@@ -40,6 +40,7 @@ private:
 
 public:
     Particle(Particle* other){
+
         positionArray = new double[2];
         personalBestPosition = new double[2];
         velocity = other->velocity;
@@ -52,6 +53,7 @@ public:
     }
 
     Particle(const Particle &other){
+
         positionArray = new double[2];
         personalBestPosition = new double[2];
         velocity = other.velocity;
@@ -95,7 +97,7 @@ public:
 
         if (positionArray!= nullptr)
         {
-            delete positionArray;
+            delete [] positionArray;
         }
 
         positionArray=new double[dimensions];

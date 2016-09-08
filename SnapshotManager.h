@@ -19,7 +19,7 @@ public:
         graphicsPosition = 0;
         bound = Bound;
         swarmSize = i;
-        head = NULL;
+        head = nullptr;
     }
     bool enqueue(Snapshot* snapshot);
     Snapshot* dequeue();
