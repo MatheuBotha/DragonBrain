@@ -1,7 +1,7 @@
 #include "GraphicsProcessor.h"
 
 #include "GraphicsEngine/GraphicsEngine.h"
-#include "GraphicsEngine/"
+#include "GraphicsEngine/FPSLimiter.h"
 
 #include <SDL2/SDL.h>
 #include <iostream>
@@ -20,6 +20,9 @@ GraphicsProcessor::~GraphicsProcessor() {
 
 void GraphicsProcessor::run() {
     // IMPLEMENT THIS!
+    initSystems();
+
+    loop();
 }
 
 void GraphicsProcessor::initSystems() {
@@ -42,9 +45,18 @@ void GraphicsProcessor::initShaders() {
 void GraphicsProcessor::loop() {
     // IMPLEMENT THIS!
 
+    GraphicsEngine::FPSLimiter fpsLimiter;
+    fpsLimiter.setMaxFPS(60.0f);
+
     while(_runState == RunState::PLAY)
     {
+        fpsLimiter.begin();
 
+        processInput();
+
+        draw();
+
+        _fps = fpsLimiter.end();
     }
 }
 
@@ -55,6 +67,7 @@ void GraphicsProcessor::processInput() {
         switch (evnt.type) {
             case SDL_QUIT:
                 // Exit the game here!
+                _runState = RunState::EXIT;
                 break;
             case SDL_MOUSEMOTION:
                 _inputManager.setMouseCoords(evnt.motion.x, evnt.motion.y);

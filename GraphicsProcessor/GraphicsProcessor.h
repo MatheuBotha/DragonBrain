@@ -49,7 +49,7 @@ private:
 
     GraphicsEngine::Camera2D _camera; ///< Main Camera
 
-    int _screenWidth, _screenHeight;
+    int _screenWidth, _screenHeight, _fps;
 
     RunState _runState;
 };

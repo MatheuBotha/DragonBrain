@@ -15,16 +15,27 @@ else()
     set(LIB_SRCS
             GLSLProgram.cpp
             GLSLProgram.h
+
+            GraphicsEngine.cpp
+            GraphicsEngine.h
+
             Errors.cpp
             Errors.h
+
             IOManager.cpp
             IOManager.h
+
             Window.cpp
             Window.h
+
             Camera2D.cpp
             Camera2D.h
+
             InputManager.cpp
             InputManager.h
+            
+            FPSLimiter.cpp
+            FPSLimiter.h
             )
 
     add_library(GraphicsEngine STATIC ${LIB_SRCS})

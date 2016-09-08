@@ -30,8 +30,8 @@ endif()
 
 
 
-#add_subdirectory(./GraphicsEngine GraphicsEngine)
-#include_directories(${GRAPHICSENGINE_INCLUDE_DIR})
+add_subdirectory(./GraphicsEngine GraphicsEngine)
+include_directories(${GRAPHICSENGINE_INCLUDE_DIR})
 
 #Include Graphics Library
 
@@ -42,8 +42,8 @@ set(SOURCE_FILES
         )
 
 add_executable(GraphicsProcessor ${SOURCE_FILES})
-target_link_libraries(GraphicsProcessor)
+target_link_libraries(GraphicsProcessor GraphicsEngine)
 
-#add_custom_command(TARGET GraphicsProcessor POST_BUILD
-#        COMMAND ${CMAKE_COMMAND} -E copy_directory
-#        ${CMAKE_SOURCE_DIR}/shaders $<TARGET_FILE_DIR:GraphicsProcessor>/shaders)
+add_custom_command(TARGET GraphicsProcessor POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/GraphicsProcessor/Shaders $<TARGET_FILE_DIR:GraphicsProcessor>/Shaders)

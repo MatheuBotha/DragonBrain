@@ -6,18 +6,16 @@
 
 namespace GraphicsEngine {
 
-    InputManager::InputManager() : _mouseCoords(0.0f)
-    {
+    InputManager::InputManager() : _mouseCoords(0.0f) {
     }
 
 
-    InputManager::~InputManager()
-    {
+    InputManager::~InputManager() {
     }
 
     void InputManager::update() {
         // Loop through _keyMap using a for each loop, and copy it over to _previousKeyMap
-        for (auto& it : _keyMap) {
+        for (auto &it : _keyMap) {
             _previousKeyMap[it.first] = it.second;
         }
     }
@@ -72,4 +70,4 @@ namespace GraphicsEngine {
             return false;
         }
     }
-
+}
