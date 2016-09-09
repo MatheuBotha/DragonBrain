@@ -26,8 +26,7 @@
 *.exe
 *.out
 *.app
+GUI/SwarmVisInterface.pro.user
+*.xml
 *.iml
-*.xml
 .idea/workspace.xml
-*.xml
-*.xml
