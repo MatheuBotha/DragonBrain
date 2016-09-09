@@ -2,46 +2,29 @@
 // Created by lemmus on 2016/09/09.
 //
 
+#include <iostream>
+#include "Manager.h"
+
+using namespace std;
 
 int main()
 {
-    char **arger = new char*[1];
-    SettingsPackage *setts = new SettingsPackage();
-    std::thread GUI_Thread(generateGUI, std::ref(arger), std::ref(setts));
+    Manager* swarmMan = new Manager();
+    swarmMan->startGUI();
+    SettingsPackage* setts = swarmMan->getSettingsPackage();
+    //still needs an alternative for the situation in which a user has not clicked a button
+    while(setts->isLocked()) {}
 
-    GUI_Thread.join();
-    return 0;
-}
+    swarmMan->generateSnapshotManager();
+    swarmMan->initializeOptimizer();
+    swarmMan->optimize();
+/*    ObjectiveFunction *obj1 = new SinObjective();
+    OPT_Process *opt1 = new HillClimber(obj1, swarmMan->getSnapshotManager(), true);
 
-
-#include <iostream>
-#include "ObjectiveFunction.h"
-#include "SinObjective.h"
-#include "RandObjective.h"
-#include "SaddleObjective.h"
-#include "SnapshotManager.h"
-#include "OPT_Process.h"
-#include "HillClimber.h"
-
-int main() {
-    std::cout << "PROGRAM START\n\n";
-
-    int maxIteration = 100;
-    int swarmSize = 15;
-    ObjectiveFunction *obj1 = new SinObjective();
-    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize);
-    OPT_Process *opt1 = new HillClimber(obj1, snap1, true);
-
-    for(int i=0;i<maxIteration;i++){
+    for(int i=0;i<setts->getOptimizerSettingsPackage()->getMaxIterations();i++){
         opt1->iterate();
     }
-
-    /*double *parameters = new double[2];
-    parameters[0] = 1.9;
-    parameters[1] = 2.1;
-
-    cout << obj1->functionInput(parameters);*/
-
-    std::cout << "\n\nPROGRAM END";
+  */
+    swarmMan->endGUI();
     return 0;
 }

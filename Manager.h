@@ -22,35 +22,55 @@
 #define OPT_MANAGER_H
 
 #include <thread>
-#include "../GenOPT/GenOPT.h"
+#include "SettingsPackage/src/settingspackage.h"
+#include "GUI/Interface.h"
+#include "SnapshotManager/SnapshotManager.h"
+#include "OPT/GenOPT/src/SinObjective.h"
+#include "OPT/GenOPT/src/SaddleObjective.h"
+#include "OPT/GenOPT/src/HillClimber.h"
+#include "OPT/GenOPT/src/OPT_Process.h"
 
 class Manager {
-
+private:
+    SettingsPackage* setPkg;
+    SnapshotManager* snapMan;
+    ObjectiveFunction* objective;
+    OPT_Process* optimizer;
+    std::thread* GUI_Thread;
 public:
-    ///Destructor for manager objects
-    virtual ~Manager();
 
     ///Constructor for the manager objects
     Manager();
 
+    ///Destructor for manager objects
+    virtual ~Manager();
+
+    void startGUI();
+    void endGUI();
+
+    void initializeOptimizer();
+    void optimize();
     /*
      * This method creates a new snapshot manager class per request.
      * */
-    SnapshotMananger makeNewSnapShotMananger();
+    void generateSnapshotManager();
+    SnapshotManager* getSnapshotManager();
 
+    bool stillRunning() { return GUI_Thread->joinable(); }
+    SettingsPackage* getSettingsPackage();
     /*
      * This method creates a new Graphics Pipeline.
      * The created graphics pipeline relates directly to a specific optimiser
      * and this pipeline provides graphical rendering services
      * */
-    GP makeGP(SettingsPackage setPackage);
+    //GP makeGP(SettingsPackage setPackage);
 
     /*
      * This method creates a new Optimiser.
      * The created graphics pipeline relates directly to a specific graphical pipline
      * and this pipeline provides optimiser services.
      * */
-    GenOPT makeOPT(SettingsPackage setPackage);
+    //GenOPT makeOPT(SettingsPackage setPackage);
 };
 
 

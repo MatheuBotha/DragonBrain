@@ -22,7 +22,6 @@
 #define OPT_RANDOM_H
 #include "OPT_Process.h"
 #include "ObjectiveFunction.h"
-#include "SnapshotManager.h"
 
 class RandomSearch: public OPT_Process {
 

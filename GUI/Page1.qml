@@ -75,7 +75,7 @@ Page1Form {
                                            parseInt(page2.x2_max.text), parseFloat(page2.transformationA.text), parseFloat(page2.transformationB.text), parseFloat(page2.transformationC.text));
                      setPkg.generateSettingsGraphics(page3.resolutionChoice.currentText, page3.renderSlider.value, showLinks.checked,
                                            showPaths.checked, page3.ramSlider.value);
-                     setPkg.generateSettingsOptimizer(page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
+                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText, page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
                      setPkg.lock(false);
         }
 
@@ -97,7 +97,7 @@ Page1Form {
                                            parseInt(page2.x2_max.text), parseFloat(page2.transformationA.text), parseFloat(page2.transformationB.text), parseFloat(page2.transformationC.text));
                      setPkg.generateSettingsGraphics(page3.resolutionChoice.currentText, page3.renderSlider.value, showLinks.checked,
                                            showPaths.checked, page3.ramSlider.value);
-                     setPkg.generateSettingsOptimizer(page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
+                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText, page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
                      setPkg.lock(false);
                     }
         opacity: 0.7

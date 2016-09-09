@@ -50,8 +50,9 @@ void SettingsPackage::generateSettingsGraphics(QString resolution, int renderSpe
     gpPkg->setResolutionW(resW);
 }
 
-void SettingsPackage::generateSettingsOptimizer(bool userInitialParticles,QString particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc)
+void SettingsPackage::generateSettingsOptimizer(QString algorithm, bool userInitialParticles,QString particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc)
 {
+    optPkg->setAlgorithm(algorithm.toStdString());
     if(userInitialParticles)
         optPkg->setParticlePlacementString(particlePlacement.toStdString());
     else optPkg->setParticlePlacementString("");

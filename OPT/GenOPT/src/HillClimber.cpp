@@ -25,7 +25,7 @@ void HillClimber::iterate() {
                                      << swarm[i]->getFitnessValue() << " and personal best of: "
                                      << swarm[i]->getPersonalBest() << std::endl;
     }
-    std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
+    if(printer)std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     snapshotManager->enqueue(newIteration);
 }
 

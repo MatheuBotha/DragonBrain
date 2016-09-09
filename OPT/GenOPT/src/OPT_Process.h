@@ -24,7 +24,7 @@
 #include <string>
 #include "Particle.h"
 #include "ObjectiveFunction.h"
-#include "SnapshotManager.h"
+#include "../../../SnapshotManager/SnapshotManager.h"
 
 
 class OPT_Process {

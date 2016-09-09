@@ -13,6 +13,7 @@
 class OptimizerSettingsPackage
 {
 private:
+    std::string algorithm;
     std::string particlePlacement;
     double inertiaWeight;
     double cognitiveCoefficient;
@@ -40,6 +41,13 @@ public:
      * @return Returns the string containing the user specified particle placement (or null)
      */
     std::string getParticlePlacementString();
+
+
+    /**
+     * @brief
+     * @return Returns the string containing the algorithm name
+     */
+    std::string getAlgorithm();
     /**
      * @brief
      * @return Returns a double containing the inertia weight
@@ -65,8 +73,14 @@ public:
      * @return Returns an int containing the accuracy at which to halt the optimizer
      */
     int getCutoffAcc();
-    
-    
+
+
+    /**
+     * @brief Sets the Particle Placement
+     * @param ParticlePlacement (string pointer)
+     */
+    void setAlgorithm(std::string);
+
     /**
      * @brief Sets the Particle Placement
      * @param ParticlePlacement (string pointer)

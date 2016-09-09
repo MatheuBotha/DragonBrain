@@ -75,3 +75,11 @@ void OptimizerSettingsPackage::setCutoffAcc(int acc)
 {
     cutoffAcc = acc;
 }
+
+void OptimizerSettingsPackage::setAlgorithm(std::string aly) {
+    algorithm = aly;
+}
+
+std::string OptimizerSettingsPackage::getAlgorithm() {
+    return algorithm;
+}

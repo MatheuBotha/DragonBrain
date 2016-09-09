@@ -4,13 +4,9 @@
 
 
 #include "gtest/gtest.h"
-#include "../ObjectiveFunction.h"
-#include "../SinObjective.h"
-#include "../RandObjective.h"
-#include "../SnapshotManager.h"
-#include "../OPT_Process.h"
-#include "../HillClimber.h"
-#include "../SaddleObjective.h"
+#include "../src/SaddleObjective.h"
+#include "../src/HillClimber.h"
+#include "../src/SinObjective.h"
 
 
 TEST(basic_check, test_SaddleHill) {

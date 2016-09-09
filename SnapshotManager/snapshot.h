@@ -6,7 +6,7 @@
 #define DRAGONBRAIN_SNAPSHOT_H
 
 #include <cstring>
-#include "Particle.h"
+#include "../OPT/GenOPT/src/Particle.h"
 
 class Snapshot {
 private:
@@ -28,7 +28,7 @@ public:
         swarmSize = other->swarmSize;
 
         swarm = new Particle*[swarmSize];
-
+        next = other->next;
         for(int i=0; i<swarmSize; i++){
             swarm[i] = new Particle(other->swarm[i]);
         }

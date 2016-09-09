@@ -23,8 +23,6 @@
 #define OPT_HILLCLIMBER_H
 #include "OPT_Process.h"
 #include "ObjectiveFunction.h"
-#include "SnapshotManager.h"
-#include "snapshot.h"
 #include "Particle.h"
 #include <cstdlib>
 
