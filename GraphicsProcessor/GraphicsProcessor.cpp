@@ -3,12 +3,14 @@
 #include "GraphicsEngine/GraphicsEngine.h"
 #include "GraphicsEngine/FPSLimiter.h"
 
+#include "LandscapeEngine/Landscape2D.h"
+
 #include <SDL2/SDL.h>
 #include <iostream>
 
 GraphicsProcessor::GraphicsProcessor() :
-    _screenWidth(800),
-    _screenHeight(600),
+    _screenWidth(640),
+    _screenHeight(480),
     _runState(RunState::PLAY)
 {
     // Empty
@@ -16,11 +18,13 @@ GraphicsProcessor::GraphicsProcessor() :
 
 GraphicsProcessor::~GraphicsProcessor() {
     // IMPLEMENT THIS!
+    delete _landscape;
 }
 
 void GraphicsProcessor::run() {
     // IMPLEMENT THIS!
     initSystems();
+    initLandscape();
 
     loop();
 }
@@ -31,6 +35,12 @@ void GraphicsProcessor::initSystems() {
     _window.create("Temp Title", 800, 640, 0);
 
     initShaders();
+}
+
+void GraphicsProcessor::initLandscape()
+{
+//    _landscape = new Landscape2D();
+//    _landscape->init();
 }
 
 void GraphicsProcessor::initShaders() {
@@ -54,6 +64,7 @@ void GraphicsProcessor::loop() {
 
         processInput();
 
+//        _landscape->draw();
         draw();
 
         _fps = fpsLimiter.end();
@@ -94,8 +105,24 @@ void GraphicsProcessor::draw() {
     // Clear the color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    _textureProgram.use();
     // IMPLEMENT THIS!
 
+    // Draw code goes here
+    glActiveTexture(GL_TEXTURE0);
+
+    // Make sure the shader uses texture 0
+    GLint textureUniform = _textureProgram.getUniformLocation("mySampler");
+    glUniform1i(textureUniform, 0);
+
+    // Grab the camera matrix
+    glm::mat4 projectionMatrix = _camera.getCameraMatrix();
+    GLint pUniform = _textureProgram.getUniformLocation("P");
+    glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+
+
+
+    _textureProgram.unuse();
     // Swap our buffer and draw everything to the screen!
     _window.swapBuffer();
 }

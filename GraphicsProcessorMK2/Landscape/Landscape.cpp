@@ -1,3 +1,9 @@
+//
+// Created by matheu on 9/8/16.
+//
+
+#include "Landscape.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -5,30 +11,11 @@
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 
-#include "shader_utils.h"
+#include "../shader_utils.h"
 
-#include "res_texture.c"
+#include "../res_texture.c"
 
-GLuint program;
-GLint attribute_coord2d;
-GLint uniform_offset_x;
-GLint uniform_scale_x;
-GLint uniform_sprite;
-GLuint texture_id;
-GLint uniform_mytexture;
-
-float offset_x = 0.0;
-float scale_x = 1.0;
-int mode = 0;
-
-struct point {
-    GLfloat x;
-    GLfloat y;
-};
-
-GLuint vbo;
-
-int init_resources() {
+int Landscape::init_resources() {
     program = create_program("Shaders/graph.v.glsl", "Shaders/graph.f.glsl");
     if (program == 0)
         return 0;
@@ -81,11 +68,11 @@ int init_resources() {
     return 1;
 }
 
-void free_resources() {
+void Landscape::free_resources() {
     glDeleteProgram(program);
 }
 
-void display() {
+void Landscape::display() {
     glUseProgram(program);
     glUniform1i(uniform_mytexture, 0);
 
@@ -118,7 +105,7 @@ void display() {
     }
 }
 
-void keyDown(SDL_KeyboardEvent *ev) {
+void Landscape::keyDown(SDL_KeyboardEvent *ev) {
     switch (ev->keysym.scancode) {
         case SDL_SCANCODE_F1:
             mode = 0;
@@ -153,7 +140,7 @@ void keyDown(SDL_KeyboardEvent *ev) {
     }
 }
 
-void windowEvent(SDL_WindowEvent *ev) {
+void Landscape::windowEvent(SDL_WindowEvent *ev) {
     switch(ev->event) {
         case SDL_WINDOWEVENT_SIZE_CHANGED:
             glViewport(0, 0, ev->data1, ev->data2);
@@ -163,7 +150,8 @@ void windowEvent(SDL_WindowEvent *ev) {
     }
 }
 
-void mainLoop(SDL_Window *window) {
+
+void Landscape::mainLoop(SDL_Window *window) {
     while (true) {
         display();
         SDL_GL_SwapWindow(window);
@@ -193,7 +181,8 @@ void mainLoop(SDL_Window *window) {
     }
 }
 
-int main(int argc, char *argv[]) {
+int Landscape::run()
+{
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window *window = SDL_CreateWindow("My Graph",
                                           SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -210,7 +199,7 @@ int main(int argc, char *argv[]) {
 
     if (!GLEW_VERSION_2_0) {
         fprintf(stderr, "No support for OpenGL 2.0 found\n");
-        return 1;
+        return 2;
     }
 
     GLfloat range[2];
@@ -227,7 +216,7 @@ int main(int argc, char *argv[]) {
     printf("Press F3 to draw point sprites.\n");
 
     if (!init_resources())
-        return EXIT_FAILURE;
+        return 3;
 
     mainLoop(window);
 
@@ -237,5 +226,5 @@ int main(int argc, char *argv[]) {
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    return EXIT_SUCCESS;
+    return 0;
 }

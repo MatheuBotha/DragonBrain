@@ -10,6 +10,8 @@
 #include "GraphicsEngine/Camera2D.h"
 #include "GraphicsEngine/InputManager.h"
 
+#include "LandscapeEngine/Landscape.h"
+
 enum class RunState {
     PLAY,
     EXIT
@@ -27,6 +29,9 @@ public:
 private:
     /// Initializes the core systems
     void initSystems();
+
+    /// Initializes the landscape
+    void initLandscape();
 
     /// Initializes the shaders
     void initShaders();
@@ -52,6 +57,8 @@ private:
     int _screenWidth, _screenHeight, _fps;
 
     RunState _runState;
+
+    Landscape* _landscape;
 };
 
 #endif //DRAGONBRAIN_GRAPHICSPROCESSOR_H

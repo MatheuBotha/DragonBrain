@@ -36,6 +36,17 @@ else()
             
             FPSLimiter.cpp
             FPSLimiter.h
+
+            Vertex.h
+
+            SpriteBatch.cpp
+            SpriteBatch.h
+
+            ResourceManager.cpp
+            ResourceManager.h
+
+            TextureCache.cpp
+            TextureCache.h
             )
 
     add_library(GraphicsEngine STATIC ${LIB_SRCS})

@@ -158,6 +158,7 @@ namespace GraphicsEngine {
 
             //Print error log and quit
             std::printf("%s\n", &(errorLog[0]));
+
             fatalError("Shader " + name + " failed to compile");
         }
     }

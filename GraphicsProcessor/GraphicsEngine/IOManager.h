@@ -18,7 +18,7 @@ namespace GraphicsEngine {
     class IOManager
     {
     public:
-        static bool readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer);
+        static bool readFileToBuffer(const char* filePath, char* buffer);
         static bool readFileToBuffer(std::string filePath, std::string& buffer);
         // Gets all directory entries in the directory specified by path and stores in rvEntries.
         // Returns false if path is not a directory.

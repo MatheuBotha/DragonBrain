@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
 
-message("STARTING")
-
 find_package(OpenGL REQUIRED)
 if (OPENGL_FOUND)
     include_directories(${OPENGL_INCLUDE_DIRS})
@@ -28,33 +26,21 @@ if (SDL2IMAGE_FOUND)
     link_libraries(${SDL2IMAGE_LIBRARIES})
 endif()
 
-
-
-add_subdirectory(./GraphicsEngine GraphicsEngine)
-include_directories(${GRAPHICSENGINE_INCLUDE_DIR})
-
-#Include Graphics Library
-
-
 set(SOURCE_FILES
         main.cpp
-        GraphicsProcessor.cpp
+        shader_utils.cpp
 
-        LandscapeEngine/Landscape.h
+        Landscape/Landscape.cpp
+        Landscape/Landscape.h
 
-        LandscapeEngine/Landscape2D.cpp
-        LandscapeEngine/Landscape2D.h
+        Landscape/Landscape3D.cpp
+        Landscape/Landscape3D.h
 
-        ../Objectives/ObjectiveFunction.cpp
-        ../Objectives/ObjectiveFunction.h
-
-        ../Objectives/SinObjective.cpp
-        ../Objectives/SinObjective.h
         )
 
-add_executable(GraphicsProcessor ${SOURCE_FILES})
-target_link_libraries(GraphicsProcessor GraphicsEngine)
+add_executable(GraphicsProcessorMK2 ${SOURCE_FILES})
+target_link_libraries(GraphicsProcessorMK2)
 
-add_custom_command(TARGET GraphicsProcessor POST_BUILD
+add_custom_command(TARGET GraphicsProcessorMK2 POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/GraphicsProcessor/Shaders $<TARGET_FILE_DIR:GraphicsProcessor>/Shaders)
+        ${CMAKE_SOURCE_DIR}/GraphicsProcessorMK2/Shaders $<TARGET_FILE_DIR:GraphicsProcessorMK2>/Shaders)

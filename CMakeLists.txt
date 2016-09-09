@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.6)
 project(DragonBrain)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_subdirectory(GraphicsProcessor)
+add_subdirectory(GraphicsProcessorMK2)
 
 #find_package(OpenGL REQUIRED)
 #if (OPENGL_FOUND)
