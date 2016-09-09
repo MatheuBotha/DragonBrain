@@ -5,13 +5,15 @@
 #include <thread>
 
 #include "../SettingsPackage/src/settingspackage.h"
+#ifndef GUI_EXE
+#define GUI_EXE
 
-
-void* generateGUI(char *argv[], SettingsPackage* setts)
+void* runGUI(SettingsPackage* setts)
 {
+    char **arger = new char*[1];
     int argc = 1;
         QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-        QGuiApplication app(argc, argv);
+        QGuiApplication app(argc, arger);
 
     QQmlApplicationEngine engine;
 
@@ -26,12 +28,4 @@ void* generateGUI(char *argv[], SettingsPackage* setts)
     app.exec();
 }
 
-int main()
-{
-    char **arger = new char*[1];
-    SettingsPackage *setts = new SettingsPackage();
-    std::thread GUI_Thread(generateGUI, std::ref(arger), std::ref(setts));
-
-    GUI_Thread.join();
-    return 0;
-}
+#endif
