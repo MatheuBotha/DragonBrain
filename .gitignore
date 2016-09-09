@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+#Qt, etc
+GUI/SwarmVisInterface.pro.user
+*.xml
+*.iml
+.idea/workspace.xml

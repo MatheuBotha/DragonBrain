@@ -1,0 +1,1 @@
+To run, one should copy all .qml resources into the build directory, if it is not the same as the source directory. (This can in future be circumvented with the release of Qt 5.8 or by using the Commercial version of Qt which include the QtQuick Compiler, which converts qml into efficient C++ code). 
