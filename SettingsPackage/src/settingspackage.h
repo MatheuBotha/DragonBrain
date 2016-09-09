@@ -19,6 +19,9 @@ class SettingsPackage: public QObject
     Q_OBJECT
 private:
     int swarmSize;
+    bool locked;
+    bool changed;
+    bool ready;
     GraphicsSettingsPackage* gpPkg;
     OptimizerSettingsPackage* optPkg;
     ProblemDomainSettingsPackage* probPkg;
@@ -30,6 +33,33 @@ public:
      * Graphics, Optimizer and ProblemDomain SettingsPackage.
      */
     SettingsPackage();
+
+    /**
+     * @brief Default SettingsPackage destructor, calls default destructors for a
+     * Graphics, Optimizer and ProblemDomain SettingsPackage.
+     */
+    ~SettingsPackage();
+
+    /**
+     * @brief Returns the lock status of the SettingsPackage
+     */
+    Q_INVOKABLE bool isLocked();
+
+     /**
+     * @brief Locks the SettingsPackage, so that the OPT will not try to use it while its data is being edited.
+     */
+    Q_INVOKABLE void lock(bool);
+
+
+    /**
+    * @brief Returns the changed status of the SettingsPackage
+    */
+    Q_INVOKABLE bool hasChanged();
+
+    /**
+     * @brief Indicates that the settings have changed.
+     */
+    Q_INVOKABLE void change(bool);
 
     /**
      * @brief

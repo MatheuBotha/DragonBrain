@@ -1,8 +1,9 @@
 #include "settingspackage.h"
 
-
 SettingsPackage::SettingsPackage()
 {
+    changed = false;
+    locked = true;
     gpPkg = new GraphicsSettingsPackage();
     optPkg = new OptimizerSettingsPackage();
     probPkg = new ProblemDomainSettingsPackage();
@@ -49,7 +50,7 @@ void SettingsPackage::generateSettingsGraphics(QString resolution, int renderSpe
     gpPkg->setResolutionW(resW);
 }
 
-void SettingsPackage::generateSettingsOptimizer(bool userInitialParticles, QString particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc)
+void SettingsPackage::generateSettingsOptimizer(bool userInitialParticles,QString particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc)
 {
     if(userInitialParticles)
         optPkg->setParticlePlacementString(particlePlacement.toStdString());
@@ -70,5 +71,27 @@ void SettingsPackage::generateSettingsDomain(QString objFunction, int dimensions
     probPkg->setBoundaries(boundaries);
     double transformations[3] = {TransformationA, TransformationB, TransformationC};
     probPkg->setTransformations(transformations);
+}
+
+SettingsPackage::~SettingsPackage() {
+    delete optPkg;
+    delete probPkg;
+    delete gpPkg;
+}
+
+void SettingsPackage::change(bool status) {
+    changed = status;
+}
+
+bool SettingsPackage::hasChanged() {
+    return changed;
+}
+
+void SettingsPackage::lock(bool status) {
+    locked = status;
+}
+
+bool SettingsPackage::isLocked() {
+    return locked;
 }
 

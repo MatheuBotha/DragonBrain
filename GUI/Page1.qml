@@ -31,7 +31,7 @@ Page1Form {
         transformOrigin: Item.Left
         opacity: 0.8
         clip: true
-        model: [ "Opt1", "Opt2", "Opt3", "Opt4", "Opt5", "Opt6", "Opt7", "Opt8", "Opt9", "Opt10" ]
+        model: [ "Sin", "Saddle" ]
         currentIndex: 0
 
     }
@@ -68,12 +68,15 @@ Page1Form {
         height: 119
         text: qsTr("Optimizer On")
         onClicked: {
+                     setPkg.lock(true);
+                     setPkg.change(true);
                      setPkg.generateSettingsGeneral(page2.swarmSize.value);
                      setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), parseInt(page2.x1_min.text), parseInt(page2.x1_max.text), parseInt(page2.x2_min.text),
                                            parseInt(page2.x2_max.text), parseFloat(page2.transformationA.text), parseFloat(page2.transformationB.text), parseFloat(page2.transformationC.text));
                      setPkg.generateSettingsGraphics(page3.resolutionChoice.currentText, page3.renderSlider.value, showLinks.checked,
                                            showPaths.checked, page3.ramSlider.value);
                      setPkg.generateSettingsOptimizer(page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
+                     setPkg.lock(false);
         }
 
     }
@@ -87,13 +90,16 @@ Page1Form {
         height: 40
         text: qsTr("Update Parameters")
         onClicked: {
+                     setPkg.lock(true);
+                     setPkg.change(true);
                      setPkg.generateSettingsGeneral(page2.swarmSize.value);
                      setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), parseInt(page2.x1_min.text), parseInt(page2.x1_max.text), parseInt(page2.x2_min.text),
                                            parseInt(page2.x2_max.text), parseFloat(page2.transformationA.text), parseFloat(page2.transformationB.text), parseFloat(page2.transformationC.text));
                      setPkg.generateSettingsGraphics(page3.resolutionChoice.currentText, page3.renderSlider.value, showLinks.checked,
                                            showPaths.checked, page3.ramSlider.value);
                      setPkg.generateSettingsOptimizer(page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
-        }
+                     setPkg.lock(false);
+                    }
         opacity: 0.7
     }
 

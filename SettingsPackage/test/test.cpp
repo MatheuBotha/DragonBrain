@@ -28,7 +28,7 @@ TEST(basic_check, test_GraphicsPackage) {
 
 TEST(basic_check, test_OptimizerPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsOptimizer("TempString", 0.5, 7.9, 120000.4123, 12, 21);
+    setPkg.generateSettingsOptimizer(true, "TempString", 0.5, 7.9, 120000.4123, 12, 21);
 
     OptimizerSettingsPackage* oPkg = setPkg.getOptimizerSettingsPackage();
 
@@ -60,4 +60,9 @@ TEST(basic_check, test_DomainPackage) {
     EXPECT_NE(0.5, transCheck[1]);
     EXPECT_EQ(-0.5, transCheck[1]);
     EXPECT_EQ(7.0, transCheck[2]);
+}
+
+
+TEST(basic_check, test_Locking) {
+    SettingsPackage setPkg;
 }
