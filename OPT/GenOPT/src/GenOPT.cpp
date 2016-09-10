@@ -90,7 +90,7 @@ string GenOPT::generateParticleCoordinates(int **arr, int dimensions) {
 GenOPT::~GenOPT() {
     delete objFunction;
     delete solvingProcess;
-    delete swarm;
+    delete [] swarm;
 
 
     for(int i=0;i<swarmSize;i++)
