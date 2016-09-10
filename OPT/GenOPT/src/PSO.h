@@ -53,6 +53,10 @@ public:
         this->socialComp=s;
     }
 
+    virtual double *updatePosition(Particle particleToUpdate) override;
+
+    virtual double updateVelocity(Particle particleToUpdates) override;
+    double genRandomNumber();
 };
 
 

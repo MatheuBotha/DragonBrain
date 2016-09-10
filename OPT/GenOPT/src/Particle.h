@@ -27,8 +27,11 @@ class Particle {
 
 public:
     ///Sets the position array
-    void setPositionArray(double *positionArray) {
-        Particle::positionArray = positionArray;
+    void setPositionArray(double *positionArrayA) {
+        for (int i=0;i<2;i++)
+        {
+            this->positionArray[i]=positionArrayA[i];
+        }
     }
 
     ///Sets the velocity of the particle

@@ -22,6 +22,7 @@
 #define OPT_OTP_PROCESS_H
 
 #include <string>
+#include <random>
 #include "Particle.h"
 using namespace std;
 
