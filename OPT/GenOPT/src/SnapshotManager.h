@@ -1,14 +1,31 @@
-//
-// Created by Warmaster on 7/24/2016.
-//
 
-#ifndef OPT_SNAPSHOTMANAGER_H
-#define OPT_SNAPSHOTMANAGER_H
+#ifndef SNAPSHOTMANAGER_H
+#define SNAPSHOTMANAGER_H
 
 
-class SnapshotManager {
+#include "snapshot.h"
 
+class SnapshotManager{
+private:
+    int queueSize;
+    int bound;
+    int graphicsPosition;
+    int swarmSize;
+    Snapshot* head;
+    Snapshot* temp;
+public:
+    SnapshotManager(int Bound, int i) {
+        queueSize = 0;
+        graphicsPosition = 0;
+        bound = Bound;
+        swarmSize = i;
+        head = nullptr;
+    }
+    bool enqueue(Snapshot* snapshot);
+    Snapshot* dequeue();
+    Snapshot* getLast();
+    Snapshot *getFirst();
 };
 
 
-#endif //OPT_SNAPSHOTMANAGER_H
+#endif //DRAGONBRAIN_SNAPSHOTMANAGER_H

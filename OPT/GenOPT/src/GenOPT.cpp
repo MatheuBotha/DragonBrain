@@ -21,9 +21,9 @@ void GenOPT::initialSetupOfSwarm(string * placements,int dimensions){
     }
     values[dimensions-1]=atof(tmp.c_str());
 
-    swarm[i].setParticlePositionByArray(values,dimensions);
+    swarm[i]->setParticlePositionByArray(values,dimensions);
 
-    swarm[i].setVelocity((rand()%10+1/1.0));
+    swarm[i]->setVelocity((rand()%10+1/1.0));
     }
 
 }
@@ -212,18 +212,18 @@ void GenOPT::solveProblem() {
         ///Determine best solution in swarm
         for(int i=0;i<swarmSize;i++)
         {
-            tmpFitness=objFunction->functionInput(swarm[i].getPositionArray());
-            swarm[i].setFitnessValue(tmpFitness);
+            tmpFitness=objFunction->functionInput(swarm[i]->getPositionArray());
+            swarm[i]->setFitnessValue(tmpFitness);
 
-            if (tmpFitness>swarm[i].getPersonalBest())
+            if (tmpFitness>swarm[i]->getPersonalBest())
             {
-                swarm[i].setPersonalBest(tmpFitness);
-                swarm[i].setPersonalBestPositions(swarm[i].getPositionArray());
+                swarm[i]->setPersonalBest(tmpFitness);
+                swarm[i]->setPersonalBestPositions(swarm[i]->getPositionArray());
             }
 
-            if (swarm[i].getFitnessValue()>bestSolution)
+            if (swarm[i]->getFitnessValue()>bestSolution)
             {
-                bestSolution=swarm[i].getFitnessValue();
+                bestSolution=swarm[i]->getFitnessValue();
             }
 
             ///Local Best is in effect{Contingent on Neighbourhood Size}
@@ -249,18 +249,18 @@ void GenOPT::solveProblem() {
                         neighbours.push_back(neighbourhoodMatrix[i][h]);
                     }
                 }
-                tmpNBest=swarm[i].getFitnessValue();
+                tmpNBest=swarm[i]->getFitnessValue();
 
                 for(int b=0;b<neighbours.size();b++)
                 {
-                    if (swarm[neighbours.at(b)].getFitnessValue()>tmpNBest)
+                    if (swarm[neighbours.at(b)]->getFitnessValue()>tmpNBest)
                     {
-                        tmpNBest=swarm[neighbours.at(b)].getFitnessValue();
+                        tmpNBest=swarm[neighbours.at(b)]->getFitnessValue();
                         bestPartInNeighbourhood=b;
                     }
                 }
-                swarm[i].setNeighbourhoodBest(tmpNBest);
-                swarm[i].setNeighbourhoodBestPosition(swarm[bestPartInNeighbourhood].getPositionArray());
+                swarm[i]->setNeighbourhoodBest(tmpNBest);
+                swarm[i]->setNeighbourhoodBestPosition(swarm[bestPartInNeighbourhood]->getPositionArray());
             }
 
 
@@ -274,11 +274,11 @@ void GenOPT::solveProblem() {
                 delete tmpPositions;
             }
             tmpPositions=new double[2];
-            tmpVelocity=solvingProcess->updateVelocity(swarm[i]);
-            swarm[i].setVelocity(tmpVelocity);
+            tmpVelocity=solvingProcess->updateVelocity(*swarm[i]);
+            swarm[i]->setVelocity(tmpVelocity);
 
-            tmpPositions=solvingProcess->updatePosition(swarm[i]);
-            swarm[i].setPositionArray(tmpPositions);
+            tmpPositions=solvingProcess->updatePosition(*swarm[i]);
+            swarm[i]->setPositionArray(tmpPositions);
         }
 
 
@@ -299,5 +299,14 @@ int **GenOPT::getNeighbourhoodMatrix() const {
 //Setter for neighbourhoood matrix
 void GenOPT::setNeighbourhoodMatrix(int **neighbourhoodMatrix) {
     GenOPT::neighbourhoodMatrix = neighbourhoodMatrix;
+}
+
+void GenOPT::updateSettings(SettingsPackage package) {
+
+    c1=package.getOptimizerSettingsPackage()->getCognitiveCoefficient();
+    c2=package.getOptimizerSettingsPackage()->getSocialCoefficient();
+}
+
+
 }
 

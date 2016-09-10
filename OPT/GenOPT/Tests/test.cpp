@@ -8,7 +8,8 @@
 
 TEST(basic_Constructor_Test_GenOPT_1,package_Test_Suite)
 {
-    GenOPT * test=new GenOPT();
+    SnapshotManager testSnapshotManager(10,2);
+    GenOPT * test= new GenOPT(SettingsPackage(), testSnapshotManager);
 
     EXPECT_NE(test,nullptr);
 }
@@ -36,7 +37,8 @@ TEST(basic_Constructor_Test_Particle_2,package_Test_Suite)
 TEST(swarm_NMatrix_creationTest,package_Test_Suite)
 {
     int size=5;
-    GenOPT * test=new GenOPT();
+    SnapshotManager testSnapshotManager(10,2);
+    GenOPT * test= new GenOPT(SettingsPackage(), testSnapshotManager);
     test->setSwarmSize(size);
     test->setNeighbourhoodSize(2);
     test->generateSwarmNMatrix();
@@ -52,7 +54,8 @@ TEST(swarm_NMatrix_creationTest,package_Test_Suite)
 TEST(swarm_NMatrix_valuesTest,package_Test_Suite)
 {
     int size=10;
-    GenOPT * test=new GenOPT();
+    SnapshotManager testSnapshotManager(10,2);
+    GenOPT * test= new GenOPT(SettingsPackage(), testSnapshotManager);
 
     test->setSwarmSize(size);
     test->setNeighbourhoodSize(2);

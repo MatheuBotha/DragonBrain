@@ -52,17 +52,16 @@ class GenOPT {
 
 
 public:
-    /// Creates a blank, unconfigured GenOPT
-    GenOPT() { }
+    GenOPT(SnapshotManager &snappy) : snappy(snappy) {
+
+    }
 
     virtual ~GenOPT();
 
     /*Constructor for GenOPT that makes use of the snapshot manager
      * and settings package in order to configure a GenOPT
      * */
-    GenOPT(SettingsPackage package,SnapshotManager &snappy)
-    {
-
+    GenOPT(SettingsPackage package, SnapshotManager &snappy) : snappy(snappy) {
     }
 
 /** @brief The Configuration Constructor
@@ -79,11 +78,12 @@ public:
      * associated parameters.
      *
      * */
-    GenOPT(int OTP,int OF,double maxVelocity, double inertiaWeight,double transA,double transB,double transC, int swarmSize, int neighbourhoodSize,
-           int ** dimensionBounds, string * placements,int dimensions,bool gBest,
-           double cOne,double cTwo,SnapshotManager & snaps) : maxVelocity(
+    GenOPT(int OTP, int OF, double maxVelocity, double inertiaWeight, double transA, double transB, double transC,
+           int swarmSize, int neighbourhoodSize, int **dimensionBounds, string *placements, int dimensions, bool gBest,
+           double cOne, double cTwo, SnapshotManager &snaps, SnapshotManager &snappy) : maxVelocity(
             maxVelocity), inertiaWeight(inertiaWeight), swarmSize(swarmSize), neighbourhoodSize(neighbourhoodSize),
-            gBest(gBest),c1(cOne),c2(cTwo) {
+                                                                                        gBest(gBest), c1(cOne), c2(cTwo),
+                                                                                        snappy(snappy) {
 
         string * tmpPlacements;
         if (placements[0].compare("-")==0)
@@ -96,7 +96,11 @@ public:
                 initialSetupOfSwarm(placements,dimensions);
             }
 
-        swarm=new Particle[swarmSize];
+        swarm=new Particle*[swarmSize];
+        for (int i=0;i<swarmSize;i++)
+        {
+            swarm[i]=new Particle();
+        }
 
         switch (OF)
         {
@@ -249,7 +253,7 @@ public:
     }
 
     ///Getter for the Swarm
-    Particle *getSwarm() const {
+    Particle **getSwarm() const {
         return swarm;
     }
 
@@ -264,7 +268,7 @@ public:
     }
 
     ///Setter for the Swarm
-    void setSwarm(Particle *swarm) {
+    void setSwarm(Particle **swarm) {
         GenOPT::swarm = swarm;
     }
 
@@ -384,13 +388,22 @@ public:
         GenOPT::accuracyRequirement = accuracyRequirement;
     }
 
+
+    /**
+     * This will be used to update the settings of the system in run. It is called externally when a user setting
+     * has been changed.
+     *
+     * */
+    void updateSettings(SettingsPackage package);
+
+
 private:
 
     OPT_Process * solvingProcess; ///> The pointer to the solving process specific to this instance of the GenOPT
 
     ObjectiveFunction * objFunction; ///> The pointer to the Objective Function specific to this instance of the GenOPT
 
-    Particle * swarm;///>A pointer to an array used to hold the swarm
+    Particle ** swarm;///>A pointer to an array used to hold the swarm
 
     /* Swarm Configuration Structure that stores the links between particles in the swarm.
      *
@@ -438,7 +451,7 @@ private:
     int maxIterations; ///> The maximum number of iterations allowed for the Optimiser
     double accuracyRequirement; ///> The target fitness value to halt on
 
-    SnapshotManager snappy;
+    SnapshotManager &snappy;
 };
 
 
