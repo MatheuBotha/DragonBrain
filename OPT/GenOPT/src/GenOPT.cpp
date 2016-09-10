@@ -209,62 +209,56 @@ void GenOPT::solveProblem() {
     {
         prevBestSolution=bestSolution;
 
+
+        ///Local Best is in effect{Contingent on Neighbourhood Size}
+        /** Local best attempts to find the best fitness value of any of the neighbours of a given particle
+         *
+         * Process
+         * 1)Use N-Matrix to determine which of the other particles comprise the neighbourhood
+         * 2)The best fitness/position amongst the neighbourhood
+         * 3)Save best neighbourhood value/position of best
+         */
+
         ///Determine best solution in swarm
-        for(int i=0;i<swarmSize;i++)
-        {
-            tmpFitness=objFunction->functionInput(swarm[i]->getPositionArray());
+        for(int i=0;i<swarmSize;i++) {
+            tmpFitness = objFunction->functionInput(swarm[i]->getPositionArray());
             swarm[i]->setFitnessValue(tmpFitness);
 
-            if (tmpFitness>swarm[i]->getPersonalBest())
-            {
+            if (tmpFitness > swarm[i]->getPersonalBest()) {
                 swarm[i]->setPersonalBest(tmpFitness);
                 swarm[i]->setPersonalBestPositions(swarm[i]->getPositionArray());
             }
-
-            if (swarm[i]->getFitnessValue()>bestSolution)
-            {
-                bestSolution=swarm[i]->getFitnessValue();
-            }
-
-            ///Local Best is in effect{Contingent on Neighbourhood Size}
-            /** Local best attempts to find the best fitness value of any of the neighbours of a given particle
-             *
-             * Process
-             * 1)Use N-Matrix to determine which of the other particles comprise the neighbourhood
-             * 2)The best fitness/position amongst the neighbourhood
-             * 3)Save best neighbourhood value/position of best
-             */
-            vector<int> neighbours;
-            double tmpNBest=-1;
-            int bestPartInNeighbourhood=0;
-
-            if(gBest==false)
-            {
-            neighbours.clear();
-
-                for(int h=0;h<swarmSize;h++)
-                {
-                    if (neighbourhoodMatrix[i][h]==1)
-                    {
-                        neighbours.push_back(neighbourhoodMatrix[i][h]);
-                    }
-                }
-                tmpNBest=swarm[i]->getFitnessValue();
-
-                for(int b=0;b<neighbours.size();b++)
-                {
-                    if (swarm[neighbours.at(b)]->getFitnessValue()>tmpNBest)
-                    {
-                        tmpNBest=swarm[neighbours.at(b)]->getFitnessValue();
-                        bestPartInNeighbourhood=b;
-                    }
-                }
-                swarm[i]->setNeighbourhoodBest(tmpNBest);
-                swarm[i]->setNeighbourhoodBestPosition(swarm[bestPartInNeighbourhood]->getPositionArray());
-            }
-
-
         }
+
+        //neighbourhoodSize!=swarmSize --> Not Global Best therefore, local
+        if (neighbourhoodSize!=swarmSize)
+        {
+            //Checks occur at i-size,i+size for neighbourhood
+            //Edge cases checked first
+
+        } else //Global Best
+            {
+                int indexOfBest=-1;
+                bestSolution=swarm[0]->getFitnessValue();
+                for (int i=0;i<swarmSize;i++)
+                {
+                    tmpFitness=swarm[i]->getFitnessValue();
+
+                    if (tmpFitness>bestSolution)
+                    {
+                        bestSolution=tmpFitness;
+                        indexOfBest=i;
+                    }
+                }
+
+                for(int i=0;i<swarmSize;i++)
+                {
+                    swarm[i]->setNeighbourhoodBest(swarm[indexOfBest]->getFitnessValue());
+                }
+            }
+
+
+
 
         ///Update particles position and velocity
         for(int i=0;i<swarmSize;i++)

@@ -162,8 +162,11 @@ public:
     }
 
     ///Setter for the best personal positions array
-    void setPersonalBestPositions(double *personalBestPositions) {
-        Particle::personalBestPositions = personalBestPositions;
+    void setPersonalBestPositions(double *personalBestPositionsA) {
+        for (int i=0;i<2;i++)
+        {
+            this->personalBestPositions[i]=personalBestPositionsA[i];
+        }
     }
 
     ///Getter for the neighbourhood best
