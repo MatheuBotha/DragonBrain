@@ -23,6 +23,36 @@
 
 class PSO: public OPT_Process {
 
+private:
+    double cogComp;
+    double socialComp;
+
+public:
+    PSO();
+
+    PSO(double cog,double soc)
+    {
+        cogComp=cog;
+        socialComp=soc;
+    }
+
+    double getCog()
+    {
+        return cogComp;
+    }
+    double getSoc()
+    {
+        return socialComp;
+    }
+    void setCog(double c)
+    {
+        this->cogComp=c;
+    }
+    void setSoc(double s)
+    {
+        this->socialComp=s;
+    }
+
 };
 
 
