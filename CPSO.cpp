@@ -20,7 +20,7 @@ void CPSO::updateVelocity(Particle *particle) {
     cogComp=(r1*cog)*(particle->getPersonalBest()-particle->getFitnessValue());
     socComp=(r2*soc)*(ideal->getPersonalBest() - particle->getFitnessValue());
 
-    double tmpV=w*inertiaComp+cogComp+soc;
+    double tmpV=(w*inertiaComp)+cogComp+soc;
 
     if (tmpV>vMax) tmpV=vMax;
     if (tmpV<-vMax) tmpV=-vMax;
