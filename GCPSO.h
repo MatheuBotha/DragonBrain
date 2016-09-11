@@ -11,6 +11,8 @@ class GCPSO: public PSO {
 private:
 public:
     GCPSO();
+
+    GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i);
 };
 
 

@@ -3,3 +3,7 @@
 //
 
 #include "CPSO.h"
+
+CPSO::CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i) : PSO(pFunction, pManager, i) {
+
+}

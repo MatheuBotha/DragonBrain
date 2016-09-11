@@ -4,12 +4,14 @@
 
 #ifndef SIMPLEOPT_CPSO_H
 #define SIMPLEOPT_CPSO_H
-w
+
 #include "PSO.h"
 class CPSO: public PSO{
 private:
 public:
     CPSO();
+
+    CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i);
 };
 
 

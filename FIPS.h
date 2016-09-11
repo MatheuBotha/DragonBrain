@@ -11,6 +11,8 @@ class FIPS: public PSO {
 private:
 public:
     FIPS();
+
+    FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i);
 };
 
 
