@@ -1,5 +1,5 @@
 //
-// Created by Warmaster on 9/11/2016.
+// Created by E.Singh on 9/11/2016.
 //
 
 #ifndef SIMPLEOPT_GCPSO_H
