@@ -11,7 +11,7 @@
 #include "../OPT_Process.h"
 #include "../HillClimber.h"
 #include "../SaddleObjective.h"
-
+#include "../PSO.h"
 
 TEST(basic_check, test_SaddleHill) {
     int maxIteration = 100;
@@ -61,6 +61,25 @@ TEST(basic_check, test_OptimalSin) {
         best = opt1->getBestSolution()->getPersonalBest();
     }
     EXPECT_EQ(2, best);
+    delete obj1;
+    delete snap1;
+    delete opt1;
+}
+
+
+TEST(pso_check,test_sin)
+{
+    int maxIteration = 20;
+    int swarmSize = 1000;
+    ObjectiveFunction *obj1 = new SinObjective();
+    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize);
+    OPT_Process *opt1 = new PSO(obj1, snap1, false);
+    float best = -1000;
+    for(int i=0;i<maxIteration;i++){
+        opt1->iterate();
+        best = opt1->getBestSolution()->getPersonalBest();
+    }
+    EXPECT_GT(best,-1000);
     delete obj1;
     delete snap1;
     delete opt1;
