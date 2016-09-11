@@ -1,5 +1,5 @@
 //
-// Created by Warmaster on 9/11/2016.
+// Created by E.Singh on 9/11/2016.
 //
 
 #ifndef SIMPLEOPT_CPSO_H
@@ -8,10 +8,34 @@
 #include "PSO.h"
 class CPSO: public PSO{
 private:
+    double w;
+    double vMax;
 public:
     CPSO();
 
-    CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i);
+    CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,double wVal, double velMax);
+
+    double getW()
+    {
+        return w;
+    }
+
+    void setW(double a)
+    {
+        w=a;
+    }
+
+    double getMaxV()
+    {
+        return vMax;
+    }
+
+    void setMaxV(double a)
+    {
+        vMax=a;
+    }
+
+    virtual void updateVelocity(Particle *particle) override;
 };
 
 

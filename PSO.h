@@ -23,7 +23,7 @@
 #include <random>
 class PSO: public OPT_Process {
 
-private:
+protected:
     /**
      * cryHalt is a special boolean value that exists within the optimiser. If it
      * detects that no real progress is being made by any of the particles

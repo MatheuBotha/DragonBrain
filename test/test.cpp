@@ -130,7 +130,7 @@ TEST(CPSO_check,test_sin)
     int swarmSize = 1000;
     ObjectiveFunction *obj1 = new SinObjective();
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize);
-    OPT_Process *opt1 = new CPSO(obj1, snap1, false);
+    OPT_Process *opt1 = new CPSO(obj1, snap1, false,0.2,100);
     float best = -1000;
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
