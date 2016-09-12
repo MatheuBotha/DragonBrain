@@ -9,14 +9,12 @@ import QtQuick.Dialogs 1.2
 ApplicationWindow {
     id: window
     visible: true
-    width: 640
-    height: 480
+    width: Screen.desktopAvailableWidth
+    height: Screen.desktopAvailableHeight
     color: "#222222"
     property alias swipeView: swipeView
     property alias page1: page1
     property alias page2: page2
-    property alias page3: page3
-    property alias page4: page4
     flags: Qt.FramelessWindowHint | Qt.Window
 
 
@@ -39,23 +37,7 @@ ApplicationWindow {
         }
 
         Page2 {
-            id: page2
-            x: 0
-            y: 0
-            clip: true
-            rotation: 0
-        }
-
-        Page3 {
-            id: page3
-            x: 0
-            y: 0
-            clip: true
-            rotation: 0
-        }
-
-        Page4 {
-                    id: page4
+                    id: page2
                     x: 0
                     y: 0
                     clip: true
@@ -71,12 +53,6 @@ ApplicationWindow {
             text: qsTr("General Config")
         }
         TabButton {
-            text: qsTr("Environmental Config")
-        }
-        TabButton {
-            text: qsTr("System Config")
-        }
-        TabButton {
             text: qsTr("Objective Choice")
         }
     }
@@ -86,7 +62,7 @@ ApplicationWindow {
         id: titlebar
         color: "#444"
         anchors.top: parent.top
-        width: parent.width
+        width: Screen.desktopAvailableWidth
         height: 20
         MouseArea {
             anchors.fill: parent
