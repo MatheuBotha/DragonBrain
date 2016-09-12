@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/home/lemmus/DragonBrain/GUI">
+        <file>Page1.qml</file>
+        <file>Page1Form.ui.qml</file>
+        <file>main.qml</file>
+        <file>Page2.qml</file>
+        <file>Page2Form.ui.qml</file>
+        <file>Page3.qml</file>
+        <file>Page3Form.ui.qml</file>
+        <file>Page4.qml</file>
+        <file>Page4Form.ui.qml</file>
+    </qresource>
+</RCC>
