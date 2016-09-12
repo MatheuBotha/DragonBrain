@@ -37,6 +37,14 @@ public:
             swarm[i] = new Particle(other->swarm[i]);
         }
     }
+
+    ~Snapshot()
+    {
+        for(int i=0; i<swarmSize; ++i)
+        {
+            delete swarm[i];
+        }
+    }
     Snapshot* next;
     void setSwarm(Particle **swarm);
     Particle** getSwarm();

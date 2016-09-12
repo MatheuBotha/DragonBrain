@@ -23,6 +23,16 @@ public:
         head = nullptr;
         dimensions = dim;
     }
+    ~SnapshotManager() {
+        temp = head;
+        if(head != nullptr)
+            while(head->next != nullptr)
+            {
+                temp = head->next;
+                delete head;
+                head = temp;
+            }
+    }
     bool enqueue(Snapshot* snapshot);
     Snapshot* dequeue();
     Snapshot* getLast();

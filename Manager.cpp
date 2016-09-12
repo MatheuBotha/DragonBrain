@@ -6,11 +6,12 @@
 
 Manager::Manager() {
     setPkg = new SettingsPackage();
+    snapMan = nullptr;
 }
 
 Manager::~Manager() {
     delete setPkg;
-    if(snapMan)
+    if(snapMan != nullptr)
         delete snapMan;
 }
 

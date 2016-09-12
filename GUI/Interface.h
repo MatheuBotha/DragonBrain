@@ -26,7 +26,7 @@ public:
 
 
 
-        engine.load(QUrl("main.qml"));
+        engine.load(QUrl("qml_resources/main.qml"));
 
         app.exec();
     }
