@@ -6,8 +6,8 @@
 
 double SaddleObjective::functionInput(double *parameters) {
     double result;
+    setParams(parameters);
+    result = x * y; //2D only for now.
 
-    result = parameters[0] * parameters[1]; //2D only for now.
-
-    return result;
+    return transformResult(result);
 }

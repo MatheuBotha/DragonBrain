@@ -22,19 +22,7 @@ Page1Form {
         currentIndex: 0
 
     }
-    ComboBox {
-        id: objectiveChoice
-        x: 381
-        y: 64
-        width: 230
 
-        transformOrigin: Item.Left
-        opacity: 0.8
-        clip: true
-        model: [ "Sin", "Saddle" ]
-        currentIndex: 0
-
-    }
 
 
 
@@ -48,15 +36,6 @@ Page1Form {
         font.pixelSize: 15
     }
 
-    Label {
-        id: objectiveLabel
-        x: 381
-        y: 40
-        color: "#ffffff"
-        text: qsTr("Objective Function")
-        font.bold: true
-        font.pixelSize: 15
-    }
 
 
 
@@ -71,8 +50,8 @@ Page1Form {
                      setPkg.lock(true);
                      setPkg.change(true);
                      setPkg.generateSettingsGeneral(page2.swarmSize.value);
-                     setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), parseInt(page2.x1_min.text), parseInt(page2.x1_max.text), parseInt(page2.x2_min.text),
-                                           parseInt(page2.x2_max.text), parseFloat(page2.transformationA.text), parseFloat(page2.transformationB.text), parseFloat(page2.transformationC.text));
+                     setPkg.generateSettingsDomain(page4.objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), parseInt(page2.x1_min.text), parseInt(page2.x1_max.text), parseInt(page2.x2_min.text),
+                                           parseInt(page2.x2_max.text), parseFloat(page4.transformationA.text), parseFloat(page4.transformationB.text), parseFloat(page4.transformationC.text));
                      setPkg.generateSettingsGraphics(page3.resolutionChoice.currentText, page3.renderSlider.value, showLinks.checked,
                                            showPaths.checked, page3.ramSlider.value);
                      setPkg.generateSettingsOptimizer(algorithmChoice.currentText, page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
@@ -93,12 +72,13 @@ Page1Form {
                      setPkg.lock(true);
                      setPkg.change(true);
                      setPkg.generateSettingsGeneral(page2.swarmSize.value);
-                     setPkg.generateSettingsDomain(objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), parseInt(page2.x1_min.text), parseInt(page2.x1_max.text), parseInt(page2.x2_min.text),
-                                           parseInt(page2.x2_max.text), parseFloat(page2.transformationA.text), parseFloat(page2.transformationB.text), parseFloat(page2.transformationC.text));
+                     setPkg.generateSettingsDomain(page4.objectiveChoice.currentText, (page2.oneD_button.checked ? 1 : 2), parseInt(page2.x1_min.text), parseInt(page2.x1_max.text), parseInt(page2.x2_min.text),
+                                           parseInt(page2.x2_max.text), parseFloat(page4.transformationA.text), parseFloat(page4.transformationB.text), parseFloat(page4.transformationC.text));
                      setPkg.generateSettingsGraphics(page3.resolutionChoice.currentText, page3.renderSlider.value, showLinks.checked,
                                            showPaths.checked, page3.ramSlider.value);
                      setPkg.generateSettingsOptimizer(algorithmChoice.currentText, page2.userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
                      setPkg.lock(false);
+
                     }
         opacity: 0.7
     }

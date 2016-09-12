@@ -20,18 +20,37 @@
 #define OPT_OBJECTIVEFUNCTION_H
 
 #include <cmath>
+#include <cfloat>
+
 using namespace std;
 
 class ObjectiveFunction {
-
+    double scale;
+    double horShift;
+    double vShift;
 public:
-    ///Creates a new Objection Function
-    ObjectiveFunction() {
+    double x;
+    double y;
 
+    ///Creates a new Objection Function
+    ObjectiveFunction(double s, double h, double v) {
+        scale = s;
+        horShift = h;
+        vShift = v;
     }
     ///The static function that returns the target output for the given input
    virtual double functionInput(double * parameters)=0;
 
+   void setParams(double * params) {
+       x=params[0]+horShift;
+       if(params[1] != DBL_MAX)
+           y=params[1]+horShift;
+   }
+
+   double transformResult(double res)
+   {
+       return (vShift+res)*scale;
+   }
 private:
 
 };

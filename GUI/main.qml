@@ -16,6 +16,7 @@ ApplicationWindow {
     property alias page1: page1
     property alias page2: page2
     property alias page3: page3
+    property alias page4: page4
     flags: Qt.FramelessWindowHint | Qt.Window
 
 
@@ -25,6 +26,10 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
         Page1 {
             id: page1
             x: 0
@@ -49,6 +54,14 @@ ApplicationWindow {
             rotation: 0
         }
 
+        Page4 {
+                    id: page4
+                    x: 0
+                    y: 0
+                    clip: true
+                    rotation: 0
+                }
+
     }
 
     footer: TabBar {
@@ -62,6 +75,9 @@ ApplicationWindow {
         }
         TabButton {
             text: qsTr("System Config")
+        }
+        TabButton {
+            text: qsTr("Objective Choice")
         }
     }
 

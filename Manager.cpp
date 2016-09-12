@@ -25,7 +25,7 @@ void Manager::endGUI() {
 
 void Manager::generateSnapshotManager() {
     snapMan = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
-                                    setPkg->getSwarmSize());
+                                    setPkg->getSwarmSize(), setPkg->getProblemDomainSettingsPackage()->getDimensions());
 }
 
 SnapshotManager *Manager::getSnapshotManager() {
@@ -38,15 +38,17 @@ SettingsPackage *Manager::getSettingsPackage() {
 
 void Manager::initializeOptimizer() {
     std::string objFun = setPkg->getProblemDomainSettingsPackage()->getObjectiveFunction();
+    double* trans = new double[3];
+    setPkg->getProblemDomainSettingsPackage()->getTransformations(trans);
     if(objFun == "Sin")
-        objective = new SinObjective();
+        objective = new SinObjective(trans[0], trans[1], trans[2]);
     else if(objFun == "Saddle")
-        objective = new SaddleObjective();
+        objective = new SaddleObjective(trans[0], trans[1], trans[2]);
 
     std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm();
     if(optAlg == "Hill Climbing")
         optimizer = new HillClimber(objective, snapMan,
-                                    false);
+                                    true);
 
 }
 
@@ -60,5 +62,5 @@ void Manager::optimize() {
     std::cout << "Best located solution is from particle at coords (" << best->getPositionArray()[0] <<","
               << best->getPositionArray()[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n"
               << "Particle's best position was (" << best->getPersonalBestPosition()[0] << ","
-              << best->getPersonalBestPosition()[1] << " with fitness of: " << best->getPersonalBest() << std::endl;
+              << best->getPersonalBestPosition()[1] << ") with fitness of: " << best->getPersonalBest() << std::endl;
 }

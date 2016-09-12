@@ -25,6 +25,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <float.h>
 
 using namespace std;
 
@@ -123,6 +124,7 @@ public:
         return velocity;
     }
 
+
     //Gets the value in the position array at dimension
     double getPositionAtDimension(int dimension){
         return positionArray[dimension];
@@ -133,15 +135,19 @@ public:
     }
 
     ///Constructs a new default Particle
-    Particle() {
+    Particle(int dimensions) {
         srand((unsigned)time(NULL));
         velocity=0.0;
         fitnessValue=0.0;
         personalBest=-1;
         positionArray=new double[2];
-        for (int i = 0; i <2 ; ++i) {
-            positionArray[i]=((double)rand()/(double)RAND_MAX);
-        }
+
+        positionArray[0]=((double)rand()/(double)RAND_MAX);
+
+        if(dimensions == 2)
+       {
+           positionArray[1] = ((double)rand()/(double)RAND_MAX);
+        }else positionArray[1] = DBL_MAX;
         personalBestPosition=new double[2];
         for (int j = 0; j <2 ; ++j) {
             personalBestPosition[j] = positionArray[j];

@@ -17,27 +17,25 @@ Page2Form {
     property alias twoD_button: twoD_button
     property alias randomPosbutton: randomPosbutton
     property alias userPosbutton: userPosbutton
-    property alias transformationA: transformationA
-    property alias transformationB: transformationB
-    property alias transformationC: transformationC
+
 
 
     SpinBox {
         id: swarmSize
         x: 44
-        y: 64
+        y: 134
         width: 157
         height: 40
         opacity: 0.7
         editable: true
-        from: 0
+        from: 1
         to: 2147483647
     }
 
     Label {
         id: sizeLabrel
         x: 44
-        y: 40
+        y: 110
         color: "#ffffff"
         text: qsTr("Swarm Size")
         font.pixelSize: 15
@@ -48,7 +46,7 @@ Page2Form {
     GroupBox {
         id: groupBox1
         x: 217
-        y: 40
+        y: 110
         width: 398
         height: 231
         clip: false
@@ -226,7 +224,7 @@ Page2Form {
     GroupBox {
         id: groupBox2
         x: 44
-        y: 110
+        y: 180
         width: 157
         height: 161
 
@@ -275,103 +273,8 @@ Page2Form {
 
     }
 
-    TextField {
-        id: transformationA
-        validator: DoubleValidator {
-            locale: "English"
-            decimals: 4
-        }
-        x: 44
-        y: 334
-        width: 169
-        height: 40
-        clip: true
-        color: "#000"
-        background: Rectangle
-        {
-            color: "#DDD"
-        }
-        text: "1.0"
-    }
-
-    TextField {
-        id: transformationB
-        validator: DoubleValidator {
-            locale: "English"
-            decimals: 4
-        }
-        x: 244
-        y: 334
-        width: 169
-        height: 40
-        clip: true
-        color: "#000"
-        background: Rectangle
-        {
-            color: "#DDD"
-        }
-        text: "0.0"
-    }
-
-    TextField {
-        id: transformationC
-        validator: DoubleValidator {
-            locale: "English"
-            decimals: 4
-        }
-
-        x: 444
-        y: 334
-        width: 169
-        height: 40
-        clip: true
-        color: "#000"
-        background: Rectangle
-        {
-            color: "#DDD"
-        }
-        text: "0.0"
-    }
-
-    Label {
-        id: transALabel
-        x: 44
-        y: 292
-        width: 180
-        color: "#ffffff"
-        text: qsTr("Growth/Shrink rate (default:1)")
-        horizontalAlignment: Text.AlignLeft
-        wrapMode: Text.WordWrap
-        font.pixelSize: 15
-        font.bold: true
 
 
-
-    }
-
-    Label {
-        id: transBLabel
-        x: 244
-        y: 292
-        width: 180
-        color: "#ffffff"
-        text: qsTr("Horizontal Shift (default:0)")
-        wrapMode: Text.WordWrap
-        font.pixelSize: 15
-        font.bold: true
-    }
-
-    Label {
-        id: transCLabel
-    x: 446
-    y: 292
-    width: 180
-    color: "#ffffff"
-    text: qsTr("Vertical Shift    (default:0)")
-    wrapMode: Text.WordWrap
-    font.pixelSize: 15
-    font.bold: true
-}
 
     Button {
         id: positionFile

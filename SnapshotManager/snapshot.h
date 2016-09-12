@@ -12,15 +12,18 @@ class Snapshot {
 private:
     Particle** swarm;
     int swarmSize;
+    int dimensions;
 
 public:
-    Snapshot(int swarmSize){
+    Snapshot(int swarmSize, int dim){
         next = nullptr;
         this->swarmSize = swarmSize;
+        dimensions = dim;
         initialiseSwarm();
     }
-    Snapshot(Particle** swarm, int swarmSize){
+    Snapshot(Particle** swarm, int swarmSize, int dim){
         next = nullptr;
+        dimensions = dim;
         this->swarm = swarm;
     }
 
@@ -29,6 +32,7 @@ public:
 
         swarm = new Particle*[swarmSize];
         next = other->next;
+        dimensions = other->dimensions;
         for(int i=0; i<swarmSize; i++){
             swarm[i] = new Particle(other->swarm[i]);
         }

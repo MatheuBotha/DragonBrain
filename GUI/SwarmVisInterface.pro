@@ -2,7 +2,7 @@ QT += qml quick
 
 CONFIG += c++11
 
-SOURCES += Interface.cpp \
+SOURCES += Interface.h \
 
 
 RESOURCES += qml.qrc

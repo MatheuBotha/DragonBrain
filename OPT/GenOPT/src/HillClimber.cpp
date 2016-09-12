@@ -32,8 +32,11 @@ void HillClimber::iterate() {
 void HillClimber::mutate(Particle *particle) {
 
     double *newPosition = particle->getPositionArray();
-
-    for (int i = 0; i < 2; ++i) {
+    int loop;
+    if(newPosition[1] == DBL_MAX)
+        loop = 1;
+    else loop = 2;
+    for (int i = 0; i < loop; ++i) {
         newPosition[i]+=(mutationRate*newPosition[i]*(((double)rand()/(double)RAND_MAX)-0.5));
     }
 

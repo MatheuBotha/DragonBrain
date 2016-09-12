@@ -7,5 +7,7 @@
         <file>Page2Form.ui.qml</file>
         <file>Page3.qml</file>
         <file>Page3Form.ui.qml</file>
+        <file>Page4.qml</file>
+        <file>Page4Form.ui.qml</file>
     </qresource>
 </RCC>

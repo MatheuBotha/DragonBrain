@@ -10,7 +10,8 @@
 
 class SinObjective : public ObjectiveFunction{
 public:
-    SinObjective(){
+    SinObjective(double g, double h, double v): ObjectiveFunction(g, h , v)
+    {
 
     }
 

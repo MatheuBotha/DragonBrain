@@ -3,11 +3,16 @@
 //
 
 #include "SinObjective.h"
-
+#include <float.h>
 double SinObjective::functionInput(double *parameters) {
     double result;
+    setParams(parameters);
 
-    result = sin(parameters[0])+sin(parameters[1]); //2D only for now.
+    if(parameters[1] != DBL_MAX)
+        result = sin(x)+sin(y); //2D only for now.
+    else {
+        result = sin(x);
+    }
 
-    return result;
+    return transformResult(result);
 }

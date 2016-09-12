@@ -10,7 +10,8 @@
 
 class SaddleObjective : public ObjectiveFunction {
 public:
-    SaddleObjective(){
+    SaddleObjective(double s, double h, double v): ObjectiveFunction(s, h, v)
+    {
 
     }
 
