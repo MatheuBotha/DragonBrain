@@ -9,19 +9,19 @@ void HillClimber::iterate() {
     int swarmSize;
 
     last = snapshotManager->getLast();
-
     newIteration = new Snapshot(last);
   if(printer)  cout << "NEW ITERATION\n";
 
     swarm = newIteration->getSwarm();
 
     swarmSize = newIteration->getSwarmSize();
-
+    double pos[2];
     for(int i=0; i<swarmSize; i++){
+        swarm[i]->getPositionArray(pos);
         if(printer)        std::cout << "Particle " << i;
         mutate(swarm[i]);
-        if(printer)        std::cout << " is at coords (" << swarm[i]->getPositionArray()[0] << ", "
-                                     << swarm[i]->getPositionArray()[1] << ") has fitness of: "
+        if(printer)        std::cout << " is at coords (" << pos[0] << ", "
+                                     << pos[1] << ") has fitness of: "
                                      << swarm[i]->getFitnessValue() << " and personal best of: "
                                      << swarm[i]->getPersonalBest() << std::endl;
     }
@@ -30,8 +30,8 @@ void HillClimber::iterate() {
 }
 
 void HillClimber::mutate(Particle *particle) {
-
-    double *newPosition = particle->getPositionArray();
+    double newPosition[2];
+    particle->getPositionArray(newPosition);
     int loop;
     if(newPosition[1] == DBL_MAX)
         loop = 1;
@@ -54,5 +54,7 @@ void HillClimber::mutate(Particle *particle) {
                 ideal != nullptr && particle->getPersonalBest() > ideal->getPersonalBest())
             ideal = particle;
     }
-    particle->setParticlePosition(particle->getPersonalBestPosition());
+    double newBest[2];
+    particle->getPersonalBestPosition(newBest);
+    particle->setParticlePosition(newBest);
 }
