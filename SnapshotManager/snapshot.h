@@ -43,7 +43,7 @@ public:
         for(int i=0; i<swarmSize; ++i)
         {
             delete swarm[i];
-        }
+        } delete [] swarm;
     }
     Snapshot* next;
     void setSwarm(Particle **swarm);
