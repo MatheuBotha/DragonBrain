@@ -66,6 +66,8 @@ public:
      * @return Returns the swarmsize associated with the entire system
      */
     int getSwarmSize();
+
+    void setSwarmSize(int a) { swarmSize = a; }
     /**
      * @brief
      * @return Returns the associated GraphicsSettingsPackage
