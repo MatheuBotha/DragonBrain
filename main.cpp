@@ -26,5 +26,6 @@ int main()
     }
   */
     swarmMan->endGUI();
+    delete swarmMan;
     return 0;
 }

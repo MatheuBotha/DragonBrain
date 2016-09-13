@@ -7,21 +7,42 @@
 Manager::Manager() {
     setPkg = new SettingsPackage();
     snapMan = nullptr;
+    optimizer = nullptr;
+    objective = nullptr;
 }
 
 Manager::~Manager() {
     delete setPkg;
     if(snapMan != nullptr)
         delete snapMan;
+    if(optimizer != nullptr)
+        delete optimizer;
+    if(objective != nullptr)
+        delete objective;
 }
 
 void Manager::startGUI() {
     GUI_Thread = new std::thread(GUI_EXE::runGUI, std::ref(setPkg));
+
+
+/* used for testing without GUI
+ * setPkg->lock(false);
+    OptimizerSettingsPackage* optPkg = setPkg->getOptimizerSettingsPackage();
+    optPkg->setAlgorithm("Hill Climbing");
+    optPkg->setMaxIterations(100);
+    ProblemDomainSettingsPackage* probPkg = setPkg->getProblemDomainSettingsPackage();
+    probPkg->setDimensions(2);
+    probPkg->setObjectiveFunction("Saddle");
+    setPkg->setSwarmSize(100);
+    double trans[3] = {1,0,0};
+    probPkg->setTransformations(trans);
+*/
 }
 
 void Manager::endGUI() {
     if(GUI_Thread->joinable())
         GUI_Thread->join();
+    delete GUI_Thread;
 }
 
 void Manager::generateSnapshotManager() {
@@ -49,19 +70,25 @@ void Manager::initializeOptimizer() {
     std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm();
     if(optAlg == "Hill Climbing")
         optimizer = new HillClimber(objective, snapMan,
-                                    true);
-
+                                    false);
+    delete [] trans;
 }
 
 void Manager::optimize() {
     if(!optimizer) return;
+
     for(int i = 0; i < setPkg->getOptimizerSettingsPackage()->getMaxIterations(); ++i)
     {
         optimizer->iterate();
     }
     Particle* best = optimizer->getBestSolution();
-    std::cout << "Best located solution is from particle at coords (" << best->getPositionArray()[0] <<","
-              << best->getPositionArray()[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n"
-              << "Particle's best position was (" << best->getPersonalBestPosition()[0] << ","
-              << best->getPersonalBestPosition()[1] << ") with fitness of: " << best->getPersonalBest() << std::endl;
+    double bestPos[2];
+    double current[2];
+    best->getPersonalBestPosition(bestPos);
+    best->getPositionArray(current);
+
+    std::cout << "Best located solution is from particle at coords (" << current[0] <<","
+              << current[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n"
+              << "Particle's best position was (" << bestPos[0] << ","
+              << bestPos[1] << ") with fitness of: " << best->getPersonalBest() << std::endl;
 }
