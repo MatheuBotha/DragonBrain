@@ -1,4 +1,6 @@
 #include "settingspackage.h"
+#include <cstdlib>
+#include <stdlib.h>
 
 SettingsPackage::SettingsPackage()
 {
@@ -40,8 +42,8 @@ ProblemDomainSettingsPackage* SettingsPackage::getProblemDomainSettingsPackage()
 void SettingsPackage::generateSettingsGraphics(QString resolution, int renderSpeed, bool showLinks, bool showPath, int maxRam)
 {
     std::string res = resolution.toStdString();
-    int resW = atof(res.substr(0,res.find('x')).c_str());
-    int resH = atof(res.substr(res.find('x')+1, res.length()).c_str());
+    int resW = atoi(res.substr(0,res.find('x')).c_str());
+    int resH = atoi(res.substr(res.find('x')+1, res.length()).c_str());
     gpPkg->setMaxRam(maxRam);
     gpPkg->setRenderSpeed(renderSpeed);
     gpPkg->setShowLinks(showLinks);

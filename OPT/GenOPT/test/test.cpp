@@ -12,8 +12,8 @@
 TEST(basic_check, test_SaddleHill) {
     int maxIteration = 100;
     int swarmSize = 100;
-    ObjectiveFunction *obj1 = new SaddleObjective();
-    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize);
+    ObjectiveFunction *obj1 = new SaddleObjective(1, 0, 0);
+    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize, 2);
     OPT_Process *opt1 = new HillClimber(obj1, snap1, false);
     double best = -1000;
     for(int i=0;i<maxIteration;i++){
@@ -29,8 +29,8 @@ TEST(basic_check, test_SaddleHill) {
 TEST(basic_check, test_SinHill) {
     int maxIteration = 100;
     int swarmSize = 100;
-    ObjectiveFunction *obj1 = new SinObjective();
-    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize);
+    ObjectiveFunction *obj1 = new SinObjective(1, 0, 0);
+    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize, 2);
     OPT_Process *opt1 = new HillClimber(obj1, snap1, false);
     double best = -1000;
     for(int i=0;i<maxIteration;i++){
@@ -48,8 +48,8 @@ TEST(basic_check, test_SinHill) {
 TEST(basic_check, test_OptimalSin) {
     int maxIteration = 1000;
     int swarmSize = 1000;
-    ObjectiveFunction *obj1 = new SinObjective();
-    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize);
+    ObjectiveFunction *obj1 = new SinObjective(1, 0, 0);
+    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize, 2);
     OPT_Process *opt1 = new HillClimber(obj1, snap1, false);
     float best = -1000;
     for(int i=0;i<maxIteration;i++){

@@ -28,7 +28,7 @@ TEST(basic_check, test_GraphicsPackage) {
 
 TEST(basic_check, test_OptimizerPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsOptimizer(true, "TempString", 0.5, 7.9, 120000.4123, 12, 21);
+    setPkg.generateSettingsOptimizer("HilClimber", true, "TempString", 0.5, 7.9, 120000.4123, 12, 21);
 
     OptimizerSettingsPackage* oPkg = setPkg.getOptimizerSettingsPackage();
 

@@ -28,7 +28,8 @@
 #include "OPT/GenOPT/src/SinObjective.h"
 #include "OPT/GenOPT/src/SaddleObjective.h"
 #include "OPT/GenOPT/src/HillClimber.h"
-#include "OPT/GenOPT/src/OPT_Process.h"
+#include "OPT/GenOPT/src/PSO.h"
+#include "OPT/GenOPT/src/CPSO.h"
 
 class Manager {
 private:

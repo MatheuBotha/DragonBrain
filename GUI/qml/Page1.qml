@@ -41,7 +41,7 @@ Page1Form {
                 opacity: 0.8
                 width: sWid * 0.42
                 clip: true
-                model: [ "Hill Climbing", "Random Search", "Conical Particle Swarm Optimization", "Guaranteed Convergence PSO",
+                model: [ "Hill Climbing", "Random Search", "Particle Swarm Optimization", Conical PSO", "Guaranteed Convergence PSO",
                 "Fully Informed PSO"]
                 currentIndex: 0
 
@@ -82,8 +82,8 @@ Page1Form {
                 {
                     color: "#DDD"
                 }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm Optimization" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
 
                 text: "1.0"
             }
@@ -104,8 +104,8 @@ Page1Form {
                 {
                     color: "#DDD"
                 }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm Optimization" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
                 text: "1.0"
             }
 
@@ -126,8 +126,8 @@ Page1Form {
                 {
                     color: "#DDD"
                 }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm Optimization" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
                 text: "1.0"
 
             }
@@ -137,8 +137,8 @@ Page1Form {
                 x: sWid * 0.02
                 y: sHei * 0.155
                 color: "#ffffff"
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm Optimization" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
                 text: qsTr("Cognitive Coefficient")
                 font.pixelSize: fontSize
                 font.bold: true
@@ -150,8 +150,8 @@ Page1Form {
                 y: sHei * 0.155
                 color: "#ffffff"
                 text: qsTr("Inertia")
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm Optimization" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
                 font.pixelSize: fontSize
                 font.bold: true
             }
@@ -162,9 +162,9 @@ Page1Form {
                 y: sHei * 0.155
                 color: "#ffffff"
                 text: qsTr("Social Coefficient")
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical Particle Swarm Optimization" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
-                font.pixelSize: fontSize
+                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
+               font.pixelSize: fontSize
                 font.bold: true
             }
 

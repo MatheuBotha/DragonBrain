@@ -69,8 +69,11 @@ void Manager::initializeOptimizer() {
 
     std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm();
     if(optAlg == "Hill Climbing")
-        optimizer = new HillClimber(objective, snapMan,
-                                    false);
+        optimizer = new HillClimber(objective, snapMan, false);
+    else if(optAlg == "Particle Swarm Optimization")
+        optimizer = new PSO(objective, snapMan, false);
+    else if(optAlg == "Conical PSO")
+        optimizer = new CPSO(objective, snapMan, false, 5, 100); //what are these values? Have I specified them in GUI?
     delete [] trans;
 }
 

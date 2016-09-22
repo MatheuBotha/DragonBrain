@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.5)
 project(OPT_SRC)
 
+set (OBJECTIVES_H ObjectiveFunction.h SinObjective.h SaddleObjective.h)
+set (OBJECTIVES_SRC ObjectiveFunction.cpp SinObjective.cpp SaddleObjective.cpp)
+set (HEADERS HillClimber.h  OPT_Process.h Particle.h PSO.h RandomSearch.h
+       CPSO.h     ../../../SnapshotManager/SnapshotManager.h ../../../SnapshotManager/snapshot.h)
 
-set (HEADERS HillClimber.h ObjectiveFunction.h OPT_Process.h Particle.h PSO.h RandomSearch.h
-        SinObjective.h SaddleObjective.h ../../../SnapshotManager/SnapshotManager.h ../../../SnapshotManager/snapshot.h)
-set(SOURCE_FILES HillClimber.cpp ObjectiveFunction.cpp OPT_Process.cpp Particle.cpp PSO.cpp RandomSearch.cpp
-        SinObjective.cpp SaddleObjective.cpp ../../../SnapshotManager/SnapshotManager.cpp ../../../SnapshotManager/snapshot.cpp)
+set(SOURCE_FILES HillClimber.cpp OPT_Process.cpp Particle.cpp PSO.cpp RandomSearch.cpp
+        CPSO.cpp ../../../SnapshotManager/SnapshotManager.cpp ../../../SnapshotManager/snapshot.cpp)
 
-add_library(OPT_SRC ${SOURCE_FILES})
+add_library(OPT_SRC ${SOURCE_FILES} ${HEADERS} ${OBJECTIVES_H} ${OBJECTIVES_SRC})
 target_link_libraries(OPT_SRC SnapshotManagerSRC)
-#add_executable(OPT_exec main.cpp ${SOURCE_FILES})
+#add_executable(OPT_exec main.cpp ${SOURCE_FILES} ${OBJECTIVES_H} ${OBJECTIVES_SRC})
 #target_link_libraries(OPT_exec SnapshotManagerSRC)
