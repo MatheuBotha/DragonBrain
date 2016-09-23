@@ -13,6 +13,8 @@ public:
     FIPS();
 
     FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i);
+
+    virtual void updateVelocity(Particle *particle) override;
 };
 
 

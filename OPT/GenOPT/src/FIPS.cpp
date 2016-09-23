@@ -7,3 +7,9 @@
 FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i) : PSO(pFunction, pManager, i) {
 
 }
+
+
+void FIPS::updateVelocity(Particle *particle) {
+
+    
+}
