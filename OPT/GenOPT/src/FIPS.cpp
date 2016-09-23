@@ -11,5 +11,5 @@ FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i) : PS
 
 void FIPS::updateVelocity(Particle *particle) {
 
-    
+
 }
