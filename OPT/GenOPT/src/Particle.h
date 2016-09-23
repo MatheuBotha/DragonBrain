@@ -92,12 +92,15 @@ public:
         positionArray[dimension]=positionValue;
     }
 
-    ///Gets the position array
+    ///Sets the position array
     void getPositionArray(double *inArr) const {
         inArr[0] = positionArray[0];
         inArr[1] = positionArray[1];
     }
-
+    double * getPositionArrayPointer()
+    {
+        return positionArray;
+    }
     ///Gets the velocity
     double getVelocity() const {
         return velocity;
@@ -181,7 +184,15 @@ public:
             neighbourhoodIndices.push_back(in.at(i));
         }
     }
-    
+    void addNeighbhour(int index)
+    {
+        neighbourhoodIndices.push_back(index);
+    }
+
+    void clearNeighbourhood()
+    {
+        neighbourhoodIndices.clear();
+    }
 };
 
 

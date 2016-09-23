@@ -17,7 +17,7 @@ void HillClimber::iterate() {
     swarmSize = newIteration->getSwarmSize();
     double pos[2];
     for(int i=0; i<swarmSize; i++){
-        swarm[i]->getPositionArray(pos);
+        swarm[i]->setPositionArray(pos);
         if(printer)        std::cout << "Particle " << i;
         mutate(swarm[i]);
         if(printer)        std::cout << " is at coords (" << pos[0] << ", "
@@ -31,7 +31,7 @@ void HillClimber::iterate() {
 
 void HillClimber::mutate(Particle *particle) {
     double newPosition[2];
-    particle->getPositionArray(newPosition);
+    particle->setPositionArray(newPosition);
     int loop;
     if(newPosition[1] == DBL_MAX)
         loop = 1;
