@@ -8,7 +8,10 @@ FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i) : PS
 
 }
 
-
+/**The Fully Informed PSO algorithm is predicated on increasing the scope of a particle's knowledge of the
+ * problem by aggregating the best's of k nearest neighbours when considering velocity updates.
+ *
+ * */
 void FIPS::updateVelocity(Particle *particle) {
 
 

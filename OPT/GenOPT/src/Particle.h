@@ -26,7 +26,7 @@
 #include <ctime>
 #include <iostream>
 #include <float.h>
-
+#include <vector>
 using namespace std;
 
 class Particle {
@@ -37,7 +37,7 @@ private:
     double velocity; ///> the velocity of the particle
     double fitnessValue=0; ///> The fitness value of the particle in relation to an objective function
     double personalBest=0; ///> The personal best or memory of each particle
-
+    vector<int> neighbourhoodIndices;
 
 public:
     Particle(Particle* other){
@@ -166,7 +166,22 @@ public:
         this->personalBestPosition[0] = personalBestPosition[0];
         this->personalBestPosition[1] = personalBestPosition[1];
     }
+    ///Gets neighbhourhood indices
+    vector<int> getNeighbourhoodIndices()
+    {
+        return neighbourhoodIndices;
+    }
 
+    ///Sets neighbourhood indices
+    void setNIndices(vector<int> in)
+    {
+        neighbourhoodIndices.clear();
+        for(int i=0;i<in.size();i++)
+        {
+            neighbourhoodIndices.push_back(in.at(i));
+        }
+    }
+    
 };
 
 
