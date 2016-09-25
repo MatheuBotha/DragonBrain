@@ -1,0 +1,188 @@
+\hypertarget{class_problem_domain_settings_package}{}\section{Problem\+Domain\+Settings\+Package Class Reference}
+\label{class_problem_domain_settings_package}\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+
+
+{\ttfamily \#include $<$problemdomainsettingspackage.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_problem_domain_settings_package_acba5f13f17058d9182f23f7e79dfdb53}{Problem\+Domain\+Settings\+Package} ()\hypertarget{class_problem_domain_settings_package_acba5f13f17058d9182f23f7e79dfdb53}{}\label{class_problem_domain_settings_package_acba5f13f17058d9182f23f7e79dfdb53}
+
+\begin{DoxyCompactList}\small\item\em The default constructor for a \hyperlink{class_problem_domain_settings_package}{Problem\+Domain\+Settings\+Package}. \end{DoxyCompactList}\item 
+\hyperlink{class_problem_domain_settings_package_ab2c7252d5998c4b2d77f1dca25d030e3}{Problem\+Domain\+Settings\+Package} (std\+::string, int, int\mbox{[}4\mbox{]}, double\mbox{[}3\mbox{]})
+\begin{DoxyCompactList}\small\item\em Creates a \hyperlink{class_problem_domain_settings_package}{Problem\+Domain\+Settings\+Package} with specified settings (currently unused) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_problem_domain_settings_package_a858c5f6501fe46a6469422ca87cbc227}{get\+Objective\+Function} ()
+\item 
+int \hyperlink{class_problem_domain_settings_package_a1ff00f66433a26e87176915159207a53}{get\+Dimensions} ()
+\item 
+void \hyperlink{class_problem_domain_settings_package_a004beb40525bd9254a1e9cbb60aac7c9}{get\+Boundaries} (int in\+Array\mbox{[}4\mbox{]})
+\begin{DoxyCompactList}\small\item\em Takes an array in and copies the boundary array into it. \end{DoxyCompactList}\item 
+void \hyperlink{class_problem_domain_settings_package_a354779476d267a4a5cc39c55c6655a14}{get\+Transformations} (double in\+Array\mbox{[}3\mbox{]})
+\begin{DoxyCompactList}\small\item\em Takes an array in and copies the transformations array into it. \end{DoxyCompactList}\item 
+void \hyperlink{class_problem_domain_settings_package_ad08819f63bb7d05409489ba9c6049f92}{set\+Objective\+Function} (std\+::string in\+ObjF)
+\begin{DoxyCompactList}\small\item\em Sets the objective function. \end{DoxyCompactList}\item 
+void \hyperlink{class_problem_domain_settings_package_a99993d6577bd93023adb2cdad0443069}{set\+Dimensions} (int)
+\begin{DoxyCompactList}\small\item\em Sets the number of dimensions for the problem. \end{DoxyCompactList}\item 
+void \hyperlink{class_problem_domain_settings_package_ac619791d99b6e9bfea96329605997140}{set\+Boundaries} (int\mbox{[}4\mbox{]})
+\begin{DoxyCompactList}\small\item\em Sets the boundary values for the dimensions. \end{DoxyCompactList}\item 
+void \hyperlink{class_problem_domain_settings_package_ab4f9e9f0656b341549e9e555069735a2}{set\+Transformations} (double\mbox{[}3\mbox{]})
+\begin{DoxyCompactList}\small\item\em Sets the transformation values for the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is a wrapper for all the settings related to the problem Domain The contents are rather simplistic, only getters and setters.
+
+This class is a general \hyperlink{class_settings_package}{Settings\+Package} which contains other, more specific Settings\+Packages and extracts settings from the G\+UI 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{Problem\+Domain\+Settings\+Package(std\+::string, int, int[4], double[3])}{ProblemDomainSettingsPackage(std::string, int, int[4], double[3])}}]{\setlength{\rightskip}{0pt plus 5cm}Problem\+Domain\+Settings\+Package\+::\+Problem\+Domain\+Settings\+Package (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{objF, }
+\item[{int}]{n, }
+\item[{int}]{bounds\mbox{[}4\mbox{]}, }
+\item[{double}]{trans\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_ab2c7252d5998c4b2d77f1dca25d030e3}{}\label{class_problem_domain_settings_package_ab2c7252d5998c4b2d77f1dca25d030e3}
+
+
+Creates a \hyperlink{class_problem_domain_settings_package}{Problem\+Domain\+Settings\+Package} with specified settings (currently unused) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Objective\+Function} & (string) \\
+\hline
+{\em Dimensions} & (int) \\
+\hline
+{\em Boundaries} & (int\mbox{[}4\mbox{]}) \\
+\hline
+{\em Transformations} & (int\mbox{[}3\mbox{]}) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!get\+Boundaries@{get\+Boundaries}}
+\index{get\+Boundaries@{get\+Boundaries}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Boundaries(int in\+Array[4])}{getBoundaries(int inArray[4])}}]{\setlength{\rightskip}{0pt plus 5cm}void Problem\+Domain\+Settings\+Package\+::get\+Boundaries (
+\begin{DoxyParamCaption}
+\item[{int}]{in\+Array\mbox{[}4\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_a004beb40525bd9254a1e9cbb60aac7c9}{}\label{class_problem_domain_settings_package_a004beb40525bd9254a1e9cbb60aac7c9}
+
+
+Takes an array in and copies the boundary array into it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em copy\+Array} & \\
+\hline
+\end{DoxyParams}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!get\+Dimensions@{get\+Dimensions}}
+\index{get\+Dimensions@{get\+Dimensions}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Dimensions()}{getDimensions()}}]{\setlength{\rightskip}{0pt plus 5cm}int Problem\+Domain\+Settings\+Package\+::get\+Dimensions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_a1ff00f66433a26e87176915159207a53}{}\label{class_problem_domain_settings_package_a1ff00f66433a26e87176915159207a53}
+\begin{DoxyReturn}{Returns}
+Returns an integer containing the number of dimensions for the problem (1 or 2) 
+\end{DoxyReturn}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!get\+Objective\+Function@{get\+Objective\+Function}}
+\index{get\+Objective\+Function@{get\+Objective\+Function}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Objective\+Function()}{getObjectiveFunction()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Problem\+Domain\+Settings\+Package\+::get\+Objective\+Function (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_a858c5f6501fe46a6469422ca87cbc227}{}\label{class_problem_domain_settings_package_a858c5f6501fe46a6469422ca87cbc227}
+\begin{DoxyReturn}{Returns}
+Returns the objective function (currently as a string) 
+\end{DoxyReturn}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!get\+Transformations@{get\+Transformations}}
+\index{get\+Transformations@{get\+Transformations}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{get\+Transformations(double in\+Array[3])}{getTransformations(double inArray[3])}}]{\setlength{\rightskip}{0pt plus 5cm}void Problem\+Domain\+Settings\+Package\+::get\+Transformations (
+\begin{DoxyParamCaption}
+\item[{double}]{in\+Array\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_a354779476d267a4a5cc39c55c6655a14}{}\label{class_problem_domain_settings_package_a354779476d267a4a5cc39c55c6655a14}
+
+
+Takes an array in and copies the transformations array into it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+Array} & \\
+\hline
+\end{DoxyParams}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!set\+Boundaries@{set\+Boundaries}}
+\index{set\+Boundaries@{set\+Boundaries}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{set\+Boundaries(int[4])}{setBoundaries(int[4])}}]{\setlength{\rightskip}{0pt plus 5cm}void Problem\+Domain\+Settings\+Package\+::set\+Boundaries (
+\begin{DoxyParamCaption}
+\item[{int}]{new\+Bounds\mbox{[}4\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_ac619791d99b6e9bfea96329605997140}{}\label{class_problem_domain_settings_package_ac619791d99b6e9bfea96329605997140}
+
+
+Sets the boundary values for the dimensions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em An} & integer array of size 4, where if dimensions are 2, then arr\mbox{[}2\mbox{]} and arr\mbox{[}3\mbox{]} will be ignored \\
+\hline
+\end{DoxyParams}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!set\+Dimensions@{set\+Dimensions}}
+\index{set\+Dimensions@{set\+Dimensions}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{set\+Dimensions(int)}{setDimensions(int)}}]{\setlength{\rightskip}{0pt plus 5cm}void Problem\+Domain\+Settings\+Package\+::set\+Dimensions (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_a99993d6577bd93023adb2cdad0443069}{}\label{class_problem_domain_settings_package_a99993d6577bd93023adb2cdad0443069}
+
+
+Sets the number of dimensions for the problem. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dimensions} & (int) \\
+\hline
+\end{DoxyParams}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!set\+Objective\+Function@{set\+Objective\+Function}}
+\index{set\+Objective\+Function@{set\+Objective\+Function}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{set\+Objective\+Function(std\+::string in\+Obj\+F)}{setObjectiveFunction(std::string inObjF)}}]{\setlength{\rightskip}{0pt plus 5cm}void Problem\+Domain\+Settings\+Package\+::set\+Objective\+Function (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{in\+ObjF}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_ad08819f63bb7d05409489ba9c6049f92}{}\label{class_problem_domain_settings_package_ad08819f63bb7d05409489ba9c6049f92}
+
+
+Sets the objective function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+ObjF} & (string) \\
+\hline
+\end{DoxyParams}
+\index{Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}!set\+Transformations@{set\+Transformations}}
+\index{set\+Transformations@{set\+Transformations}!Problem\+Domain\+Settings\+Package@{Problem\+Domain\+Settings\+Package}}
+\subsubsection[{\texorpdfstring{set\+Transformations(double[3])}{setTransformations(double[3])}}]{\setlength{\rightskip}{0pt plus 5cm}void Problem\+Domain\+Settings\+Package\+::set\+Transformations (
+\begin{DoxyParamCaption}
+\item[{double}]{new\+Trans\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_problem_domain_settings_package_ab4f9e9f0656b341549e9e555069735a2}{}\label{class_problem_domain_settings_package_ab4f9e9f0656b341549e9e555069735a2}
+
+
+Sets the transformation values for the problem. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em An} & integer array of size 3. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rento/\+Documents/\+Dragon\+Brain/\+Settings\+Package/src/problemdomainsettingspackage.\+h\item 
+C\+:/\+Users/rento/\+Documents/\+Dragon\+Brain/\+Settings\+Package/src/problemdomainsettingspackage.\+cpp\end{DoxyCompactItemize}
