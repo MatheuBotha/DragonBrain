@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/..">
+      <sourceFolder url="file://$MODULE_DIR$/../SnapshotManager/SnapshotManager.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../SnapshotManager/SnapshotManager.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../SnapshotManager/snapshot.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../SnapshotManager/snapshot.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/SaddleObjective.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/Particle.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/OPT_Process.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/ObjectiveFunction.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/SaddleObjective.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/HillClimber.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/PSO.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/HillClimber.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/Particle.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/CPSO.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/SinObjective.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/OPT_Process.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/CPSO.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/RandomSearch.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/ObjectiveFunction.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/SinObjective.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/RandomSearch.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/FIPS.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/PSO.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/src/FIPS.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/test/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GenOPT/test/test.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include" />
+          <root url="file://C:/cygwin64/usr/include" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include" />
+          <root url="file://C:/cygwin64/usr/include" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
