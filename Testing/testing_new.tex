@@ -1,0 +1,142 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\graphicspath{ {images/} }
+\begin{document}
+
+\begin{titlepage}
+
+\begin{center}
+\begin{huge}
+Swarm Visualiser - COS 301 Main Project
+\\
+Testing Specifications
+\begin{small}
+\\
+Team: Dragon Brain
+\\
+Members:
+\\
+Matheu Botha u14284104
+\\
+Renton McInytre u14312710
+\\
+Emilio Singh u14006512
+\\
+Gerard van Wyk u14101263
+
+\end{small}
+
+\end{huge}
+\end{center}
+\end{titlepage}
+
+\pagebreak
+
+\tableofcontents
+
+\pagebreak
+\section{Introduction}
+\subsection{Purpose}
+This document describes the testing methodologies and frameworks used in the Swarm Visualiser project by team DragonBrain. The general purpose of the project is to create a functional experimental and teaching tool that allows the functioning of a Particle Swarm Optimisation problem solver to be conceptualised and visualised to display a more comprehensible impression of the inner workings of such systems.
+\newline This document serves as a recording of the methods and specific tests used to ensure proper functionality of the project, thus permitting proper test driven development processes to be followed. This is a necessity in order to ensure that the system in question has minimal risk of failure as the system develops.
+
+
+\subsection{Scope}
+This document is structured as follows:
+\begin{itemize}
+    \item Tests that have been identified are specified in section 2.
+    \item Features to be tested are specified in section 3.
+    \item Sections 4 through 6 will discuss the tests indepth.
+    \item Section 7 will discuss the results of the testing.
+    \item Sections 8 and 9 will conclude with additional comments and explanations.
+    \item The remainder of this section will be used to discuss the testing environment, as well as assumptions and dependencies.
+\end{itemize}
+
+\subsection{Test Environment}
+The environment of the testing system is as follows:
+\begin{itemize}
+    \item Programming Languages: C++ has been used as the base language with which the system is coded. Additionally, graphical subsections of the system make use of OpenGL and the Graphical User Interface is made using Qt libraries.
+    \item Testing Frameworks: The system's unit tests are run and handled using the cross-platform Unit Testing library, Google Test, Google's own testing framework for C++ applications.
+    \item Coding Environment: All coding has been done using CLion, Jetbrains' IDE for C++ (which has integrated support for Google Tests), along with CMake for automated building of the system.
+    \item Operating System: In true spirit of cross-compatibility, tests have been run under two particular operating systems, namely Windows 10 and Linux Mint (a distribution of Linux).
+\end{itemize}
+
+\subsection{Assumptions and Dependencies}
+For the sake of these tests, the following dependencies between subsystems are assumed:
+\begin{itemize}
+    \item The Manager depends upon the Settings Package, the Graphics Pipeline, the General Optimiser and the Snapshot Manager.
+    \item The Graphics Pipeline depends on the Snapshot Manager and the Settings Package.
+    \item The General Optimiser depends on the Snapshot Manager and the Settings Package.
+\end{itemize}
+
+
+\section{Test Items}
+Following is a list of the unit tests performed:
+\begin{itemize}
+    \item Snapshot Manager subsystem functionality.
+    \item General Optimiser subsystem functionality.
+    \item Settings Package subsystem functionality.
+\end{itemize}
+
+\section{Functional Features to be Tested}
+\subsection{Snapshot Manager}
+The features to be tested are as follows:
+\begin{itemize}
+    \item The ability of the subsystem to create a correct snapshot of the current particle situation.
+    \item The ability of the subsystem to correctly function as a standard queue of snapshots (hence, the ability to enqueue and dequeue snapshots correctly).
+    \item The ability of the subsystem to handle additional bounded queue functionality.
+\end{itemize}
+These are all low level tests that will be tested with a series of simple assertion-like methods, to ensure that the queue functions as it is meant to. The queue's main design requirement is Scalability.
+
+\subsection{General Optimiser}
+The features to be tested are as follows:
+\begin{itemize}
+    \item The ability of the subsystem to correctly generate particle objects.
+    \item The ability of the subsystem to correctly generate a swarm with a valid n-matrix.
+\end{itemize}
+
+
+\subsection{Settings Package}
+The features to be tested are as follows:
+\begin{itemize}
+    \item The ability of the subsystem to create a valid Graphics Settings Package.
+    \item The ability of the subsystem to create a valid Problem Domain Settings Package.
+    \item The ability of the subsystem to create a valid Optimiser Settings Package.
+\end{itemize}
+
+\section{Test Cases}
+\subsection{Snapshot Manager}
+\subsubsection{Case 1: Generating a Snapshot}
+\begin{itemize}
+    \item Objective: To ensure basic generation of a Snapshot is functional.
+    \item Input: An array of Particles and an array of integers representing the links between them.
+    \item To assume a pass result, the expected outcome is for a single Snapshot which has the Particles and links as members to be created.
+\end{itemize}
+
+\subsubsection{Case 2: Generating a Snapshot Queue}
+\begin{itemize}
+    \item Objective: To ensure basic generation of a Snapshot is functional.
+    \item Input: An array of Particles and an array of integers representing the links between them.
+    \item To assume a pass result, the expected outcome is for a single Snapshot which has the Particles and links as members to be created, which is then expected to be enqueued into the Snapshot Manager and dequeued successfully.
+\end{itemize}
+
+\subsection{General Optimiser}
+\subsection{Settings Package}
+
+\section{Item Pass/Fail Criteria}
+Each item tested must meet criteria specific to its particular scenario in order to be considered passed or failed. These are tested with assertions and similar methodologies, hence if an item is failed it will be detected as such by Google Tests.
+
+\section{Test Deliverables}
+%To be filled out after completion.
+
+\section{Detailed Test Results}
+%To be filled out after completion.
+
+\section{Other}
+%To be filled out after completion.
+
+\section{Conclusions and Recommendations}
+%To be filled out after completion.
+
+\end{document}
