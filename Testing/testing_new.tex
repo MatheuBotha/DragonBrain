@@ -159,7 +159,13 @@ The features to be tested are as follows:
     \item To assume a pass result, the expected outcome is for at least one particle in the swarm to be at a position better than it originally was. In ideal conditions, the swarm would have every particle reach a better position, the best, and reach a convergence point but for the purposes of testing, at least one particle needs to be in a position better as defined by its objective function.
 \end{itemize}
 \subsection{Settings Package}
-
+\subsection{Case 1: Generatng a SettingsPackage Object}
+\begin{itemize}
+    \item Objective: To instantiate a SettingsPackage Object comprised of A ProblemDomainSettingsPackage, GraphicsSettingsPackage, and an OptimizerSettingsPackage, as well as some local independent variables.
+    \item Input: A series of values for initialization of the various components
+    \item: To assume a pass result, it must be confirmed that all composing objects of the SettingsPackage Object contain the attributes that are expected.
+    \end{itemize}
+\end{itemize}
 \subsection{Objective functions}
 \subsection{Case 1: Generating a sinObjective}
 \begin{itemize}
@@ -243,20 +249,21 @@ The failing condition would require the following:
 \subsection{Snapshot Manager}
 \subsubsection{Case 1: Generating a Snapshot}
 The following results were obtained from the tests conducted. The tests to produce the
-following results have passed/failed and the reasons are stated below.
+following results have \textbf{passed} and the reasons are stated below.
 
 \begin{itemize}
-	\item Reason 1
-	\item Reason 2
+	\item Created Snapshot Object and confirmed that the links are as they were expected to me.
+	\item Snapshot Object has a list of particles matching the expectation.
 \end{itemize}
 
 \subsubsection{Case 2: Generating a Snapshot Queue}
 The following results were obtained from the tests conducted. The tests to produce the
-following results have passed/failed and the reasons are stated below.
+following results have passed and the reasons are stated below.
 
 \begin{itemize}
-	\item Reason 1
-	\item Reason 2
+	\item Basic Enqueue/Dequeue check passes (item enqueued correctly matches dequeued item).
+	\item Bounded Queue behaviour demonstrated correctly (no further items enqueued after [bound] number of items have been enqueued).
+	\item Dequeue fails correctly when attempting to dequeue from an empty queue.
 \end{itemize}
 
 \subsection{General Optimiser}
@@ -285,6 +292,18 @@ following results have passed/failed and the reasons are stated below.
 	\item Reason 2
 \end{itemize}
 \subsection{Settings Package}
+\subsubsection{Case 1: Generating a SettingsPackage Object}
+The following results were obtained from the tests conducted. The tests to produce the
+following results have \textbf{passed} and the reasons are stated below.
+
+\begin{itemize}
+	\item Object's own attributes are confirmed equal to the expected values.
+	\item ProblemDomainSettingsPackage Object's attributes are confirmed equal to expected values.
+	\item GraphicsSettingsPackage Object's attributes are confirmed equal to expected values.
+	\item OptimizerSettingsPackage Object's attributes are confirmed equal to expected values.
+\end{itemize}
+
+
 \subsection{Objective Function}
 \subsection{Graphics Processor}
 \subsubsection{Case 1: Generating a Graphics Processor}
