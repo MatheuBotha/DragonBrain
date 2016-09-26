@@ -165,7 +165,6 @@ The features to be tested are as follows:
     \item Input: A series of values for initialization of the various components
     \item: To assume a pass result, it must be confirmed that all composing objects of the SettingsPackage Object contain the attributes that are expected.
     \end{itemize}
-\end{itemize}
 \subsection{Objective functions}
 \subsection{Case 1: Generating a sinObjective}
 \begin{itemize}
@@ -335,9 +334,17 @@ following results have passed/failed and the reasons are stated below.
 \end{itemize}
 
 \section{Other}
-%To be filled out after completion.
-
+\begin{itemize}
+\item Firstly, a comment needs to be made regarding the use of Maven. Maven is a build system that is somewhat at odds with the project structure and project specifications. C++ is a language that encourages the use of two kinds of files, h and cpp, in order to construct a single class. Couple this together with inherently standalone nature of the project and it creates an additional, but not necessarily better or needed, requirement to configure a Maven build system. Currently, the existing system is an integration of the CLion IDE by Jet Brains with Github. The IDE is capable of opening and launching a project using MakeList files written by us directly out of a branch from Github. To that end, our current strategy is to have stable and development branches of any component and develop directly out of the branches including building.
+\item Contracts and Mock Objects have been used in the project. The latter used heavily during earlier development of the project was required in order to test the Graphics Processor as it could not be tested without Mock Objects. The former has been extremely useful in terms of clearly specifying the requirements of components of the system. System components would have their requirements and services specified clearly by contracts and those would be used to ensure system correctness.
+\item The deployability of the project to an application server is an interesting question. In general the project is stated to have performance as a key quality requirement. Extrapolating the service to an application server would require some significant changes to enable high performance over a network. Application servers generally are a Java specific component and again, that stands at odds with the C++ that was required for the project so we believe that deployment to an application server is not advisable with the project.
+\end{itemize}
 \section{Conclusions and Recommendations}
-%To be filled out after completion.
+\paragraph{•}
+There are two fundamental limitations to the testing included here in this document. The first is that due to the stochastic nature of the underlying optimisation strategies, it is essentially impossible to precisely define parameters during testing. So largely, this means that testing consists of observing that general positive or negative trends become apparent rather than being able to accurately and specifically check for values. The second limitation would be the Graphics Processor itself. The Graphics Processor produces visual output mapped to a screen which is difficult to rigorously test according to unit testing specifications. 
+\paragraph{•}
+A mention needs paying to the testing environment which has been slightly troublesome. Early on in the development of the project, CLion was chosen as the development environment because it offered very many features and integrations that did not exist in many other competing products. However, its one limitation would be that only one testing framework is implemented, Google Test, for it. Google Test requires a specific project structure and that imposition is unfortunately one of the trade-offs made in the design process.
 
+\paragraph{•}
+In conclusion, the document presented here is a summation of the most important aspects to the testing and refining of the project. The provisions made here hopefully illuminate the reader on the more technical aspects of the project.
 \end{document}
