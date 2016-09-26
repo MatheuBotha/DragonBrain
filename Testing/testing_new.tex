@@ -159,7 +159,37 @@ The features to be tested are as follows:
     \item To assume a pass result, the expected outcome is for at least one particle in the swarm to be at a position better than it originally was. In ideal conditions, the swarm would have every particle reach a better position, the best, and reach a convergence point but for the purposes of testing, at least one particle needs to be in a position better as defined by its objective function.
 \end{itemize}
 \subsection{Settings Package}
-\subsection{Objective Function}
+
+\subsection{Objective functions}
+\subsection{Case 1: Generating a sinObjective}
+\begin{itemize}
+    \item Objective: To instantiate a specific objective function(sinObjective) and test that it returns a value in the correct range, for a given random input.
+    \item Function: sinObjective calculates the formula sin(x)+sin(y), where x and y are the 2 input parameters.
+    \item Input:\begin{itemize}
+        \item a sinObjective instance does not require any parameters for its constructor.
+        \item the function in sinObjective is called with random parameters to assure that it is tested with a diversity of values, making the test more robust.
+        \end{itemize}
+    \item To achieve a pass result the value returned by sinObjective(after being called with random parameters) should always be within the range [0,2], if the returned value is outside of that range it is a fail result.
+\end{itemize}
+\subsection{Case 2: Checking the integrity of the AckleyObjective}
+\begin{itemize}
+	\item Objective: Determine if the Ackley Objective function is functioning as expected.
+	\item Function:
+	$$f(x_0 \cdots x_n) = -20 exp(-0.2 \sqrt{\frac{1}{n} \sum_{i=1}^n x_i^2}) - exp(\frac{1}{n} \sum_{i=1}^n cos(2\pi x_i)) + 20 + e$$ 
+	
+	$$-32 \leq x_i \leq 32$$ 
+	
+	$$\text{minimum at }f(0, \cdots, 0) = 0$$
+	
+	
+	\item Input: \begin{itemize}
+		\item An AckleyObjective instance does not require any parameters for its constructor.
+		\item The function in AckleyObjective is called with the specific value of (0,0) and then with a random value at any point other than (0,0).
+	\end{itemize}
+	\item If the function returns 0 for (0,0) and any positive value for the randomly chosen point, then it passes, otherwise it fails.
+\end{itemize}
+
+
 \subsection{Graphics Processor}
 \subsubsection{Case 1: Generating a Graphics Processor}
 \begin{itemize}
