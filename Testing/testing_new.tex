@@ -1,7 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{graphicx}
 \usepackage{lipsum}
-\graphicspath{ {images/} }
 \begin{document}
 
 \begin{titlepage}
@@ -199,7 +198,24 @@ The features to be tested are as follows:
 \end{itemize}
 
 \subsection{Particle}
-\subsubsection{•}
+\subsubsection{setVelocity}
+\begin{itemize}
+	\item Objective: To ensure that a particle's velocity value can be set by being passed an external vector.
+	\item Input: An array consisting of double values of a pre-specified length.
+	\item To assume a pass result, the expected outcome is for the private array representing the particle's position vector to be set to exactly the values specified by the passed in array.
+\end{itemize}
+\subsubsection{setPositionAtDimension}
+\begin{itemize}
+	\item Objective: To ensure that a particle's position vector at a specific dimension can be set by being passed an external value.
+	\item Input: Two double values: one representing the position value, the other the dimension.
+	\item To assume a pass result, the expected outcome is for the private array at the specified dimension, representing the particle's position vector,  to be set to exactly the value specified by the parameter passed in.
+		\end{itemize}
+\subsubsection{getVelocity}
+\begin{itemize}
+	\item Objective: To ensure that a particle's velocity value can be set by being passed an external vector.
+	\item Input: No input.
+	\item To assume a pass result, the value returned must be the same as the value stored by the particle that getVelocity was called on.
+\end{itemize}
 \subsection{Graphics Processor}
 \subsubsection{Case 1: Generating a Graphics Processor}
 \begin{itemize}
@@ -241,11 +257,8 @@ The failing condition would require the following:
 \item More than 50 percent of the particle swarm ended in a worse position than the previous iteration and it continues for at least some proportional(x) degree of the total number of iterations.
 \end{itemize}
 
-\section{Test Deliverables}
-%To be filled out after completion.
 
 \section{Detailed Test Results}
-%To be filled out after completion.
 \subsection{Snapshot Manager}
 \subsubsection{Case 1: Generating a Snapshot}
 The following results were obtained from the tests conducted. The tests to produce the
@@ -255,6 +268,7 @@ following results have \textbf{passed} and the reasons are stated below.
 	\item Created Snapshot Object and confirmed that the links are as they were expected to me.
 	\item Snapshot Object has a list of particles matching the expectation.
 \end{itemize}
+
 
 \subsubsection{Case 2: Generating a Snapshot Queue}
 The following results were obtained from the tests conducted. The tests to produce the
@@ -275,6 +289,12 @@ following results have passed/failed and the reasons are stated below.
 	\item Reason 1
 	\item Reason 2
 \end{itemize}
+
+\begin{figure}
+\includegraphics[scale=0.5]{GTest.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+
 \subsubsection{Case 2: Conical PSO OPT Process}
 The following results were obtained from the tests conducted. The tests to produce the
 following results have passed/failed and the reasons are stated below.
@@ -283,6 +303,12 @@ following results have passed/failed and the reasons are stated below.
 	\item Reason 1
 	\item Reason 2
 \end{itemize}
+
+\begin{figure}
+\includegraphics[scale=0.5]{GTest.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+
 \subsubsection{Case 3: FIPS OPT Process}
 The following results were obtained from the tests conducted. The tests to produce the
 following results have passed/failed and the reasons are stated below.
@@ -291,6 +317,48 @@ following results have passed/failed and the reasons are stated below.
 	\item Reason 1
 	\item Reason 2
 \end{itemize}
+\begin{figure}
+\includegraphics[scale=0.5]{GTest.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+
+\subsection{Particle}
+\subsubsection{setVelocity}
+The following results were obtained from the tests conducted. The tests to produce the
+following results have passed/failed and the reasons are stated below.
+
+\begin{itemize}
+	\item Reason 1
+	\item Reason 2
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=0.5]{GTest.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+\subsubsection{setPositionAtDimension}
+The following results were obtained from the tests conducted. The tests to produce the
+following results have passed/failed and the reasons are stated below.
+
+\begin{itemize}
+	\item Reason 1
+	\item Reason 2
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=0.5]{GTest.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+\subsubsection{getVelocity}
+The following results were obtained from the tests conducted. The tests to produce the
+following results have passed/failed and the reasons are stated below.
+
+\begin{itemize}
+	\item Reason 1
+	\item Reason 2
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=0.5]{GTest.png}
+\caption{Example Unit Test Performed}
+\end{figure}
 \subsection{Settings Package}
 \subsubsection{Case 1: Generating a SettingsPackage Object}
 The following results were obtained from the tests conducted. The tests to produce the
@@ -303,35 +371,6 @@ following results have \textbf{passed} and the reasons are stated below.
 	\item OptimizerSettingsPackage Object's attributes are confirmed equal to expected values.
 \end{itemize}
 
-
-\subsection{Objective Function}
-\subsection{Graphics Processor}
-\subsubsection{Case 1: Generating a Graphics Processor}
-The following results were obtained from the tests conducted. The tests to produce the
-following results have passed/failed and the reasons are stated below.
-
-\begin{itemize}
-	\item Reason 1
-	\item Reason 2
-\end{itemize}
-
-\subsubsection{Case 2: Generating a Landscape Mesh}
-The following results were obtained from the tests conducted. The tests to produce the
-following results have passed/failed and the reasons are stated below.
-
-\begin{itemize}
-	\item Reason 1
-	\item Reason 2
-\end{itemize}
-
-\subsubsection{Case 3: Generating a particle System}
-The following results were obtained from the tests conducted. The tests to produce the
-following results have passed/failed and the reasons are stated below.
-
-\begin{itemize}
-	\item Reason 1
-	\item Reason 2
-\end{itemize}
 
 \section{Other}
 \begin{itemize}
