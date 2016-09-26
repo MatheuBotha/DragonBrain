@@ -128,6 +128,22 @@ The features to be tested are as follows:
 \subsubsection{Case 1: Generating a Graphics Processor}
 \begin{itemize}
 	\item Objective: Ensure that a Graphics Processor is correctly instantiated with an objective function and a snapshot manager.
+	\item Input: An objective function representing some mathematical formula.
+	\item To assume a pass result, the expected outcome is for the graphics processor to correctly create a mesh from the given objective function as well as be able to dequeue from the snapshot manager and create a particle system from the snapshot.
+\end{itemize}
+
+\subsubsection{Case 2: Generating a Landscape Mesh}
+\begin{itemize}
+	\item Objective: Ensure that a mesh can be generated from a objective function.
+	\item Input: An objective function representing some mathematical formula.
+	\item To assume a pass result, it is expected that the given objective function will produce values from given co ordinates and create an accurate mesh that can be drawn to the screen.
+\end{itemize}
+
+\subsubsection{Case 3: Generating a particle System}
+\begin{itemize}
+	\item Objective: Ensure that a particle system can be generated from the snapshot manager.
+	\item Input: A valid snapshot manager.
+	\item To assume a pass result, it is expected that the graphics processor will be able to dequeue from the snapshot and use the particle co ordinates to create a particle system.s
 \end{itemize}
 
 \section{Item Pass/Fail Criteria}
