@@ -145,9 +145,9 @@ The features to be tested are as follows:
     \end{itemize}
     \item To assume a pass result, the expected outcome is for at least one particle in the swarm to be at a position better than it originally was. In ideal conditions, the swarm would have every particle reach a better position, the best, and reach a convergence point but for the purposes of testing, at least one particle needs to be in a position better as defined by its objective function.
 \end{itemize}
-\subsubsection{Case 3: FIPS OPT Process}
+\subsubsection{Case 3: General PSO OPT Process}
 \begin{itemize}
-    \item Objective: To ensure that during a single iteration, using the Fully Informed particle swarm optimisation process,that the particles are able to perform an optimisation action.
+    \item Objective: To ensure that during a single iteration, using the general particle swarm optimisation process,that the particles are able to perform an optimisation action.
     \item Input: \begin{itemize}
     \item A Snapshot consisting of the following:
     	\begin{itemize}
@@ -283,82 +283,67 @@ following results have passed and the reasons are stated below.
 \subsection{General Optimiser}
 \subsubsection{Case 1: Hill-climber OPT Process}
 The following results were obtained from the tests conducted. The tests to produce the
-following results have passed/failed and the reasons are stated below.
+following results have passed and the reasons are stated below.
 
 \begin{itemize}
-	\item Reason 1
-	\item Reason 2
+	\item The Hill-Climber process is considered to be stable. By this, this means that the probability of any of the particles not becoming even slightly more improved is very low. Even in stable stochastic settings, it is very unlikely that, for sufficiently large swarms, none of the particles achieve some position at termination of the run less optimal than their position at the start.
+	\begin{enumerate}
+		\item A sufficiently large test swarm, 20 particles, was used.
+	\item The Marsenne Twister Pseudo Random number generator improves the stochastic reliability of the test.
+	
+	\end{enumerate}
 \end{itemize}
 
-\begin{figure}
-\includegraphics[scale=0.5]{GTest.png}
-\caption{Example Unit Test Performed}
-\end{figure}
 
 \subsubsection{Case 2: Conical PSO OPT Process}
 The following results were obtained from the tests conducted. The tests to produce the
 following results have passed/failed and the reasons are stated below.
-
 \begin{itemize}
-	\item Reason 1
-	\item Reason 2
-\end{itemize}
 
-\begin{figure}
-\includegraphics[scale=0.5]{GTest.png}
-\caption{Example Unit Test Performed}
-\end{figure}
+\item The Conical PSO process is considered to be stable. By this, this means that the probability of any of the particles not becoming even slightly more improved is very low. Even in stable stochastic settings, it is very unlikely that, for sufficiently large swarms, none of the particles achieve some position at termination of the run less optimal than their position at the start.
+	\begin{enumerate}
+	\item A sufficiently large test swarm, 20 particles, was used.
+	\item The Marsenne Twister Pseudo Random number generator improves the stochastic reliability of the test.
+	\end{enumerate}
+\end{itemize}		
 
-\subsubsection{Case 3: FIPS OPT Process}
+\subsubsection{Case 3: General PSO OPT Process}
 The following results were obtained from the tests conducted. The tests to produce the
 following results have passed/failed and the reasons are stated below.
-
 \begin{itemize}
-	\item Reason 1
-	\item Reason 2
-\end{itemize}
-\begin{figure}
-\includegraphics[scale=0.5]{GTest.png}
-\caption{Example Unit Test Performed}
-\end{figure}
+\item The PSO process is considered to be stable. By this, this means that the probability of any of the particles not becoming even slightly more improved is very low. Even in stable stochastic settings, it is very unlikely that, for sufficiently large swarms, none of the particles achieve some position at termination of the run less optimal than their position at the start.
+	\begin{enumerate}
+		\item A sufficiently large test swarm, 20 particles, was used.
+	\item The Marsenne Twister Pseudo Random number generator improves the stochastic reliability of the test.
 
+	\end{enumerate}
+	\end{itemize}
 \subsection{Particle}
 \subsubsection{setVelocity}
 The following results were obtained from the tests conducted. The tests to produce the
-following results have passed/failed and the reasons are stated below.
+following results have passed and the reasons are stated below.
 
 \begin{itemize}
-	\item Reason 1
-	\item Reason 2
+	\item The velocity passed in was a double value in the range of allowable values.
+	\item The particle was correctly initialised.
 \end{itemize}
-\begin{figure}
-\includegraphics[scale=0.5]{GTest.png}
-\caption{Example Unit Test Performed}
-\end{figure}
 \subsubsection{setPositionAtDimension}
 The following results were obtained from the tests conducted. The tests to produce the
 following results have passed/failed and the reasons are stated below.
 
 \begin{itemize}
-	\item Reason 1
-	\item Reason 2
+	\item The position value passed in was a double value in the range of allowable values.
+	\item The dimension value was within the range of dimensionality of the position vector.
+	\item The particle was correctly initialised.
 \end{itemize}
-\begin{figure}
-\includegraphics[scale=0.5]{GTest.png}
-\caption{Example Unit Test Performed}
-\end{figure}
 \subsubsection{getVelocity}
 The following results were obtained from the tests conducted. The tests to produce the
 following results have passed/failed and the reasons are stated below.
 
 \begin{itemize}
-	\item Reason 1
-	\item Reason 2
+	\item The Velocity value provided was within the range of allowable velocities.
+	\item The particle was correctly initialised with correct initial values.
 \end{itemize}
-\begin{figure}
-\includegraphics[scale=0.5]{GTest.png}
-\caption{Example Unit Test Performed}
-\end{figure}
 \subsection{Settings Package}
 \subsubsection{Case 1: Generating a SettingsPackage Object}
 The following results were obtained from the tests conducted. The tests to produce the
@@ -386,4 +371,27 @@ A mention needs paying to the testing environment which has been slightly troubl
 
 \paragraph{•}
 In conclusion, the document presented here is a summation of the most important aspects to the testing and refining of the project. The provisions made here hopefully illuminate the reader on the more technical aspects of the project.
+
+\section{Appendix- Unit Testing Examples}
+\paragraph{•}
+Below are all of the unit test example screenshots presented here because of the size of the screenshots and to prevent a cluttered paragraph structure.
+\begin{figure}[h]
+\includegraphics[scale=0.2]{Particle.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.2]{psoTest.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+\begin{figure}[h]
+\includegraphics[scale=0.2]{cPSOcheck.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+\begin{figure}[h]
+\includegraphics[scale=0.2]{hillClimbTest.png}
+\caption{Example Unit Test Performed}
+\end{figure}
+
 \end{document}
+
