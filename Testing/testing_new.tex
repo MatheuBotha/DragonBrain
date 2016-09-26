@@ -185,9 +185,21 @@ The features to be tested are as follows:
 \section{Item Pass/Fail Criteria}
 Each item tested must meet criteria specific to its particular scenario in order to be considered passed or failed. These are tested with assertions and similar methodologies, hence if an item is failed it will be detected as such by Google Tests.
 
-\subsection{General Optimiser}
+\subsection{General Optimiser: OPT Process}
 \paragraph{•}
+In general, the difficulty of testing is predicated on the stochastic nature of the particle system, exact precise testing is difficult. However, that being said, there are certain capacities that would be considered fail and considered a pass. 
 
+\subparagraph{•}
+The passing condition would require any combination of the following:
+\begin{itemize}
+\item At least one particle is in a better position according to the appropriate function.
+\end{itemize}
+
+\subparagraph{•}
+The failing condition would require the following: 
+\begin{itemize}
+\item More than 50 percent of the particle swarm ended in a worse position than the previous iteration and it continues for at least some proportional(x) degree of the total number of iterations.
+\end{itemize}
 
 \section{Test Deliverables}
 %To be filled out after completion.
