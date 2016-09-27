@@ -22,6 +22,7 @@
 #define OPT_OTP_PROCESS_H
 
 #include <string>
+#include <vector>
 #include "Particle.h"
 #include "ObjectiveFunction.h"
 #include "../../../SnapshotManager/SnapshotManager.h"
@@ -45,6 +46,7 @@ public:
 
     ///A pure virtual method for the solving process
     virtual void iterate()=0;
+    virtual bool caclulateSwarmRadius(Particle** swarm,int swarmS);
 private:
 };
 
