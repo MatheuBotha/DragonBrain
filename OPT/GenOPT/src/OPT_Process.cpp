@@ -7,6 +7,7 @@
 bool OPT_Process::caclulateSwarmRadius(Particle** swarm,int swarmS) {
     int swarmSize=swarmS;
     double bestValue=-1;
+    int bestIndex=-1;
     vector<double> distanceVector;
     double baseCoordinates[2];
 
@@ -21,6 +22,7 @@ bool OPT_Process::caclulateSwarmRadius(Particle** swarm,int swarmS) {
             bestValue = swarm[i]->getFitnessValue();
             baseCoordinates[0] = swarm[i]->getPositionArrayPointer()[0];
             baseCoordinates[1] = swarm[i]->getPositionArrayPointer()[1];
+            bestIndex=i;
         }
     }
 
@@ -28,18 +30,22 @@ bool OPT_Process::caclulateSwarmRadius(Particle** swarm,int swarmS) {
     {
         for (int j=0;j<swarmSize;j++)
         {
-            averageDistance=averageDistance+abs(baseCoordinates[0]-swarm[j]->getPositionArrayPointer()[0]);
-            distanceVector.push_back(abs(baseCoordinates[0]-swarm[j]->getPositionArrayPointer()[0]));
+            if (j!=bestIndex) {
+                averageDistance = averageDistance + abs(baseCoordinates[0] - swarm[j]->getPositionArrayPointer()[0]);
+                distanceVector.push_back(abs(baseCoordinates[0] - swarm[j]->getPositionArrayPointer()[0]));
+            }
         }
     }else
         {
             double tmp;
             for (int j=0;j<swarmSize;j++)
             {
-                tmp=sqrt(pow((baseCoordinates[0]-swarm[j]->getPositionArrayPointer()[0]),2)
-                         +pow((baseCoordinates[1]-swarm[j]->getPositionArrayPointer()[1]),2));
-                averageDistance=averageDistance+tmp;
-                distanceVector.push_back(tmp);
+                if (j!=bestIndex) {
+                    tmp = sqrt(pow((baseCoordinates[0] - swarm[j]->getPositionArrayPointer()[0]), 2)
+                               + pow((baseCoordinates[1] - swarm[j]->getPositionArrayPointer()[1]), 2));
+                    averageDistance = averageDistance + tmp;
+                    distanceVector.push_back(tmp);
+                }
             }
         }
 
