@@ -53,7 +53,7 @@ bool OPT_Process::caclulateSwarmRadius(Particle** swarm,int swarmS) {
 
     double closeness=averageDistance/maxDistance;
 
-    if (closeness<=0.2) return true;
+    if (closeness<=0.2 || abs(averageDistance-maxDistance)<0.1) return true;
     else return false;
 
     return false;
