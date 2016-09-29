@@ -85,25 +85,46 @@ bool GCPSO::guaranteeConvergence(Particle ** swarm,int s) {
 
     calculateSearchParticleVelocity(swarm[bestParticleIndex]->getFitnessValue()
             ,calculatePt(swarm,swarmSize));
+    double result;
     if (twoD) {
-        basePosition[0] = swarm[bestParticleIndex]->getPositionArrayPointer()[0]+pastVelocity;
-        basePosition[1]=swarm[bestParticleIndex]->getPositionArrayPointer()[1]+pastVelocity;
+        for(int i=0;i<swarmSize;i++)
+        {
+            basePosition[0] = swarm[i]->getPositionArrayPointer()[0]+pastVelocity;
+            basePosition[1]=swarm[i]->getPositionArrayPointer()[1]+pastVelocity;
+
+            result=objectiveFunction->functionInput(basePosition);
+
+            if (result>tmpBestFitness)
+            {
+                numSucccses++;
+                return true;
+            } else
+            {
+                numFailures++;
+                return false;
+            }
+        }
+
     } else
     {
-        basePosition[0]=swarm[bestParticleIndex]->getPositionArrayPointer()[0]+pastVelocity;
+        for(int i=0;i<swarmSize;i++)
+        {
+            basePosition[0] = swarm[i]->getPositionArrayPointer()[0]+pastVelocity;
+            result=objectiveFunction->functionInput(basePosition);
+            if (result>tmpBestFitness)
+            {
+                numSucccses++;
+                return true;
+            } else
+            {
+                numFailures++;
+                return false;
+            }
+        }
+
     }
 
-    double result=objectiveFunction->functionInput(basePosition);
 
-    if (result>tmpBestFitness)
-    {
-        numSucccses++;
-        return true;
-    } else
-    {
-        numFailures++;
-        return false;
-    }
     return false;
 }
 
