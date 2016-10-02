@@ -1,0 +1,22 @@
+#include "ObjectiveFunction.h"
+class *Objective : public ObjectiveFunction{
+public:
+    *Objective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
+
+    }
+
+    double functionInput(double * parameters);
+};
+
+\
+
+double *Objective::functionInput(double *parameters){
+    double result;
+    transformInput(parameters);
+    double x1 = parameters[0];
+    double x2 = parameters[1];
+
+    result = 42;
+
+    return transformOutput(result);
+}
