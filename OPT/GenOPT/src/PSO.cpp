@@ -5,12 +5,12 @@
 #include "PSO.h"
 
 
-PSO::PSO(bool output) : OPT_Process(output) {
+PSO::PSO(bool output,double inBounds[4]) : OPT_Process(output,inBounds) {
 
 }
 
-PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output)
-        : OPT_Process(output) {
+PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4])
+        : OPT_Process(output,inBounds) {
 
     this->objectiveFunction=myObjectiveFunction;
     this->snapshotManager=mySnapshotManager;

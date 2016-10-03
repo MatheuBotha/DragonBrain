@@ -36,11 +36,11 @@ protected:
 public:
     /** Default empty constructor
      * */
-    PSO(bool output);
+    PSO(bool output,double inBounds[4]);
 
     /** Specialised constructor
      * */
-    PSO(bool output1, ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output);
+    PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4]);
 
     /**
      *  Destructor

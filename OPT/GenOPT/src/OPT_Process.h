@@ -43,9 +43,14 @@ protected:
 public:
 
     ///Creates a new OPT_Process
-    OPT_Process(bool output) {
+    OPT_Process(bool output,double inBounds[4]) {
         ideal = nullptr;
-        printer = output; }
+        printer = output;
+        for(int i=0;i<4;i++)
+        {
+            bounds[i]=inBounds[i];
+        }
+    }
     Particle* getBestSolution() { return ideal; }
 
     virtual ~OPT_Process() { }

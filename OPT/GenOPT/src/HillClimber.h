@@ -37,7 +37,7 @@ public:
 ///The override method for solve
     virtual void iterate() override;
 
-    HillClimber(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output) : OPT_Process(output)
+    HillClimber(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4]) : OPT_Process(output,inBounds)
     {
 
         objectiveFunction = myObjectiveFunction;
