@@ -39,7 +39,37 @@ void HillClimber::mutate(Particle *particle) {
     for (int i = 0; i < loop; ++i) {
         newPosition[i]+=(mutationRate*newPosition[i]*(((double)rand()/(double)RAND_MAX)-0.5));
     }
+    if (checkBound(newPosition)==false)
+    {
+        if (loop==1)
+        {
+            int boundChoice=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);
+            if (boundChoice==0)
+            {
+                newPosition[0]=bounds[0];
+            } else newPosition[0]=bounds[1];
+        }else
+            {
+                int bC1,bC2;
+                bC1=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);
+                bC2=checkProximityDistances(bounds[3],bounds[4],newPosition[1]);
 
+                if (bC1==0)
+                {
+                    newPosition[0]=bounds[0];
+                } else
+                    {
+                        newPosition[0]=bounds[1];
+                    }
+                if (bC2==0)
+                {
+                    newPosition[1]=bounds[3];
+                } else
+                {
+                    newPosition[1]=bounds[4];
+                }
+            }
+    }
     double fitness;
     fitness = objectiveFunction->functionInput(newPosition);
     particle->setFitnessValue(fitness);
