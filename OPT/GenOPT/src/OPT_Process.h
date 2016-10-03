@@ -34,6 +34,12 @@ protected:
     SnapshotManager *snapshotManager;
     Particle* ideal;
     bool printer;
+    /**
+     * Bounds has the following format
+     * [xmin, xmax , ymin , ymax]
+     * */
+    double bounds[4];
+
 public:
 
     ///Creates a new OPT_Process
@@ -46,7 +52,27 @@ public:
 
     ///A pure virtual method for the solving process
     virtual void iterate()=0;
-    virtual bool caclulateSwarmRadius(Particle** swarm,int swarmS);
+    virtual bool calulateSwarmRadius(Particle** swarm,int swarmS);
+
+    ObjectiveFunction *getObjectiveFunction() const;
+
+    void setObjectiveFunction(ObjectiveFunction *objectiveFunction);
+
+    SnapshotManager *getSnapshotManager() const;
+
+    void setSnapshotManager(SnapshotManager *snapshotManager);
+
+    Particle *getIdeal() const;
+
+    void setIdeal(Particle *ideal);
+
+    bool isPrinter() const;
+
+    void setPrinter(bool printer);
+
+    const double *getBounds() const;
+    void setBounds(double inBounds[4]);
+    double getBoundAtIndex(int index);
 private:
 };
 
