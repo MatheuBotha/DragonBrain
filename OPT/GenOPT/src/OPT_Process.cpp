@@ -116,4 +116,5 @@ bool OPT_Process::checkBound(double valueToCheck[2]) {
     return valueToCheck[1] == DBL_MAX ? valueToCheck[0] >= bounds[0] && valueToCheck[0] <= bounds[1] :
            valueToCheck[0] >= bounds[0] && valueToCheck[0] <= bounds[1]
            && (valueToCheck[1] >= bounds[3] && valueToCheck[1] <= bounds[4]);
+
 }
