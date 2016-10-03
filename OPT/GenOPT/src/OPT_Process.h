@@ -78,6 +78,8 @@ public:
     const double *getBounds() const;
     void setBounds(double inBounds[4]);
     double getBoundAtIndex(int index);
+
+    bool checkBound(double valueToCheck[2]);
 private:
 };
 
