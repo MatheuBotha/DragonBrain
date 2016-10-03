@@ -126,8 +126,6 @@ int OPT_Process::checkProximityDistances(double lowerBound,double upperBound,dou
     distanceLowerToValue=abs(value-lowerBound);
     distanceValueToUpper=abs(upperBound-value);
 
-    if (distanceLowerToValue<distanceValueToUpper) return 0;
-    else return 1;
+    return distanceLowerToValue > distanceValueToUpper ? 1 : 0;
 
-    return 0;
 }
