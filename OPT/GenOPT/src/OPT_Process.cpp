@@ -118,3 +118,16 @@ bool OPT_Process::checkBound(double valueToCheck[2]) {
            && (valueToCheck[1] >= bounds[3] && valueToCheck[1] <= bounds[4]);
 
 }
+
+int OPT_Process::checkProximityDistances(double lowerBound,double upperBound,double value) {
+
+    double distanceLowerToValue,distanceValueToUpper;
+
+    distanceLowerToValue=abs(value-lowerBound);
+    distanceValueToUpper=abs(upperBound-value);
+
+    if (distanceLowerToValue<distanceValueToUpper) return 0;
+    else return 1;
+
+    return 0;
+}

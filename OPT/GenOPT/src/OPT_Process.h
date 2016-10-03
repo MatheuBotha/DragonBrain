@@ -80,6 +80,15 @@ public:
     double getBoundAtIndex(int index);
 
     bool checkBound(double valueToCheck[2]);
+
+    /**This method takes two bounds, the lower and upper bound for a dimension, and a position value.
+     *
+     * It then determines which bound the position value is closer to.
+     * It will return 0 if the value is closer to the lower bound. 1 otherwise. By default, in the case
+     * of a tie, it will return the lower bound.
+     *
+     * */
+    int checkProximityDistances(double lowerBound,double upperBound,double value);
 private:
 };
 
