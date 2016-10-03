@@ -20,3 +20,10 @@ double *Objective::functionInput(double *parameters){
 
     return transformOutput(result);
 }
+
+/
+
+    defaultBounds[0]=-1.0;
+    defaultBounds[1]=1.0;
+    defaultBounds[2]=-1.0;
+    defaultBounds[3]=1.0;

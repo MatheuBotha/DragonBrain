@@ -25,11 +25,12 @@
 #include "StepObjective.h"
 #include "WeierstrassObjective.h"
 #include "ZakharovObjective.h"
+#include "AckleyObjective.h"
 
 int main() {
     std::cout << "Start\n\n";
 
-    ObjectiveFunction *objective = new ZakharovObjective(1,1,1,1);
+    ObjectiveFunction *objective = new AckleyObjective(1,1,1,1);
     //std::cout << "alpha\n";
     double * parameters = new double[2];
 

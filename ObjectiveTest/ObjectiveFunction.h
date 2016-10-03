@@ -11,7 +11,7 @@
  * Gerard van wyk u14101263
  * Emilio Singh u14006512
  *
- * @version 0.3
+ * @version 0.4
  *
  * @date: 2016/07/01 12:16
  *
@@ -32,6 +32,7 @@ public:
     double xShift;
     double yShift;
     double vShift;
+    double defaultBounds[4];
 
     ///Creates a new Objective Function
     ObjectiveFunction(double s, double x, double y, double v) {
@@ -39,6 +40,11 @@ public:
         xShift = x;
         yShift = y;
         vShift = v;
+
+        defaultBounds[0]=-1.0;
+        defaultBounds[1]=1.0;
+        defaultBounds[2]=-1.0;
+        defaultBounds[3]=1.0;
     }
     ///The static function that returns the target output for the given input
    virtual double functionInput(double * parameters)=0;

@@ -10,7 +10,10 @@
 class QuadricObjective : public ObjectiveFunction{
 public:
 QuadricObjective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
-
+    defaultBounds[0]=-100.0;
+    defaultBounds[1]=100.0;
+    defaultBounds[2]=-100.0;
+    defaultBounds[3]=100.0;
 }
 
 double functionInput(double * parameters);
