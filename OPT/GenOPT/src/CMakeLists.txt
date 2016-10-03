@@ -10,6 +10,16 @@ set (HEADERS HillClimber.h  OPT_Process.h Particle.h PSO.h RandomSearch.h
 
 set(SOURCE_FILES HillClimber.cpp OPT_Process.cpp Particle.cpp PSO.cpp RandomSearch.cpp
         CPSO.cpp ../../../SnapshotManager/SnapshotManager.cpp ../../../SnapshotManager/snapshot.cpp FIPS.cpp GCPSO.cpp
+        AlpineObjective.cpp AlpineObjective.h BealeObjective.cpp BealeObjective.h BohachevskyObjective.cpp
+        BohachevskyObjective.h EggHolderObjective.cpp EggHolderObjective.h GoldSteinPriceObjective.cpp
+        GoldSteinPriceObjective.h GriewankObjective.cpp GriewankObjective.h Levy13Objective.cpp Levy13Objective.h
+        Michalewicz.cpp Michalewicz.h PathologicalObjective.cpp PathologicalObjective.h QuadricObjective.cpp
+        QuadricObjective.h QuarticObjective.cpp QuarticObjective.h RanaObjective.cpp RanaObjective.h
+        RastriginObjective.cpp RastriginObjective.h RosenbrockObjective.cpp RosenbrockObjective.h SalomonObjective.cpp
+        SalomonObjective.h Schwefel22Objective.cpp Schwefel22Objective.h Schwefel26Objective.cpp Schwefel26Objective.h
+        SixHumpCamelBackObjective.cpp SixHumpCamelBackObjective.h SkewRastriginObjective.cpp SkewRastriginObjective.h
+        SphericalObjective.cpp SphericalObjective.h StepObjective.cpp StepObjective.h WeierstrassObjective.cpp
+        WeierstrassObjective.h ZakharovObjective.cpp ZakharovObjective.h AckleyObjective.cpp AckleyObjective.h
         )
 
 add_library(OPT_SRC ${SOURCE_FILES} ${HEADERS} ${OBJECTIVES_H} ${OBJECTIVES_SRC})

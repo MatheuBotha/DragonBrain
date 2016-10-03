@@ -10,9 +10,12 @@
 
 class SaddleObjective : public ObjectiveFunction {
 public:
-    SaddleObjective(double s, double h, double v): ObjectiveFunction(s, h, v)
+    SaddleObjective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v)
     {
-
+        defaultBounds[0]=-10.0;
+        defaultBounds[1]=10.0;
+        defaultBounds[2]=-10.0;
+        defaultBounds[3]=10.0;
     }
 
     double functionInput(double * parameters);

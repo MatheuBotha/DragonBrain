@@ -7,9 +7,11 @@
  *
  * @note Still in Progress
  *
- * @author Emilio Singh u14006512
+ * @authors
+ * Gerard van wyk u14101263
+ * Emilio Singh u14006512
  *
- * @version 0.1
+ * @version 0.4
  *
  * @date: 2016/07/01 12:16
  *
@@ -25,32 +27,46 @@
 using namespace std;
 
 class ObjectiveFunction {
-    double scale;
-    double horShift;
-    double vShift;
 public:
-    double x;
-    double y;
+    double scale;
+    double xShift;
+    double yShift;
+    double vShift;
+    double defaultBounds[4];
 
-    ///Creates a new Objection Function
-    ObjectiveFunction(double s, double h, double v) {
+    ///Creates a new Objective Function
+    ObjectiveFunction(double s, double x, double y, double v) {
         scale = s;
-        horShift = h;
+        xShift = x;
+        yShift = y;
         vShift = v;
+
+        defaultBounds[0]=-1.0;
+        defaultBounds[1]=1.0;
+        defaultBounds[2]=-1.0;
+        defaultBounds[3]=1.0;
     }
     ///The static function that returns the target output for the given input
    virtual double functionInput(double * parameters)=0;
 
-   void setParams(double * params) {
-       x=params[0]+horShift;
-       if(params[1] != DBL_MAX)
-           y=params[1]+horShift;
+   double * transformInput(double * input)
+   {
+       if(input[1] == DBL_MAX){
+           input[1] = 0;
+       }
+
+       input[0] *= xShift;
+       input[1] *= yShift;
+
+       input[0] *= scale;
+       input[1] *= scale;
+
+       return input;
    }
 
-   double transformResult(double res)
-   {
-       return (vShift+res)*scale;
-   }
+    double transformOutput(double output){
+        return output * vShift;
+    }
 private:
 
 };
