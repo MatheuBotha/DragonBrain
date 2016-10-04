@@ -23,17 +23,11 @@
 
 #include <cmath>
 #include <cfloat>
-
+#include <iostream>
 using namespace std;
 
 class ObjectiveFunction {
 public:
-    double scale;
-    double xShift;
-    double yShift;
-    double vShift;
-    double defaultBounds[4];
-
     ///Creates a new Objective Function
     ObjectiveFunction(double s, double x, double y, double v) {
         scale = s;
@@ -49,25 +43,35 @@ public:
     ///The static function that returns the target output for the given input
    virtual double functionInput(double * parameters)=0;
 
-   double * transformInput(double * input)
+   void transformInput(double * input)
    {
+
        if(input[1] == DBL_MAX){
            input[1] = 0;
        }
+       input[0] += xShift;
+       input[1] += yShift;
 
-       input[0] *= xShift;
-       input[1] *= yShift;
-
-       input[0] *= scale;
-       input[1] *= scale;
-
-       return input;
    }
 
     double transformOutput(double output){
-        return output * vShift;
+        return (output + vShift)*scale;
+    }
+
+    void getBounds(double *boundArr)
+    {
+        boundArr[0] = defaultBounds[0];
+        boundArr[1] = defaultBounds[1];
+        boundArr[2] = defaultBounds[2];
+        boundArr[3] = defaultBounds[3];
     }
 private:
+    double scale;
+    double xShift;
+    double yShift;
+    double vShift;
+protected:
+    double defaultBounds[4];
 
 };
 

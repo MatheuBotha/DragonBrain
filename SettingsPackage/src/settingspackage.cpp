@@ -52,7 +52,8 @@ void SettingsPackage::generateSettingsGraphics(QString resolution, int renderSpe
     gpPkg->setResolutionW(resW);
 }
 
-void SettingsPackage::generateSettingsOptimizer(QString algorithm, bool userInitialParticles,QString particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc)
+void SettingsPackage::generateSettingsOptimizer(QString algorithm, bool userInitialParticles,QString particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc,
+                                                double constrictionCoeff, double maxVelo, int success, int fail, int neighbourSize)
 {
     optPkg->setAlgorithm(algorithm.toStdString());
     if(userInitialParticles)
@@ -63,16 +64,21 @@ void SettingsPackage::generateSettingsOptimizer(QString algorithm, bool userInit
     optPkg->setSocialCoefficient(socialCoefficient);
     optPkg->setMaxIterations(maxIterations);
     optPkg->setCutoffAcc(cutoffAcc);
+    optPkg->setConstrictionCoefficient(constrictionCoeff);
+    optPkg->setMaxVelocity(maxVelo);
+    optPkg->setSuccessCount(success);
+    optPkg->setFailCount(fail);
+    optPkg->setNeighbourhoodSize(neighbourSize);
 }
 
 
-void SettingsPackage::generateSettingsDomain(QString objFunction, int dimensions, int x1_min, int x1_max, int x2_min, int x2_max, double TransformationA, double TransformationB, double TransformationC)
+void SettingsPackage::generateSettingsDomain(QString objFunction, int dimensions, double x1_min, double x1_max, double x2_min, double x2_max, double TransformationA, double TransformationB, double TransformationC, double TransformationD)
 {
     probPkg->setObjectiveFunction(objFunction.toStdString());
     probPkg->setDimensions(dimensions);
-    int boundaries[4] = {x1_min, x1_max, x2_min, x2_max};
+    double boundaries[4] = {x1_min, x1_max, x2_min, x2_max};
     probPkg->setBoundaries(boundaries);
-    double transformations[3] = {TransformationA, TransformationB, TransformationC};
+    double transformations[4] = {TransformationA, TransformationB, TransformationC, TransformationD};
     probPkg->setTransformations(transformations);
 }
 

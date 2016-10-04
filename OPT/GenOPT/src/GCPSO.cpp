@@ -4,7 +4,8 @@
 
 #include "GCPSO.h"
 
-GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int scVal, int fcVal,double f) : PSO(pFunction, pManager, i) {
+GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double boundArr[4], int scVal, int fcVal,double f) :
+        PSO(pFunction, pManager, i, boundArr) {
     fc=fcVal;
     sc=scVal;
     constrictionCoefficient=f;

@@ -3,6 +3,8 @@
 //
 
 #include "Manager.h"
+#include "OPT/GenOPT/src/FIPS.h"
+#include "OPT/GenOPT/src/GCPSO.h"
 
 Manager::Manager() {
     setPkg = new SettingsPackage();
@@ -62,12 +64,6 @@ void Manager::initializeOptimizer() {
     std::string objFun = setPkg->getProblemDomainSettingsPackage()->getObjectiveFunction();
     double* trans = new double[4];
     setPkg->getProblemDomainSettingsPackage()->getTransformations(trans);
-    ///////TEMPORARY//////v
-    trans[0]=1;
-    trans[1]=1;
-    trans[2]=1;
-    trans[3]=1;
-    ///////TEMPORARY//////^
     if(objFun == "Sin")
         objective = new SinObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Saddle")
@@ -119,24 +115,31 @@ void Manager::initializeOptimizer() {
     else if(objFun == "Zakharov")
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
 
+    double *bounds = new double[4];
+
+    setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
+    if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
+        objective->getBounds(bounds);
+
 
     std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm();
     if(optAlg == "Hill Climbing") {
-
-        ///////TEMPORARY//////v
-        for (int i = 0; i < 4; i++) {
-            bounds[i] = objective->defaultBounds[i];
-        }
-        ///////TEMPORARY//////^
-
         optimizer = new HillClimber(objective, snapMan, false, bounds);
     }
-    /*else if(optAlg == "Particle Swarm Optimization")
-        optimizer = new PSO(objective, snapMan, false);
+    else if(optAlg == "Particle Swarm Optimization")
+        optimizer = new PSO(objective, snapMan, false, bounds);
     else if(optAlg == "Conical PSO")
-        optimizer = new CPSO(objective, snapMan, false, 5, 100); //what are these values? Have I specified them in GUI?
-    *////Error: above temporarily commented out
-    /// due to "undefined reference to `PSO::PSO(ObjectiveFunction*, SnapshotManager*, bool)"
+        optimizer = new CPSO(objective, snapMan, false, bounds,
+                             setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), setPkg->getOptimizerSettingsPackage()->getMaxVelocity()); 
+    else if(optAlg == "Fully Informed PSO")
+        optimizer = new FIPS(objective, snapMan, false, bounds,
+                             setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
+    else if(optAlg == "Guaranteed Convergence PSO")
+        optimizer = new GCPSO(objective, snapMan, false, bounds, setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
+                setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
+
+
+
     delete [] trans;
 }
 

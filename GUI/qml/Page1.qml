@@ -167,23 +167,193 @@ Page1Form {
                font.pixelSize: fontSize
                 font.bold: true
             }
+            //
+            //
+            //
+            //BEGIN PSO SPECIFIC SECTION
+            //
+            Label {  wrapMode: Text.WordWrap
+                id: constrictLabel
+                anchors.left: cognitiveCoeff.left
+                anchors.top: inertia.bottom
+                color: "#ffffff"
+                text: qsTr("Constriction Coefficient")
+                visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
+                         || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+               font.pixelSize: fontSize
+                font.bold: true
+            }
+
+            TextField { font.pixelSize: fontSize
+                id: constrictCoeff
+                validator: DoubleValidator {
+                    locale: "English"
+                    decimals: 4
+                }
+                anchors.left: constrictLabel.left
+                anchors.top: constrictLabel.bottom
+                width: parent.width * 0.25
+                clip: true
+                color: "#000"
+                background: Rectangle
+                {
+                    color: "#DDD"
+                }
+                visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
+                         || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+
+                text: "1.0"
+            }
 
 
 
+            //CPSO
+                        Label {  wrapMode: Text.WordWrap
+                            id: veloLabel
+                            x: sWid * 0.02 + (parent.width * 0.6)
+                            anchors.top: inertia.bottom
+                            anchors.left: socialCoeff.left
+                            color: "#ffffff"
+                            text: qsTr("Maximum Velocity")
+                             visible: (algorithmChoice.displayText == "Conical PSO") ? true : false
+                           font.pixelSize: fontSize
+                            font.bold: true
+            }
+            TextField { font.pixelSize: fontSize
+                            id: maxVelocity
+                            validator: DoubleValidator {
+                                locale: "English"
+                                decimals: 4
+                            }
+                            anchors.left: veloLabel.left
+                            anchors.top: veloLabel.bottom
+                            width: parent.width * 0.25
+                            clip: true
+                            color: "#000"
+                            background: Rectangle
+                            {
+                                color: "#DDD"
+                            }
+                            visible: (algorithmChoice.displayText == "Conical PSO") ? true : false
+
+                            text: "50.0"
+                        }
+
+
+
+        //ENDCPSO
+            //GCPSO
+                        Label {  wrapMode: Text.WordWrap
+                            id: successLabel
+                            anchors.top: inertia.bottom
+                            anchors.left: socialCoeff.left
+                            color: "#ffffff"
+                            text: qsTr("Success Count")
+                            visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                            font.pixelSize: fontSize
+                            font.bold: true
+            }
+            TextField { font.pixelSize: fontSize
+                            id: successCount
+                            validator: IntValidator{
+                                locale: "English"
+                            }
+                            anchors.left: successLabel.left
+                            anchors.top: successLabel.bottom
+                            width: parent.width * 0.25
+                            clip: true
+                            color: "#000"
+                            background: Rectangle
+                            {
+                                color: "#DDD"
+                            }
+                            visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+
+                            text: "15"
+                        }
+
+
+
+
+                        Label {  wrapMode: Text.WordWrap
+                            id: failLabel
+                            anchors.top: inertia.bottom
+                            anchors.left: inertia.left
+                            color: "#ffffff"
+                            text: qsTr("Fail Count")
+                            visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                           font.pixelSize: fontSize
+                            font.bold: true
+            }
+            TextField { font.pixelSize: fontSize
+                            id: failCount
+                            validator: IntValidator {
+                                locale: "English"
+                            }
+                            anchors.left: failLabel.left
+                            anchors.top: failLabel.bottom
+                            width: parent.width * 0.25
+                            clip: true
+                            color: "#000"
+                            background: Rectangle
+                            {
+                                color: "#DDD"
+                            }
+                            visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+
+                            text: "5"
+                        }
+
+
+        //ENDGCPSO
+            //FIPS
+
+                        Label {  wrapMode: Text.WordWrap
+                            id: neighbourLabel
+                            anchors.top: inertia.bottom
+                            anchors.left: socialCoeff.left
+                            color: "#ffffff"
+                            text: qsTr("Neighbourhood Size")
+                            visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
+                            font.pixelSize: fontSize
+                            font.bold: true
+            }
+            TextField { font.pixelSize: fontSize
+                            id: neighbourSize
+                            validator: IntValidator{
+                                locale: "English"
+                            }
+                            anchors.left: neighbourLabel.left
+                            anchors.top: neighbourLabel.bottom
+                            width: parent.width * 0.25
+                            clip: true
+                            color: "#000"
+                            background: Rectangle
+                            {
+                                color: "#DDD"
+                            }
+                            visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
+
+                            text: "2"
+                        }
+
+
+        //ENDFIPS
+        //END PSO SPECIFIC SECTION
         CheckBox {
             id: showLinks
             anchors.left: targetAcc.left
-            y: 0.33 * sHei
+            anchors.top: targetAcc.bottom
             text: qsTr("")
             scale: 1.3
             visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
         }
 
             Label {  wrapMode: Text.WordWrap
-                id: showLinksLabel
+            id: showLinksLabel
             anchors.left: showLinks.right
     //x: 0.25 * sWid
-            y: 0.33 * sHei
+            anchors.verticalCenter: showLinks.verticalCenter
             width: 0.094 * sWid
             color: "#ffffff"
             text: qsTr("Show Links")
@@ -196,7 +366,7 @@ Page1Form {
         CheckBox {
             id: showPaths
             x: 0.02 * sWid
-            y: 0.33 * sHei
+            anchors.top: targetAcc.bottom
             text: qsTr("")
             scale: 1.3
         }
@@ -204,7 +374,7 @@ Page1Form {
             Label {  wrapMode: Text.WordWrap
                 id: showPathLabel
                  anchors.left: showPaths.right
-                 y: 0.33 * sHei
+            anchors.verticalCenter: showLinks.verticalCenter
                  width: 0.094 * sWid
                 color: "#ffffff"
                 text: qsTr("Show Paths")
@@ -216,9 +386,9 @@ Page1Form {
         SpinBox {
             id: maxIterations
             anchors.left: cognitiveCoeff.left
-            y: sHei * 0.25
+            anchors.top: accuracyLabel.bottom
             width: algorithmChoice.width * 0.45
-            height: sHei * 0.075
+            height: sHei * 0.05
             opacity: 0.7
             from: 1
             value: 1
@@ -229,9 +399,9 @@ Page1Form {
         SpinBox {
             id: targetAcc
             anchors.right: inertia.right
-            y: sHei * 0.25
+            anchors.top: accuracyLabel.bottom
             width: algorithmChoice.width * 0.45
-            height: sHei * 0.075
+            height: sHei * 0.05
             opacity: 0.7
             from: 1
             value: 1
@@ -242,7 +412,7 @@ Page1Form {
         Label {  wrapMode: Text.WordWrap
             id: iterationLabel
             anchors.left: cognitiveCoeff.left
-            y: sHei * 0.23
+            y: sHei * 0.28
             color: "#ffffff"
             text: qsTr("Max Iterations")
             horizontalAlignment: Text.AlignLeft
@@ -253,7 +423,7 @@ Page1Form {
         Label {  wrapMode: Text.WordWrap
             id: accuracyLabel
             anchors.left: targetAcc.left
-            y: sHei * 0.23
+            y: sHei * 0.28
             color: "#ffffff"
             text: qsTr("Accuracy cutoff (%)")
             horizontalAlignment: Text.AlignLeft
@@ -329,7 +499,7 @@ Label {  wrapMode: Text.WordWrap
         RadioButton {
             id: oneD_button
             anchors.left: parent.left
-            y: 0.15 * parent.height
+            y: 0.10 * parent.height
             width: 0.5 * parent.width
 
             Text {
@@ -345,7 +515,7 @@ Label {  wrapMode: Text.WordWrap
         RadioButton {
             id: twoD_button
             anchors.right: x1_max.horizontalCenter
-            y: 0.15 * parent.height
+            y: 0.10 * parent.height
             checked: true
             Text {
                 x: 48
@@ -362,10 +532,11 @@ Label {  wrapMode: Text.WordWrap
         TextField { font.pixelSize: fontSize
             id: x1_min
             anchors.left: parent.left
-            y: parent.height * 0.39
-            validator: IntValidator {
-                locale: "English"
-            }
+            y: parent.height * 0.48
+            validator: DoubleValidator {
+                            locale: "English"
+                            decimals: 2
+                        }
             width: parent.width * 0.43
             height: parent.height * 0.15
             clip: true
@@ -380,10 +551,11 @@ Label {  wrapMode: Text.WordWrap
         TextField { font.pixelSize: fontSize
             id: x1_max
             anchors.right: parent.right
-            y: parent.height * 0.39
-            validator: IntValidator {
-                locale: "English"
-            }
+            y: parent.height * 0.48
+            validator: DoubleValidator {
+                            locale: "English"
+                            decimals: 2
+                        }
             width: parent.width * 0.43
             height: parent.height * 0.15
             clip: true
@@ -398,10 +570,11 @@ Label {  wrapMode: Text.WordWrap
         TextField { font.pixelSize: fontSize
             id: x2_max
             anchors.left: x1_max.left
-            y: parent.height * 0.71
-            validator: IntValidator {
-                locale: "English"
-            }
+            y: parent.height * 0.79
+            validator: DoubleValidator {
+                            locale: "English"
+                            decimals: 2
+                        }
                 width: parent.width * 0.43
                 height: parent.height * 0.15
             clip: true
@@ -418,10 +591,11 @@ Label {  wrapMode: Text.WordWrap
         TextField { font.pixelSize: fontSize
             id: x2_min
             anchors.left: x1_min.left
-            y: parent.height * 0.71
-            validator: IntValidator {
-                locale: "English"
-            }
+            y: parent.height * 0.79
+            validator: DoubleValidator {
+                            locale: "English"
+                            decimals: 2
+                        }
                 width: parent.width * 0.43
                 height: parent.height * 0.15
             clip: true
@@ -433,6 +607,17 @@ Label {  wrapMode: Text.WordWrap
             text: "0"
             visible: twoD_button.checked
         }
+
+        Label {  wrapMode: Text.WordWrap
+                    id: boundsLabel
+                    anchors.left: x1_min.left
+                    anchors.bottom: x1_maxlabel.top
+                    width: parent.width;
+                    text: qsTr("Boundaries (set all to 0 for objective defaults)")
+                    color: "#ffffff"
+                    font.bold: true
+                    font.pixelSize: fontSize +2
+                }
 
         Label {  wrapMode: Text.WordWrap
             id: x1_maxlabel
@@ -590,7 +775,7 @@ GroupBox
                 decimals: 4
             }
             x: 0.2 * parent.width
-            y: 0.45 * parent.height
+            y: 0.43 * parent.height
             width: 0.6 * parent.width
             height: 0.1 * parent.height
             clip: true
@@ -608,9 +793,10 @@ GroupBox
                 locale: "English"
                 decimals: 4
             }
+            visible: twoD_button.checked
 
             x: 0.2 * parent.width
-            y: 0.7 * parent.height
+            y: 0.66 * parent.height
             width: 0.6 * parent.width
             height: 0.1 * parent.height
             clip: true
@@ -622,6 +808,25 @@ GroupBox
             text: "0.0"
         }
 
+            TextField { font.pixelSize: fontSize
+                    id: transformationD
+                    validator: DoubleValidator {
+                        locale: "English"
+                        decimals: 4
+                    }
+                    x: 0.2 * parent.width
+                    y: 0.89 * parent.height
+                    width: 0.6 * parent.width
+                    height: 0.1 * parent.height
+                    clip: true
+                    color: "#000"
+                    background: Rectangle
+                    {
+                        color: "#DDD"
+                    }
+                    text: "0.0"
+                }
+
         Label {  wrapMode: Text.WordWrap
             id: transALabel
             anchors.left: transformationA.left
@@ -632,16 +837,15 @@ GroupBox
             font.pixelSize: fontSize
             font.bold: true
 
-
-
         }
 
         Label {  wrapMode: Text.WordWrap
             id: transBLabel
             anchors.left: transformationB.left
-            y: transformationB.height + (0.065*sWid)
+            anchors.bottom: transformationB.top
+            y: transformationB.height + (0.01*sWid)
             color: "#ffffff"
-            text: qsTr("Horizontal Shift (default:0)")
+            text: qsTr("X Shift (default:0)")
             font.pixelSize: fontSize
             font.bold: true
         }
@@ -649,13 +853,25 @@ GroupBox
         Label {  wrapMode: Text.WordWrap
             id: transCLabel
         anchors.left: transformationC.left
-        y: transformationC.height + (0.12*sWid)
+        anchors.bottom: transformationC.top
+        y: transformationC.height + (0.01*sWid)
         color: "#ffffff"
-        text: qsTr("Vertical Shift    (default:0)")
+        text: qsTr("Y Shift (default:0)")
+            visible: twoD_button.checked
         font.pixelSize: fontSize
         font.bold: true
     }
 
+        Label {  wrapMode: Text.WordWrap
+            id: transDLabel
+        anchors.left: transformationD.left
+        anchors.bottom: transformationD.top
+        y: transformationD.height + (0.01*sWid)
+        color: "#ffffff"
+        text: qsTr("Vertical Shift (default:0)")
+        font.pixelSize: fontSize
+        font.bold: true
+    }
 
 }
 
@@ -856,11 +1072,12 @@ FileDialog {
                      setPkg.lock(true);
                      setPkg.change(true);
                      setPkg.generateSettingsGeneral(swarmSize.value);
-                     setPkg.generateSettingsDomain( page4.objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseInt( x1_min.text), parseInt( x1_max.text), parseInt( x2_min.text),
-                                           parseInt( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text));
+                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
+                                           parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
                      setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value, showLinks.checked,
                                            showPaths.checked,  ramSlider.value);
-                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
+                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value,
+                                            parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
         }
 
@@ -881,11 +1098,12 @@ FileDialog {
           /*           setPkg.lock(true);
                      setPkg.change(true);
                      setPkg.generateSettingsGeneral( swarmSize.value);
-                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, ( oneD_button.checked ? 1 : 2), parseInt( x1_min.text), parseInt( x1_max.text), parseInt( x2_min.text),
-                                           parseInt( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text));
+                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, ( oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
+                                           parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
                      setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value, showLinks.checked,
                                            showPaths.checked,  ramSlider.value);
-                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value);
+                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value,
+                                            parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
 
             */        }

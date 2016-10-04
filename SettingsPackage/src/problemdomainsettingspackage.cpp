@@ -16,7 +16,7 @@ ProblemDomainSettingsPackage::ProblemDomainSettingsPackage(std::string objF, int
     transformations[0] = trans[0];
     transformations[1] = trans[1];
     transformations[2] = trans[2];
-
+    transformations[3] = trans[3];
 }
 
 std::string ProblemDomainSettingsPackage::getObjectiveFunction()
@@ -29,7 +29,7 @@ int ProblemDomainSettingsPackage::getDimensions()
     return dimensions;
 }
 
-void ProblemDomainSettingsPackage::getBoundaries(int inArray[])
+void ProblemDomainSettingsPackage::getBoundaries(double inArray[])
 {
     inArray[0] = boundaries[0];
     inArray[1] = boundaries[1];
@@ -42,6 +42,7 @@ void ProblemDomainSettingsPackage::getTransformations(double inArray[])
     inArray[0] = transformations[0];
     inArray[1] = transformations[1];
     inArray[2] = transformations[2];
+    inArray[3] = transformations[3];
 
 }
 
@@ -55,7 +56,7 @@ void ProblemDomainSettingsPackage::setDimensions(int n)
     dimensions = n;
 }
 
-void ProblemDomainSettingsPackage::setBoundaries(int newBounds[4])
+void ProblemDomainSettingsPackage::setBoundaries(double newBounds[4])
 {
     boundaries[0] = newBounds[0];
     boundaries[1] = newBounds[1];
@@ -68,4 +69,5 @@ void ProblemDomainSettingsPackage::setTransformations(double newTrans[3])
     transformations[0] = newTrans[0];
     transformations[1] = newTrans[1];
     transformations[2] = newTrans[2];
+    transformations[3] = newTrans[3];
 }

@@ -63,7 +63,6 @@ private:
     ObjectiveFunction* objective;
     OPT_Process* optimizer;
     std::thread* GUI_Thread;
-    double bounds[4];
 public:
 
     ///Constructor for the manager objects
@@ -97,7 +96,6 @@ public:
      * The created graphics pipeline relates directly to a specific graphical pipline
      * and this pipeline provides optimiser services.
      * */
-    //GenOPT makeOPT(SettingsPackage setPackage);
 };
 
 
