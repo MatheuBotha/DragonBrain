@@ -41,7 +41,7 @@ Page1Form {
                 opacity: 0.8
                 width: sWid * 0.42
                 clip: true
-                model: [ "Hill Climbing", "Random Search", "Particle Swarm Optimization", Conical PSO", "Guaranteed Convergence PSO",
+                model: [ "Hill Climbing", "Random Search", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
                 "Fully Informed PSO"]
                 currentIndex: 0
 
@@ -83,7 +83,7 @@ Page1Form {
                     color: "#DDD"
                 }
                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
 
                 text: "1.0"
             }
@@ -105,7 +105,7 @@ Page1Form {
                     color: "#DDD"
                 }
                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                 text: "1.0"
             }
 
@@ -127,7 +127,7 @@ Page1Form {
                     color: "#DDD"
                 }
                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                 text: "1.0"
 
             }
@@ -138,7 +138,7 @@ Page1Form {
                 y: sHei * 0.155
                 color: "#ffffff"
                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                 text: qsTr("Cognitive Coefficient")
                 font.pixelSize: fontSize
                 font.bold: true
@@ -151,7 +151,7 @@ Page1Form {
                 color: "#ffffff"
                 text: qsTr("Inertia")
                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
+                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                 font.pixelSize: fontSize
                 font.bold: true
             }
@@ -163,7 +163,7 @@ Page1Form {
                 color: "#ffffff"
                 text: qsTr("Social Coefficient")
                  visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText = "Particle Swarm Optimization") ? true : false
+                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                font.pixelSize: fontSize
                 font.bold: true
             }
@@ -893,4 +893,3 @@ FileDialog {
     }
 
 }
-
