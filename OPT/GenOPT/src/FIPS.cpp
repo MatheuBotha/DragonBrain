@@ -4,8 +4,9 @@
 
 #include "FIPS.h"
 
-FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int size) : PSO(pFunction, pManager, i) {
+FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int size,double wA) : PSO(pFunction, pManager, i) {
 nSize=size;
+    constrictionCoefficient=wA;
 }
 
 /**The Fully Informed PSO algorithm is predicated on increasing the scope of a particle's knowledge of the
