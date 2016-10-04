@@ -8,6 +8,8 @@ add_subdirectory(SettingsPackage)
 add_subdirectory(gtest)
 add_subdirectory(OPT)
 add_subdirectory(SnapshotManager)
+add_subdirectory(GraphicsProcessor)
+add_subdirectory(GraphicsProcessorMK2_old)
 
 add_executable(SwarmViz main.cpp  Manager.cpp Manager.h)
 target_link_libraries(SwarmViz SettingsPackageSRC)

@@ -1,128 +1,111 @@
+//
+// Created by matheu on 2016/10/04.
+//
+
 #include "GraphicsProcessor.h"
 
-#include "GraphicsEngine/GraphicsEngine.h"
-#include "GraphicsEngine/FPSLimiter.h"
-
-#include "LandscapeEngine/Landscape2D.h"
-
-#include <SDL2/SDL.h>
 #include <iostream>
 
-GraphicsProcessor::GraphicsProcessor() :
-    _screenWidth(640),
-    _screenHeight(480),
-    _runState(RunState::PLAY)
-{
-    // Empty
+#include "Engine/Debug.h"
+#include "Engine/Engine.h"
+#include "Engine/Camera.h"
+#include "Engine/Landscape2D.h"
+#include "Engine/Cube.h"
+
+// GLM Mathemtics
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+// Camera
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+bool keys[1024];
+GLfloat lastX = 400, lastY = 300;
+bool firstMouse = true;
+
+GLfloat deltaTime = 0.0f;
+GLfloat lastFrame = 0.0f;
+
+GraphicsProcessor::GraphicsProcessor(){
+    std::cout << "Starting Graphics Processor Test" << std::endl;
+    //init SDL stuffz
+    Engine::init();
+
+    //make a window
+    window.create("Temp Title", 800, 600, 0);
+
+    //Create the shader program
+    shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
+    shaderProgram.linkShaders();
 }
 
-GraphicsProcessor::~GraphicsProcessor() {
-    // IMPLEMENT THIS!
-    delete _landscape;
+GraphicsProcessor::~GraphicsProcessor(){
+    shaderProgram.unuse();
+    shaderProgram.dispose();
+    std::cout << "Ending Graphics Processor Test" << std::endl;
 }
 
-void GraphicsProcessor::run() {
-    // IMPLEMENT THIS!
-    initSystems();
-    initLandscape();
+void GraphicsProcessor::run(){
+    Cube cube(shaderProgram, Texture("Textures/container.jpg"));
 
-    loop();
-}
+    while(true){
+        while(SDL_PollEvent(&event)){
+            if (event.type == SDL_QUIT)
+            {
+                return;
+            }
 
-void GraphicsProcessor::initSystems() {
-    GraphicsEngine::init();
+            // Set frame time
+            GLfloat currentFrame = SDL_GetTicks()/1000;
+            deltaTime = currentFrame - lastFrame;
+            lastFrame = currentFrame;
 
-    _window.create("Temp Title", 800, 640, 0);
-
-    initShaders();
-}
-
-void GraphicsProcessor::initLandscape()
-{
-//    _landscape = new Landscape2D();
-//    _landscape->init();
-}
-
-void GraphicsProcessor::initShaders() {
-    // Compile our color shader
-    _textureProgram.compileShaders("Shaders/textureShading.vert", "Shaders/textureShading.frag");
-    _textureProgram.addAttribute("vertexPosition");
-    _textureProgram.addAttribute("vertexColor");
-    _textureProgram.addAttribute("vertexUV");
-    _textureProgram.linkShaders();
-}
-
-void GraphicsProcessor::loop() {
-    // IMPLEMENT THIS!
-
-    GraphicsEngine::FPSLimiter fpsLimiter;
-    fpsLimiter.setMaxFPS(60.0f);
-
-    while(_runState == RunState::PLAY)
-    {
-        fpsLimiter.begin();
-
-        processInput();
-
-//        _landscape->draw();
-        draw();
-
-        _fps = fpsLimiter.end();
-    }
-}
-
-void GraphicsProcessor::processInput() {
-    SDL_Event evnt;
-    //Will keep looping until there are no more events to process
-    while (SDL_PollEvent(&evnt)) {
-        switch (evnt.type) {
-            case SDL_QUIT:
-                // Exit the game here!
-                _runState = RunState::EXIT;
-                break;
-            case SDL_MOUSEMOTION:
-                _inputManager.setMouseCoords(evnt.motion.x, evnt.motion.y);
-                break;
-            case SDL_KEYDOWN:
-                _inputManager.pressKey(evnt.key.keysym.sym);
-                break;
-            case SDL_KEYUP:
-                _inputManager.releaseKey(evnt.key.keysym.sym);
-                break;
-            case SDL_MOUSEBUTTONDOWN:
-                _inputManager.pressKey(evnt.button.button);
-                break;
-            case SDL_MOUSEBUTTONUP:
-                _inputManager.releaseKey(evnt.button.button);
-                break;
+            switch( event.type ){
+                /* Look for a keypress */
+                case SDL_KEYDOWN:
+                    /* Check the SDLKey values and move change the coords */
+                    switch( event.key.keysym.sym ){
+                        case SDLK_LEFT:
+                            Debug::print("Moving LEFT");
+                            camera.ProcessKeyboard(LEFT, deltaTime);
+                            break;
+                        case SDLK_RIGHT:
+                            camera.ProcessKeyboard(RIGHT, deltaTime);
+                            break;
+                        case SDLK_UP:
+                            camera.ProcessKeyboard(FORWARD, deltaTime);
+                            break;
+                        case SDLK_DOWN:
+                            camera.ProcessKeyboard(BACKWARD, deltaTime);
+                            break;
+                        default:
+                            break;
+                    }
+            }
         }
+        //Render
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        shaderProgram.use();
+
+        // Create camera transformation
+        glm::mat4 view;
+        view = camera.GetViewMatrix();
+        glm::mat4 projection;
+        projection = glm::perspective(camera.Zoom, (float)800/(float)600, 0.1f, 1000.0f);
+        // Get the uniform locations
+        GLint viewLoc = shaderProgram.getUniformLocation("view");
+        GLint projLoc = shaderProgram.getUniformLocation("projection");
+
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+        cube.draw();
+
+
+
+        shaderProgram.unuse();
+        window.swapBuffer();
     }
-}
 
-void GraphicsProcessor::draw() {
-    // Set the base depth to 1.0
-    glClearDepth(1.0);
-    // Clear the color and depth buffer
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    _textureProgram.use();
-    // IMPLEMENT THIS!
-
-    // Draw code goes here
-    glActiveTexture(GL_TEXTURE0);
-
-    // Make sure the shader uses texture 0
-    GLint textureUniform = _textureProgram.getUniformLocation("mySampler");
-    glUniform1i(textureUniform, 0);
-
-    // Grab the camera matrix
-    glm::mat4 projectionMatrix = _camera.getCameraMatrix();
-    GLint pUniform = _textureProgram.getUniformLocation("P");
-    glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
-
-
-
-    _textureProgram.unuse();
-    // Swap our buffer and draw everything to the screen!
-    _window.swapBuffer();
 }
