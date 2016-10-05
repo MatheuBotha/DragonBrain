@@ -3,9 +3,13 @@
 //
 
 #include "../GraphicsProcessor.h"
+#include "../../OPT/GenOPT/src/ObjectiveFunction.h"
+#include "../../OPT/GenOPT/src/SaddleObjective.h"
 
 int main()
 {
-    GraphicsProcessor gp;
+    ObjectiveFunction* objective = new SaddleObjective(0,0,0);
+
+    GraphicsProcessor gp(objective);
     gp.run();
 }

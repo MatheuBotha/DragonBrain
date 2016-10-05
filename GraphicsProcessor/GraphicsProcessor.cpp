@@ -26,7 +26,7 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
-GraphicsProcessor::GraphicsProcessor(){
+GraphicsProcessor::GraphicsProcessor(ObjectiveFunction* objective) : objective(objective){
     std::cout << "Starting Graphics Processor Test" << std::endl;
     //init SDL stuffz
     Engine::init();
@@ -99,9 +99,6 @@ void GraphicsProcessor::run(){
 
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-        cube.draw();
-
 
 
         shaderProgram.unuse();

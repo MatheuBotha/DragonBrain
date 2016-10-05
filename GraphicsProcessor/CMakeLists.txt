@@ -60,7 +60,18 @@ set(SOURCE_FILES
 
         Engine/Camera.h
 
-        GraphicsProcessor.cpp GraphicsProcessor.h Engine/Mesh.cpp Engine/Mesh.h Engine/Texture.cpp Engine/Texture.h)
+        GraphicsProcessor.cpp
+        GraphicsProcessor.h
+
+        Engine/Mesh.cpp
+        Engine/Mesh.h
+
+        Engine/Texture.cpp
+        Engine/Texture.h
+
+        ../OPT/GenOPT/src/ObjectiveFunction.h
+        ../OPT/GenOPT/src/SaddleObjective.cpp
+        )
 add_executable(GraphicsProcessor ${SOURCE_FILES})
 
 add_custom_command(TARGET GraphicsProcessor POST_BUILD

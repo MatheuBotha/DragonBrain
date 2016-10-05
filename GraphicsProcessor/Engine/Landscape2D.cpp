@@ -10,61 +10,98 @@
 
 
 Landscape2D::Landscape2D(GLSLProgram textureProgram){
+    program = create_program("graph.v.glsl", "graph.f.glsl");
+    if (program == 0)
+        return 0;
 
-    // Create the vertex buffer object
+    attribute_coord2d = get_attrib(program, "coord2d");
+    uniform_vertex_transform = get_uniform(program, "vertex_transform");
+    uniform_texture_transform = get_uniform(program, "texture_transform");
+    uniform_mytexture = get_uniform(program, "mytexture");
+    uniform_color = get_uniform(program, "color");
 
+    if (attribute_coord2d == -1 || uniform_vertex_transform == -1 || uniform_texture_transform == -1 || uniform_mytexture == -1)
+        return 0;
 
-    // Create our own temporary buffer
-    point graph[2000];
+    // Create our datapoints, store it as bytes
+#define N 256
+    GLbyte graph[N][N];
 
-    // Fill it in just like an array
-    for (int i = 0; i < 2000; i++) {
-        float x = (i) / 2000.0;
-        graph[i].x = x;
-        graph[i].y = sin(x);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            float x = (i - N / 2) / (N / 2.0);
+            float y = (j - N / 2) / (N / 2.0);
+            float d = hypotf(x, y) * 4.0;
+            float z = (1 - d * d) * expf(d * d / -2.0);
 
-        std::ostringstream ssx;
-        ssx << x;
-        std::string sx("x" + ssx.str());
-
-        std::ostringstream ssy;
-        ssy << sin(x);
-        std::string sy("y" + ssy.str());
-
-        Debug::print(sx);
-        Debug::print(sy);
+            graph[i][j] = roundf(z * 127 + 128);
+        }
     }
 
+    /* Upload the texture with our datapoints */
+    glActiveTexture(GL_TEXTURE0);
+    glGenTextures(1, &texture_id);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, N, N, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, graph);
 
-//    point graph[3];
-//
-//    graph[0].x = 0;
-//    graph[0].y = 0;
-//
-//    graph[1].x = 1;
-//    graph[1].y = 1;
-//
-//    graph[2].x = 1;
-//    graph[2].y = 0;
+    // Create two vertex buffer objects
+    glGenBuffers(3, vbo);
 
-    // Tell OpenGL to copy our array to the buffer object
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof graph, graph, GL_STATIC_DRAW);
+    // Create an array for 101 * 101 vertices
+    glm::vec2 vertices[101][101];
 
-    // Position attribute
-    glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, 1 * sizeof(point), (GLvoid*)0);
-    glEnableVertexAttribArray(0);
+    for (int i = 0; i < 101; i++) {
+        for (int j = 0; j < 101; j++) {
+            vertices[i][j].x = (j - 50) / 50.0;
+            vertices[i][j].y = (i - 50) / 50.0;
+        }
+    }
 
+    // Tell OpenGL to copy our array to the buffer objects
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW);
+
+    // Create an array of indices into the vertex array that traces both horizontal and vertical lines
+    GLushort indices[100 * 100 * 6];
+    int i = 0;
+
+    for (int y = 0; y < 101; y++) {
+        for (int x = 0; x < 100; x++) {
+            indices[i++] = y * 101 + x;
+            indices[i++] = y * 101 + x + 1;
+        }
+    }
+
+    for (int x = 0; x < 101; x++) {
+        for (int y = 0; y < 100; y++) {
+            indices[i++] = y * 101 + x;
+            indices[i++] = (y + 1) * 101 + x;
+        }
+    }
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[1]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 100 * 101 * 4 * sizeof *indices, indices, GL_STATIC_DRAW);
+
+    // Create another array of indices that describes all the triangles needed to create a completely filled surface
+    i = 0;
+
+    for (int y = 0; y < 100; y++) {
+        for (int x = 0; x < 100; x++) {
+            indices[i++] = y * 101 + x;
+            indices[i++] = y * 101 + x + 1;
+            indices[i++] = (y + 1) * 101 + x + 1;
+
+            indices[i++] = y * 101 + x;
+            indices[i++] = (y + 1) * 101 + x + 1;
+            indices[i++] = (y + 1) * 101 + x;
+        }
+    }
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[2]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof indices, indices, GL_STATIC_DRAW);
 }
 Landscape2D::~Landscape2D(){}
 
 void Landscape2D::draw(){
 
-    /* Draw using the vertices in our vertex buffer object */
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-    glDrawArrays(GL_LINE_STRIP, 0, 2000);
 }

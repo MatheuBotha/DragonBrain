@@ -7,11 +7,13 @@
 
 #include "Engine/Window.h"
 #include "Engine/GLSLProgram.h"
+#include "../OPT/GenOPT/src/ObjectiveFunction.h"
+
 
 class GraphicsProcessor {
 
 public:
-    GraphicsProcessor();
+    GraphicsProcessor(ObjectiveFunction* objective);
     ~GraphicsProcessor();
     void run();
 protected:
@@ -20,8 +22,7 @@ private:
     GLSLProgram shaderProgram;
     SDL_Event event;
 
-
-
+    ObjectiveFunction* objective;
 };
 
 

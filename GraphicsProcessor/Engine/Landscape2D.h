@@ -13,18 +13,12 @@ class Landscape2D {
 public:
     Landscape2D(GLSLProgram textureProgram);
     ~Landscape2D();
-
     void draw();
 
 private:
     GLSLProgram textureProgram;
 
-    struct point {
-        GLfloat x;
-        GLfloat y;
-    };
 
-    GLuint VBO;
 };
 
 
