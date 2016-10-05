@@ -3,8 +3,8 @@
 //
 
 #include "Manager.h"
-#include "OPT/GenOPT/src/FIPS.h"
-#include "OPT/GenOPT/src/GCPSO.h"
+#include "OPT/src/FIPS.h"
+#include "OPT/src/GCPSO.h"
 
 Manager::Manager() {
     setPkg = new SettingsPackage();

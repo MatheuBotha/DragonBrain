@@ -22,7 +22,7 @@
 #ifndef OPT_HILLCLIMBER_H
 #define OPT_HILLCLIMBER_H
 #include "OPT_Process.h"
-#include "ObjectiveFunction.h"
+#include "../../Objectives/ObjectiveFunction.h"
 #include "Particle.h"
 #include <cstdlib>
 

@@ -1,15 +1,8 @@
-cmake_minimum_required(VERSION 3.5)
-project(OPT_SRC)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -pthread")
+cmake_minimum_required(VERSION 3.3)
 
-set (OBJECTIVES_H ObjectiveFunction.h SinObjective.h SaddleObjective.h)
-set (OBJECTIVES_SRC ObjectiveFunction.cpp SinObjective.cpp SaddleObjective.cpp)
-set (HEADERS HillClimber.h  OPT_Process.h Particle.h PSO.h RandomSearch.h
-       CPSO.h     ../../../SnapshotManager/SnapshotManager.h ../../../SnapshotManager/snapshot.h FIPS.h GCPSO.h
-        )
+project(OBJECTIVES_SRC)
 
-set(SOURCE_FILES HillClimber.cpp OPT_Process.cpp Particle.cpp PSO.cpp RandomSearch.cpp
-        CPSO.cpp ../../../SnapshotManager/SnapshotManager.cpp ../../../SnapshotManager/snapshot.cpp FIPS.cpp GCPSO.cpp
+set(SOURCE_FILES 
         AlpineObjective.cpp AlpineObjective.h BealeObjective.cpp BealeObjective.h BohachevskyObjective.cpp
         BohachevskyObjective.h EggHolderObjective.cpp EggHolderObjective.h GoldSteinPriceObjective.cpp
         GoldSteinPriceObjective.h GriewankObjective.cpp GriewankObjective.h Levy13Objective.cpp Levy13Objective.h
@@ -22,7 +15,4 @@ set(SOURCE_FILES HillClimber.cpp OPT_Process.cpp Particle.cpp PSO.cpp RandomSear
         WeierstrassObjective.h ZakharovObjective.cpp ZakharovObjective.h AckleyObjective.cpp AckleyObjective.h
         )
 
-add_library(OPT_SRC ${SOURCE_FILES} ${HEADERS} ${OBJECTIVES_H} ${OBJECTIVES_SRC})
-target_link_libraries(OPT_SRC SnapshotManagerSRC)
-#add_executable(OPT_exec main.cpp ${SOURCE_FILES} ${OBJECTIVES_H} ${OBJECTIVES_SRC})
-#target_link_libraries(OPT_exec SnapshotManagerSRC)
+add_library(OBJECTIVES_SRC ${SOURCE_FILES})

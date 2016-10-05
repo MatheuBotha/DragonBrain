@@ -21,7 +21,7 @@
 #ifndef OPT_RANDOM_H
 #define OPT_RANDOM_H
 #include "OPT_Process.h"
-#include "ObjectiveFunction.h"
+#include "../../Objectives/ObjectiveFunction.h"
 
 class RandomSearch: public OPT_Process {
 
