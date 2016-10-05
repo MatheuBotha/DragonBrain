@@ -26,11 +26,12 @@ void FIPS::updateVelocity(Particle *particle,Snapshot * snappy) {
         {
             k=nSize;
         }
-
+    vector<int> tmpVector;
     for (int i=0;i<snappy->getSwarmSize();i++)
     {
+        tmpVector.clear();
         double cTemp=0;
-        vector<int> tmpVector;
+
         int a[snappy->getSwarmSize()] ;
         for(int r=0;r<snappy->getSwarmSize();r++)
         {
