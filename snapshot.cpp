@@ -17,7 +17,7 @@ Particle** Snapshot::getSwarm(){
 void Snapshot::initialiseSwarm(){
     swarm = new Particle*[swarmSize];
     for(int i=0; i<swarmSize; i++){
-        swarm[i] = new Particle();
+        swarm[i] = new Particle(dimensions);
     }
 
 

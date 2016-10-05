@@ -39,12 +39,16 @@ public:
 ///The override method for solve
     virtual void iterate() override;
 
-    HillClimber(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double bounds[2]) : OPT_Process(output,bounds)
+    HillClimber(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double boundsA[4]) : OPT_Process(output,boundsA)
     {
 
         objectiveFunction = myObjectiveFunction;
         snapshotManager = mySnapshotManager;
         srand((unsigned)time(NULL));
+        for(int i=0;i<4;i++)
+        {
+            bounds[i]=boundsA[i];
+        }
     }
 
     void mutate(Particle *particle);
