@@ -113,9 +113,9 @@ double OPT_Process::getBoundAtIndex(int index) {
 }
 
 bool OPT_Process::checkBound(double valueToCheck[2]) {
-    return valueToCheck[1] == DBL_MAX ? valueToCheck[0] >= bounds[0] && valueToCheck[0] <= bounds[1] :
+    return valueToCheck[1] == DBL_MAX ? valueToCheck[0] >= bounds[0] && valueToCheck[0] <= bounds[1] :(
            valueToCheck[0] >= bounds[0] && valueToCheck[0] <= bounds[1]
-           && (valueToCheck[1] >= bounds[3] && valueToCheck[1] <= bounds[4]);
+           && (valueToCheck[1] >= bounds[2] && valueToCheck[1] <= bounds[3]));
 
 }
 
@@ -128,4 +128,8 @@ int OPT_Process::checkProximityDistances(double lowerBound,double upperBound,dou
 
     return distanceLowerToValue > distanceValueToUpper ? 1 : 0;
 
+}
+
+bool OPT_Process::checkSpecificBound(double lowerBound, double upperBound, double valueToCheck) {
+    return (valueToCheck<=upperBound && valueToCheck>=lowerBound);
 }

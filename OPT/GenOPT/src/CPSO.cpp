@@ -4,7 +4,7 @@
 
 #include "CPSO.h"
 
-CPSO::CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double boundArr[4], double wVal, double velMax) :
+CPSO::CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double wVal, double velMax,double boundArr[4]) :
         PSO(pFunction, pManager, i, boundArr) {
     vMax=velMax;
     w=wVal;

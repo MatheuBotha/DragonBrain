@@ -9,67 +9,74 @@ void HillClimber::iterate() {
     int swarmSize;
 
     last = snapshotManager->getLast();
+
     newIteration = new Snapshot(last);
   if(printer)  cout << "NEW ITERATION\n";
 
     swarm = newIteration->getSwarm();
 
     swarmSize = newIteration->getSwarmSize();
-    double pos[2];
+
     for(int i=0; i<swarmSize; i++){
-        swarm[i]->getPositionArray(pos);
         if(printer)        std::cout << "Particle " << i;
         mutate(swarm[i]);
-        if(printer)        std::cout << " is at coords (" << pos[0] << ", "
-                                     << pos[1] << ") has fitness of: "
+        if(printer)        std::cout << " is at coords (" << swarm[i]->getPositionArrayPointer()[0] << ", "
+                                     << swarm[i]->getPositionArrayPointer()[1] << ") has fitness of: "
                                      << swarm[i]->getFitnessValue() << " and personal best of: "
                                      << swarm[i]->getPersonalBest() << std::endl;
     }
-    if(printer)std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
+    std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     snapshotManager->enqueue(newIteration);
 }
 
 void HillClimber::mutate(Particle *particle) {
-    double newPosition[2];
-    particle->getPositionArray(newPosition);
-    int loop;
-    if(newPosition[1] == DBL_MAX)
-        loop = 1;
-    else loop = 2;
-    for (int i = 0; i < loop; ++i) {
+
+    double *newPosition = particle->getPositionArrayPointer();
+
+    for (int i = 0; i < 2; ++i) {
         newPosition[i]+=(mutationRate*newPosition[i]*(((double)rand()/(double)RAND_MAX)-0.5));
     }
-    if (checkBound(newPosition)==false)
+    if (newPosition[1]==DBL_MAX)
     {
-        if (loop==1)
+        if (checkSpecificBound(bounds[0],bounds[1],newPosition[0])==false)
         {
-            int boundChoice=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);
-            if (boundChoice==0)
-            {
-                newPosition[0]=bounds[0];
-            } else newPosition[0]=bounds[1];
-        }else
-            {
-                int bC1,bC2;
-                bC1=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);
-                bC2=checkProximityDistances(bounds[3],bounds[4],newPosition[1]);
+            int c=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);
 
-                if (bC1==0)
+            if (c==1)
+            {
+                newPosition[0]=bounds[1];
+            } else
                 {
                     newPosition[0]=bounds[0];
+                }
+        }
+    } else
+        {
+            if (checkSpecificBound(bounds[0],bounds[1],newPosition[0])==false)
+            {
+                int c=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);
+
+                if (c==1)
+                {
+                    newPosition[0]=bounds[1];
                 } else
-                    {
-                        newPosition[0]=bounds[1];
-                    }
-                if (bC2==0)
+                {
+                    newPosition[0]=bounds[0];
+                }
+            }
+            if (checkSpecificBound(bounds[2],bounds[3],newPosition[1])==false)
+            {
+                int c=checkProximityDistances(bounds[2],bounds[3],newPosition[1]);
+
+                if (c==1)
                 {
                     newPosition[1]=bounds[3];
                 } else
                 {
-                    newPosition[1]=bounds[4];
+                    newPosition[1]=bounds[2];
                 }
             }
-    }
+        }
     double fitness;
     fitness = objectiveFunction->functionInput(newPosition);
     particle->setFitnessValue(fitness);
@@ -84,7 +91,7 @@ void HillClimber::mutate(Particle *particle) {
                 ideal != nullptr && particle->getPersonalBest() > ideal->getPersonalBest())
             ideal = particle;
     }
-    double newBest[2];
-    particle->getPersonalBestPosition(newBest);
-    particle->setParticlePosition(newBest);
+
+
+    particle->setParticlePosition(newPosition);
 }
