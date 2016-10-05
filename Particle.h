@@ -25,24 +25,26 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-
+#include <float.h>
+#include <vector>
 using namespace std;
 
 class Particle {
 private:
 
-    double * positionArray; ///> the array of double values holding the positions per dimension of the particle
-    double * personalBestPosition; ///>the array that holds the position of the best personal state of the particle.
+    double positionArray[2]; ///> the array of double values holding the positions per dimension of the particle
+    double personalBestPosition[2]; ///>the array that holds the position of the best personal state of the particle.
     double velocity; ///> the velocity of the particle
     double fitnessValue=0; ///> The fitness value of the particle in relation to an objective function
     double personalBest=0; ///> The personal best or memory of each particle
-
+    vector<int> neighbourhoodIndices;
 
 public:
-    Particle(Particle* other){
+    Particle()
+    {
 
-        positionArray = new double[2];
-        personalBestPosition = new double[2];
+    }
+    Particle(Particle* other){
         velocity = other->velocity;
         fitnessValue = other->fitnessValue;
         personalBest = other->personalBest;
@@ -53,9 +55,6 @@ public:
     }
 
     Particle(const Particle &other){
-
-        positionArray = new double[2];
-        personalBestPosition = new double[2];
         velocity = other.velocity;
         fitnessValue = other.fitnessValue;
         personalBest = other.personalBest;
@@ -65,9 +64,12 @@ public:
         }
     }
 
+
+
 ///Sets the position array
     void setPositionArray(double *positionArray) {
-        Particle::positionArray = positionArray;
+        this->positionArray[1] = positionArray[0];
+        this->positionArray[1] = positionArray[1];
     }
 
     ///Sets the velocity of the particle
@@ -77,31 +79,12 @@ public:
 
     ///Sets the position of the particle based on an array input
     void setParticlePosition(double * positions){
-
-        /*if (positionArray!= nullptr)
-        {
-            delete positionArray;
-        }
-
-
-        positionArray=new double[2];*/
-
-        for(int i=0;i<2;i++)
-        {
-            positionArray[i]=positions[i];
-        }
+            this->positionArray[0] = positions[0];
+            this->positionArray[1] = positions[1];
     }
 
     ///Sets particle positions based on fixed size array
     void setParticlePositionByArray(double positions[],int dimensions){
-
-        if (positionArray!= nullptr)
-        {
-            delete [] positionArray;
-        }
-
-        positionArray=new double[dimensions];
-
         for(int i=0;i<dimensions;i++)
         {
             positionArray[i]=positions[i];
@@ -113,15 +96,20 @@ public:
         positionArray[dimension]=positionValue;
     }
 
-    ///Gets the position array
-    double *getPositionArray() const {
+    ///Sets the position array
+    void getPositionArray(double *inArr) const {
+        inArr[0] = positionArray[0];
+        inArr[1] = positionArray[1];
+    }
+    double * getPositionArrayPointer()
+    {
         return positionArray;
     }
-
     ///Gets the velocity
     double getVelocity() const {
         return velocity;
     }
+
 
     //Gets the value in the position array at dimension
     double getPositionAtDimension(int dimension){
@@ -129,20 +117,22 @@ public:
     }
 
     virtual ~Particle() {
-        delete positionArray;
     }
 
     ///Constructs a new default Particle
-    Particle() {
+    Particle(int dimensions) {
         srand((unsigned)time(NULL));
         velocity=0.0;
         fitnessValue=0.0;
         personalBest=-1;
-        positionArray=new double[2];
-        for (int i = 0; i <2 ; ++i) {
-            positionArray[i]=((double)rand()/(double)RAND_MAX);
-        }
-        personalBestPosition=new double[2];
+
+        positionArray[0]=((double)rand()/(double)RAND_MAX);
+
+        if(dimensions == 2)
+       {
+           positionArray[1] = ((double)rand()/(double)RAND_MAX);
+        }else positionArray[1] = DBL_MAX;
+
         for (int j = 0; j <2 ; ++j) {
             personalBestPosition[j] = positionArray[j];
         }
@@ -173,15 +163,40 @@ public:
     }
 
     ///Getter for the best personal positions array
-    double *getPersonalBestPosition() const {
-        return personalBestPosition;
+    double getPersonalBestPosition(double* inArr) const {
+        inArr[0] = personalBestPosition[0];
+        inArr[1] = personalBestPosition[1];
     }
 
     ///Setter for the best personal positions array
     void setPersonalBestPosition(double *personalBestPosition) {
-        this->personalBestPosition = personalBestPosition;
+        this->personalBestPosition[0] = personalBestPosition[0];
+        this->personalBestPosition[1] = personalBestPosition[1];
+    }
+    ///Gets neighbhourhood indices
+    vector<int> getNeighbourhoodIndices()
+    {
+        return neighbourhoodIndices;
     }
 
+    ///Sets neighbourhood indices
+    void setNIndices(vector<int> in)
+    {
+        neighbourhoodIndices.clear();
+        for(int i=0;i<in.size();i++)
+        {
+            neighbourhoodIndices.push_back(in.at(i));
+        }
+    }
+    void addNeighbhour(int index)
+    {
+        neighbourhoodIndices.push_back(index);
+    }
+
+    void clearNeighbourhood()
+    {
+        neighbourhoodIndices.clear();
+    }
 };
 
 

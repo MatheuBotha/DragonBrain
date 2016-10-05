@@ -9,10 +9,25 @@
 class FIPS: public PSO {
 
 private:
+    int nSize;
+    double constrictionCoefficient;
 public:
     FIPS();
 
-    FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i);
+    FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int size,double w,double bounds[4]);
+
+    virtual void updateVelocity(Particle *particle,Snapshot * snappy);
+
+    virtual void iterate() override;
+
+    double getConstrictionCoefficient() const;
+
+    void setConstrictionCoefficient(double constrictionCoefficient);
+
+    int getNSize() const;
+
+    void setNSize(int nSize);
+    double distanceFunction(double * a,double * b);
 };
 
 

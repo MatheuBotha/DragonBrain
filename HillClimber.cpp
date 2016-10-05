@@ -20,8 +20,8 @@ void HillClimber::iterate() {
     for(int i=0; i<swarmSize; i++){
         if(printer)        std::cout << "Particle " << i;
         mutate(swarm[i]);
-        if(printer)        std::cout << " is at coords (" << swarm[i]->getPositionArray()[0] << ", "
-                                     << swarm[i]->getPositionArray()[1] << ") has fitness of: "
+        if(printer)        std::cout << " is at coords (" << swarm[i]->getPositionArrayPointer()[0] << ", "
+                                     << swarm[i]->getPositionArrayPointer()[1] << ") has fitness of: "
                                      << swarm[i]->getFitnessValue() << " and personal best of: "
                                      << swarm[i]->getPersonalBest() << std::endl;
     }
@@ -31,7 +31,7 @@ void HillClimber::iterate() {
 
 void HillClimber::mutate(Particle *particle) {
 
-    double *newPosition = particle->getPositionArray();
+    double *newPosition = particle->getPositionArrayPointer();
 
     for (int i = 0; i < 2; ++i) {
         newPosition[i]+=(mutationRate*newPosition[i]*(((double)rand()/(double)RAND_MAX)-0.5));
@@ -51,5 +51,5 @@ void HillClimber::mutate(Particle *particle) {
                 ideal != nullptr && particle->getPersonalBest() > ideal->getPersonalBest())
             ideal = particle;
     }
-    particle->setParticlePosition(particle->getPersonalBestPosition());
+    particle->setParticlePosition(newPosition);
 }

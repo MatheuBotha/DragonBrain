@@ -5,12 +5,12 @@
 #include "PSO.h"
 
 
-PSO::PSO(bool output) : OPT_Process(output) {
+PSO::PSO(bool output,double inBounds[4]) : OPT_Process(output,inBounds) {
 
 }
 
-PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output)
-        : OPT_Process(output) {
+PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4])
+        : OPT_Process(output,inBounds) {
 
     this->objectiveFunction=myObjectiveFunction;
     this->snapshotManager=mySnapshotManager;
@@ -40,10 +40,11 @@ double cogComp,socComp,inertiaComp;
 }
 
 void PSO::updatePosition(Particle *particle) {
-
+    double currentPos[2];
+    particle->getPositionArray(currentPos);
     for (int i=0;i<2;i++)
     {
-        particle->setPositionAtDimension(particle->getPositionArray()[i]+particle->getVelocity(),i);
+        particle->setPositionAtDimension(currentPos[i]+particle->getVelocity(),i);
     }
 }
 
@@ -54,6 +55,8 @@ void PSO::iterate() {
     int swarmSize;
 
     last=snapshotManager->getLast();
+    std::cout << last << std::endl;
+    std::cout << last->getSwarmSize() << std::endl;
     newIteration=new Snapshot(last);
 
     if(printer)  cout << "NEW ITERATION\n";
@@ -72,10 +75,13 @@ void PSO::iterate() {
      *  update position
     */
     double tmpFit;
+    double currentPos[2];
+
     for (int i=0;i<swarmSize;i++) {
         if (printer) { std::cout << "Particle " << i; }
 
-        tmpFit = objectiveFunction->functionInput(swarm[i]->getPositionArray());
+        swarm[i]->getPositionArray(currentPos);
+        tmpFit = objectiveFunction->functionInput(currentPos);
         swarm[i]->setFitnessValue(tmpFit);
 
         if (tmpFit >= swarm[i]->getPersonalBest()) {
@@ -88,8 +94,10 @@ void PSO::iterate() {
 
         if (printer)
         {
-        std::cout << " is at coords (" << swarm[i]->getPositionArray()[0] << ", "
-                  << swarm[i]->getPositionArray()[1] << ") has fitness of: "
+            swarm[i]->getPositionArray(currentPos);
+
+            std::cout << " is at coords (" << currentPos[0] << ", "
+                  << currentPos[1] << ") has fitness of: "
                   << swarm[i]->getFitnessValue() << " and personal best of: "
                   << swarm[i]->getPersonalBest() << std::endl;
 
