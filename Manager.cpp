@@ -126,18 +126,18 @@ void Manager::initializeOptimizer() {
     if(optAlg == "Hill Climbing") {
         optimizer = new HillClimber(objective, snapMan, false, bounds);
     }
-    else if(optAlg == "Particle Swarm Optimization")
-        optimizer = new PSO(objective, snapMan, false, bounds);
-    else if(optAlg == "Conical PSO")
-        optimizer = new CPSO(objective, snapMan, false, bounds,
-                             setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), setPkg->getOptimizerSettingsPackage()->getMaxVelocity()); 
-    else if(optAlg == "Fully Informed PSO")
-        optimizer = new FIPS(objective, snapMan, false, bounds,
-                             setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
-    else if(optAlg == "Guaranteed Convergence PSO")
-        optimizer = new GCPSO(objective, snapMan, false, bounds, setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
-                setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
-
+//    else if(optAlg == "Particle Swarm Optimization")
+//        optimizer = new PSO(objective, snapMan, false, bounds);
+//    else if(optAlg == "Conical PSO")
+//        optimizer = new CPSO(objective, snapMan, false, bounds,
+//                             setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), setPkg->getOptimizerSettingsPackage()->getMaxVelocity());
+//    else if(optAlg == "Fully Informed PSO")
+//        optimizer = new FIPS(objective, snapMan, false, bounds,
+//                             setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
+//    else if(optAlg == "Guaranteed Convergence PSO")
+//        optimizer = new GCPSO(objective, snapMan, false, bounds, setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
+//                setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
+//
 
 
     delete [] trans;

@@ -38,7 +38,7 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp) : pdsp(p
     shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
     shaderProgram.linkShaders();
 
-    boundaries = new int[4];
+    boundaries = new double[4];
     pdsp.getBoundaries(boundaries);
 }
 

@@ -28,7 +28,7 @@ private:
 
     ProblemDomainSettingsPackage pdsp;
     ObjectiveFunction* objective;
-    int* boundaries;
+    double* boundaries;
 };
 
 

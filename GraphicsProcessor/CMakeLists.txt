@@ -74,6 +74,7 @@ set(SOURCE_FILES
         ../OPT/GenOPT/src/SinObjective.cpp
         ../OPT/GenOPT/src/AckleyObjective.cpp
         ../SettingsPackage/src/problemdomainsettingspackage.cpp
+        ../OPT/GenOPT/src/WeierstrassObjective.cpp
         )
 add_executable(GraphicsProcessor ${SOURCE_FILES})
 

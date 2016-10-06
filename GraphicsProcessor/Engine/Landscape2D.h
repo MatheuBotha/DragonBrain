@@ -12,7 +12,7 @@
 
 class Landscape2D {
 public:
-    Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objective, int* boundaries);
+    Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objective, double* boundaries);
     ~Landscape2D();
     void draw();
 
@@ -21,7 +21,7 @@ public:
 private:
     GLSLProgram textureProgram;
     ObjectiveFunction* objective;
-    int* boundaries;
+    double* boundaries;
 
     GLint attribute_coord2d;
     GLint uniform_vertex_transform;

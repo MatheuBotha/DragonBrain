@@ -5,7 +5,7 @@ ProblemDomainSettingsPackage::ProblemDomainSettingsPackage()
 
 }
 
-ProblemDomainSettingsPackage::ProblemDomainSettingsPackage(std::string objF, int n, int bounds[4], double trans[3])
+ProblemDomainSettingsPackage::ProblemDomainSettingsPackage(std::string objF, int n, double bounds[4], double trans[3])
 {
     objectiveFunction = objF;
     dimensions = n;

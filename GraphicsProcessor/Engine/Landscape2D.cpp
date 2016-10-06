@@ -17,7 +17,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objective, int* boundaries) : textureProgram(textureProgram), objective(objective), boundaries(boundaries)
+Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objective, double* boundaries) : textureProgram(textureProgram), objective(objective), boundaries(boundaries)
 {
     textureProgram.addAttribute("coord2d");
     uniform_vertex_transform = textureProgram.getUniformLocation("vertex_transform");
@@ -30,18 +30,18 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 
     //set up graph variables
 
-    int xMin = boundaries[0];
-    int xMax = boundaries[1];
-    int yMin = boundaries[2];
-    int yMax = boundaries[3];
+    double xMin = boundaries[0];
+    double xMax = boundaries[1];
+    double yMin = boundaries[2];
+    double yMax = boundaries[3];
 
-    printf("xMin = %i\n", xMin);
-    printf("xMax = %i\n", xMax);
-    printf("yMin = %i\n", yMin);
-    printf("yMax = %i\n", yMax);
+    printf("xMin = %f\n", xMin);
+    printf("xMax = %f\n", xMax);
+    printf("yMin = %f\n", yMin);
+    printf("yMax = %f\n", yMax);
 
-    double xRange = (double)(xMax - xMin)/(double)N;
-    double yRange = (double)(yMax - yMin)/(double)N;
+    double xRange = (xMax - xMin)/(double)N;
+    double yRange = (yMax - yMin)/(double)N;
 
     printf("xMin = %i\n", xMin);
     printf("xMax = %i\n", xMax);
@@ -107,7 +107,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            //graph[i][j] = roundf(((((1-(-1))*(results[i][j] - zMin))/(zMax - zMin))-1) * 127 + 128);
+            graph[i][j] = roundf(((((1-(-1))*(results[i][j] - zMin))/(zMax - zMin))-1) * 127 + 128);
         }
     }
 
