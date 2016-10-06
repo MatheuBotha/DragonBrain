@@ -117,10 +117,15 @@ void Manager::initializeOptimizer() {
 
     double *bounds = new double[4];
 
+    graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
+    graphicsProcessor->setObjective(objective);
+
     setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
     if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
+    {
         objective->getBounds(bounds);
-
+        graphicsProcessor->setBounds(bounds);
+    }
 
     std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm();
     if(optAlg == "Hill Climbing") {
@@ -160,3 +165,9 @@ void Manager::optimize() {
               << "Particle's best position was (" << bestPos[0] << ","
               << bestPos[1] << ") with fitness of: " << best->getPersonalBest() << std::endl;
 }
+
+GraphicsProcessor* Manager::getGraphicsProcessor()
+{
+    return graphicsProcessor;
+}
+

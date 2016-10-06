@@ -18,6 +18,8 @@ int main()
     swarmMan->generateSnapshotManager();
     swarmMan->initializeOptimizer();
     swarmMan->optimize();
+    swarmMan->getGraphicsProcessor()->run();
+    std::cout << "APPLES" << std::endl;
 /*    ObjectiveFunction *obj1 = new SinObjective();
     OPT_Process *opt1 = new HillClimber(obj1, swarmMan->getSnapshotManager(), true);
 

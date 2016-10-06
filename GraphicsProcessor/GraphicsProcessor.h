@@ -19,6 +19,7 @@ public:
     void run();
 
     void setObjective(ObjectiveFunction* objective);
+    void setBounds(double* boundaries);
 
 protected:
 private:

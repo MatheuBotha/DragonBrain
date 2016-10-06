@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
-project(LearningOGL)
+project(GraphicsProcessor)
+
+add_subdirectory("test")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/GraphicsProcessor/cmake/modules/")
@@ -76,12 +78,12 @@ set(SOURCE_FILES
         ../SettingsPackage/src/problemdomainsettingspackage.cpp
         ../OPT/GenOPT/src/WeierstrassObjective.cpp
         )
-add_executable(GraphicsProcessor ${SOURCE_FILES})
+add_library(GraphicsProcessor ${SOURCE_FILES})
 
 add_custom_command(TARGET GraphicsProcessor POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/GraphicsProcessor/Shaders $<TARGET_FILE_DIR:GraphicsProcessor>/Shaders)
+        ${CMAKE_SOURCE_DIR}/GraphicsProcessor/Shaders ${CMAKE_BINARY_DIR}/Shaders)
 
 add_custom_command(TARGET GraphicsProcessor POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/GraphicsProcessor/Textures $<TARGET_FILE_DIR:GraphicsProcessor>/Textures)
+        ${CMAKE_SOURCE_DIR}/GraphicsProcessor/Textures ${CMAKE_BINARY_DIR}/Textures)

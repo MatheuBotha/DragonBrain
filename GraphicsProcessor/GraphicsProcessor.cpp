@@ -69,6 +69,9 @@ void GraphicsProcessor::run(){
                 case SDL_KEYDOWN:
                     /* Check the SDLKey values and move change the coords */
                     switch( event.key.keysym.sym ){
+                        case SDLK_q:
+                            return;
+                            break;
                         case SDLK_LEFT:
                             Debug::print("Moving LEFT");
                             camera.ProcessKeyboard(LEFT, deltaTime);
@@ -117,4 +120,9 @@ void GraphicsProcessor::run(){
 void GraphicsProcessor::setObjective(ObjectiveFunction* objective)
 {
     this->objective = objective;
+}
+
+void GraphicsProcessor::setBounds(double* boundaries)
+{
+    this->boundaries = boundaries;
 }

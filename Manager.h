@@ -54,6 +54,7 @@
 #include "OPT/GenOPT/src/WeierstrassObjective.h"
 #include "OPT/GenOPT/src/ZakharovObjective.h"
 #include "OPT/GenOPT/src/AckleyObjective.h"
+#include "GraphicsProcessor/GraphicsProcessor.h"
 
 
 class Manager {
@@ -63,6 +64,7 @@ private:
     ObjectiveFunction* objective;
     OPT_Process* optimizer;
     std::thread* GUI_Thread;
+    GraphicsProcessor* graphicsProcessor;
 public:
 
     ///Constructor for the manager objects
@@ -96,6 +98,8 @@ public:
      * The created graphics pipeline relates directly to a specific graphical pipline
      * and this pipeline provides optimiser services.
      * */
+
+    GraphicsProcessor* getGraphicsProcessor();
 };
 
 
