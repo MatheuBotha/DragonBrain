@@ -129,11 +129,10 @@ void Manager::initializeOptimizer() {
     else if(optAlg == "Particle Swarm Optimization")
         optimizer = new PSO(objective, snapMan, false, bounds);
     else if(optAlg == "Conical PSO")
-        optimizer = new CPSO(objective, snapMan, false, bounds,
-                             setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), setPkg->getOptimizerSettingsPackage()->getMaxVelocity()); 
+        optimizer = new CPSO(objective, snapMan, false, setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), setPkg->getOptimizerSettingsPackage()->getMaxVelocity(), bounds);
     else if(optAlg == "Fully Informed PSO")
-        optimizer = new FIPS(objective, snapMan, false, bounds,
-                             setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
+        optimizer = new FIPS(objective, snapMan, false,
+                             setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), bounds);
     else if(optAlg == "Guaranteed Convergence PSO")
         optimizer = new GCPSO(objective, snapMan, false, bounds, setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
                 setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
