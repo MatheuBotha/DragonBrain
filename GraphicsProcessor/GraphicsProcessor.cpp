@@ -26,7 +26,7 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
-GraphicsProcessor::GraphicsProcessor(ObjectiveFunction* objective) : objective(objective){
+GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp) : pdsp(pdsp){
     std::cout << "Starting Graphics Processor Test" << std::endl;
     //init SDL stuffz
     Engine::init();
@@ -37,6 +37,9 @@ GraphicsProcessor::GraphicsProcessor(ObjectiveFunction* objective) : objective(o
     //Create the shader program
     shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
     shaderProgram.linkShaders();
+
+    boundaries = new int[4];
+    pdsp.getBoundaries(boundaries);
 }
 
 GraphicsProcessor::~GraphicsProcessor(){
@@ -46,7 +49,8 @@ GraphicsProcessor::~GraphicsProcessor(){
 }
 
 void GraphicsProcessor::run(){
-    Cube cube(shaderProgram, Texture("Textures/container.jpg"));
+
+    Landscape2D l(shaderProgram, objective, boundaries);
 
     while(true){
         while(SDL_PollEvent(&event)){
@@ -88,21 +92,29 @@ void GraphicsProcessor::run(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shaderProgram.use();
 
-        // Create camera transformation
-        glm::mat4 view;
-        view = camera.GetViewMatrix();
-        glm::mat4 projection;
-        projection = glm::perspective(camera.Zoom, (float)800/(float)600, 0.1f, 1000.0f);
-        // Get the uniform locations
-        GLint viewLoc = shaderProgram.getUniformLocation("view");
-        GLint projLoc = shaderProgram.getUniformLocation("projection");
+//        // Create camera transformation
+//        glm::mat4 view;
+//        view = camera.GetViewMatrix();
+//        glm::mat4 projection;
+//        projection = glm::perspective(camera.Zoom, (float)800/(float)600, 0.1f, 1000.0f);
+//        // Get the uniform locations
+//        GLint viewLoc = shaderProgram.getUniformLocation("view");
+//        GLint projLoc = shaderProgram.getUniformLocation("projection");
+//
+//        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+//        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+        l.draw();
 
 
         shaderProgram.unuse();
         window.swapBuffer();
     }
 
+}
+
+void GraphicsProcessor::setObjective(ObjectiveFunction* objective)
+{
+    this->objective = objective;
 }

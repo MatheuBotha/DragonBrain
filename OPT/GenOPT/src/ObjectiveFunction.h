@@ -28,8 +28,17 @@ using namespace std;
 
 class ObjectiveFunction {
 public:
+<<<<<<< Updated upstream
     ///Creates a new Objective Function
     ObjectiveFunction(double s, double x, double y, double v) {
+=======
+    double x;
+    double y;
+
+    ///Creates a new Objection Function
+    ObjectiveFunction(){}
+    ObjectiveFunction(double s, double h, double v) {
+>>>>>>> Stashed changes
         scale = s;
         xShift = x;
         yShift = y;

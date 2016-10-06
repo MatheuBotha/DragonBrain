@@ -71,6 +71,9 @@ set(SOURCE_FILES
 
         ../OPT/GenOPT/src/ObjectiveFunction.h
         ../OPT/GenOPT/src/SaddleObjective.cpp
+        ../OPT/GenOPT/src/SinObjective.cpp
+        ../OPT/GenOPT/src/AckleyObjective.cpp
+        ../SettingsPackage/src/problemdomainsettingspackage.cpp
         )
 add_executable(GraphicsProcessor ${SOURCE_FILES})
 

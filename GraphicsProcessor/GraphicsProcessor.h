@@ -8,21 +8,27 @@
 #include "Engine/Window.h"
 #include "Engine/GLSLProgram.h"
 #include "../OPT/GenOPT/src/ObjectiveFunction.h"
+#include "../SettingsPackage/src/problemdomainsettingspackage.h"
 
 
 class GraphicsProcessor {
 
 public:
-    GraphicsProcessor(ObjectiveFunction* objective);
+    GraphicsProcessor(ProblemDomainSettingsPackage pdsp);
     ~GraphicsProcessor();
     void run();
+
+    void setObjective(ObjectiveFunction* objective);
+
 protected:
 private:
     Window window;
     GLSLProgram shaderProgram;
     SDL_Event event;
 
+    ProblemDomainSettingsPackage pdsp;
     ObjectiveFunction* objective;
+    int* boundaries;
 };
 
 
