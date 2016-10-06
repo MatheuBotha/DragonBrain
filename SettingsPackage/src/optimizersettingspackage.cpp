@@ -83,3 +83,43 @@ void OptimizerSettingsPackage::setAlgorithm(std::string aly) {
 std::string OptimizerSettingsPackage::getAlgorithm() {
     return algorithm;
 }
+
+void OptimizerSettingsPackage::setConstrictionCoefficient(double constrict) {
+    constrictionCoefficient = constrict;
+}
+
+void OptimizerSettingsPackage::setMaxVelocity(double velo) {
+    maxVelocity = velo;
+}
+
+void OptimizerSettingsPackage::setFailCount(int fails) {
+    failCount = fails;
+}
+
+void OptimizerSettingsPackage::setSuccessCount(int successes) {
+    successCount = successes;
+}
+
+void OptimizerSettingsPackage::setNeighbourhoodSize(int nSize) {
+    neighbourhoodSize = nSize;
+}
+
+double OptimizerSettingsPackage::getConstrictionCoefficient() {
+    return constrictionCoefficient;
+}
+
+double OptimizerSettingsPackage::getMaxVelocity() {
+    return maxVelocity;
+}
+
+int OptimizerSettingsPackage::getFailCount() {
+    return failCount;
+}
+
+int OptimizerSettingsPackage::getSuccessCount() {
+    return successCount;
+}
+
+int OptimizerSettingsPackage::getNeighbourhoodSize() {
+    return neighbourhoodSize;
+}

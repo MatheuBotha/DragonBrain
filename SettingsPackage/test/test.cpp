@@ -28,7 +28,7 @@ TEST(basic_check, test_GraphicsPackage) {
 
 TEST(basic_check, test_OptimizerPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsOptimizer("HilClimber", true, "TempString", 0.5, 7.9, 120000.4123, 12, 21);
+    setPkg.generateSettingsOptimizer("HilClimber", true, "TempString", 0.5, 7.9, 120000.4123, 12, 21, 1.0, 50.0, 15, 5, 2);
 
     OptimizerSettingsPackage* oPkg = setPkg.getOptimizerSettingsPackage();
 
@@ -44,9 +44,9 @@ TEST(basic_check, test_OptimizerPackage) {
 
 TEST(basic_check, test_DomainPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsDomain("TempObjFun",2,1,2,3,4,0.5,-0.5,7.0);
+    setPkg.generateSettingsDomain("TempObjFun",2,1,2,3,4,0.5,-0.5,7.0,0);
     ProblemDomainSettingsPackage* dPkg = setPkg.getProblemDomainSettingsPackage();
-    int boundCheck[4];
+    double boundCheck[4];
     double transCheck[3];
     dPkg->getBoundaries(boundCheck);
     dPkg->getTransformations(transCheck);

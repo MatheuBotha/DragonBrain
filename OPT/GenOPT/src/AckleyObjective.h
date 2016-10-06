@@ -1,18 +1,22 @@
 //
-// Created by gerard on 2016/09/25.
+// Created by gerard on 2016/10/03.
 //
 
-#ifndef SWARMVIZ_ACKLEYOBJECTIVE_H
-#define SWARMVIZ_ACKLEYOBJECTIVE_H
+#ifndef OBJECTIVETEST_ACKLEYOBJECTIVE_H
+#define OBJECTIVETEST_ACKLEYOBJECTIVE_H
+
 
 #include "ObjectiveFunction.h"
-
 class AckleyObjective : public ObjectiveFunction{
 public:
-    AckleyObjective(){}
+AckleyObjective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
+    defaultBounds[0]=-32.768;
+    defaultBounds[1]=32.768;
+    defaultBounds[2]=-32.768;
+    defaultBounds[3]=32.768;
+}
 
-    double functionInput(double * parameters);
+double functionInput(double * parameters);
 };
 
-
-#endif //SWARMVIZ_ACKLEYOBJECTIVE_H
+#endif //OBJECTIVETEST_ACKLEYOBJECTIVE_H

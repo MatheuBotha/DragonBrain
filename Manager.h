@@ -30,6 +30,31 @@
 #include "OPT/GenOPT/src/HillClimber.h"
 #include "OPT/GenOPT/src/PSO.h"
 #include "OPT/GenOPT/src/CPSO.h"
+#include "OPT/GenOPT/src/AlpineObjective.h"
+#include "OPT/GenOPT/src/BealeObjective.h"
+#include "OPT/GenOPT/src/BohachevskyObjective.h"
+#include "OPT/GenOPT/src/EggHolderObjective.h"
+#include "OPT/GenOPT/src/GoldSteinPriceObjective.h"
+#include "OPT/GenOPT/src/GriewankObjective.h"
+#include "OPT/GenOPT/src/Levy13Objective.h"
+#include "OPT/GenOPT/src/Michalewicz.h"
+#include "OPT/GenOPT/src/PathologicalObjective.h"
+#include "OPT/GenOPT/src/QuadricObjective.h"
+#include "OPT/GenOPT/src/QuarticObjective.h"
+#include "OPT/GenOPT/src/RanaObjective.h"
+#include "OPT/GenOPT/src/RastriginObjective.h"
+#include "OPT/GenOPT/src/RosenbrockObjective.h"
+#include "OPT/GenOPT/src/SalomonObjective.h"
+#include "OPT/GenOPT/src/Schwefel22Objective.h"
+#include "OPT/GenOPT/src/Schwefel26Objective.h"
+#include "OPT/GenOPT/src/SixHumpCamelBackObjective.h"
+#include "OPT/GenOPT/src/SkewRastriginObjective.h"
+#include "OPT/GenOPT/src/SphericalObjective.h"
+#include "OPT/GenOPT/src/StepObjective.h"
+#include "OPT/GenOPT/src/WeierstrassObjective.h"
+#include "OPT/GenOPT/src/ZakharovObjective.h"
+#include "OPT/GenOPT/src/AckleyObjective.h"
+
 
 class Manager {
 private:
@@ -71,7 +96,6 @@ public:
      * The created graphics pipeline relates directly to a specific graphical pipline
      * and this pipeline provides optimiser services.
      * */
-    //GenOPT makeOPT(SettingsPackage setPackage);
 };
 
 

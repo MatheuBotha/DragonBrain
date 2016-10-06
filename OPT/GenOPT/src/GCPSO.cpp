@@ -4,7 +4,8 @@
 
 #include "GCPSO.h"
 
-GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int scVal, int fcVal,double f) : PSO(pFunction, pManager, i) {
+GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double boundArr[4], int scVal, int fcVal,double f) :
+        PSO(pFunction, pManager, i, boundArr) {
     fc=fcVal;
     sc=scVal;
     constrictionCoefficient=f;
@@ -27,7 +28,7 @@ double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
     for (int i=1;i<swarmSize;i++)
     {
 
-        if (twoD==true)
+        if (twoD==false)
         {
             tmpDistance=getDistance(swarm[i]->getPositionArrayPointer()[0],basePositon[0]);
         } else
@@ -132,29 +133,32 @@ void GCPSO::iterate() {
     bool cont=true;
     Particle ** swarm;
     int s;
-    while (cont)
+    int index=0;
+
+    PSO::iterate();
+
+    swarm = snapshotManager->getLast()->getSwarm();
+    s = snapshotManager->getLast()->getSwarmSize();
+    cont = guaranteeConvergence(swarm, s);
+    if (cont==true)
     {
-        cont=false;
-
         PSO::iterate();
-        swarm=snapshotManager->getLast()->getSwarm();
-         s=snapshotManager->getLast()->getSwarmSize();
-        cont=guaranteeConvergence(swarm,s);
     }
-
+    /*
     for(int i=0;i<s;i++)
     {
         delete swarm[i];
     }
     delete [] swarm;
+    */
 }
 
 double GCPSO::getDistance(double a, double b) {
-    return abs(a-b);
+    return abs(a*100-b*100);
 }
 
 double GCPSO::getDistance(double *a, double *b) {
-    return sqrt(pow((a[0]-b[0]),2)+pow((a[1]-b[1]),2));
+    return sqrt(pow((a[0]*100-b[0]*100),2)+pow((a[1]*100-b[1]*100),2));
 }
 
 double GCPSO::getConstrictionCoefficient() const {

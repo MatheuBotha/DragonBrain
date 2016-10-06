@@ -20,7 +20,9 @@ ComboBox {
         transformOrigin: Item.Left
         opacity: 0.8
         clip: true
-        model: [ "Sin", "Saddle" ]
+        model: [ "Alpine", "Beale", "Bohachevsky", "EggHolder", "GoldSteinPrice", "Griewank", "Levy13",
+        "Michalewicz", "Pathological", "Quadric", "Quartic", "Rana", "Rastrigin", "Rosenbrock", "Saddle", "Salomon", "Schwefel22",
+         "Schwefel26", "Sin", "SixHumpCamelBack", "SkewRastrigin", "Spherical", "Step", "Weierstrass", "Zakharov"]
         currentIndex: 0
         font.pixelSize: 20
         font.bold: true

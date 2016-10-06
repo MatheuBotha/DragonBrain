@@ -4,62 +4,70 @@
 
 #include "FIPS.h"
 
-FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int size) : PSO(pFunction, pManager, i) {
+FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, int size,double wA,double boundsD[4]) : PSO(pFunction, pManager, i,boundsD) {
 nSize=size;
+    constrictionCoefficient=wA;
+    for(int i=0;i<4;i++)
+    {
+        bounds[i]=boundsD[i];
+    }
 }
 
 /**The Fully Informed PSO algorithm is predicated on increasing the scope of a particle's knowledge of the
  * problem by aggregating the best's of k nearest neighbours when considering velocity updates.
  *
  * */
-void FIPS::updateVelocity(Particle *particle,Snapshot * snappy) {
+void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexVal) {
     int k;
-    if (snappy->getSwarmSize()<nSize)
+    int sizeSwarm=ss;
+    if (sizeSwarm<nSize)
     {
-        k=snappy->getSwarmSize();
+        k=sizeSwarm;
     } else
         {
             k=nSize;
         }
+    vector<int> tmpVector;
+    double cTemp;
+    int a[sizeSwarm];
 
-    for (int i=0;i<snappy->getSwarmSize();i++)
-    {
-        double cTemp=0;
-        vector<int> tmpVector;
-        int a[snappy->getSwarmSize()] ;
-        for(int r=0;r<snappy->getSwarmSize();r++)
-        {
-            a[r]=r;
+        tmpVector.clear();
+        cTemp = 0;
+
+
+        for (int r = 0; r < sizeSwarm; r++) {
+            a[r] = r;
         }
         ///construct local neighbourhood
-        while(tmpVector.size()!=k)
-        {
-            double smallestValue=DBL_MAX;
-            int index;
+    int index;
+    long double smallestValue = DBL_MAX;
 
-            for (int e=0;e<snappy->getSwarmSize();e++)
-            {
-                if (a[e]!=-1 &&distanceFunction(particle->getPositionArrayPointer(),snappy->getSwarm()[e]->getPositionArrayPointer())<smallestValue)
-                {
-                    smallestValue=distanceFunction(particle->getPositionArrayPointer(),snappy->getSwarm()[e]->getPositionArrayPointer());
-                    index=e;
+    while (tmpVector.size() != k) {
+            smallestValue=DBL_MAX;
+            for (int e = 0; e < sizeSwarm; e++) {
+                if (indexVal!=e && a[e] != -1 && distanceFunction(particle->getPositionArrayPointer(),
+                                                   swarm[e]->getPositionArrayPointer()) < smallestValue) {
+                    smallestValue = distanceFunction(particle->getPositionArrayPointer(),swarm[e]->getPositionArrayPointer());
+                    index = e;
                 }
             }
 
             tmpVector.push_back(index);
-            a[index]=-1;
+            a[index] = -1;
         }
+
         ///
+        cTemp=0;
         for(int j=0;j<tmpVector.size();j++)
         {
-            cTemp+=getRandomNumberMT()*(snappy->getSwarm()[tmpVector.at(i)]->getPersonalBest()-particle->getPersonalBest());
+            cTemp+=getRandomNumberMT()*(swarm[j]->getFitnessValue());
         }
 
         double vUP=particle->getVelocity()+constrictionCoefficient*(particle->getVelocity()+((1/k)*cTemp));
         particle->setVelocity(vUP);
         particle->setNIndices(tmpVector);
         tmpVector.clear();
-    }
+
 }
 
 void FIPS::iterate() {
@@ -120,7 +128,7 @@ void FIPS::iterate() {
 
     for (int j=0;j<swarmSize;j++)
     {
-        updateVelocity(swarm[j],newIteration);
+        updateVelocity(swarm[j],swarm,swarmSize,j);
         updatePosition(swarm[j]);
     }
     std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
@@ -144,14 +152,19 @@ void FIPS::setNSize(int nSize) {
     FIPS::nSize = nSize;
 }
 
-double FIPS::distanceFunction(double *a,double * b) {
+long double FIPS::distanceFunction(double *a,double * b) {
     if (a[1]==DBL_MAX || a[1]==DBL_MIN || b[1]==DBL_MAX || b[1]==DBL_MIN)
     {
         return abs(a[0]-b[0]);
     } else
         {
-            double val;
-            val=sqrt(pow((a[0]-b[0]),2)+pow((a[1]-b[1]),2));
+            long double val;
+            long double at0,at1,bt0,bt1;
+            at0=a[0]*100;
+            at1=a[1]*100;
+            bt0=b[0]*100;
+            bt1=b[1]*100;
+            val=sqrt(pow((at0-bt0),2)+pow((at1-bt1),2));
             return val;
         }
 }

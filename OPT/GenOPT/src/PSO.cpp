@@ -5,12 +5,12 @@
 #include "PSO.h"
 
 
-PSO::PSO(bool output) : OPT_Process(output) {
+PSO::PSO(bool output,double inBounds[4]) : OPT_Process(output,inBounds) {
 
 }
 
-PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output)
-        : OPT_Process(output) {
+PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4])
+        : OPT_Process(output,inBounds) {
 
     this->objectiveFunction=myObjectiveFunction;
     this->snapshotManager=mySnapshotManager;
@@ -46,6 +46,39 @@ void PSO::updatePosition(Particle *particle) {
     {
         particle->setPositionAtDimension(currentPos[i]+particle->getVelocity(),i);
     }
+
+    if (currentPos[1]==DBL_MAX)
+    {
+        if (checkSpecificBound(bounds[0],bounds[1],particle->getPositionArrayPointer()[0])==false)
+        {
+            int c=checkProximityDistances(bounds[0],bounds[1],particle->getPositionArrayPointer()[0]);
+            if (c==1)
+            {
+                particle->setPositionAtDimension(bounds[1],0);
+            } else
+                {
+                    particle->setPositionAtDimension(bounds[0],0);
+                }
+        }
+    } else
+        {
+            if (checkSpecificBound(bounds[0],bounds[1],particle->getPositionArrayPointer()[0])==false) {
+                int c = checkProximityDistances(bounds[0], bounds[1], particle->getPositionArrayPointer()[0]);
+                if (c == 1) {
+                    particle->setPositionAtDimension(bounds[1], 0);
+                } else {
+                    particle->setPositionAtDimension(bounds[0], 0);
+                }
+            }
+            if (checkSpecificBound(bounds[2],bounds[3],particle->getPositionArrayPointer()[1])==false) {
+                int c = checkProximityDistances(bounds[2], bounds[3], particle->getPositionArrayPointer()[1]);
+                if (c == 1) {
+                    particle->setPositionAtDimension(bounds[3], 1);
+                } else {
+                    particle->setPositionAtDimension(bounds[2], 1);
+                }
+            }
+        }
 }
 
 void PSO::iterate() {

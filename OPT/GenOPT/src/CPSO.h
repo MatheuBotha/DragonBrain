@@ -13,7 +13,7 @@ private:
 public:
     CPSO();
 
-    CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,double wVal, double velMax);
+    CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,  double wVal, double velMax,double boundArr[4]);
 
     double getW()
     {
