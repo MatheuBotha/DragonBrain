@@ -14,9 +14,9 @@ private:
 public:
     FIPS();
 
-    FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int size);
+    FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int size,double w,double bounds[4]);
 
-    virtual void updateVelocity(Particle *particle,Snapshot * snappy);
+    virtual void updateVelocity(Particle *particle,Particle ** swarm,int ss,int index);
 
     virtual void iterate() override;
 
@@ -27,7 +27,7 @@ public:
     int getNSize() const;
 
     void setNSize(int nSize);
-    double distanceFunction(double * a,double * b);
+    long double distanceFunction(double * a,double * b);
 };
 
 

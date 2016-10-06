@@ -97,11 +97,11 @@ public:
     /**
       * @brief Generates a OptimizerSettingsPackage using input from the GUI
       */
-    Q_INVOKABLE void generateSettingsOptimizer(QString, bool, QString, double, double, double, int ,int);
+    Q_INVOKABLE void generateSettingsOptimizer(QString, bool, QString, double, double, double, int ,int, double, double, int, int, int);
     /**
       * @brief Generates a ProblemDomainSettingsPackage using input from the GUI
       */
-    Q_INVOKABLE void generateSettingsDomain(QString, int, int, int, int, int, double, double, double);
+    Q_INVOKABLE void generateSettingsDomain(QString, int , double, double, double, double, double, double, double, double);
 
 };
 

@@ -4,7 +4,7 @@
 
 #include "OPT_Process.h"
 
-bool OPT_Process::caclulateSwarmRadius(Particle** swarm,int swarmS) {
+bool OPT_Process::calulateSwarmRadius(Particle** swarm,int swarmS) {
     int swarmSize=swarmS;
     double bestValue=-1;
     int bestIndex=-1;
@@ -63,4 +63,73 @@ bool OPT_Process::caclulateSwarmRadius(Particle** swarm,int swarmS) {
     else return false;
 
     return false;
+}
+
+ObjectiveFunction *OPT_Process::getObjectiveFunction() const {
+    return objectiveFunction;
+}
+
+void OPT_Process::setObjectiveFunction(ObjectiveFunction *objectiveFunction) {
+    OPT_Process::objectiveFunction = objectiveFunction;
+}
+
+SnapshotManager *OPT_Process::getSnapshotManager() const {
+    return snapshotManager;
+}
+
+void OPT_Process::setSnapshotManager(SnapshotManager *snapshotManager) {
+    OPT_Process::snapshotManager = snapshotManager;
+}
+
+Particle *OPT_Process::getIdeal() const {
+    return ideal;
+}
+
+void OPT_Process::setIdeal(Particle *ideal) {
+    OPT_Process::ideal = ideal;
+}
+
+bool OPT_Process::isPrinter() const {
+    return printer;
+}
+
+void OPT_Process::setPrinter(bool printer) {
+    OPT_Process::printer = printer;
+}
+
+const double *OPT_Process::getBounds() const {
+    return bounds;
+}
+void OPT_Process::setBounds(double boundsIn[4])
+{
+    for(int i=0;i<4;i++)
+    {
+        bounds[i]=boundsIn[i];
+    }
+}
+
+double OPT_Process::getBoundAtIndex(int index) {
+    return bounds[index];
+}
+
+bool OPT_Process::checkBound(double valueToCheck[2]) {
+    return valueToCheck[1] == DBL_MAX ? valueToCheck[0] >= bounds[0] && valueToCheck[0] <= bounds[1] :(
+           valueToCheck[0] >= bounds[0] && valueToCheck[0] <= bounds[1]
+           && (valueToCheck[1] >= bounds[2] && valueToCheck[1] <= bounds[3]));
+
+}
+
+int OPT_Process::checkProximityDistances(double lowerBound,double upperBound,double value) {
+
+    double distanceLowerToValue,distanceValueToUpper;
+
+    distanceLowerToValue=abs(value-lowerBound);
+    distanceValueToUpper=abs(upperBound-value);
+
+    return distanceLowerToValue > distanceValueToUpper ? 1 : 0;
+
+}
+
+bool OPT_Process::checkSpecificBound(double lowerBound, double upperBound, double valueToCheck) {
+    return (valueToCheck<=upperBound && valueToCheck>=lowerBound);
 }
