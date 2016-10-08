@@ -35,8 +35,9 @@ private:
     double positionArray[2]; ///> the array of double values holding the positions per dimension of the particle
     double personalBestPosition[2]; ///>the array that holds the position of the best personal state of the particle.
     double velocity; ///> the velocity of the particle
-    double fitnessValue=0; ///> The fitness value of the particle in relation to an objective function
-    double personalBest=0; ///> The personal best or memory of each particle
+    //DBL_MAX is the initial value if the optimiser is searching for the minimum value in the objective.
+    double fitnessValue=DBL_MAX; ///> The fitness value of the particle in relation to an objective function
+    double personalBest=DBL_MAX; ///> The personal best or memory of each particle
     vector<int> neighbourhoodIndices;
 
 public:
@@ -64,7 +65,7 @@ public:
 
 ///Sets the position array
     void setPositionArray(double *positionArray) {
-        this->positionArray[1] = positionArray[0];
+        this->positionArray[0] = positionArray[0];
         this->positionArray[1] = positionArray[1];
     }
 
@@ -162,6 +163,11 @@ public:
     double getPersonalBestPosition(double* inArr) const {
         inArr[0] = personalBestPosition[0];
         inArr[1] = personalBestPosition[1];
+    }
+
+    ///Getter for best position pointer
+    double * getPersonalBestPos(){
+        return personalBestPosition;
     }
 
     ///Setter for the best personal positions array
