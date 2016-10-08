@@ -40,7 +40,6 @@ void HillClimber::iterate() {
 }
 
 void HillClimber::mutate(Particle *particle) {
-
     double *newPosition = particle->getPositionArrayPointer();
     double xRange = bounds[1]-bounds[0];
     double yRange = bounds[3]-bounds[2];

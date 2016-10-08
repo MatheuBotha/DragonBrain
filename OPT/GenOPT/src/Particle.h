@@ -71,7 +71,7 @@ public:
 
     ///Sets the velocity of the particle
     void setVelocity(double velocity) {
-        Particle::velocity = velocity;
+        this->velocity = velocity;
     }
 
     ///Sets the position of the particle based on an array input
@@ -117,18 +117,20 @@ public:
     }
 
     ///Constructs a new default Particle
-    Particle(int dimensions) {
-        srand((unsigned)time(NULL));
+    Particle(int dimensions, double bounds[4]) {
+        //srand((unsigned)time(NULL));
         velocity=0.0;
         fitnessValue=0.0;
         personalBest=-1;
 
-        positionArray[0]=((double)rand()/(double)RAND_MAX);
+        positionArray[0]=(((double)rand()*(bounds[1]-bounds[0])/(double)RAND_MAX)+bounds[0]);
 
         if(dimensions == 2)
-       {
-           positionArray[1] = ((double)rand()/(double)RAND_MAX);
-        }else positionArray[1] = DBL_MAX;
+        {
+            positionArray[1]=(((double)rand()*(bounds[3]-bounds[2])/(double)RAND_MAX)+bounds[2]);
+        }else{
+            positionArray[1] = DBL_MAX;
+        }
 
         for (int j = 0; j <2 ; ++j) {
             personalBestPosition[j] = positionArray[j];

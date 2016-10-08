@@ -37,7 +37,7 @@ Snapshot* SnapshotManager::dequeue(){
 
 Snapshot *SnapshotManager::getLast() {
     if(head==NULL){
-        head = new Snapshot(swarmSize, dimensions);
+        head = new Snapshot(swarmSize, dimensions, bounds);
     }
     Snapshot* last=head;
     while(last->next != NULL){
@@ -48,7 +48,7 @@ Snapshot *SnapshotManager::getLast() {
 
 Snapshot *SnapshotManager::getFirst() {
     if(head==NULL){
-        head = new Snapshot(swarmSize, dimensions);
+        head = new Snapshot(swarmSize, dimensions, bounds);
     }
     return head;
 }
