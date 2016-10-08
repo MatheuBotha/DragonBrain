@@ -10,6 +10,7 @@
 #include "../OPT/GenOPT/src/ObjectiveFunction.h"
 #include "../SettingsPackage/src/problemdomainsettingspackage.h"
 #include "../SnapshotManager/SnapshotManager.h"
+#include "Engine/ParticleSystem.h"
 
 
 class GraphicsProcessor {
@@ -27,12 +28,15 @@ protected:
 private:
     Window window;
     GLSLProgram shaderProgram;
+    GLSLProgram particleShaderProgram;
     SDL_Event event;
 
     ProblemDomainSettingsPackage pdsp;
     SnapshotManager* snapshotManager;
     ObjectiveFunction* objective;
     double* boundaries;
+
+    ParticleSystem* particleSystem;
 };
 
 

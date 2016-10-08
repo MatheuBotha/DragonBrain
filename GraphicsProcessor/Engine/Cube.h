@@ -16,20 +16,36 @@
 class Cube : public Mesh {
 
 public:
-    Cube(GLSLProgram textureProgram, Texture texture);
+    Cube(GLSLProgram shaderProgram);
+    Cube(GLSLProgram shaderProgram, Texture* texture1, Texture* texture2);
     ~Cube();
-    glm::vec3 modelLocation;
-    void draw();
+    void draw(GLfloat deltaTime);
 
-    Texture getTexture();
-    void setTexture();
+    void activateShader();
+    void deactivateShader();
+
+    void rotate(GLfloat angle, glm::vec3 rotationVector);
+    void scale(glm::vec3 scaleVector);
+    void translate(glm::vec3 location);
 
 protected:
 
 private:
-    GLuint VAO, VBO, EBO;
-    Texture texture;
-    GLSLProgram textureProgram;
+    GLSLProgram shaderProgram;
+    Texture* texture1;
+    Texture* texture2;
+
+    GLuint _texture1;
+    GLuint _texture2;
+
+    GLuint VBO, VAO;
+
+    glm::mat4 model;
+
+
+
+
+
 };
 
 

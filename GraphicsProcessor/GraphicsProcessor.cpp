@@ -58,13 +58,16 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, Snapshot
     shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
     shaderProgram.linkShaders();
 
+    particleShaderProgram.compileShaders("Shaders/cube.vertex.glsl", "Shaders/cube.fragment.glsl");
+    particleShaderProgram.linkShaders();
+
     boundaries = new double[4];
     pdsp.getBoundaries(boundaries);
 
     this->snapshotManager = snapshotManager;
 
     printf("Making Particle System\n");
-    ParticleSystem ps(snapshotManager);
+    particleSystem = new ParticleSystem(snapshotManager, particleShaderProgram);
     printf("Finished making particle system\n");
 
 }
@@ -82,19 +85,22 @@ void GraphicsProcessor::run(){
 
     Landscape2D l(shaderProgram, objective, boundaries);
 
+    Texture cubeTexture("Textures/container.jpg");
+
+    Cube cube(particleShaderProgram);
+
 
 
     while(true){
+        // Set frame time
+        GLfloat currentFrame = SDL_GetTicks()/1;
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
         while(SDL_PollEvent(&event)){
             if (event.type == SDL_QUIT)
             {
                 return;
             }
-
-            // Set frame time
-            GLfloat currentFrame = SDL_GetTicks()/1000;
-            deltaTime = currentFrame - lastFrame;
-            lastFrame = currentFrame;
 
             switch( event.type ){
                 /* Look for a keypress */
@@ -126,19 +132,11 @@ void GraphicsProcessor::run(){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shaderProgram.use();
-//        // Create camera transformation
-//        glm::mat4 view;
-//        view = camera.GetViewMatrix();
-//        glm::mat4 projection;
-//        projection = glm::perspective(camera.Zoom, (float)800/(float)600, 0.1f, 1000.0f);
-//        // Get the uniform locations
-//        GLint viewLoc = shaderProgram.getUniformLocation("view");
-//        GLint projLoc = shaderProgram.getUniformLocation("projection");
-//
-//        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-//        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
         l.draw();
         shaderProgram.unuse();
+
+        particleSystem->draw(deltaTime);
+
         window.swapBuffer();
     }
 

@@ -3,18 +3,24 @@
 //
 
 #include "ParticleSystem.h"
+#include "Cube.h"
 
-ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager)
+ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram shaderProgram)
 {
     this->snapshotManager = snapshotManager;
-    analyzeSnapshotManager();
+    this->shaderProgram = shaderProgram;
+    particle = new Cube(shaderProgram);
+    //analyzeSnapshotManager();
 }
 
 ParticleSystem::~ParticleSystem(){}
 
-void ParticleSystem::draw()
+void ParticleSystem::draw(GLfloat deltaTime)
 {
-
+    particle->activateShader();
+    particle->rotate(deltaTime/1000, glm::vec3(1.0f, 0.3f, 0.5f));
+    particle->draw(deltaTime);
+    particle->deactivateShader();
 }
 
 void ParticleSystem::analyzeSnapshotManager()

@@ -7,16 +7,21 @@
 
 
 #include "../../SnapshotManager/SnapshotManager.h"
+#include "GLSLProgram.h"
+#include "Mesh.h"
 
 class ParticleSystem {
 public:
-    ParticleSystem(SnapshotManager* snapshotManager);
+    ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram shaderProgram);
     ~ParticleSystem();
-    void draw();
+    void draw(GLfloat deltaTime);
     void analyzeSnapshotManager();
 protected:
 private:
     SnapshotManager* snapshotManager;
+    GLSLProgram shaderProgram;
+
+    Mesh* particle;
 };
 
 

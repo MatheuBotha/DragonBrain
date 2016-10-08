@@ -116,6 +116,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     glGenTextures(1, &texture_id);
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, N, N, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, graph);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     // Create two vertex buffer objects
     glGenBuffers(3, vbo);
@@ -176,6 +177,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 Landscape2D::~Landscape2D(){}
 
 void Landscape2D::draw(){
+    glBindTexture(GL_TEXTURE_2D, texture_id);
     glUniform1i(uniform_mytexture, 0);
 
     glm::mat4 model;

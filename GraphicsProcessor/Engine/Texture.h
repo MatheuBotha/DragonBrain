@@ -12,15 +12,14 @@
 class Texture
 {
 public:
+    Texture() {}
     Texture(const std::string& fileName);
     virtual ~Texture();
 
     void bind();
-    Texture(const Texture& texture) {}
 
 protected:
 private:
-    void operator=(const Texture& texture) {}
 
     GLuint texture_id;
 };
