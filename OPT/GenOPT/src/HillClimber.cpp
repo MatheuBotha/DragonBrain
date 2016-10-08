@@ -19,13 +19,20 @@ void HillClimber::iterate() {
 
     for(int i=0; i<swarmSize; i++){
         if(printer)        std::cout << "Particle " << i;
+        double * truck = new double[2];
+        swarm[i]->getPositionArray(truck);
+        if(printer) cout << "\nbefore mutate: " << truck[0] << " " << truck[1];
         mutate(swarm[i]);
+        swarm[i]->getPositionArray(truck);
+        if(printer) cout << "\nafter mutate: " << truck[0] << " " << truck[1];
+
+        delete truck;
         if(printer)        std::cout << " is at coords (" << swarm[i]->getPositionArrayPointer()[0] << ", "
                                      << swarm[i]->getPositionArrayPointer()[1] << ") has fitness of: "
                                      << swarm[i]->getFitnessValue() << " and personal best of: "
                                      << swarm[i]->getPersonalBest() << std::endl;
     }
-    std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
+    if(printer) std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     snapshotManager->enqueue(newIteration);
 }
 
@@ -45,13 +52,11 @@ void HillClimber::mutate(Particle *particle) {
             if (c==1)
             {
                 newPosition[0]=bounds[1];
-            } else
-                {
-                    newPosition[0]=bounds[0];
-                }
+            }else{
+                newPosition[0]=bounds[0];
+            }
         }
-    } else
-        {
+    } else {
             if (checkSpecificBound(bounds[0],bounds[1],newPosition[0])==false)
             {
                 int c=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);

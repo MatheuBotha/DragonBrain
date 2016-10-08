@@ -10,6 +10,7 @@
 #include "Engine/Engine.h"
 #include "Engine/Camera.h"
 #include "Engine/Landscape2D.h"
+#include "Engine/ParticleSystem.h"
 #include "Engine/Cube.h"
 
 // GLM Mathemtics
@@ -40,7 +41,34 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp) : pdsp(p
 
     boundaries = new double[4];
     pdsp.getBoundaries(boundaries);
+
+    this->snapshotManager = NULL;
 }
+
+GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager)
+{
+    std::cout << "Starting Graphics Processor Test" << std::endl;
+    //init SDL stuffz
+    Engine::init();
+
+    //make a window
+    window.create("Temp Title", 800, 600, 0);
+
+    //Create the shader program
+    shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
+    shaderProgram.linkShaders();
+
+    boundaries = new double[4];
+    pdsp.getBoundaries(boundaries);
+
+    this->snapshotManager = snapshotManager;
+
+    printf("Making Particle System\n");
+    ParticleSystem ps(snapshotManager);
+    printf("Finished making particle system\n");
+
+}
+
 
 GraphicsProcessor::~GraphicsProcessor(){
     shaderProgram.unuse();
@@ -50,7 +78,11 @@ GraphicsProcessor::~GraphicsProcessor(){
 
 void GraphicsProcessor::run(){
 
+
+
     Landscape2D l(shaderProgram, objective, boundaries);
+
+
 
     while(true){
         while(SDL_PollEvent(&event)){
@@ -94,7 +126,6 @@ void GraphicsProcessor::run(){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shaderProgram.use();
-
 //        // Create camera transformation
 //        glm::mat4 view;
 //        view = camera.GetViewMatrix();
@@ -106,11 +137,7 @@ void GraphicsProcessor::run(){
 //
 //        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 //        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-
         l.draw();
-
-
         shaderProgram.unuse();
         window.swapBuffer();
     }

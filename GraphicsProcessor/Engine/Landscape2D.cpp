@@ -35,21 +35,21 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     double yMin = boundaries[2];
     double yMax = boundaries[3];
 
-    printf("xMin = %f\n", xMin);
-    printf("xMax = %f\n", xMax);
-    printf("yMin = %f\n", yMin);
-    printf("yMax = %f\n", yMax);
+//    printf("xMin = %f\n", xMin);
+//    printf("xMax = %f\n", xMax);
+//    printf("yMin = %f\n", yMin);
+//    printf("yMax = %f\n", yMax);
 
     double xRange = (xMax - xMin)/(double)N;
     double yRange = (yMax - yMin)/(double)N;
 
-    printf("xMin = %i\n", xMin);
-    printf("xMax = %i\n", xMax);
-    printf("yMin = %i\n", yMin);
-    printf("yMax = %i\n", yMax);
-
-    printf("xRange = %.2f\n", xRange);
-    printf("yRange = %.2f\n", yRange);
+//    printf("xMin = %i\n", xMin);
+//    printf("xMax = %i\n", xMax);
+//    printf("yMin = %i\n", yMin);
+//    printf("yMax = %i\n", yMax);
+//
+//    printf("xRange = %.2f\n", xRange);
+//    printf("yRange = %.2f\n", yRange);
 
     GLfloat results[N][N];
     GLbyte graph[N][N];
@@ -64,10 +64,10 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     double zMax = DBL_MIN;
     double zMin = DBL_MAX;
 
-    printf("currentX = %f\n", currentX);
-    printf("currentY = %f\n", currentY);
-
-    printf("Starting Loop\n");
+//    printf("currentX = %f\n", currentX);
+//    printf("currentY = %f\n", currentY);
+//
+//    printf("Starting Loop\n");
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
 
@@ -96,9 +96,9 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 
 
             //printf("%d\t\t-\t\t%i\n", result, (signed)graph[i][j]);
-            printf("currentX = %f\n",currentX);
-            printf("currentY = %f\n",currentY);
-            printf("result = %f\n",results[i][j]);
+//            printf("currentX = %f\n",currentX);
+//            printf("currentY = %f\n",currentY);
+//            printf("result = %f\n",results[i][j]);
             currentY+=yRange;
         }
         currentY = yMin;

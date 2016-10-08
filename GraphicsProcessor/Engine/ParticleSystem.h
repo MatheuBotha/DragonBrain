@@ -6,8 +6,17 @@
 #define SWARMVIZ_PARTICLESYSTEM_H
 
 
-class ParticleSystem {
+#include "../../SnapshotManager/SnapshotManager.h"
 
+class ParticleSystem {
+public:
+    ParticleSystem(SnapshotManager* snapshotManager);
+    ~ParticleSystem();
+    void draw();
+    void analyzeSnapshotManager();
+protected:
+private:
+    SnapshotManager* snapshotManager;
 };
 
 

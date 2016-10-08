@@ -1,4 +1,4 @@
-#version 330 core
+#version 130
 
 //layout (location = 0) in vec3 position;
 //layout (location = 1) in vec3 color;
@@ -18,7 +18,7 @@
 //	TexCoord = vec2(texCoord.x, 1.0 - texCoord.y);
 //}
 
-layout (location = 0) in vec2 coord2d;
+in vec2 coord2d;
 varying vec4 graph_coord;
 uniform mat4 texture_transform;
 uniform mat4 vertex_transform;

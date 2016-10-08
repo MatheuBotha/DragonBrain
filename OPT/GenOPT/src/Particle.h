@@ -125,13 +125,22 @@ public:
         positionArray[0]=((double)rand()/(double)RAND_MAX);
 
         if(dimensions == 2)
-       {
+        {
            positionArray[1] = ((double)rand()/(double)RAND_MAX);
-        }else positionArray[1] = DBL_MAX;
+        }
+        else
+        {
+            positionArray[1] = DBL_MAX;
+        }
 
-        for (int j = 0; j <2 ; ++j) {
+        for (int j = 0; j <2 ; ++j)
+        {
             personalBestPosition[j] = positionArray[j];
         }
+
+//        printf("BANANA\n");
+//        printf("x = %f\n", positionArray[0]);
+//        printf("y = %f\n", positionArray[1]);
     }
 
 

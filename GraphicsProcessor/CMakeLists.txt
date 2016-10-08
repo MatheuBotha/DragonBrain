@@ -71,12 +71,16 @@ set(SOURCE_FILES
         Engine/Texture.cpp
         Engine/Texture.h
 
+        Engine/ParticleSystem.cpp
+        Engine/ParticleSystem.h
+
         ../OPT/GenOPT/src/ObjectiveFunction.h
         ../OPT/GenOPT/src/SaddleObjective.cpp
         ../OPT/GenOPT/src/SinObjective.cpp
         ../OPT/GenOPT/src/AckleyObjective.cpp
         ../SettingsPackage/src/problemdomainsettingspackage.cpp
         ../OPT/GenOPT/src/WeierstrassObjective.cpp
+
         )
 add_library(GraphicsProcessor ${SOURCE_FILES})
 

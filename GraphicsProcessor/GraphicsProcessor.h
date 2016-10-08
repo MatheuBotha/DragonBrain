@@ -9,12 +9,14 @@
 #include "Engine/GLSLProgram.h"
 #include "../OPT/GenOPT/src/ObjectiveFunction.h"
 #include "../SettingsPackage/src/problemdomainsettingspackage.h"
+#include "../SnapshotManager/SnapshotManager.h"
 
 
 class GraphicsProcessor {
 
 public:
     GraphicsProcessor(ProblemDomainSettingsPackage pdsp);
+    GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager);
     ~GraphicsProcessor();
     void run();
 
@@ -28,6 +30,7 @@ private:
     SDL_Event event;
 
     ProblemDomainSettingsPackage pdsp;
+    SnapshotManager* snapshotManager;
     ObjectiveFunction* objective;
     double* boundaries;
 };
