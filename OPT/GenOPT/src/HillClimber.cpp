@@ -58,12 +58,15 @@ void HillClimber::mutate(Particle *particle) {
         newPosition[0]+=(mutationRate*xRange*(((double)rand()/(double)RAND_MAX)-0.5));
         newPosition[1]+=(mutationRate*yRange*(((double)rand()/(double)RAND_MAX)-0.5));
 
-        for(int i=0; i<2; i++) {
-            if (newPosition[i] < bounds[0]) {
-                newPosition[i] = bounds[0];
-            } else if (newPosition[i] > bounds[1]) {
-                newPosition[i] = bounds[1];
-            }
+        if(newPosition[0] < bounds[0]){
+            newPosition[0] = bounds[0];
+        }else if(newPosition[0] > bounds[1]){
+            newPosition[0] = bounds[1];
+        }
+        if(newPosition[1] < bounds[2]){
+            newPosition[1] = bounds[2];
+        }else if(newPosition[1] > bounds[3]){
+            newPosition[1] = bounds[3];
         }
     }
 
@@ -71,13 +74,8 @@ void HillClimber::mutate(Particle *particle) {
     fitness = objectiveFunction->functionInput(newPosition);
     particle->setFitnessValue(fitness);
     if(particle->getFitnessValue() < particle->getPersonalBest()){
-        //cout<<"CurrentFitness: "<<particle->getFitnessValue()<<endl;
-        //cout<<"BestFitness: "<<particle->getPersonalBest()<<endl;
         particle->setPersonalBestPosition(newPosition);
         particle->setPersonalBest(particle->getFitnessValue());
-//    if(printer)
-  //      std::cout<<"New best: "<<fitness<<std::endl;
-
     }
 
     if(ideal == nullptr ||

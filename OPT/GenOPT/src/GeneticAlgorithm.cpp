@@ -2,71 +2,69 @@
 // Created by gerard on 2016/10/09.
 //
 
-#include "ElitistHillClimber.h"
-#include <iostream>
+#include "GeneticAlgorithm.h"
 
-
-void ElitistHillClimber::iterate() {
+void GeneticAlgorithm::iterate() {
 
     Snapshot *last;
     Snapshot *newIteration;
     Particle **swarm;
+    Particle **oldSwarm;
     int swarmSize;
 
     last = snapshotManager->getLast();
 
     newIteration = new Snapshot(last);
-    if(printer){
-        cout << "NEW ITERATION\n";
-    }
 
+    oldSwarm = last->getSwarm();
     swarm = newIteration->getSwarm();
 
     swarmSize = newIteration->getSwarmSize();
 
-    //Get best particle
-    Particle * elite = swarm[0];
-    for(int j=0; j<swarmSize; j++) {
-        if(swarm[j]->getFitnessValue() < elite->getFitnessValue()){
-            elite = swarm[j];
-        }
+    //Build new generation
+    Particle * parent1 = oldSwarm[0];
+    Particle * parent2 = oldSwarm[0];
+    int randomParentIndex;
+    if(tournamentSize<3){
+        tournamentSize=3;
     }
-    elite = new Particle(elite);
-    //Make all particles the same as the best/elite particle
-    for(int k=0; k<swarmSize; k++) {
-        delete swarm[k];
-        swarm[k] = new Particle(elite);
-    }
-    delete elite;
-
-    //Mutate all the particles to be slightly different
     for(int i=0; i<swarmSize; i++){
-        if(printer){
-            std::cout << "Particle " << i;
+        for(int j=0; j<tournamentSize; j++){
+            randomParentIndex = rand() % swarmSize;
+            if(oldSwarm[randomParentIndex]->getFitnessValue() < parent1->getFitnessValue()){
+                parent1 = oldSwarm[randomParentIndex];
+            }else if(oldSwarm[randomParentIndex]->getFitnessValue() < parent2->getFitnessValue()){
+                parent2 = oldSwarm[randomParentIndex];
+            }
         }
+        crossover(parent1,parent2,swarm[i]);
+    }
 
+    //Add mutations
+    for(int i=0; i<swarmSize; i++){
         mutate(swarm[i]);
+    }
 
-        if(printer){
-            std::cout << " is at coords (" << swarm[i]->getPositionArrayPointer()[0] << ", "
-                      << swarm[i]->getPositionArrayPointer()[1] << ") has fitness of: "
-                      << swarm[i]->getFitnessValue() << " and personal best of: "
-                      << swarm[i]->getPersonalBest() << std::endl;
-        }
-    }
-    if(printer){
-        std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
-    }
     snapshotManager->enqueue(newIteration);
 }
 
-void ElitistHillClimber::mutate(Particle *particle) {
+void GeneticAlgorithm::crossover(Particle * parent1, Particle * parent2, Particle * child){
+    double *childPosition = new double[2];
+    childPosition[0] = parent1->getPositionArrayPointer()[0];
+    childPosition[1] = parent2->getPositionArrayPointer()[1];
+    child->setParticlePosition(childPosition);
+    childPosition[0] = parent1->getPersonalBestPos()[0];
+    childPosition[1] = parent1->getPersonalBestPos()[1];
+    child->setPersonalBestPosition(childPosition);
+    child->setPersonalBest(parent1->getPersonalBest());
+}
+
+void GeneticAlgorithm::mutate(Particle *particle) {
     double *newPosition = particle->getPositionArrayPointer();
     double xRange = bounds[1]-bounds[0];
     double yRange = bounds[3]-bounds[2];
 
     if (newPosition[1]==DBL_MAX){
-
         newPosition[0]+=(mutationRate*xRange*(((double)rand()/(double)RAND_MAX)-0.5));
 
         if(newPosition[0]<bounds[0]){
@@ -75,7 +73,6 @@ void ElitistHillClimber::mutate(Particle *particle) {
             newPosition[0]=bounds[1];
         }
     }else{
-
         newPosition[0]+=(mutationRate*xRange*(((double)rand()/(double)RAND_MAX)-0.5));
         newPosition[1]+=(mutationRate*yRange*(((double)rand()/(double)RAND_MAX)-0.5));
 
@@ -95,20 +92,12 @@ void ElitistHillClimber::mutate(Particle *particle) {
     fitness = objectiveFunction->functionInput(newPosition);
     particle->setFitnessValue(fitness);
     if(particle->getFitnessValue() < particle->getPersonalBest()){
-        //cout<<"CurrentFitness: "<<particle->getFitnessValue()<<endl;
-        //cout<<"BestFitness: "<<particle->getPersonalBest()<<endl;
         particle->setPersonalBestPosition(newPosition);
         particle->setPersonalBest(particle->getFitnessValue());
-//    if(printer)
-        //      std::cout<<"New best: "<<fitness<<std::endl;
-
     }
 
     if(ideal == nullptr ||
        ideal != nullptr && particle->getPersonalBest() < ideal->getPersonalBest()) {
         ideal = particle;
     }
-
-    particle->setParticlePosition(particle->getPersonalBestPos());
-    particle->setFitnessValue(particle->getPersonalBest());
 }
