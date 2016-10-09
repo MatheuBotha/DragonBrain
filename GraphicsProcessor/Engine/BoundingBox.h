@@ -1,24 +1,19 @@
 //
-// Created by matheu on 9/26/16.
+// Created by matheu on 10/9/16.
 //
 
-#ifndef LEARNINGOGL_CUBE_H
-#define LEARNINGOGL_CUBE_H
+#ifndef SWARMVIZ_BOUNDINGBOX_H
+#define SWARMVIZ_BOUNDINGBOX_H
 
-
-#include <GL/glew.h>
-#include <glm/glm.hpp>
 
 #include "Mesh.h"
 #include "GLSLProgram.h"
-#include "Texture.h"
 
-class Cube : public Mesh {
+class BoundingBox : public Mesh {
 
 public:
-    Cube(GLSLProgram shaderProgram);
-    Cube(GLSLProgram shaderProgram, Texture* texture1, Texture* texture2);
-    ~Cube();
+    BoundingBox(GLSLProgram shaderProgram);
+    ~BoundingBox();
     void draw(GLfloat deltaTime);
 
     void activateShader();
@@ -29,22 +24,16 @@ public:
     void translate(glm::vec3 location);
 
     void setModel();
+
     void setCamera(Camera* camera);
-protected:
 
 private:
     GLSLProgram shaderProgram;
-    Texture* texture1;
-    Texture* texture2;
     Camera* camera;
-
-    GLuint _texture1;
-    GLuint _texture2;
-
     GLuint VBO, VAO;
-
     glm::mat4 model;
+    GLuint _texture1;
 };
 
 
-#endif //LEARNINGOGL_CUBE_H
+#endif //SWARMVIZ_BOUNDINGBOX_H

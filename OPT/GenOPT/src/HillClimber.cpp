@@ -39,6 +39,8 @@ void HillClimber::iterate() {
 void HillClimber::mutate(Particle *particle) {
 
     double *newPosition = particle->getPositionArrayPointer();
+    double xRange = bounds[1]-bounds[0];
+    double yRange = bounds[3]-bounds[2];
 
     for (int i = 0; i < 2; ++i) {
         newPosition[i]+=(mutationRate*newPosition[i]*(((double)rand()/(double)RAND_MAX)-0.5));
@@ -82,6 +84,7 @@ void HillClimber::mutate(Particle *particle) {
                 }
             }
         }
+
     double fitness;
     fitness = objectiveFunction->functionInput(newPosition);
     particle->setFitnessValue(fitness);
@@ -97,6 +100,10 @@ void HillClimber::mutate(Particle *particle) {
             ideal = particle;
     }
 
+    if(ideal == nullptr ||
+       ideal != nullptr && particle->getPersonalBest() < ideal->getPersonalBest()) {
+        ideal = particle;
+    }
 
     particle->setParticlePosition(newPosition);
 }

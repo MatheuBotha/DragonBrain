@@ -12,15 +12,15 @@
 #include "Engine/Landscape2D.h"
 #include "Engine/ParticleSystem.h"
 #include "Engine/Cube.h"
+#include "Engine/BoundingBox.h"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <SDL/SDL_video.h>
 
 // Camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
 
@@ -33,7 +33,7 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp) : pdsp(p
     Engine::init();
 
     //make a window
-    window.create("Temp Title", 800, 600, 0);
+    window.create("SwarmVis", 800, 600, 0);
 
     //Create the shader program
     shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
@@ -52,7 +52,7 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, Snapshot
     Engine::init();
 
     //make a window
-    window.create("Temp Title", 800, 600, 0);
+    window.create("SwarmVis", 800, 600, 0);
 
     //Create the shader program
     shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
@@ -61,33 +61,37 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, Snapshot
     particleShaderProgram.compileShaders("Shaders/cube.vertex.glsl", "Shaders/cube.fragment.glsl");
     particleShaderProgram.linkShaders();
 
+    boundingBoxShaderProgram.compileShaders("Shaders/bounding_box.vertex.glsl", "Shaders/bounding_box.fragment.glsl");
+    boundingBoxShaderProgram.linkShaders();
+
     boundaries = new double[4];
     pdsp.getBoundaries(boundaries);
 
     this->snapshotManager = snapshotManager;
 
-    printf("Making Particle System\n");
-    particleSystem = new ParticleSystem(snapshotManager, particleShaderProgram);
-    printf("Finished making particle system\n");
-
+    camera = new Camera(glm::vec3(0.0f, 2.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90, -45);
+    SDL_ShowCursor(SDL_DISABLE);
 }
 
 
 GraphicsProcessor::~GraphicsProcessor(){
     shaderProgram.unuse();
     shaderProgram.dispose();
+    delete camera;
+    delete boundaries;
     std::cout << "Ending Graphics Processor Test" << std::endl;
 }
 
 void GraphicsProcessor::run(){
-
-
-
     Landscape2D l(shaderProgram, objective, boundaries);
+    l.setCamera(camera);
+    printf("Making Particle System\n");
+    particleSystem = new ParticleSystem(snapshotManager, particleShaderProgram, &l);
+    particleSystem->setCamera(camera);
+    printf("Finished making particle system\n");
 
-    Texture cubeTexture("Textures/container.jpg");
-
-    Cube cube(particleShaderProgram);
+    BoundingBox bb(boundingBoxShaderProgram);
+    bb.setCamera(camera);
 
 
 
@@ -112,20 +116,37 @@ void GraphicsProcessor::run(){
                             break;
                         case SDLK_LEFT:
                             Debug::print("Moving LEFT");
-                            camera.ProcessKeyboard(LEFT, deltaTime);
+                            camera->ProcessKeyboard(LEFT, deltaTime/1000);
                             break;
                         case SDLK_RIGHT:
-                            camera.ProcessKeyboard(RIGHT, deltaTime);
+                            camera->ProcessKeyboard(RIGHT, deltaTime/1000);
                             break;
                         case SDLK_UP:
-                            camera.ProcessKeyboard(FORWARD, deltaTime);
+                            camera->ProcessKeyboard(FORWARD, deltaTime/1000);
                             break;
                         case SDLK_DOWN:
-                            camera.ProcessKeyboard(BACKWARD, deltaTime);
+                            camera->ProcessKeyboard(BACKWARD, deltaTime/1000);
                             break;
                         default:
                             break;
                     }
+                    break;
+                case SDL_MOUSEMOTION:
+                    if(firstMouse)
+                    {
+                        lastX = event.motion.x;
+                        lastY = event.motion.y;
+                        firstMouse = false;
+                    }
+
+                    GLfloat xoffset = event.motion.x - lastX;
+                    GLfloat yoffset = lastY - event.motion.y;  // Reversed since y-coordinates go from bottom to left
+
+                    lastX = event.motion.x;
+                    lastY = event.motion.y;
+
+                    camera->ProcessMouseMovement(xoffset, yoffset);
+                    break;
             }
         }
         //Render
@@ -136,6 +157,12 @@ void GraphicsProcessor::run(){
         shaderProgram.unuse();
 
         particleSystem->draw(deltaTime);
+
+        bb.activateShader();
+        bb.setModel();
+        bb.scale(glm::vec3(2.0f));
+        bb.draw(deltaTime);
+        bb.deactivateShader();
 
         window.swapBuffer();
     }

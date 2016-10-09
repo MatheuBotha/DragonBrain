@@ -31,18 +31,18 @@ int main()
     boundaries[3] = 10;
     pdsp.setBoundaries(boundaries);
 
+
     ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
     //GGGGGGGG
-    int maxIteration = 10;
-    int swarmSize = 2;
+    int maxIteration = 200;
+    int swarmSize = 3;
     int dimension = 2;
-    SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension);
+    SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
     OPT_Process *opt1 = new HillClimber(objective, snapshotManager, false, boundaries);
 
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
     }
-
 
     //GGGGGGGG
     GraphicsProcessor gp(pdsp, snapshotManager);

@@ -21,12 +21,11 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 {
     textureProgram.addAttribute("coord2d");
     uniform_vertex_transform = textureProgram.getUniformLocation("vertex_transform");
-    uniform_texture_transform = textureProgram.getUniformLocation("texture_transform");
     uniform_mytexture = textureProgram.getUniformLocation("mytexture");
     uniform_color = textureProgram.getUniformLocation("color");
 
     // Create our datapoints, store it as bytes
-#define N 256
+#define N 1000
 
     //set up graph variables
 
@@ -61,8 +60,8 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     double currentX = (double)xMin;
     double currentY = (double)yMin;
 
-    double zMax = DBL_MIN;
-    double zMin = DBL_MAX;
+    zMax = DBL_MIN;
+    zMin = DBL_MAX;
 
 //    printf("currentX = %f\n", currentX);
 //    printf("currentY = %f\n", currentY);
@@ -107,7 +106,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            graph[i][j] = roundf(((((1-(-1))*(results[i][j] - zMin))/(zMax - zMin))-1) * 127 + 128);
+            graph[i][j] = roundf(normalize(results[i][j]) * 127 + 128);
         }
     }
 
@@ -187,20 +186,15 @@ void Landscape2D::draw(){
 //
 //    else
 //        model = glm::mat4(1.0f);
-    model = glm::rotate(glm::mat4(1.0f), glm::radians(SDL_GetTicks() / 100.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    //model = glm::rotate(glm::mat4(1.0f), glm::radians(SDL_GetTicks() / 100.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
-
-    glm::mat4 view = glm::lookAt(glm::vec3(0.0, -2.0, 2.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 1.0));
-    glm::mat4 projection = glm::perspective(45.0f, 1.0f * 640 / 480, 0.1f, 10.0f);
+    glm::mat4 view = camera->getViewMatrix();
+    glm::mat4 projection = glm::perspective(45.0f, 1.0f * 800 / 600, 0.1f, 10.0f);
 
     glm::mat4 vertex_transform = projection * view * model;
-    glm::mat4 texture_transform = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, 1)), glm::vec3(offset_x, offset_y, 0));
-
+    //glm::mat4 vertex_transform;
+    //glm::mat4 texture_transform = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, 1)), glm::vec3(offset_x, offset_y, 0));
     glUniformMatrix4fv(uniform_vertex_transform, 1, GL_FALSE, glm::value_ptr(vertex_transform));
-    glUniformMatrix4fv(uniform_texture_transform, 1, GL_FALSE, glm::value_ptr(texture_transform));
-
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     /* Set texture wrapping mode */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, clamp ? GL_CLAMP_TO_EDGE : GL_REPEAT);
@@ -247,4 +241,29 @@ void Landscape2D::draw(){
 void Landscape2D::setObjective(ObjectiveFunction* objective)
 {
     this->objective = objective;
+}
+
+double* Landscape2D::getBoundaries()
+{
+    return boundaries;
+}
+
+double Landscape2D::getZMin()
+{
+    return zMin;
+}
+
+double Landscape2D::getZMax()
+{
+    return zMax;
+}
+
+double Landscape2D::normalize(double value)
+{
+    return ((((1-(-1))*(value - zMin))/(zMax - zMin))-1);
+}
+
+void Landscape2D::setCamera(Camera* camera)
+{
+    this->camera = camera;
 }

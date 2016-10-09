@@ -69,7 +69,7 @@ public:
     }
 
     // Returns the view matrix calculated using Eular Angles and the LookAt Matrix
-    glm::mat4 GetViewMatrix()
+    glm::mat4 getViewMatrix()
     {
         return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
     }

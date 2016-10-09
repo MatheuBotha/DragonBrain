@@ -74,3 +74,8 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 void Window::swapBuffer() {
     SDL_GL_SwapWindow(_sdlWindow);
 }
+
+SDL_Window* Window::getWindowInstance()
+{
+    return _sdlWindow;
+}

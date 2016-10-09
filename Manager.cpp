@@ -48,8 +48,19 @@ void Manager::endGUI() {
 }
 
 void Manager::generateSnapshotManager() {
+
+    double *bounds = new double[4];
+    setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
+    if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
+    {
+        objective->getBounds(bounds);
+        graphicsProcessor->setBounds(bounds);
+        setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
+    }
+
     snapMan = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
-                                    setPkg->getSwarmSize(), setPkg->getProblemDomainSettingsPackage()->getDimensions());
+                                    setPkg->getSwarmSize(), setPkg->getProblemDomainSettingsPackage()->getDimensions(),
+                                  bounds);
 }
 
 SnapshotManager *Manager::getSnapshotManager() {
@@ -115,17 +126,9 @@ void Manager::initializeOptimizer() {
     else if(objFun == "Zakharov")
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
 
-    double *bounds = new double[4];
 
     graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
     graphicsProcessor->setObjective(objective);
-
-    setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
-    if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
-    {
-        objective->getBounds(bounds);
-        graphicsProcessor->setBounds(bounds);
-    }
 
     std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm();
     if(optAlg == "Hill Climbing") {

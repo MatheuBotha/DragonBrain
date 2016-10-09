@@ -35,8 +35,9 @@ private:
     double positionArray[2]; ///> the array of double values holding the positions per dimension of the particle
     double personalBestPosition[2]; ///>the array that holds the position of the best personal state of the particle.
     double velocity; ///> the velocity of the particle
-    double fitnessValue=0; ///> The fitness value of the particle in relation to an objective function
-    double personalBest=0; ///> The personal best or memory of each particle
+    //DBL_MAX is the initial value if the optimiser is searching for the minimum value in the objective.
+    double fitnessValue=DBL_MAX; ///> The fitness value of the particle in relation to an objective function
+    double personalBest=DBL_MAX; ///> The personal best or memory of each particle
     vector<int> neighbourhoodIndices;
 
 public:
@@ -64,13 +65,13 @@ public:
 
 ///Sets the position array
     void setPositionArray(double *positionArray) {
-        this->positionArray[1] = positionArray[0];
+        this->positionArray[0] = positionArray[0];
         this->positionArray[1] = positionArray[1];
     }
 
     ///Sets the velocity of the particle
     void setVelocity(double velocity) {
-        Particle::velocity = velocity;
+        this->velocity = velocity;
     }
 
     ///Sets the position of the particle based on an array input
@@ -126,14 +127,26 @@ public:
 
         if(dimensions == 2)
         {
+<<<<<<< HEAD
+           positionArray[1] = ((double)rand()/(double)RAND_MAX);
+        }
+        else
+        {
+=======
             positionArray[1]=(((double)rand()*(bounds[3]-bounds[2])/(double)RAND_MAX)+bounds[2]);
         }else{
+>>>>>>> 4f34cb88102563363d968fc43bc3c9c85d5410e6
             positionArray[1] = DBL_MAX;
         }
 
-        for (int j = 0; j <2 ; ++j) {
+        for (int j = 0; j <2 ; ++j)
+        {
             personalBestPosition[j] = positionArray[j];
         }
+
+//        printf("BANANA\n");
+//        printf("x = %f\n", positionArray[0]);
+//        printf("y = %f\n", positionArray[1]);
     }
 
 
@@ -164,6 +177,11 @@ public:
     double getPersonalBestPosition(double* inArr) const {
         inArr[0] = personalBestPosition[0];
         inArr[1] = personalBestPosition[1];
+    }
+
+    ///Getter for best position pointer
+    double * getPersonalBestPos(){
+        return personalBestPosition;
     }
 
     ///Setter for the best personal positions array

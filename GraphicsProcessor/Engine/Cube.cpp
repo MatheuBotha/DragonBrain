@@ -14,8 +14,10 @@
 
 Cube::Cube(GLSLProgram shaderProgram)
 {
-    model = glm::mat4();
+    model = glm::mat4(1.0f);
     this->shaderProgram = shaderProgram;
+    shaderProgram.addAttribute("position");
+    shaderProgram.addAttribute("texCoord");
     // Set up vertex data (and buffer(s)) and attribute pointers
     GLfloat vertices[] = {
             -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -250,7 +252,7 @@ void Cube::draw(GLfloat deltaTime)
     };
     // Bind Textures using texture units
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, _texture1);
+    glBindTexture(GL_TEXTURE_2D, _texture2);
     glUniform1i(shaderProgram.getUniformLocation("ourTexture1"), 0);
 //    glActiveTexture(GL_TEXTURE1);
 //    glBindTexture(GL_TEXTURE_2D, _texture2);
@@ -259,8 +261,10 @@ void Cube::draw(GLfloat deltaTime)
     // Create transformations
     glm::mat4 view;
     glm::mat4 projection;
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-    projection = glm::perspective(45.0f, (GLfloat)800 / (GLfloat)600, 0.1f, 100.0f);
+
+    view = camera->getViewMatrix();
+    projection = glm::perspective(45.0f, 1.0f * 800 / 600, 0.1f, 10.0f);
+
     // Get their uniform location
     GLint modelLoc = shaderProgram.getUniformLocation("model");
     GLint viewLoc = shaderProgram.getUniformLocation("view");
@@ -285,7 +289,6 @@ void Cube::draw(GLfloat deltaTime)
 //    glBindVertexArray(0);
 
     glBindVertexArray(VAO);
-    translate(cubePositions[0]);
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
@@ -315,4 +318,14 @@ void Cube::scale(glm::vec3 scaleVector)
 void Cube::translate(glm::vec3 location)
 {
     model = glm::translate(model, location);
+}
+
+void Cube::setModel()
+{
+    model = glm::mat4();
+}
+
+void Cube::setCamera(Camera* camera)
+{
+    this->camera = camera;
 }

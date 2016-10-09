@@ -15,13 +15,13 @@ private:
     int dimensions;
 
 public:
-    Snapshot(int swarmSize, int dim){
+    Snapshot(int swarmSize, int dim, double bounds[4]){
         next = nullptr;
         this->swarmSize = swarmSize;
         dimensions = dim;
-        initialiseSwarm();
+        initialiseSwarm(bounds);
     }
-    Snapshot(Particle** swarm, int swarmSize, int dim){
+    Snapshot(Particle** swarm, int swarmSize, int dim){ //Do not use this constructor.
         next = nullptr;
         dimensions = dim;
         this->swarm = swarm;
@@ -48,7 +48,7 @@ public:
     Snapshot* next;
     void setSwarm(Particle **swarm);
     Particle** getSwarm();
-    void initialiseSwarm();
+    void initialiseSwarm(double bounds[4]);
     int getSwarmSize();
 };
 

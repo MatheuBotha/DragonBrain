@@ -72,6 +72,9 @@ set(SOURCE_FILES
         ../Engine/ParticleSystem.cpp
         ../Engine/ParticleSystem.h
 
+        ../Engine/BoundingBox.cpp
+        ../Engine/BoundingBox.h
+
         ../../OPT/GenOPT/src/ObjectiveFunction.h
         ../../OPT/GenOPT/src/SaddleObjective.cpp
         ../../OPT/GenOPT/src/SinObjective.cpp
