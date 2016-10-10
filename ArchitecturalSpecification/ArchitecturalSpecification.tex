@@ -132,7 +132,43 @@ The Model View Controller design is structured as follows: The Model handles bus
 \pagebreak
 
 
+\subsection{Event-Driven Architecture}
+\paragraph{•}
+The above mentioned MVC pattern highlights and specifies the system components at a high level. This high level description does not encapsulate a behavioural specification at an architectural level in terms of the project. To this end, we turn towards the Event-Driven Architectural pattern to further specify the system.
+
+\paragraph{•}
+To begin to understand the relevance of the pattern to the system, consider the following definitions:
+
+\begin{itemize}
+\item Event: A change of State.
+\item Event Flow: a sequence of layers that mediates the event in the system.
+	\begin{itemize}
+	\item Event Generator: The Event Generator is the component that produces the initial event and the initial sense in the system that an event has occurred.
+	\item Event Channel: The Event Channel is the medium by which the event is processed to the processing engine.
+	\item Event Processing Engine: The Event Processing engine is where the event is selected and the response is executed. 
+	\item Downstream Event-driven Activity: Here is where the consequences of the event being processed are made visible.
+	\end{itemize}
+\end{itemize}
+
+\paragraph{•}
+Considering the above definitions, we will consider a use case of the system to indicate how the Event-Driven Architectural pattern is in play.
+
+
+\paragraph{•}
+As shown by the diagram below, a standard use case of system operation would be the running of an iteration of a Optimisation Process. The Iteration involves 3 components: an Optimiser, a Datastore(Snapshot Manager) and a Graphics Processor.
+\begin{figure}[h]
+\includegraphics[scale=0.45]{systemExample.png}
+\caption{A sequence diagram to indicate the point of events in the system}
+\end{figure}
+
+\paragraph{•}
+The Optimiser at the point of 1, has finished perform an iteration. The end result of the iteration, is producing a snapshot. This results in our Event being created. The Snapshot Manager is the communication channel for this event. The enqueue of the Snapshot makes that event visible to the Event Processing Engine, the Graphics Processor. The Graphics Processor is made aware of the new system state once the enqueue is complete and it will take the appropriate action, by dequeuing the snapshot and then processing it. Once this is complete, the Snapshot Manager will have one more space, which is the consequence propagated to the system. The cycle begins again with the Optimiser calling enqueueSnapshot again.
+\paragraph{•}
+This event-driven cycle is found in many other areas of the system since the various components will only react once other components have started to function, furthering the system by processing and generating events, which can be defined at various levels of system granularity.
 \section{Programming Paradigm}
+\paragraph{•}
+In the programming Paradigm section, we will present a paradigm that we have considered for the project and used in order to adapt to a more traditional imperative paradigm as dictated by the current language implementations of C++. 
+\subsection{Functional Reactive Programming}
 \paragraph{•}
 Functional Reactive Programming is one such programming style that promotes data driven design. There are 3 common divisions of FRP:
 \begin{itemize}
@@ -161,11 +197,23 @@ There are two common usages of FRP in systems: push-based and pull-based systems
 \end{itemize}
 
 By making use of a shared data pool, to which both the Rendering and Optimiser layer are able to pull and push data from, we obviate the need for an explicit message passing framework.
-\subsubsection{Unit Testing}
+
+\subsection{Adapations for Project}
+\subsubsection{Language Support}
+\paragraph{•}
+The most pressing barrier for adopting this programming paradigm directly into our project would be the lack of existing C++ implementations for it. The language choice for the project was supplied by the client and this has meant direct adoption of the paradigm is not possible within operating parameters.
+\subsubsection{Implications for the Project}
+\paragraph{•}
+Despite a lack of direct adoption, we have been strongly influenced by the paradigm with regards to designing the project to make use of the methods and systems espoused by Functional Reactive Programming. Although following an Imperative paradigm, we have structured the system using both events and MVC to create a system with push/pull-based systems, events and discrete and continuous mathematical processing.
+
+
+\section{Unit Testing}
 \paragraph{•}
 With a data orientated approach, your aim is to create a compartment of code that contains functions that will typically only have a single use. i.e. no decisions will ever be made in the functions, the decisions will be made the the graphics engine and the graphics engine will use this grab bag of functions to execute whatever it has decided. This approach allows for powerful, comprehensive unit testing due to the fact that the functions are minimalistic in nature. This is especially useful when debugging a graphical applications as you can unit test an image output, but if you have a comprehensive unit testing backbone for the functions then it can make it easier to see logical mistakes.
 \paragraph{•}
 The basic premise of data orientated design is to design the code around the data, instead of abstracting the data behind models. While this may seem counter intuitive it is still possible to achieve a familiar level of abstraction while still making use of the performance increases that come with the approach.
+\paragraph{•}
+At an architectural level, unit testing is typically not present. However, the specific testing framework, Google Test, requires a specific file directory hierarchy and structure in order to work. This requires us to alter directory structure and makelist files such that a Google Test folder can be injected into any working branch of the project so that unit tests can be run without having to perform a manual restructuring of the project.
 \subsection{Client Layer}
 The client layer will handle Graphical User Interface elements that the software user will interact with, and will present the output of the Graphics layer(and implicitly the Optimiser layer) to the user. The user will also use the client layer to set parameters of the optimiser layer to determine which fitness landscape will be used, which optimisation algorithm will be used, and also let the user set the optimiser's parameters.
 \subsection{Technologies}
