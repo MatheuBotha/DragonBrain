@@ -195,7 +195,23 @@ Following is an activity diagram for the process involved in starting a run of t
 \paragraph{•}
 The following use case diagram highlights the user actions during the system operation
 \begin{figure}[H]
-	\includegraphics[scale=0.55]{inUse.png}
+	\includegraphics[scale=0.45]{inUse.png}
+\end{figure}
+
+\subsection{System Components}
+\subsubsection{Optimiser}
+\paragraph{•}
+The use cases for the Optimiser component are represented below.
+Of particular interest is the generalisation hierarchy that exists from the ManageGeneralSwarm capacity. This hierarchy is extended to enable additional behavioural changes to the swarm at run time by polymorphism.
+\begin{figure}[H]
+	\includegraphics[scale=0.50]{Optimiser.png}
+\end{figure}
+
+\subsubsection{Snapshot Manager}
+\paragraph{•}
+The use cases for the Snapshot Manager component are represented below.
+\begin{figure}[H]
+	\includegraphics[scale=0.55]{SnapshotManager.png}
 \end{figure}
 
 \section{Algorithm Service Contracts}
