@@ -319,7 +319,7 @@ This process is also represented in the following activity diagram
 	\includegraphics[scale=0.40]{OptimiserProcess.png}
 \end{figure}
 \paragraph{•}
-Below are the algorithm specifics pertinent to each of the Optimiser algorithms currently implemented. Each will consist of a detailed explanation of each algorithm which will consist of a service contract, use case and activity diagram.
+Below are the algorithm specifics pertinent to each of the Optimiser algorithms currently implemented.
 \subsection{FIPS: Fully Informed Particle Swarm Optimisation}
 \paragraph{•}
 The point of the FIPS adaption of the standard PSO algorithm is to increase the reliability of the results. How this works, is it will increase the influence capacity of other particles to, based on a scalar k, influence others by increasing the influence capacity good nearby particles to influence the particle being considered. The effect of this is that, based on considering size of the scalar value, particles generally avoid worse positions. This comes at a greater cost to the performance of this especially since large capacity swarms could potentially have large neighbourhoods for potential consideration requiring increasingly more run time computation.
