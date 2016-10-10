@@ -323,15 +323,32 @@ Below are the algorithm specifics pertinent to each of the Optimiser algorithms 
 \subsection{FIPS: Fully Informed Particle Swarm Optimisation}
 \paragraph{•}
 The point of the FIPS adaption of the standard PSO algorithm is to increase the reliability of the results. How this works, is it will increase the influence capacity of other particles to, based on a scalar k, influence others by increasing the influence capacity good nearby particles to influence the particle being considered. The effect of this is that, based on considering size of the scalar value, particles generally avoid worse positions. This comes at a greater cost to the performance of this especially since large capacity swarms could potentially have large neighbourhoods for potential consideration requiring increasingly more run time computation.
+\begin{figure}[h]
+	\includegraphics[scale=0.45]{fipsServiceContract.png}
+\end{figure}
+
 \subsection{GCPSO: Guaranteed Convergence PSO}
 \paragraph{•}
 The reasoning behind the GCPSO is to provide an additional capacity for the swarm to prevent itself from converging on a poor position, a minima when there are potentially better positions within range of the swarm. To do this, it makes use of an additional search particle that exists contiguous to the swarm but not as a part of the swarm.
+
 \paragraph{•}
 Once the swarm has potentially converged, the additional search particle, called Beta for short, will then attempt to within the maximum potential radius of the swarm, find a better position. If it is able to do so, the convergence is halted and the swarm will continue to iterate. If not, it will more reliably guarantee that the position that the swarm converged to is the best one within its capacity to reach.
+\begin{figure}[h]
+	\includegraphics[scale=0.45]{gcpsoServiceContract.png}
+\end{figure}
+
 \subsection{CPSO: Conical Particle Swarm Optimisation}
 \paragraph{•}
 The CPSO is the least variant of the traditional PSO algorithms. The only significant changes are a modified update velocity function which makes use of velocity clamping and inertia weights to aid in convergence actions.
+\begin{figure}[h]
+	\includegraphics[scale=0.80]{cpsoServiceContract.png}
+\end{figure}
+
 \subsection{Hill-Climber Approach}
 \paragraph{•}
 The Hill-Climber Approach is a non-PSO approach. It makes of a swarm but none of the particles have any capacity to influence each other. Rather,each particle only has one capacity, namely, to only go in directions that result in a better position. In this way, each particle only moves to better positions but each particle is isolated from the next so finding the best position is difficult and largely determined by the maximum bounding of the domain.
+\begin{figure}[h]
+	\includegraphics[scale=0.80]{hillclimberServiceContract.png}
+\end{figure}
+
 \end{document}
