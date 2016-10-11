@@ -146,7 +146,6 @@ void Manager::initializeOptimizer() {
                 setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
 
 
-
     delete [] trans;
 }
 

@@ -92,16 +92,14 @@ void ElitistHillClimber::mutate(Particle *particle) {
     }
 
     double fitness;
+    double bestFitness;
     fitness = objectiveFunction->functionInput(newPosition);
+    bestFitness = objectiveFunction->functionInput(particle->getPersonalBestPos());
     particle->setFitnessValue(fitness);
+    particle->setPersonalBest(bestFitness);
     if(particle->getFitnessValue() < particle->getPersonalBest()){
-        //cout<<"CurrentFitness: "<<particle->getFitnessValue()<<endl;
-        //cout<<"BestFitness: "<<particle->getPersonalBest()<<endl;
         particle->setPersonalBestPosition(newPosition);
         particle->setPersonalBest(particle->getFitnessValue());
-//    if(printer)
-        //      std::cout<<"New best: "<<fitness<<std::endl;
-
     }
 
     if(ideal == nullptr ||

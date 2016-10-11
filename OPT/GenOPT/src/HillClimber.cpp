@@ -71,8 +71,11 @@ void HillClimber::mutate(Particle *particle) {
     }
 
     double fitness;
+    double bestFitness;
     fitness = objectiveFunction->functionInput(newPosition);
+    bestFitness = objectiveFunction->functionInput(particle->getPersonalBestPos());
     particle->setFitnessValue(fitness);
+    particle->setPersonalBest(bestFitness);
     if(particle->getFitnessValue() < particle->getPersonalBest()){
         particle->setPersonalBestPosition(newPosition);
         particle->setPersonalBest(particle->getFitnessValue());
