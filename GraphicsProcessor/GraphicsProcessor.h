@@ -19,17 +19,23 @@ class GraphicsProcessor {
 
 public:
     GraphicsProcessor(ProblemDomainSettingsPackage pdsp);
-    GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager);
+    GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager, int width, int height);
     ~GraphicsProcessor();
     void run();
 
     void setObjective(ObjectiveFunction* objective);
     void setBounds(double* boundaries);
 
+
+
 protected:
 private:
+    int screenWidth;
+    int screenHeight;
     Window window;
     Camera* camera;
+    GLfloat cameraYaw;
+    GLfloat cameraPitch;
     GLSLProgram shaderProgram;
     GLSLProgram particleShaderProgram;
     GLSLProgram boundingBoxShaderProgram;

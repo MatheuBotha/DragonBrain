@@ -36,7 +36,7 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp) : pdsp(p
     window.create("SwarmVis", 800, 600, 0);
 
     //Create the shader program
-    shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
+    shaderProgram.compileShaders("Shaders/landscape2d.vertex.glsl", "Shaders/landscape2d.fragment.glsl");
     shaderProgram.linkShaders();
 
     boundaries = new double[4];
@@ -45,17 +45,20 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp) : pdsp(p
     this->snapshotManager = NULL;
 }
 
-GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager)
+GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager, int width, int height)
+:
+screenWidth(width),
+screenHeight(height)
 {
     std::cout << "Starting Graphics Processor Test" << std::endl;
     //init SDL stuffz
     Engine::init();
 
     //make a window
-    window.create("SwarmVis", 800, 600, 0);
+    window.create("SwarmVis", screenWidth, screenHeight, 0);
 
     //Create the shader program
-    shaderProgram.compileShaders("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
+    shaderProgram.compileShaders("Shaders/landscape2d.vertex.glsl", "Shaders/landscape2d.fragment.glsl");
     shaderProgram.linkShaders();
 
     particleShaderProgram.compileShaders("Shaders/cube.vertex.glsl", "Shaders/cube.fragment.glsl");
@@ -115,16 +118,20 @@ void GraphicsProcessor::run(){
                             return;
                             break;
                         case SDLK_LEFT:
+                        case SDLK_a:
                             Debug::print("Moving LEFT");
                             camera->ProcessKeyboard(LEFT, deltaTime/1000);
                             break;
                         case SDLK_RIGHT:
+                        case SDLK_d:
                             camera->ProcessKeyboard(RIGHT, deltaTime/1000);
                             break;
                         case SDLK_UP:
+                        case SDLK_w:
                             camera->ProcessKeyboard(FORWARD, deltaTime/1000);
                             break;
                         case SDLK_DOWN:
+                        case SDLK_s:
                             camera->ProcessKeyboard(BACKWARD, deltaTime/1000);
                             break;
                         default:
@@ -132,20 +139,22 @@ void GraphicsProcessor::run(){
                     }
                     break;
                 case SDL_MOUSEMOTION:
-                    if(firstMouse)
-                    {
-                        lastX = event.motion.x;
-                        lastY = event.motion.y;
-                        firstMouse = false;
-                    }
 
-                    GLfloat xoffset = event.motion.x - lastX;
-                    GLfloat yoffset = lastY - event.motion.y;  // Reversed since y-coordinates go from bottom to left
 
-                    lastX = event.motion.x;
-                    lastY = event.motion.y;
 
-                    camera->ProcessMouseMovement(xoffset, yoffset);
+
+
+
+
+
+                    cameraPitch = event.motion.x - screenWidth/2;
+                    cameraYaw = screenHeight/2-event.motion.y;  // Reversed since y-coordinates go from bottom to left
+
+                    SDL_WarpMouseInWindow(window.getWindowInstance(), screenWidth/2, screenHeight/2);
+                    SDL_PumpEvents();
+                    SDL_GetKeyboardState(NULL);
+
+                    camera->ProcessMouseMovement(cameraPitch, cameraYaw);
                     break;
             }
         }

@@ -35,7 +35,7 @@ int main()
     ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
     //GGGGGGGG
     int maxIteration = 200;
-    int swarmSize = 3;
+    int swarmSize = 10;
     int dimension = 2;
     SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
     OPT_Process *opt1 = new HillClimber(objective, snapshotManager, false, boundaries);
@@ -45,7 +45,7 @@ int main()
     }
 
     //GGGGGGGG
-    GraphicsProcessor gp(pdsp, snapshotManager);
+    GraphicsProcessor gp(pdsp, snapshotManager, 800, 600);
     gp.setObjective(objective);
     gp.run();
 }

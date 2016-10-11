@@ -26,9 +26,9 @@ void main(void) {
 	if (gl_FrontFacing)
 		factor = 1.0;
 	else
-		factor = 0.5;
+		factor = 0.0;
 
-	gl_FragColor = vec4(1 - graph_coord.z, graph_coord.z, 0.1, 1) * color * factor;
+	gl_FragColor = vec4(1 - graph_coord.z, graph_coord.z, 0.2, 1) * color * factor;
 }
 
 
