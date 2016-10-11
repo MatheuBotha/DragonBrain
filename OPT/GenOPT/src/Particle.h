@@ -171,6 +171,12 @@ public:
         this->personalBestPosition[0] = personalBestPosition[0];
         this->personalBestPosition[1] = personalBestPosition[1];
     }
+
+    ///Getter for best position pointer
+    double * getPersonalBestPos(){
+        return personalBestPosition;
+    }
+
     ///Gets neighbhourhood indices
     vector<int> getNeighbourhoodIndices()
     {

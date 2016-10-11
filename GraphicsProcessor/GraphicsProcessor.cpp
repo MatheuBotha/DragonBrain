@@ -82,6 +82,7 @@ GraphicsProcessor::~GraphicsProcessor(){
     shaderProgram.dispose();
     delete camera;
     delete boundaries;
+    delete particleSystem;
     std::cout << "Ending Graphics Processor Test" << std::endl;
 }
 
@@ -116,10 +117,8 @@ void GraphicsProcessor::run(){
                     switch( event.key.keysym.sym ){
                         case SDLK_q:
                             return;
-                            break;
                         case SDLK_LEFT:
                         case SDLK_a:
-                            Debug::print("Moving LEFT");
                             camera->ProcessKeyboard(LEFT, deltaTime/1000);
                             break;
                         case SDLK_RIGHT:
@@ -139,14 +138,6 @@ void GraphicsProcessor::run(){
                     }
                     break;
                 case SDL_MOUSEMOTION:
-
-
-
-
-
-
-
-
                     cameraPitch = event.motion.x - screenWidth/2;
                     cameraYaw = screenHeight/2-event.motion.y;  // Reversed since y-coordinates go from bottom to left
 

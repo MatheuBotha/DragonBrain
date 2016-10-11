@@ -34,7 +34,7 @@ int main()
 
     ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
     //GGGGGGGG
-    int maxIteration = 200;
+    int maxIteration = 1;
     int swarmSize = 10;
     int dimension = 2;
     SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
@@ -44,8 +44,14 @@ int main()
         opt1->iterate();
     }
 
+
+
     //GGGGGGGG
     GraphicsProcessor gp(pdsp, snapshotManager, 800, 600);
     gp.setObjective(objective);
     gp.run();
+
+    delete snapshotManager;
+    delete opt1;
+    delete boundaries;
 }
