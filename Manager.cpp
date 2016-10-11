@@ -11,6 +11,7 @@ Manager::Manager() {
     snapMan = nullptr;
     optimizer = nullptr;
     objective = nullptr;
+    bounds = new double[4];
 }
 
 Manager::~Manager() {
@@ -49,7 +50,6 @@ void Manager::endGUI() {
 
 void Manager::generateSnapshotManager() {
 
-    double *bounds = new double[4];
     setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
     if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
     {

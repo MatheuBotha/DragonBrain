@@ -65,6 +65,7 @@ private:
     OPT_Process* optimizer;
     std::thread* GUI_Thread;
     GraphicsProcessor* graphicsProcessor;
+    double *bounds;
 public:
 
     ///Constructor for the manager objects
