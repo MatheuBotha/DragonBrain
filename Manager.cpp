@@ -127,6 +127,16 @@ void Manager::initializeOptimizer() {
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
 
 
+
+    double *bounds = new double[4];
+    setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
+    if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
+    {
+        objective->getBounds(bounds);
+        graphicsProcessor->setBounds(bounds);
+        setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
+    }
+
     graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
     graphicsProcessor->setObjective(objective);
 
