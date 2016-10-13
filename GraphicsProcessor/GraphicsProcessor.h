@@ -13,6 +13,7 @@
 #include "../SnapshotManager/SnapshotManager.h"
 #include "Engine/ParticleSystem.h"
 #include "Engine/Camera.h"
+#include "Engine/Timer.h"
 
 
 class GraphicsProcessor {
@@ -39,6 +40,7 @@ private:
     GLSLProgram shaderProgram;
     GLSLProgram particleShaderProgram;
     GLSLProgram boundingBoxShaderProgram;
+    Timer timer;
     SDL_Event event;
 
     ProblemDomainSettingsPackage pdsp;

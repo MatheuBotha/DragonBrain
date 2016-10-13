@@ -10,6 +10,7 @@
 #include "../../SettingsPackage/src/problemdomainsettingspackage.h"
 #include "../../SnapshotManager/SnapshotManager.h"
 #include "../../OPT/GenOPT/src/HillClimber.h"
+#include "../../OPT/GenOPT/src/ElitistHillClimber.h"
 
 int main()
 {
@@ -32,26 +33,20 @@ int main()
     pdsp.setBoundaries(boundaries);
 
 
-    ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
+    ObjectiveFunction* objective = new SaddleObjective(1, 0, 0, 0);
     //GGGGGGGG
-    int maxIteration = 1;
-    int swarmSize = 10;
+    int maxIteration = 2;
+    int swarmSize = 3;
     int dimension = 2;
     SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
-    OPT_Process *opt1 = new HillClimber(objective, snapshotManager, false, boundaries);
+    OPT_Process *opt1 = new ElitistHillClimber(objective, snapshotManager, false, boundaries);
 
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
     }
 
-
-
     //GGGGGGGG
     GraphicsProcessor gp(pdsp, snapshotManager, 800, 600);
     gp.setObjective(objective);
     gp.run();
-
-    delete snapshotManager;
-    delete opt1;
-    delete boundaries;
 }

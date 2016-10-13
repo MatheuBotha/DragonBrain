@@ -77,6 +77,9 @@ set(SOURCE_FILES
         Engine/BoundingBox.cpp
         Engine/BoundingBox.h
 
+        Engine/Timer.cpp
+        Engine/Timer.h
+
         ../OPT/GenOPT/src/ObjectiveFunction.h
         ../OPT/GenOPT/src/SaddleObjective.cpp
         ../OPT/GenOPT/src/SinObjective.cpp

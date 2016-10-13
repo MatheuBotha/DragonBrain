@@ -75,6 +75,9 @@ set(SOURCE_FILES
         ../Engine/BoundingBox.cpp
         ../Engine/BoundingBox.h
 
+        ../Engine/Timer.cpp
+        ../Engine/Timer.h
+
         ../../OPT/GenOPT/src/ObjectiveFunction.h
         ../../OPT/GenOPT/src/SaddleObjective.cpp
         ../../OPT/GenOPT/src/SinObjective.cpp
@@ -82,6 +85,7 @@ set(SOURCE_FILES
         ../../SettingsPackage/src/problemdomainsettingspackage.cpp
         ../../OPT/GenOPT/src/WeierstrassObjective.cpp
         ../../OPT/GenOPT/src/HillClimber.cpp
+        ../../OPT/GenOPT/src/ElitistHillClimber.cpp
         ../../OPT/GenOPT/src/OPT_Process.cpp
         ../../SnapshotManager/SnapshotManager.cpp
         ../../SnapshotManager/snapshot.cpp

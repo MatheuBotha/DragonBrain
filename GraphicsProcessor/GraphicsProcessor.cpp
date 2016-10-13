@@ -74,6 +74,8 @@ screenHeight(height)
 
     camera = new Camera(glm::vec3(0.0f, 2.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90, -45);
     SDL_ShowCursor(SDL_DISABLE);
+
+    timer.setMaxFPS(60.0f);
 }
 
 
@@ -100,6 +102,7 @@ void GraphicsProcessor::run(){
 
 
     while(true){
+        timer.begin();
         // Set frame time
         GLfloat currentFrame = SDL_GetTicks()/1;
         deltaTime = currentFrame - lastFrame;
@@ -158,13 +161,15 @@ void GraphicsProcessor::run(){
 
         particleSystem->draw(deltaTime);
 
-        bb.activateShader();
-        bb.setModel();
-        bb.scale(glm::vec3(2.0f));
-        bb.draw(deltaTime);
-        bb.deactivateShader();
+//        bb.activateShader();
+//        bb.setModel();
+//        bb.scale(glm::vec3(2.0f));
+//        bb.draw(deltaTime);
+//        bb.deactivateShader();
 
         window.swapBuffer();
+        //std::cout << "fps = " << timer.end() << std::endl;
+        timer.end();
     }
 
 }
