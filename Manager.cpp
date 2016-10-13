@@ -11,6 +11,7 @@ Manager::Manager() {
     snapMan = nullptr;
     optimizer = nullptr;
     objective = nullptr;
+    bounds = new double[4];
 }
 
 Manager::~Manager() {
@@ -49,7 +50,6 @@ void Manager::endGUI() {
 
 void Manager::generateSnapshotManager() {
 
-    double *bounds = new double[4];
     setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
     if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
     {
@@ -125,7 +125,7 @@ void Manager::initializeOptimizer() {
         objective = new WeierstrassObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Zakharov")
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
-
+    
 
     graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
     graphicsProcessor->setObjective(objective);
@@ -144,7 +144,6 @@ void Manager::initializeOptimizer() {
     else if(optAlg == "Guaranteed Convergence PSO")
         optimizer = new GCPSO(objective, snapMan, false, bounds, setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
                 setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
-
 
 
     delete [] trans;
