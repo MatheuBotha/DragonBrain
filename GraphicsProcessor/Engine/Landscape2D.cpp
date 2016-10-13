@@ -25,7 +25,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     uniform_color = textureProgram.getUniformLocation("color");
 
     // Create our datapoints, store it as bytes
-#define N 1000
+#define N 256
 
     //set up graph variables
 
@@ -251,6 +251,11 @@ double* Landscape2D::getBoundaries()
 double Landscape2D::getZMin()
 {
     return zMin;
+
+//    double* parameters = new double[2];
+//    parameters[0] = currentX;
+//    parameters[1] = currentY;
+//    results[i][j] = objective->functionInput(parameters);
 }
 
 double Landscape2D::getZMax()
@@ -260,7 +265,7 @@ double Landscape2D::getZMax()
 
 double Landscape2D::normalize(double value)
 {
-    return ((((1-(-1))*(value - zMin))/(zMax - zMin))-1);
+    return ((((1-(-1))*(value - zMin))/(zMax - zMin))+(-1));
 }
 
 void Landscape2D::setCamera(Camera* camera)

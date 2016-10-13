@@ -84,6 +84,7 @@ set(SOURCE_FILES
         ../../OPT/GenOPT/src/AckleyObjective.cpp
         ../../SettingsPackage/src/problemdomainsettingspackage.cpp
         ../../OPT/GenOPT/src/WeierstrassObjective.cpp
+        ../../OPT/GenOPT/src/QuadricObjective.cpp
         ../../OPT/GenOPT/src/HillClimber.cpp
         ../../OPT/GenOPT/src/ElitistHillClimber.cpp
         ../../OPT/GenOPT/src/OPT_Process.cpp

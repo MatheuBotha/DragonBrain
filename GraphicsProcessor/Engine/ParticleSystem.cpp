@@ -11,6 +11,13 @@ ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram sha
     this->snapshotManager = snapshotManager;
     this->shaderProgram = shaderProgram;
     this->landscape = landscape;
+
+    printf("xMin = %f\n", landscape->getBoundaries()[0]);
+    printf("xMax = %f\n", landscape->getBoundaries()[1]);
+
+    printf("yMin = %f\n", landscape->getBoundaries()[2]);
+    printf("yMax = %f\n", landscape->getBoundaries()[3]);
+
     printf("zMin = %f\n", landscape->getZMin());
     printf("zMax = %f\n", landscape->getZMax());
 
@@ -51,13 +58,13 @@ void ParticleSystem::draw(GLfloat deltaTime)
             //get the x y position
             double* pos = new double[2];
             swarm[i]->getPositionArray(pos);
-//            printf("x = %f\n", pos[0]);
-//            printf("scaled x = %f\n", scaleX(pos[0]));
-//            printf("y = %f\n", pos[1]);
-//            printf("scaled y = %f\n", scaleY(pos[1]));
-//            printf("z = %f\n", swarm[i]->getFitnessValue());
-//            printf("normalized z = %f\n", scaleZ(swarm[i]->getFitnessValue()));
-//            printf("\n\n");
+            printf("x = %f\n", pos[0]);
+            printf("scaled x = %f\n", scaleX(pos[0]));
+            printf("y = %f\n", pos[1]);
+            printf("scaled y = %f\n", scaleY(pos[1]));
+            printf("z = %f\n", swarm[i]->getFitnessValue());
+            printf("normalized z = %f\n", scaleZ(swarm[i]->getFitnessValue()));
+            printf("\n\n");
 
             particle->setModel();
             //particle->translate(glm::vec3(scaleX(-1), scaleZ(-1), scaleY(1)));

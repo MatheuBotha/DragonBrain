@@ -161,11 +161,12 @@ void GraphicsProcessor::run(){
 
         particleSystem->draw(deltaTime);
 
-//        bb.activateShader();
-//        bb.setModel();
-//        bb.scale(glm::vec3(2.0f));
-//        bb.draw(deltaTime);
-//        bb.deactivateShader();
+        bb.activateShader();
+        bb.setModel();
+        bb.translate(glm::vec3(0.0f, 0.5f, 0.0f));
+        bb.scale(glm::vec3(2.0f, 1.0f, 2.0f));
+        bb.draw(deltaTime);
+        bb.deactivateShader();
 
         window.swapBuffer();
         //std::cout << "fps = " << timer.end() << std::endl;
