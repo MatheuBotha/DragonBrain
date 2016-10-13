@@ -37,14 +37,38 @@ int main()
     ObjectiveFunction* objective = new QuadricObjective(1, 0, 0, 0);
     //GGGGGGGG
     int maxIteration = 2;
-    int swarmSize = 3;
+    int swarmSize = 1;
     int dimension = 2;
     SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
 
     //******************************************************************************************************************
     //  Here Please
     //******************************************************************************************************************
+    double* minPosition = new double[2];
+    double* maxPosition = new double[2];
 
+    double minValue;
+    double maxValue;
+
+    Snapshot *minSnapshot = new Snapshot(swarmSize,dimension,boundaries);
+    Snapshot *maxSnapshot = new Snapshot(swarmSize,dimension,boundaries);
+
+    minPosition[0]=0.0;
+    minPosition[1]=0.0;
+
+    maxPosition[0]=boundaries[1];
+    maxPosition[1]=boundaries[3];
+
+    minValue = objective->functionInput(minPosition);
+    maxValue = objective->functionInput(maxPosition);
+
+    minSnapshot->getSwarm()[0]->setParticlePosition(minPosition);
+    maxSnapshot->getSwarm()[0]->setParticlePosition(maxPosition);
+    minSnapshot->getSwarm()[0]->setFitnessValue(minValue);
+    maxSnapshot->getSwarm()[0]->setFitnessValue(maxValue);
+
+    snapshotManager->enqueue(minSnapshot);
+    snapshotManager->enqueue(maxSnapshot);
     //******************************************************************************************************************
     //  End: Here Please
     //******************************************************************************************************************
