@@ -243,6 +243,11 @@ void Landscape2D::setObjective(ObjectiveFunction* objective)
     this->objective = objective;
 }
 
+ObjectiveFunction* Landscape2D::getObjective()
+{
+    return objective;
+}
+
 double* Landscape2D::getBoundaries()
 {
     return boundaries;

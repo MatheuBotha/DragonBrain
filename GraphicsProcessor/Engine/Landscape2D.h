@@ -18,6 +18,7 @@ public:
     void draw();
 
     void setObjective(ObjectiveFunction* objective);
+    ObjectiveFunction* getObjective();
 
     double* getBoundaries();
     double getZMin();

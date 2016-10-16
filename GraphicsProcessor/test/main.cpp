@@ -27,16 +27,16 @@ int main()
 
     //set boundaries
     double* boundaries = new double[4];
-    boundaries[0] = -1;
-    boundaries[1] = 1;
-    boundaries[2] = -1;
-    boundaries[3] = 1;
+    boundaries[0] = -10.0;
+    boundaries[1] = 10.0;
+    boundaries[2] = -10.0;
+    boundaries[3] = 10.0;
     pdsp.setBoundaries(boundaries);
 
 
-    ObjectiveFunction* objective = new QuadricObjective(1, 0, 0, 0);
+    ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
     //GGGGGGGG
-    int maxIteration = 2;
+    int maxIteration = 4;
     int swarmSize = 1;
     int dimension = 2;
     SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
@@ -44,31 +44,47 @@ int main()
     //******************************************************************************************************************
     //  Here Please
     //******************************************************************************************************************
-    double* minPosition = new double[2];
-    double* maxPosition = new double[2];
-
-    double minValue;
-    double maxValue;
-
-    Snapshot *minSnapshot = new Snapshot(swarmSize,dimension,boundaries);
-    Snapshot *maxSnapshot = new Snapshot(swarmSize,dimension,boundaries);
-
-    minPosition[0]=0.0;
-    minPosition[1]=0.0;
-
-    maxPosition[0]=boundaries[1];
-    maxPosition[1]=boundaries[3];
-
-    minValue = objective->functionInput(minPosition);
-    maxValue = objective->functionInput(maxPosition);
-
-    minSnapshot->getSwarm()[0]->setParticlePosition(minPosition);
-    maxSnapshot->getSwarm()[0]->setParticlePosition(maxPosition);
-    minSnapshot->getSwarm()[0]->setFitnessValue(minValue);
-    maxSnapshot->getSwarm()[0]->setFitnessValue(maxValue);
-
-    snapshotManager->enqueue(minSnapshot);
-    snapshotManager->enqueue(maxSnapshot);
+//    double* minPosition = new double[2];
+//    double minValue;
+//    Snapshot *minSnapshot = new Snapshot(swarmSize,dimension,boundaries);
+//    minPosition[0]=0.0;
+//    minPosition[1]=0.0;
+//    minValue = objective->functionInput(minPosition);
+//    minSnapshot->getSwarm()[0]->setParticlePosition(minPosition);
+//    minSnapshot->getSwarm()[0]->setFitnessValue(minValue);
+//    snapshotManager->enqueue(minSnapshot);
+//
+//
+//    double* halfPosition = new double[2];
+//    double halfValue;
+//    Snapshot *halfSnapshot = new Snapshot(swarmSize,dimension,boundaries);
+//    halfPosition[0]=boundaries[0];
+//    halfPosition[1]=boundaries[2];
+//    halfValue = objective->functionInput(halfPosition);
+//    halfSnapshot->getSwarm()[0]->setParticlePosition(halfPosition);
+//    halfSnapshot->getSwarm()[0]->setFitnessValue(halfValue);
+//    snapshotManager->enqueue(halfSnapshot);
+//
+//    double* thirdPosition = new double[2];
+//    double thirdValue;
+//    Snapshot *thirdSnapshot = new Snapshot(swarmSize,dimension,boundaries);
+//    thirdPosition[0]=boundaries[1];
+//    thirdPosition[1]=boundaries[2];
+//    thirdValue = objective->functionInput(thirdPosition);
+//    thirdSnapshot->getSwarm()[0]->setParticlePosition(thirdPosition);
+//    thirdSnapshot->getSwarm()[0]->setFitnessValue(thirdValue);
+//    snapshotManager->enqueue(thirdSnapshot);
+//
+//
+//    double* maxPosition = new double[2];
+//    double maxValue;
+//    Snapshot *maxSnapshot = new Snapshot(swarmSize,dimension,boundaries);
+//    maxPosition[0]=boundaries[1];
+//    maxPosition[1]=boundaries[3];
+//    maxValue = objective->functionInput(maxPosition);
+//    maxSnapshot->getSwarm()[0]->setParticlePosition(maxPosition);
+//    maxSnapshot->getSwarm()[0]->setFitnessValue(maxValue);
+//    snapshotManager->enqueue(maxSnapshot);
     //******************************************************************************************************************
     //  End: Here Please
     //******************************************************************************************************************
@@ -83,4 +99,6 @@ int main()
     GraphicsProcessor gp(pdsp, snapshotManager, 1280, 720);
     gp.setObjective(objective);
     gp.run();
+
+    delete snapshotManager;
 }

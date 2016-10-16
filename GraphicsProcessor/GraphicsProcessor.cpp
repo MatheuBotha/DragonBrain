@@ -100,7 +100,6 @@ void GraphicsProcessor::run(){
     bb.setCamera(camera);
 
 
-
     while(true){
         timer.begin();
         // Set frame time
@@ -155,6 +154,7 @@ void GraphicsProcessor::run(){
         //Render
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         shaderProgram.use();
         l.draw();
         shaderProgram.unuse();
@@ -169,7 +169,7 @@ void GraphicsProcessor::run(){
         bb.deactivateShader();
 
         window.swapBuffer();
-        //std::cout << "fps = " << timer.end() << std::endl;
+        std::cout << "fps = " << timer.end() << std::endl;
         timer.end();
     }
 

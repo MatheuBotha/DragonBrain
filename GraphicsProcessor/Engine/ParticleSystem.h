@@ -26,6 +26,16 @@ public:
 
     void setCamera(Camera* camera);
 
+    glm::vec3 getCurrentPosition(Particle* from, Particle* to);
+
+    glm::vec3 getParticleVector(Particle* particle);
+
+    glm::vec3 scaleParticleVector(glm::vec3 particleVector);
+
+    void printParticleDetails(Particle* particle);
+
+
+
 protected:
 private:
     SnapshotManager* snapshotManager;
@@ -34,6 +44,16 @@ private:
     Camera* camera;
 
     Mesh* particle;
+
+    //Animation
+    Snapshot* fromSnapshot;
+    Snapshot* toSnapshot;
+    glm::vec3 currentDirection;
+    glm::vec3 currentPosition;
+    unsigned int animationSpeed;
+    unsigned int animationTime;
+
+
 };
 
 
