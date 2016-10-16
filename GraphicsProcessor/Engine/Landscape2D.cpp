@@ -25,7 +25,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     uniform_color = textureProgram.getUniformLocation("color");
 
     // Create our datapoints, store it as bytes
-#define N 256
+#define N 1000
 
     //set up graph variables
 

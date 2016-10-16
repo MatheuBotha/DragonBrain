@@ -48,10 +48,10 @@ void ParticleSystem::draw(GLfloat deltaTime)
 //        printf("Going to\n");
 //        printParticleDetails(toSnapshot->getSwarm()[i]);
 
-        printf("Current Position\n");
-        printf("x = %f\n", currentPosition.x);
-        printf("y = %f\n", currentPosition.y);
-        printf("z = %f\n", currentPosition.z);
+//        printf("Current Position\n");
+//        printf("x = %f\n", currentPosition.x);
+//        printf("y = %f\n", currentPosition.y);
+//        printf("z = %f\n", currentPosition.z);
 
 
         particle->setModel();
@@ -64,14 +64,14 @@ void ParticleSystem::draw(GLfloat deltaTime)
 //           getParticleVector(toSnapshot->getSwarm()[i]).z != currentPosition.z
         )
         {
-            printf("\n\n\n\n\n\n\nDone animating\n\n\n\n\n\n\n");
+            //printf("\n\n\n\n\n\n\nDone animating\n\n\n\n\n\n\n");
             particle->translate(scaleParticleVector(getParticleVector(toSnapshot->getSwarm()[i])));
             stagnantParticles++;
 
         }
         else
         {
-            printf("still animating\n");
+            //printf("still animating\n");
             particle->translate(scaleParticleVector(currentPosition));
         }
 
@@ -196,4 +196,9 @@ glm::vec3 ParticleSystem::scaleParticleVector(glm::vec3 particleVector)
     particleVector.z = scaleY(particleVector.z);
 
     return particleVector;
+}
+
+void ParticleSystem::setAnimationSpeed(unsigned int animationSpeed)
+{
+    this->animationSpeed = animationSpeed;
 }

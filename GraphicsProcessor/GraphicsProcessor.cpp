@@ -94,6 +94,7 @@ void GraphicsProcessor::run(){
     printf("Making Particle System\n");
     particleSystem = new ParticleSystem(snapshotManager, particleShaderProgram, &l);
     particleSystem->setCamera(camera);
+    particleSystem->setAnimationSpeed(50);
     printf("Finished making particle system\n");
 
     BoundingBox bb(boundingBoxShaderProgram);
@@ -155,6 +156,7 @@ void GraphicsProcessor::run(){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        
         shaderProgram.use();
         l.draw();
         shaderProgram.unuse();
@@ -169,7 +171,7 @@ void GraphicsProcessor::run(){
         bb.deactivateShader();
 
         window.swapBuffer();
-        std::cout << "fps = " << timer.end() << std::endl;
+        //std::cout << "fps = " << timer.end() << std::endl;
         timer.end();
     }
 

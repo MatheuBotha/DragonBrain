@@ -1,11 +1,12 @@
-#version 130
-in mediump vec2 TexCoord;
+#version 330 core
 
-out mediump vec4 color;
+in vec2 TexCoord;
+
+out vec4 color;
 
 uniform sampler2D ourTexture1;
 
 void main()
 {
-    gl_FragColor = vec4(texture2D(ourTexture1, TexCoord));
+    color = vec4(texture(ourTexture1, TexCoord));
 }

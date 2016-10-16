@@ -18,7 +18,7 @@
 //	TexCoord = vec2(texCoord.x, 1.0 - texCoord.y);
 //}
 
-in vec2 coord2d;
+attribute vec2 coord2d;
 varying vec4 graph_coord;
 uniform mat4 vertex_transform;
 uniform sampler2D mytexture;

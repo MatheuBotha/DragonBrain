@@ -27,17 +27,17 @@ int main()
 
     //set boundaries
     double* boundaries = new double[4];
-    boundaries[0] = -10.0;
-    boundaries[1] = 10.0;
-    boundaries[2] = -10.0;
-    boundaries[3] = 10.0;
+    boundaries[0] = -1.0;
+    boundaries[1] = 1.0;
+    boundaries[2] = -1.0;
+    boundaries[3] = 1.0;
     pdsp.setBoundaries(boundaries);
 
 
-    ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
+    ObjectiveFunction* objective = new WeierstrassObjective(1, 0, 0, 0);
     //GGGGGGGG
-    int maxIteration = 4;
-    int swarmSize = 1;
+    int maxIteration = 100;
+    int swarmSize = 1000;
     int dimension = 2;
     SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
 
@@ -94,6 +94,7 @@ int main()
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
     }
+
 
     //GGGGGGGG
     GraphicsProcessor gp(pdsp, snapshotManager, 1280, 720);

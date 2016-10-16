@@ -34,6 +34,8 @@ public:
 
     void printParticleDetails(Particle* particle);
 
+    void setAnimationSpeed(unsigned int animationSpeed);
+
 
 
 protected:

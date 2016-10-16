@@ -54,11 +54,8 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
     //Check the OpenGL version
     std::printf("***   OpenGL Version: %s   ***\n", glGetString(GL_VERSION));
 
-    //Set the background color to black
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
     //Set VSYNC
-    SDL_GL_SetSwapInterval(0);
+    SDL_GL_SetSwapInterval(1);
 
     // Enable alpha blend
     glEnable(GL_BLEND);
