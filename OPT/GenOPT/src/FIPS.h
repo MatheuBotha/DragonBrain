@@ -14,7 +14,7 @@ private:
 public:
     FIPS();
 
-    FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int size,double w,double bounds[4]);
+    FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,int size,double w,double bounds[4],double s,double c);
 
     virtual void updateVelocity(Particle *particle,Particle ** swarm,int ss,int index);
 
