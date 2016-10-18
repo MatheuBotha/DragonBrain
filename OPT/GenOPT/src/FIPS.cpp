@@ -4,7 +4,7 @@
 
 #include "FIPS.h"
 
-FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, int size,double wA,double boundsD[4]) : PSO(pFunction, pManager, i,boundsD) {
+FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, int size,double wA,double boundsD[4],double s,double c) : PSO(pFunction, pManager, i,boundsD,s,c) {
 nSize=size;
     constrictionCoefficient=wA;
     for(int i=0;i<4;i++)
