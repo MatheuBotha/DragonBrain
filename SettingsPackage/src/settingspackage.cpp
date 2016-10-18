@@ -1,6 +1,7 @@
 #include "settingspackage.h"
 #include <cstdlib>
 #include <stdlib.h>
+#include <iostream>
 
 SettingsPackage::SettingsPackage()
 {
@@ -17,9 +18,10 @@ int SettingsPackage::getSwarmSize()
 }
 
 
-void SettingsPackage::generateSettingsGeneral(int sSize)
+void SettingsPackage::generateSettingsGeneral(int sSize, int instances)
 {
     swarmSize = sSize;
+    numInstances = instances;
 }
 
 GraphicsSettingsPackage* SettingsPackage::getGraphicsSettingsPackage()
@@ -39,36 +41,29 @@ ProblemDomainSettingsPackage* SettingsPackage::getProblemDomainSettingsPackage()
 
 
 // Some manual labour to be done here, nothing special at all
-void SettingsPackage::generateSettingsGraphics(QString resolution, int renderSpeed, bool showLinks, bool showPath, int maxRam)
+void SettingsPackage::generateSettingsGraphics(QString resolution, bool showLinks, bool showPath)
 {
     std::string res = resolution.toStdString();
     int resW = atoi(res.substr(0,res.find('x')).c_str());
     int resH = atoi(res.substr(res.find('x')+1, res.length()).c_str());
-    gpPkg->setMaxRam(maxRam);
-    gpPkg->setRenderSpeed(renderSpeed);
     gpPkg->setShowLinks(showLinks);
     gpPkg->setShowPath(showPath);
     gpPkg->setResolutionH(resH);
     gpPkg->setResolutionW(resW);
 }
 
-void SettingsPackage::generateSettingsOptimizer(QString algorithm, bool userInitialParticles,QString particlePlacement, double InertiaWeight, double cognitiveCoefficient, double socialCoefficient, int maxIterations, int cutoffAcc,
+void SettingsPackage::generateSettingsOptimizer(QString algorithm, QString algo2, QString algo3, QString algo4, int maxIterations, double cog, double soc,
                                                 double constrictionCoeff, double maxVelo, int success, int fail, int neighbourSize)
 {
-    optPkg->setAlgorithm(algorithm.toStdString());
-    if(userInitialParticles)
-        optPkg->setParticlePlacementString(particlePlacement.toStdString());
-    else optPkg->setParticlePlacementString("");
-    optPkg->setInertiaWeight(InertiaWeight);
-    optPkg->setCognitiveCoefficient(cognitiveCoefficient);
-    optPkg->setSocialCoefficient(socialCoefficient);
+    optPkg->setAlgorithms(algorithm.toStdString(), algo2.toStdString(), algo3.toStdString(), algo4.toStdString());
     optPkg->setMaxIterations(maxIterations);
-    optPkg->setCutoffAcc(cutoffAcc);
     optPkg->setConstrictionCoefficient(constrictionCoeff);
     optPkg->setMaxVelocity(maxVelo);
     optPkg->setSuccessCount(success);
     optPkg->setFailCount(fail);
     optPkg->setNeighbourhoodSize(neighbourSize);
+    optPkg->setSocialCoefficient(soc);
+    optPkg->setCognitiveCoefficient(cog);
 }
 
 
@@ -104,3 +99,13 @@ bool SettingsPackage::isLocked() {
     return locked;
 }
 
+
+void SettingsPackage::updateSettings(double transA, double transB, double transC, double transD, double maxVelocity,
+                                     int succ, int fail)
+{
+    double transformations[4] = {transA, transB, transC, transD};
+    probPkg->setTransformations(transformations);
+    optPkg->setMaxVelocity(maxVelocity);
+    optPkg->setSuccessCount(succ);
+    optPkg->setFailCount(fail);
+}

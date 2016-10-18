@@ -5,6 +5,8 @@
 #include "Manager.h"
 #include "OPT/GenOPT/src/FIPS.h"
 #include "OPT/GenOPT/src/GCPSO.h"
+#include "OPT/GenOPT/src/ElitistHillClimber.h"
+#include "OPT/GenOPT/src/GeneticAlgorithm.h"
 
 Manager::Manager() {
     setPkg = new SettingsPackage();
@@ -50,28 +52,6 @@ void Manager::endGUI() {
 
 void Manager::generateSnapshotManager() {
 
-    setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
-    if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
-    {
-        objective->getBounds(bounds);
-        graphicsProcessor->setBounds(bounds);
-        setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
-    }
-
-    snapMan = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
-                                    setPkg->getSwarmSize(), setPkg->getProblemDomainSettingsPackage()->getDimensions(),
-                                  bounds);
-}
-
-SnapshotManager *Manager::getSnapshotManager() {
-    return snapMan;
-}
-
-SettingsPackage *Manager::getSettingsPackage() {
-    return setPkg;
-}
-
-void Manager::initializeOptimizer() {
     std::string objFun = setPkg->getProblemDomainSettingsPackage()->getObjectiveFunction();
     double* trans = new double[4];
     setPkg->getProblemDomainSettingsPackage()->getTransformations(trans);
@@ -125,28 +105,57 @@ void Manager::initializeOptimizer() {
         objective = new WeierstrassObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Zakharov")
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
-    
+    delete [] trans;
 
-    graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
-    graphicsProcessor->setObjective(objective);
+ //   graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
+   // graphicsProcessor->setObjective(objective);
 
-    std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm();
+    setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
+    if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
+    {
+        objective->getBounds(bounds);
+//        graphicsProcessor->setBounds(bounds);
+        setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
+    }
+
+    snapMan = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
+                                    setPkg->getSwarmSize(), setPkg->getProblemDomainSettingsPackage()->getDimensions(),
+                                  bounds);
+}
+
+SnapshotManager *Manager::getSnapshotManager() {
+    return snapMan;
+}
+
+SettingsPackage *Manager::getSettingsPackage() {
+    return setPkg;
+}
+
+void Manager::initializeOptimizer() {
+
+    std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm(1);
     if(optAlg == "Hill Climbing") {
         optimizer = new HillClimber(objective, snapMan, false, bounds);
     }
     else if(optAlg == "Particle Swarm Optimization")
-        optimizer = new PSO(objective, snapMan, false, bounds);
+        optimizer = new PSO(objective, snapMan, false, bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
+                            setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
     else if(optAlg == "Conical PSO")
-        optimizer = new CPSO(objective, snapMan, false, setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), setPkg->getOptimizerSettingsPackage()->getMaxVelocity(), bounds);
+        optimizer = new CPSO(objective, snapMan, false, setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), setPkg->getOptimizerSettingsPackage()->getMaxVelocity(),
+                             bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(), setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
     else if(optAlg == "Fully Informed PSO")
         optimizer = new FIPS(objective, snapMan, false,
-                             setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), bounds);
+                             setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+                             bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(), setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
     else if(optAlg == "Guaranteed Convergence PSO")
         optimizer = new GCPSO(objective, snapMan, false, bounds, setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
-                setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
+                setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+        setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(), setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+    else if(optAlg == "Elitist Hill Climbing")
+        optimizer = new ElitistHillClimber(objective, snapMan, false, bounds);
+    else if(optAlg == "Genetic Algorithm")
+        optimizer = new GeneticAlgorithm(objective, snapMan, false, bounds);
 
-
-    delete [] trans;
 }
 
 void Manager::optimize() {

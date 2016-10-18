@@ -9,35 +9,34 @@
 
 TEST(basic_check, test_GeneralPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsGeneral(20);
+    setPkg.generateSettingsGeneral(20, 1);
     EXPECT_EQ(20, setPkg.getSwarmSize());
 }
 
 
 TEST(basic_check, test_GraphicsPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsGraphics("ResolutionString", 15, true, false, 9);
+    setPkg.generateSettingsGraphics("ResolutionString",true, false);
     GraphicsSettingsPackage* gPkg = setPkg.getGraphicsSettingsPackage();
 
-    EXPECT_EQ(15, gPkg->getRenderSpeed());
     EXPECT_TRUE(gPkg->getShowLinks());
     EXPECT_FALSE(gPkg->getShowPath());
-    EXPECT_EQ(9, gPkg->getMaxRam());
 }
 
 
 TEST(basic_check, test_OptimizerPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsOptimizer("HilClimber", true, "TempString", 0.5, 7.9, 120000.4123, 12, 21, 1.0, 50.0, 15, 5, 2);
+    setPkg.generateSettingsOptimizer("HillClimber", "HillClimber", "HillClimber", "HillClimber",  21, 5.3, 2.6, 1.0, 50.0, 15, 5, 2);
 
     OptimizerSettingsPackage* oPkg = setPkg.getOptimizerSettingsPackage();
 
-    EXPECT_EQ("TempString", oPkg->getParticlePlacementString());
-    EXPECT_EQ(0.5, oPkg->getInertiaWeight());
-    EXPECT_EQ(7.9, oPkg->getCognitiveCoefficient());
-    EXPECT_EQ(120000.4123, oPkg->getSocialCoefficient());
-    EXPECT_EQ(12, oPkg->getMaxIterations());
-    EXPECT_EQ(21, oPkg->getCutoffAcc());
+    EXPECT_EQ("HillClimber", oPkg->getAlgorithm(1));
+    EXPECT_EQ(21, oPkg->getMaxIterations());
+    EXPECT_EQ(1.0, oPkg->getConstrictionCoefficient());
+    EXPECT_EQ(50.0, oPkg->getMaxVelocity());
+    EXPECT_EQ(15, oPkg->getSuccessCount());
+    EXPECT_EQ(5, oPkg->getFailCount());
+    EXPECT_EQ(2, oPkg->getNeighbourhoodSize());
 
 }
 
@@ -62,7 +61,3 @@ TEST(basic_check, test_DomainPackage) {
     EXPECT_EQ(7.0, transCheck[2]);
 }
 
-
-TEST(basic_check, test_Locking) {
-    SettingsPackage setPkg;
-}

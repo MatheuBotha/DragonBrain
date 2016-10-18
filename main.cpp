@@ -18,15 +18,9 @@ int main()
     swarmMan->generateSnapshotManager();
     swarmMan->initializeOptimizer();
     swarmMan->optimize();
-    swarmMan->getGraphicsProcessor()->run();
+    //swarmMan->getGraphicsProcessor()->run();
     std::cout << "APPLES" << std::endl;
-/*    ObjectiveFunction *obj1 = new SinObjective();
-    OPT_Process *opt1 = new HillClimber(obj1, swarmMan->getSnapshotManager(), true);
 
-    for(int i=0;i<setts->getOptimizerSettingsPackage()->getMaxIterations();i++){
-        opt1->iterate();
-    }
-  */
     swarmMan->endGUI();
     delete swarmMan;
     return 0;

@@ -949,113 +949,41 @@ GroupBox{
 
     }
 
-    Slider {
-        id: renderSlider
-        x: 0.1 * parent.width
-        y: 0.5* parent.height
-        width: 0.75 * parent.width
-        height: 0.2 * parent.height
-        spacing: 3
-        stepSize: 1
-        to: 120
-        from: 0
-        snapMode: Slider.SnapAlways
-        value: 60
-    }
 
-    Label {  wrapMode: Text.WordWrap
-        id: renderLabel
-        anchors.horizontalCenter: renderSlider.horizontalCenter
-        anchors.bottom: renderValLabel.top
-        color: "#ffffff"
-        text: qsTr("Render Speed - ")
-        font.pixelSize: fontSize
+ComboBox {
+        id: objectiveChoice
+        anchors.bottom: instancesLabel.top
+        y: 0.15 * Screen.desktopAvailableHeight
+        width: 0.8 * parent.width
+        height: 0.1 * Screen.desktopAvailablHeight
+
+        transformOrigin: Item.Left
+        opacity: 0.8
+        clip: true
+        model: [ "Alpine", "Beale", "Bohachevsky", "EggHolder", "GoldSteinPrice", "Griewank", "Levy13",
+        "Michalewicz", "Pathological", "Quadric", "Quartic", "Rana", "Rastrigin", "Rosenbrock", "Saddle", "Salomon", "Schwefel22",
+         "Schwefel26", "Sin", "SixHumpCamelBack", "SkewRastrigin", "Spherical", "Step", "Weierstrass", "Zakharov"]
+        currentIndex: 0
+        font.pixelSize: 20
         font.bold: true
-    }
-
-    Label {  wrapMode: Text.WordWrap
-        id: ramLabel
-        anchors.horizontalCenter: ramSlider.horizontalCenter
-        anchors.bottom: ramValLabel.top
-        anchors.top: renderSlider.bottom
-        y: 274
-        color: "#ffffff"
-        text: qsTr("Max Ram Use - ")
-        font.pixelSize: fontSize
-        font.bold: true
-    }
-
-    Slider {
-        id: ramSlider
-        x: 0.1 * parent.width
-        y: 0.7 * parent.height
-        width: 0.75 * parent.width
-        height: 0.2 * parent.height
-        stepSize: 1
-        snapMode: Slider.SnapAlways
-        to: 2048
-        from: 0
-        value: 512
-
-    }
-
-    Label {  wrapMode: Text.WordWrap
-        id: renderValLabel
-        anchors.horizontalCenter: renderSlider.horizontalCenter
-        anchors.bottom: renderSlider.top
-        color: "#ffffff"
-        text: qsTr(renderSlider.value.toString())
-        font.pixelSize: fontSize
-        font.bold: true
-
-    }
-
-    Label {  wrapMode: Text.WordWrap
-        id: ramValLabel
-        anchors.horizontalCenter: ramSlider.horizontalCenter
-        anchors.bottom: ramSlider.top
-        color: "#ffffff"
-        text: qsTr(ramSlider.value.toString())
-        font.pixelSize: fontSize
-        font.bold: true
+        font.family: "Helvetica"
 
     }
 }
 
-/*
-Button {
-    id: positionFile
-    x: 44
-    y: 395
-    width: 157
-    height: 40
-    text: qsTr("Positions Text File")
-    opacity: 0.7
-    onClicked: fileChooser.visible = true;
-    visible: userPosbutton.checked
-}
 
-TextField { font.pixelSize: fontSize
-    id: positionText
-    x: 217
-    y: 395
-    width: 398
-    height: 40
-    color: "#ffffff"
-    font.pixelSize: fontSize
-    font.bold: true
-    visible: userPosbutton.checked
-}
 
-FileDialog {
-   id: fileChooser
-   title: "Please choose a file"
-   folder: shortcuts.home
-   onAccepted: {
-       positionText.text = ""+fileChooser.fileUrls;
-   }
-   visible: false
-}*/
+
+
+   Label {
+        id: objectiveLabel
+        anchors.left: objectiveChoice.left
+        y: 0.1 * Screen.desktopAvailableHeight
+        color: "#ffffff"
+        text: qsTr("Objective Function")
+        font.bold: true
+        font.pixelSize: 15
+    }
 
 
 
@@ -1072,7 +1000,7 @@ FileDialog {
                      setPkg.lock(true);
                      setPkg.change(true);
                      setPkg.generateSettingsGeneral(swarmSize.value);
-                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
+                     setPkg.generateSettingsDomain( objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
                                            parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
                      setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value, showLinks.checked,
                                            showPaths.checked,  ramSlider.value);
@@ -1095,18 +1023,16 @@ FileDialog {
         font.family: "Garamond"
         font.pixelSize: 20
         onClicked: {
-          /*           setPkg.lock(true);
+                     setPkg.lock(true);
                      setPkg.change(true);
-                     setPkg.generateSettingsGeneral( swarmSize.value);
-                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, ( oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
+                     setPkg.generateSettingsDomain( objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
                                            parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
                      setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value, showLinks.checked,
                                            showPaths.checked,  ramSlider.value);
                      setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value,
                                             parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
-
-            */        }
+                    }
         opacity: 0.7
     }
 

@@ -14,7 +14,6 @@ ApplicationWindow {
     color: "#222222"
     property alias swipeView: swipeView
     property alias page1: page1
-    property alias page2: page2
     flags: Qt.FramelessWindowHint | Qt.Window
 
 
@@ -36,24 +35,13 @@ ApplicationWindow {
             rotation: 0
         }
 
-        Page2 {
-                    id: page2
-                    x: 0
-                    y: 0
-                    clip: true
-                    rotation: 0
-                }
-
     }
 
     footer: TabBar {
         id: tabBar
         currentIndex: swipeView.currentIndex
         TabButton {
-            text: qsTr("General Config")
-        }
-        TabButton {
-            text: qsTr("Objective Choice")
+            text: qsTr("Config")
         }
     }
 
