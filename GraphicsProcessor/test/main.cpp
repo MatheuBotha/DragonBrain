@@ -34,10 +34,10 @@ int main()
     pdsp.setBoundaries(boundaries);
 
 
-    ObjectiveFunction* objective = new WeierstrassObjective(1, 0, 0, 0);
+    ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
     //GGGGGGGG
-    int maxIteration = 100;
-    int swarmSize = 1000;
+    int maxIteration = 200;
+    int swarmSize = 100;
     int dimension = 2;
     SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
 
@@ -94,6 +94,7 @@ int main()
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
     }
+
 
 
     //GGGGGGGG

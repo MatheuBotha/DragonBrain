@@ -64,6 +64,9 @@ screenHeight(height)
     particleShaderProgram.compileShaders("Shaders/cube.vertex.glsl", "Shaders/cube.fragment.glsl");
     particleShaderProgram.linkShaders();
 
+    sphereShaderProgram.compileShaders("Shaders/sphere.vertex.glsl", "Shaders/sphere.fragment.glsl");
+    sphereShaderProgram.linkShaders();
+
     boundingBoxShaderProgram.compileShaders("Shaders/bounding_box.vertex.glsl", "Shaders/bounding_box.fragment.glsl");
     boundingBoxShaderProgram.linkShaders();
 
@@ -92,7 +95,7 @@ void GraphicsProcessor::run(){
     Landscape2D l(shaderProgram, objective, boundaries);
     l.setCamera(camera);
     printf("Making Particle System\n");
-    particleSystem = new ParticleSystem(snapshotManager, particleShaderProgram, &l);
+    particleSystem = new ParticleSystem(snapshotManager, sphereShaderProgram, &l);
     particleSystem->setCamera(camera);
     particleSystem->setAnimationSpeed(50);
     printf("Finished making particle system\n");

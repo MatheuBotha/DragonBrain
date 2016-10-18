@@ -5,6 +5,8 @@
 #include <SDL/SDL_timer.h>
 #include "ParticleSystem.h"
 #include "Cube.h"
+#include "Sphere.h"
+#include "Sphere2.h"
 
 ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram shaderProgram, Landscape2D* landscape)
 {
@@ -26,7 +28,7 @@ ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram sha
     printf("zMax = %f\n", landscape->getZMax());
 
 
-    particle = new Cube(shaderProgram);
+    particle = new Sphere2(shaderProgram);
     //analyzeSnapshotManager();
 }
 
@@ -75,7 +77,7 @@ void ParticleSystem::draw(GLfloat deltaTime)
             particle->translate(scaleParticleVector(currentPosition));
         }
 
-        particle->scale(glm::vec3(0.1f));
+        particle->scale(glm::vec3(0.05f));
         particle->rotate(glm::radians(SDL_GetTicks() / 10.0f), glm::vec3(0.0f, 1.0f, 1.0f));
         //particle->translate(glm::vec3(0.0f,0.0f,0.3f));
         particle->draw(deltaTime);

@@ -56,6 +56,9 @@ set(SOURCE_FILES
 
         ../Engine/Cube.cpp
 
+        ../Engine/Sphere.cpp
+        ../Engine/Sphere2.cpp
+
         ../Engine/Landscape2D.cpp
 
         ../Engine/Camera.h

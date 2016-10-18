@@ -39,6 +39,7 @@ private:
     GLfloat cameraPitch;
     GLSLProgram shaderProgram;
     GLSLProgram particleShaderProgram;
+    GLSLProgram sphereShaderProgram;
     GLSLProgram boundingBoxShaderProgram;
     Timer timer;
     SDL_Event event;
