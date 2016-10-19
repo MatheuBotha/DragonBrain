@@ -994,7 +994,7 @@ ComboBox {
                                            parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
                      setPkg.generateSettingsGraphics( resolutionChoice.currentText,  showLinks.checked,
                                            showPaths.checked);
-                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  secondAlgo.currentText, thirdAlgo.currentText, fourthAlgo.currentText, parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value,
+                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  secondAlgo.currentText, thirdAlgo.currentText, fourthAlgo.currentText, maxIterations.value, parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text),
                                             parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
         }

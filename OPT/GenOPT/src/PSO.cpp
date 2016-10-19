@@ -90,8 +90,6 @@ void PSO::iterate() {
     int swarmSize;
 
     last=snapshotManager->getLast();
-    std::cout << last << std::endl;
-    std::cout << last->getSwarmSize() << std::endl;
     newIteration=new Snapshot(last);
 
     if(printer)  cout << "NEW ITERATION\n";
@@ -144,7 +142,6 @@ void PSO::iterate() {
         updateVelocity(swarm[j]);
         updatePosition(swarm[j]);
     }
-    std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     snapshotManager->enqueue(newIteration);
 }
 

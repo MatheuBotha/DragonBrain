@@ -7,6 +7,7 @@
 #include "OPT/GenOPT/src/GCPSO.h"
 #include "OPT/GenOPT/src/ElitistHillClimber.h"
 #include "OPT/GenOPT/src/GeneticAlgorithm.h"
+#include "OPT/GenOPT/src/RandomSearch.h"
 
 Manager::Manager() {
     setPkg = new SettingsPackage();
@@ -144,7 +145,6 @@ void Manager::initializeOptimizer() {
         //+1 because getAlgorithm refers to algorithms labeled 1 to 4 (I've clearly used too many funny languages
         //recently, to actually start something at 1)
         std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm(i+1);
-        std::cout << optAlg << std::endl;
         if (optAlg == "Hill Climbing") {
             optimizer[i] = new HillClimber(objective, snapMan[i], false, bounds);
         } else if (optAlg == "Particle Swarm Optimization")
@@ -174,6 +174,8 @@ void Manager::initializeOptimizer() {
             optimizer[i] = new ElitistHillClimber(objective, snapMan[i], false, bounds);
         else if (optAlg == "Genetic Algorithm")
             optimizer[i] = new GeneticAlgorithm(objective, snapMan[i], false, bounds);
+//        else if (optAlg == "Random Search")
+//            optimizer[i] = new RandomSearch(objective, snapMan[i], false, bounds);
     }
 }
 
