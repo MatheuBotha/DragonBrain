@@ -5,11 +5,14 @@
 #include "Manager.h"
 #include "OPT/GenOPT/src/FIPS.h"
 #include "OPT/GenOPT/src/GCPSO.h"
+#include "OPT/GenOPT/src/ElitistHillClimber.h"
+#include "OPT/GenOPT/src/GeneticAlgorithm.h"
+#include "OPT/GenOPT/src/RandomSearch.h"
 
 Manager::Manager() {
     setPkg = new SettingsPackage();
-    snapMan = nullptr;
-    optimizer = nullptr;
+    snapMan = new SnapshotManager*[4];
+    optimizer = new OPT_Process*[4];
     objective = nullptr;
     bounds = new double[4];
 }
@@ -50,28 +53,6 @@ void Manager::endGUI() {
 
 void Manager::generateSnapshotManager() {
 
-    setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
-    if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
-    {
-        objective->getBounds(bounds);
-        graphicsProcessor->setBounds(bounds);
-        setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
-    }
-
-    snapMan = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
-                                    setPkg->getSwarmSize(), setPkg->getProblemDomainSettingsPackage()->getDimensions(),
-                                  bounds);
-}
-
-SnapshotManager *Manager::getSnapshotManager() {
-    return snapMan;
-}
-
-SettingsPackage *Manager::getSettingsPackage() {
-    return setPkg;
-}
-
-void Manager::initializeOptimizer() {
     std::string objFun = setPkg->getProblemDomainSettingsPackage()->getObjectiveFunction();
     double* trans = new double[4];
     setPkg->getProblemDomainSettingsPackage()->getTransformations(trans);
@@ -125,47 +106,119 @@ void Manager::initializeOptimizer() {
         objective = new WeierstrassObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Zakharov")
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
-    
-
-    graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
-    graphicsProcessor->setObjective(objective);
-
-    std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm();
-    if(optAlg == "Hill Climbing") {
-        optimizer = new HillClimber(objective, snapMan, false, bounds);
-    }
-    else if(optAlg == "Particle Swarm Optimization")
-        optimizer = new PSO(objective, snapMan, false, bounds);
-    else if(optAlg == "Conical PSO")
-        optimizer = new CPSO(objective, snapMan, false, setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), setPkg->getOptimizerSettingsPackage()->getMaxVelocity(), bounds);
-    else if(optAlg == "Fully Informed PSO")
-        optimizer = new FIPS(objective, snapMan, false,
-                             setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(), bounds);
-    else if(optAlg == "Guaranteed Convergence PSO")
-        optimizer = new GCPSO(objective, snapMan, false, bounds, setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
-                setPkg->getOptimizerSettingsPackage()->getFailCount(), setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient());
-
-
     delete [] trans;
+
+ //   graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
+   // graphicsProcessor->setObjective(objective);
+
+    setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
+    if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
+    {
+        objective->getBounds(bounds);
+//        graphicsProcessor->setBounds(bounds);
+        setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
+    }
+
+    for(int i = 0; i < setPkg->getNumInstances(); ++i) {
+        snapMan[i] = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
+                                         setPkg->getSwarmSize(),
+                                         setPkg->getProblemDomainSettingsPackage()->getDimensions(),
+                                         bounds);
+    }
+    for(int i = 1; i < setPkg->getNumInstances(); ++i)
+    {
+        snapMan[i]->enqueue( new Snapshot(snapMan[0]->getLast()) );
+    }
+}
+
+SnapshotManager *Manager::getSnapshotManager() {
+    return snapMan[0];
+}
+
+SettingsPackage *Manager::getSettingsPackage() {
+    return setPkg;
+}
+
+void Manager::initializeOptimizer() {
+
+    for(int i = 0; i < setPkg->getNumInstances(); ++i) {
+        //+1 because getAlgorithm refers to algorithms labeled 1 to 4 (I've clearly used too many funny languages
+        //recently, to actually start something at 1)
+        std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm(i+1);
+        if (optAlg == "Hill Climbing") {
+            optimizer[i] = new HillClimber(objective, snapMan[i], false, bounds);
+        } else if (optAlg == "Particle Swarm Optimization")
+            optimizer[i] = new PSO(objective, snapMan[i], false, bounds,
+                                   setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
+                                   setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+        else if (optAlg == "Conical PSO")
+            optimizer[i] = new CPSO(objective, snapMan[i], false,
+                                    setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+                                    setPkg->getOptimizerSettingsPackage()->getMaxVelocity(),
+                                    bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
+                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+        else if (optAlg == "Fully Informed PSO")
+            optimizer[i] = new FIPS(objective, snapMan[i], false,
+                                    setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(),
+                                    setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+                                    bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
+                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+        else if (optAlg == "Guaranteed Convergence PSO")
+            optimizer[i] = new GCPSO(objective, snapMan[i], false, bounds,
+                                     setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
+                                     setPkg->getOptimizerSettingsPackage()->getFailCount(),
+                                     setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+                                     setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
+                                     setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+        else if (optAlg == "Elitist Hill Climbing")
+            optimizer[i] = new ElitistHillClimber(objective, snapMan[i], false, bounds);
+        else if (optAlg == "Genetic Algorithm")
+            optimizer[i] = new GeneticAlgorithm(objective, snapMan[i], false, bounds);
+//        else if (optAlg == "Random Search")
+//            optimizer[i] = new RandomSearch(objective, snapMan[i], false, bounds);
+    }
 }
 
 void Manager::optimize() {
-    if(!optimizer) return;
+    optThreads = new std::thread*[4];
 
-    for(int i = 0; i < setPkg->getOptimizerSettingsPackage()->getMaxIterations(); ++i)
+    for(int i = 0; i < setPkg->getNumInstances(); i++)
     {
-        optimizer->iterate();
+        optThreads[i] = new std::thread(&Manager::optimizeInstance, this, i);
     }
-    Particle* best = optimizer->getBestSolution();
+
+}
+
+
+void Manager::waitForOpts() {
+    for(int i = 0; i < setPkg->getNumInstances(); i++)
+    {
+        optThreads[i]->join();
+    }
+}
+void Manager::optimizeInstance(void *instance, int i)
+{
+    Manager* mng = static_cast<Manager*>(instance);
+    if(!mng->optimizer[i]) return;
+
+    for(int j = 0; j < mng->setPkg->getOptimizerSettingsPackage()->getMaxIterations(); ++j)
+    {
+        mng->optimizer[i]->iterate();
+    }
+    Particle* best = mng->optimizer[i]->getBestSolution();
     double bestPos[2];
     double current[2];
     best->getPersonalBestPosition(bestPos);
     best->getPositionArray(current);
 
+    //There's some small chance this output will get muddled with the other threads ofc. This is only for
+    //testing anyway, it should be visualized in the end
+    std::cout << "===============OPTIMIZER " << i << "===========================================\n";
     std::cout << "Best located solution is from particle at coords (" << current[0] <<","
               << current[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n"
               << "Particle's best position was (" << bestPos[0] << ","
               << bestPos[1] << ") with fitness of: " << best->getPersonalBest() << std::endl;
+
 }
 
 GraphicsProcessor* Manager::getGraphicsProcessor()

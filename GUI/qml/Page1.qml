@@ -41,7 +41,7 @@ Page1Form {
                 opacity: 0.8
                 width: sWid * 0.42
                 clip: true
-                model: [ "Hill Climbing", "Random Search", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
+                model: [ "Hill Climbing", "Random Search", "Elitist Hill Climbing", "Genetic Algorithm", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
                 "Fully Informed PSO"]
                 currentIndex: 0
 
@@ -109,28 +109,6 @@ Page1Form {
                 text: "1.0"
             }
 
-            TextField { font.pixelSize: fontSize
-                id: inertia
-
-                validator: DoubleValidator {
-                    locale: "English"
-                    decimals: 4
-                }
-                anchors.right: algorithmChoice.right
-                y: sHei * 0.18
-                width: parent.width * 0.25
-                height: sHei * 0.038
-                clip: true
-                color: "#000"
-                background: Rectangle
-                {
-                    color: "#DDD"
-                }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
-                text: "1.0"
-
-            }
 
             Label {  wrapMode: Text.WordWrap
                 id: cognitiveLabel
@@ -140,18 +118,6 @@ Page1Form {
                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                 text: qsTr("Cognitive Coefficient")
-                font.pixelSize: fontSize
-                font.bold: true
-            }
-
-            Label {  wrapMode: Text.WordWrap
-                id: inertiaLabel
-                anchors.left: inertia.left
-                y: sHei * 0.155
-                color: "#ffffff"
-                text: qsTr("Inertia")
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                 font.pixelSize: fontSize
                 font.bold: true
             }
@@ -175,7 +141,7 @@ Page1Form {
             Label {  wrapMode: Text.WordWrap
                 id: constrictLabel
                 anchors.left: cognitiveCoeff.left
-                anchors.top: inertia.bottom
+                anchors.top: socialCoeff.bottom
                 color: "#ffffff"
                 text: qsTr("Constriction Coefficient")
                 visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
@@ -211,7 +177,7 @@ Page1Form {
                         Label {  wrapMode: Text.WordWrap
                             id: veloLabel
                             x: sWid * 0.02 + (parent.width * 0.6)
-                            anchors.top: inertia.bottom
+                            anchors.top: socialCoeff.bottom
                             anchors.left: socialCoeff.left
                             color: "#ffffff"
                             text: qsTr("Maximum Velocity")
@@ -245,7 +211,7 @@ Page1Form {
             //GCPSO
                         Label {  wrapMode: Text.WordWrap
                             id: successLabel
-                            anchors.top: inertia.bottom
+                            anchors.top: socialCoeff.bottom
                             anchors.left: socialCoeff.left
                             color: "#ffffff"
                             text: qsTr("Success Count")
@@ -277,8 +243,8 @@ Page1Form {
 
                         Label {  wrapMode: Text.WordWrap
                             id: failLabel
-                            anchors.top: inertia.bottom
-                            anchors.left: inertia.left
+                            anchors.top: socialCoeff.bottom
+                            anchors.left: failCount.left
                             color: "#ffffff"
                             text: qsTr("Fail Count")
                             visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
@@ -290,7 +256,7 @@ Page1Form {
                             validator: IntValidator {
                                 locale: "English"
                             }
-                            anchors.left: failLabel.left
+                            anchors.right:  algorithmChoice.right
                             anchors.top: failLabel.bottom
                             width: parent.width * 0.25
                             clip: true
@@ -310,7 +276,7 @@ Page1Form {
 
                         Label {  wrapMode: Text.WordWrap
                             id: neighbourLabel
-                            anchors.top: inertia.bottom
+                            anchors.top: socialCoeff.bottom
                             anchors.left: socialCoeff.left
                             color: "#ffffff"
                             text: qsTr("Neighbourhood Size")
@@ -342,8 +308,8 @@ Page1Form {
         //END PSO SPECIFIC SECTION
         CheckBox {
             id: showLinks
-            anchors.left: targetAcc.left
-            anchors.top: targetAcc.bottom
+            anchors.left: showPathLabel.right
+            anchors.top: showPaths.top
             text: qsTr("")
             scale: 1.3
             visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
@@ -366,7 +332,8 @@ Page1Form {
         CheckBox {
             id: showPaths
             x: 0.02 * sWid
-            anchors.top: targetAcc.bottom
+            anchors.left: maxIterations.right
+            anchors.bottom: maxIterations.bottom
             text: qsTr("")
             scale: 1.3
         }
@@ -374,7 +341,8 @@ Page1Form {
             Label {  wrapMode: Text.WordWrap
                 id: showPathLabel
                  anchors.left: showPaths.right
-            anchors.verticalCenter: showLinks.verticalCenter
+
+                 anchors.verticalCenter: showLinks.verticalCenter
                  width: 0.094 * sWid
                 color: "#ffffff"
                 text: qsTr("Show Paths")
@@ -386,7 +354,7 @@ Page1Form {
         SpinBox {
             id: maxIterations
             anchors.left: cognitiveCoeff.left
-            anchors.top: accuracyLabel.bottom
+            anchors.top: iterationLabel.bottom
             width: algorithmChoice.width * 0.45
             height: sHei * 0.05
             opacity: 0.7
@@ -396,18 +364,6 @@ Page1Form {
             to: 2147483647
         }
 
-        SpinBox {
-            id: targetAcc
-            anchors.right: inertia.right
-            anchors.top: accuracyLabel.bottom
-            width: algorithmChoice.width * 0.45
-            height: sHei * 0.05
-            opacity: 0.7
-            from: 1
-            value: 1
-            editable: true
-            to: 100
-        }
 
         Label {  wrapMode: Text.WordWrap
             id: iterationLabel
@@ -420,16 +376,6 @@ Page1Form {
             font.bold: true
          }
 
-        Label {  wrapMode: Text.WordWrap
-            id: accuracyLabel
-            anchors.left: targetAcc.left
-            y: sHei * 0.28
-            color: "#ffffff"
-            text: qsTr("Accuracy cutoff (%)")
-            horizontalAlignment: Text.AlignLeft
-            font.pixelSize: fontSize
-            font.bold: true
-        }
 }
 
 Label {  wrapMode: Text.WordWrap
@@ -678,45 +624,30 @@ Label {  wrapMode: Text.WordWrap
         height: sHei * 0.175
 
         Label {  wrapMode: Text.WordWrap
-            id: startPosLabel
+            id: instancesLabel
             x: 0
-            y: 0
+            y: 20
             color: "#ffffff"
-            text: qsTr("Initialization")
+            text: qsTr("Num. Optimizers")
             font.pixelSize: fontSize
             font.bold: true
         }
 
-        RadioButton {
-            id: randomPosbutton
-            x: 0
-            y: parent.height * 0.33
 
-            checked: true
-            Text {
-                x: 48
-                y: 11
-                color: "#ffffff"
-                text: qsTr("Random")
-                font.pixelSize: fontSize
-                font.bold: true
-            }
-        }
+    ComboBox {
+        id: numInstances
+        anchors.top: instancesLabel.bottom
+        anchors.left: instancesLabel.left
 
-        RadioButton {
-            id: userPosbutton
-            x: 0
-            y: parent.height * 0.66
-            Text {
-                x: 48
-                y: 11
-                color: "#ffffff"
-                text: qsTr("Specified")
-                font.pixelSize: fontSize
-                font.bold: true
-            }
-        }
+        model: [ 1, 2, 4 ]
 
+        width: objectiveChoice.width /3
+        height: objectiveChoice.height
+        opacity: 0.7
+
+        font.pixelSize: fontSize+2  
+
+    }
 
     }
 
@@ -901,29 +832,20 @@ GroupBox{
     Label {  wrapMode: Text.WordWrap
         id: resolutionLabel
         anchors.left: resolutionChoice.left
-        y: parent.height * 0.2
+        anchors.top: objectiveChoice.bottom
         color: "#ffffff"
         text: qsTr("Resolution")
         font.bold: true
-        font.pixelSize: fontSize
-    }
-
-    Label {  wrapMode: Text.WordWrap
-        id: instancesLabel
-        anchors.left: numInstances.left
-        y: parent.height * 0.2
-        color: "#ffffff"
-        text: qsTr("Number of simultaneous instances")
-        font.bold: true
-        font.pixelSize: fontSize
+        font.pixelSize: fontSize+2
     }
 
     ComboBox {
         id: resolutionChoice
         x: parent.width * 0.1
-        y: parent.height * 0.25
-        width: 0.12 * sWid
-        height: 0.037 * sHei
+        anchors.top: resolutionLabel.bottom
+
+        width: objectiveChoice.width
+        height: objectiveChoice.height
         transformOrigin: Item.Left
         opacity: 0.8
         clip: true
@@ -932,130 +854,126 @@ GroupBox{
         font.pixelSize: fontSize
     }
 
+    Label {  wrapMode: Text.WordWrap
+                    id: secAlgoLabel
+                    anchors.left: objectiveChoice.left
+                    anchors.top: resolutionChoice.bottom
+                    y: sHei * 0.08
+                    color: "#ffffff"
+                    text: qsTr("Second Optimization Algorithm")
+                    font.bold: true
+                    font.pixelSize: fontSize
+                    visible: (numInstances.displayText == "2" || numInstances.displayText == "4")
+
+                }
 
 
-    SpinBox {
-        id: numInstances
-        x: parent.width * 0.5
-        y: parent.height * 0.25
-        width: 0.12 * sWid
-        height: 0.037 * sHei
-        opacity: 0.7
-        editable: true
-        from: 1
-        to: 4
-        value: 1
-        font.pixelSize: fontSize
-
-    }
-
-    Slider {
-        id: renderSlider
-        x: 0.1 * parent.width
-        y: 0.5* parent.height
-        width: 0.75 * parent.width
-        height: 0.2 * parent.height
-        spacing: 3
-        stepSize: 1
-        to: 120
-        from: 0
-        snapMode: Slider.SnapAlways
-        value: 60
-    }
+    ComboBox {
+                    id: secondAlgo
+                    anchors.left: objectiveChoice.left
+                    anchors.top: secAlgoLabel.bottom
+                    opacity: 0.8
+                    width: resolutionChoice.width
+                    clip: true
+                model: [ "Hill Climbing", "Random Search", "Elitist Hill Climbing", "Genetic Algorithm", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
+                "Fully Informed PSO"]
+                    currentIndex: 0
+                    visible: (numInstances.displayText == "2" || numInstances.displayText == "4")
+                }
 
     Label {  wrapMode: Text.WordWrap
-        id: renderLabel
-        anchors.horizontalCenter: renderSlider.horizontalCenter
-        anchors.bottom: renderValLabel.top
-        color: "#ffffff"
-        text: qsTr("Render Speed - ")
-        font.pixelSize: fontSize
-        font.bold: true
-    }
+                    id: thirdAlgoLabel
+                    anchors.left: objectiveChoice.left
+                    anchors.top: secondAlgo.bottom
+                    width: objectiveChoice.width * 0.45
+                    y: sHei * 0.08
+                    color: "#ffffff"
+                    text: qsTr("Third Optimization Algorithm")
+                    font.bold: true
+                    font.pixelSize: fontSize
+                      visible: (numInstances.displayText == "4")
+                }
 
+
+    ComboBox {
+                    id: thirdAlgo
+                    anchors.left: objectiveChoice.left
+                    anchors.top: thirdAlgoLabel.bottom
+                    opacity: 0.8
+                    width: resolutionChoice.width * 0.45
+                    clip: true
+                model: [ "Hill Climbing", "Random Search", "Elitist Hill Climbing", "Genetic Algorithm", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
+                "Fully Informed PSO"]
+                    currentIndex: 0
+                    visible: (numInstances.displayText == "4")
+                }
     Label {  wrapMode: Text.WordWrap
-        id: ramLabel
-        anchors.horizontalCenter: ramSlider.horizontalCenter
-        anchors.bottom: ramValLabel.top
-        anchors.top: renderSlider.bottom
-        y: 274
+                    id: fourthAlgoLabel
+                    anchors.right: objectiveChoice.right
+                    anchors.top: thirdAlgoLabel.top
+                    width: objectiveChoice.width * 0.45
+                    y: sHei * 0.08
+                    color: "#ffffff"
+                    text: qsTr("Second Optimization Algorithm")
+                    font.bold: true
+                    font.pixelSize: fontSize
+                    visible: (numInstances.displayText == "4")
+                }
+
+
+    ComboBox {
+                    id: fourthAlgo
+                    anchors.right: objectiveChoice.right
+                    anchors.top: thirdAlgo.top
+                    opacity: 0.8
+                    width: resolutionChoice.width * 0.45
+                    clip: true
+                model: [ "Hill Climbing", "Random Search", "Elitist Hill Climbing", "Genetic Algorithm", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
+                "Fully Informed PSO"]
+                    currentIndex: 0
+                    visible: (numInstances.displayText == "4")
+                }
+
+
+
+
+
+   Label {
+        id: objectiveLabel
+        anchors.left: objectiveChoice.left
+        y: 0.05 * Screen.desktopAvailableHeight
         color: "#ffffff"
-        text: qsTr("Max Ram Use - ")
-        font.pixelSize: fontSize
+        text: qsTr("Objective Function")
         font.bold: true
+        font.pixelSize: 15
     }
 
-    Slider {
-        id: ramSlider
-        x: 0.1 * parent.width
-        y: 0.7 * parent.height
-        width: 0.75 * parent.width
-        height: 0.2 * parent.height
-        stepSize: 1
-        snapMode: Slider.SnapAlways
-        to: 2048
-        from: 0
-        value: 512
 
-    }
+ComboBox {
+        id: objectiveChoice
+        anchors.top: objectiveLabel.bottom
+        anchors.left: resolutionChoice.left
+        width: 0.8 * parent.width
+        height: 0.1 * Screen.desktopAvailablHeight
 
-    Label {  wrapMode: Text.WordWrap
-        id: renderValLabel
-        anchors.horizontalCenter: renderSlider.horizontalCenter
-        anchors.bottom: renderSlider.top
-        color: "#ffffff"
-        text: qsTr(renderSlider.value.toString())
-        font.pixelSize: fontSize
+        transformOrigin: Item.Left
+        opacity: 0.8
+        clip: true
+        model: [ "Alpine", "Beale", "Bohachevsky", "EggHolder", "GoldSteinPrice", "Griewank", "Levy13",
+        "Michalewicz", "Pathological", "Quadric", "Quartic", "Rana", "Rastrigin", "Rosenbrock", "Saddle", "Salomon", "Schwefel22",
+         "Schwefel26", "Sin", "SixHumpCamelBack", "SkewRastrigin", "Spherical", "Step", "Weierstrass", "Zakharov"]
+        currentIndex: 0
+        font.pixelSize: 20
         font.bold: true
-
-    }
-
-    Label {  wrapMode: Text.WordWrap
-        id: ramValLabel
-        anchors.horizontalCenter: ramSlider.horizontalCenter
-        anchors.bottom: ramSlider.top
-        color: "#ffffff"
-        text: qsTr(ramSlider.value.toString())
-        font.pixelSize: fontSize
-        font.bold: true
+        font.family: "Helvetica"
 
     }
 }
 
-/*
-Button {
-    id: positionFile
-    x: 44
-    y: 395
-    width: 157
-    height: 40
-    text: qsTr("Positions Text File")
-    opacity: 0.7
-    onClicked: fileChooser.visible = true;
-    visible: userPosbutton.checked
-}
 
-TextField { font.pixelSize: fontSize
-    id: positionText
-    x: 217
-    y: 395
-    width: 398
-    height: 40
-    color: "#ffffff"
-    font.pixelSize: fontSize
-    font.bold: true
-    visible: userPosbutton.checked
-}
 
-FileDialog {
-   id: fileChooser
-   title: "Please choose a file"
-   folder: shortcuts.home
-   onAccepted: {
-       positionText.text = ""+fileChooser.fileUrls;
-   }
-   visible: false
-}*/
+
+
 
 
 
@@ -1071,12 +989,12 @@ FileDialog {
         onClicked: {
                      setPkg.lock(true);
                      setPkg.change(true);
-                     setPkg.generateSettingsGeneral(swarmSize.value);
-                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
+                     setPkg.generateSettingsGeneral(swarmSize.value, parseInt(numInstances.displayText));
+                     setPkg.generateSettingsDomain( objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
                                            parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
-                     setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value, showLinks.checked,
-                                           showPaths.checked,  ramSlider.value);
-                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value,
+                     setPkg.generateSettingsGraphics( resolutionChoice.currentText,  showLinks.checked,
+                                           showPaths.checked);
+                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  secondAlgo.currentText, thirdAlgo.currentText, fourthAlgo.currentText, maxIterations.value, parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text),
                                             parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
         }
@@ -1095,18 +1013,14 @@ FileDialog {
         font.family: "Garamond"
         font.pixelSize: 20
         onClicked: {
-          /*           setPkg.lock(true);
+                     setPkg.lock(true);
                      setPkg.change(true);
-                     setPkg.generateSettingsGeneral( swarmSize.value);
-                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, ( oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
-                                           parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
-                     setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value, showLinks.checked,
-                                           showPaths.checked,  ramSlider.value);
-                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value,
-                                            parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
+                     setPkg.updateSettings(parseFloat( transformationA.text),   parseFloat( transformationB.text),
+                     parseFloat( transformationC.text), parseFloat( transformationD.text ),
+                         parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text)
+                                                                                 );
                      setPkg.lock(false);
-
-            */        }
+                    }
         opacity: 0.7
     }
 

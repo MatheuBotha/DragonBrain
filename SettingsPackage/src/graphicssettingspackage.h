@@ -12,27 +12,16 @@
 class GraphicsSettingsPackage
 {
 private:
+
     int resolutionH;
     int resolutionW;
-    int renderSpeed;
     bool showLinks;
     bool showPath;
-    int maxRam;
 public:
     /**
      * @brief The default constructor for an OptimizerSettingsPackage
      */
     GraphicsSettingsPackage();
-    /**
-     * @brief Creates a GraphicsSettingsPackage with specified settings (currently unused)
-     * @param Resolution height (int)
-     * @param Resolution width (int)
-     * @param Render speed (int)
-     * @param ShowLinks(bool)
-     * @param ShowPath (bool)
-     * @param MaxRam (int)
-     */
-    GraphicsSettingsPackage(int, int, int, bool, bool, int);
     /**
      * @brief
      * @return Returns the resolution height dimension (an int)
@@ -45,11 +34,6 @@ public:
     int getResolutionW();
     /**
      * @brief
-     * @return Returns the render speed (an int)
-     */
-    int getRenderSpeed();
-    /**
-     * @brief
      * @return Returns whether links are to be shown or not (a bool)
      */
     bool getShowLinks();
@@ -58,11 +42,6 @@ public:
      * @return Returns whether the path is shown or not (a bool)
      */
     bool getShowPath();
-    /**
-     * @brief
-     * @return Returns the max useable ram in Megabytes (an int)
-     */
-    int getMaxRam();
 
     /**
      * @brief Sets the resolution height
@@ -75,11 +54,6 @@ public:
      */
     void setResolutionW(int);
     /**
-     * @brief Sets the render speed
-     * @param RenderSpeed (int)
-     */
-    void setRenderSpeed(int);
-    /**
      * @brief Sets link showing on or off
      * @param ShowLink (bool)
      */
@@ -89,11 +63,6 @@ public:
      * @param ShowPath (bool)
      */
     void setShowPath(bool);
-    /**
-     * @brief Sets maximum useable ram in megabytes
-     * @param MaxRam (int)
-     */
-    void setMaxRam(int);
 };
 
 #endif // GRAPHICSSETTINGSPACKAGE_H

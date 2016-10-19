@@ -9,12 +9,14 @@ PSO::PSO(bool output,double inBounds[4]) : OPT_Process(output,inBounds) {
 
 }
 
-PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4])
+PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4],double s, double c)
         : OPT_Process(output,inBounds) {
 
     this->objectiveFunction=myObjectiveFunction;
     this->snapshotManager=mySnapshotManager;
     generator.seed((unsigned)time(NULL));
+    cog=c;
+    soc=c;
 }
 
 PSO::~PSO() {
@@ -88,8 +90,6 @@ void PSO::iterate() {
     int swarmSize;
 
     last=snapshotManager->getLast();
-    std::cout << last << std::endl;
-    std::cout << last->getSwarmSize() << std::endl;
     newIteration=new Snapshot(last);
 
     if(printer)  cout << "NEW ITERATION\n";
@@ -142,7 +142,6 @@ void PSO::iterate() {
         updateVelocity(swarm[j]);
         updatePosition(swarm[j]);
     }
-    std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     snapshotManager->enqueue(newIteration);
 }
 

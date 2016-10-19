@@ -40,7 +40,7 @@ public:
 
     /** Specialised constructor
      * */
-    PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4]);
+    PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4],double s,double c);
 
     /**
      *  Destructor

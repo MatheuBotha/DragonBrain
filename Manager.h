@@ -60,12 +60,17 @@
 class Manager {
 private:
     SettingsPackage* setPkg;
-    SnapshotManager* snapMan;
+    SnapshotManager** snapMan;
     ObjectiveFunction* objective;
-    OPT_Process* optimizer;
+    OPT_Process** optimizer;
     std::thread* GUI_Thread;
+    std::thread** optThreads;
     GraphicsProcessor* graphicsProcessor;
     double *bounds;
+
+    static void optimizeInstance(void *, int i);
+
+
 public:
 
     ///Constructor for the manager objects
@@ -101,6 +106,8 @@ public:
      * */
 
     GraphicsProcessor* getGraphicsProcessor();
+
+    void waitForOpts();
 };
 
 
