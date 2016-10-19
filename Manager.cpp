@@ -124,6 +124,10 @@ void Manager::generateSnapshotManager() {
                                          setPkg->getProblemDomainSettingsPackage()->getDimensions(),
                                          bounds);
     }
+    for(int i = 1; i < setPkg->getNumInstances(); ++i)
+    {
+        snapMan[i]->enqueue( new Snapshot(snapMan[0]->getLast()) );
+    }
 }
 
 SnapshotManager *Manager::getSnapshotManager() {
