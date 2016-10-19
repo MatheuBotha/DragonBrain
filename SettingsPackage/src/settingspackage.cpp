@@ -22,6 +22,7 @@ void SettingsPackage::generateSettingsGeneral(int sSize, int instances)
 {
     swarmSize = sSize;
     numInstances = instances;
+
 }
 
 GraphicsSettingsPackage* SettingsPackage::getGraphicsSettingsPackage()
@@ -108,4 +109,8 @@ void SettingsPackage::updateSettings(double transA, double transB, double transC
     optPkg->setMaxVelocity(maxVelocity);
     optPkg->setSuccessCount(succ);
     optPkg->setFailCount(fail);
+}
+
+int SettingsPackage::getNumInstances() {
+    return numInstances;
 }

@@ -68,7 +68,11 @@ public:
      */
     int getSwarmSize();
 
+    int getNumInstances();
+
     void setSwarmSize(int a) { swarmSize = a; }
+
+    void setNumInstances(int n) { numInstances = n; }
     /**
      * @brief
      * @return Returns the associated GraphicsSettingsPackage

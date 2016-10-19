@@ -989,7 +989,7 @@ ComboBox {
         onClicked: {
                      setPkg.lock(true);
                      setPkg.change(true);
-                     setPkg.generateSettingsGeneral(swarmSize.value, parseInt(numInstances));
+                     setPkg.generateSettingsGeneral(swarmSize.value, parseInt(numInstances.displayText));
                      setPkg.generateSettingsDomain( objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
                                            parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
                      setPkg.generateSettingsGraphics( resolutionChoice.currentText,  showLinks.checked,

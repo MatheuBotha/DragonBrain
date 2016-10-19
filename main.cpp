@@ -18,7 +18,9 @@ int main()
     swarmMan->generateSnapshotManager();
     swarmMan->initializeOptimizer();
     swarmMan->optimize();
+
     //swarmMan->getGraphicsProcessor()->run();
+    swarmMan->waitForOpts();
     std::cout << "APPLES" << std::endl;
 
     swarmMan->endGUI();
