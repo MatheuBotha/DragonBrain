@@ -11,6 +11,7 @@
 class Snapshot {
 private:
     Particle** swarm;
+    Particle* gbest;
     int swarmSize;
     int dimensions;
 
@@ -46,6 +47,9 @@ public:
         } delete [] swarm;
     }
     Snapshot* next;
+
+    void setGBest(Particle* p) { gbest = p; };
+    Particle* getGBest() { return gbest; }
     void setSwarm(Particle **swarm);
     Particle** getSwarm();
     void initialiseSwarm(double bounds[4]);

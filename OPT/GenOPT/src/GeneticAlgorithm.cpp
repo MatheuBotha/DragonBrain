@@ -12,6 +12,7 @@ void GeneticAlgorithm::iterate() {
     Particle **oldSwarm;
     int swarmSize;
 
+    ideal = nullptr;
     last = snapshotManager->getLast();
 
     newIteration = new Snapshot(last);
@@ -44,7 +45,7 @@ void GeneticAlgorithm::iterate() {
     for(int i=0; i<swarmSize; i++){
         mutate(swarm[i]);
     }
-
+    newIteration->setGBest(ideal);
     snapshotManager->enqueue(newIteration);
 }
 

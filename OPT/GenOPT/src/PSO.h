@@ -31,8 +31,8 @@ protected:
      * */
     bool cryHalt=false;
     mt19937 generator;
-    double cog=0.5; //cognitive component
-    double soc=0.5; //social component
+    double cog; //cognitive component
+    double soc; //social component
 public:
     /** Default empty constructor
      * */

@@ -95,7 +95,7 @@ void BoundingBox::draw(GLfloat deltaTime)
     glm::mat4 view;
     glm::mat4 projection;
     view = camera->getViewMatrix();
-    projection = glm::perspective(45.0f, 1.0f * 800 / 600, 0.1f, 10.0f);
+    projection = camera->getProjectionMatrix();
 
     // Get their uniform location
     GLint modelLoc = shaderProgram.getUniformLocation("model");

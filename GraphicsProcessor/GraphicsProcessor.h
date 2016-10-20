@@ -19,8 +19,8 @@
 class GraphicsProcessor {
 
 public:
-    GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager,
-                      int width, int height, unsigned int animationSpeed);
+    GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager** snapshotManagers,
+                      int width, int height, unsigned int animationSpeed, int numInstances);
     ~GraphicsProcessor();
     void run();
 
@@ -46,14 +46,16 @@ private:
     SDL_Event event;
 
     ProblemDomainSettingsPackage pdsp;
-    SnapshotManager* snapshotManager;
+    SnapshotManager** snapshotManagers;
     ObjectiveFunction* objective;
     double* boundaries;
 
-    ParticleSystem* particleSystem;
+    ParticleSystem** particleSystems;
     unsigned int animationSpeed;
 
     bool isFocused;
+    int numInstances;
+    glm::vec3** instanceLocations;
 };
 
 

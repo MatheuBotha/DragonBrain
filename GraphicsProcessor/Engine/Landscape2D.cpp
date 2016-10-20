@@ -19,6 +19,7 @@
 
 Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objective, double* boundaries) : textureProgram(textureProgram), objective(objective), boundaries(boundaries)
 {
+    model = glm::mat4(1.0f);
     textureProgram.addAttribute("coord2d");
     uniform_vertex_transform = textureProgram.getUniformLocation("vertex_transform");
     uniform_mytexture = textureProgram.getUniformLocation("mytexture");
@@ -180,8 +181,6 @@ void Landscape2D::draw(){
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glUniform1i(uniform_mytexture, 0);
 
-    glm::mat4 model;
-
 //    if (rotate)
 //        model = glm::rotate(glm::mat4(1.0f), glm::radians(SDL_GetTicks() / 100.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 //
@@ -190,11 +189,9 @@ void Landscape2D::draw(){
     //model = glm::rotate(glm::mat4(1.0f), glm::radians(SDL_GetTicks() / 100.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
     glm::mat4 view = camera->getViewMatrix();
-    glm::mat4 projection = glm::perspective(45.0f, 1.0f * 800 / 600, 0.1f, 10.0f);
+    glm::mat4 projection = camera->getProjectionMatrix();
 
     glm::mat4 vertex_transform = projection * view * model;
-    //glm::mat4 vertex_transform;
-    //glm::mat4 texture_transform = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, 1)), glm::vec3(offset_x, offset_y, 0));
     glUniformMatrix4fv(uniform_vertex_transform, 1, GL_FALSE, glm::value_ptr(vertex_transform));
 
     /* Set texture wrapping mode */
@@ -208,8 +205,6 @@ void Landscape2D::draw(){
     /* Draw the triangles, a little dark, with a slight offset in depth. */
     GLfloat grey[4] = { 0.5, 0.5, 0.5, 1 };
     glUniform4fv(uniform_color, 1, grey);
-
-    glEnable(GL_DEPTH_TEST);
 
     if (polygonoffset) {
         glPolygonOffset(1, 0);
@@ -278,4 +273,39 @@ double Landscape2D::normalize(double value)
 void Landscape2D::setCamera(Camera* camera)
 {
     this->camera = camera;
+}
+
+void Landscape2D::activateShader()
+{
+    textureProgram.use();
+}
+
+void Landscape2D::deactivateShader()
+{
+    textureProgram.unuse();
+}
+
+void Landscape2D::rotate(GLfloat angle, glm::vec3 rotationVector)
+{
+    model = glm::rotate(model, angle, rotationVector);
+}
+
+void Landscape2D::scale(glm::vec3 scaleVector)
+{
+    model = glm::scale(model, scaleVector);
+}
+
+void Landscape2D::translate(glm::vec3 location)
+{
+    model = glm::translate(model, location);
+}
+
+void Landscape2D::setModel()
+{
+    model = glm::mat4();
+}
+
+void Landscape2D::setModel(glm::mat4 model)
+{
+    this->model = model;
 }

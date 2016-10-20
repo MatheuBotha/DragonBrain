@@ -16,7 +16,7 @@ PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotMana
     this->snapshotManager=mySnapshotManager;
     generator.seed((unsigned)time(NULL));
     cog=c;
-    soc=c;
+    soc=s;
 }
 
 PSO::~PSO() {
@@ -32,13 +32,21 @@ double PSO::getRandomNumberMT() {
 void PSO::updateVelocity(Particle *particle) {
 double cogComp,socComp,inertiaComp;
     double r1,r2;
-    r1=getRandomNumberMT();
-    r2=getRandomNumberMT();
-    inertiaComp=particle->getVelocity();
-    cogComp=(r1*cog)*(particle->getPersonalBest()-particle->getFitnessValue());
-    socComp=(r2*soc)*(ideal->getPersonalBest() - particle->getFitnessValue());
+    double bestPos[2], currentPos[2], gbestPos[2];
+    particle->getPersonalBestPosition(bestPos);
+    particle->getPositionArray(currentPos);
+    ideal->getPersonalBestPosition(gbestPos);
 
-    particle->setVelocity(inertiaComp+cogComp+soc);
+    for(int i = 0; i < 2; ++i) {
+        r1 = getRandomNumberMT();
+        r2 = getRandomNumberMT();
+        inertiaComp = particle->getVelocity(i);
+
+        cogComp = (r1 * cog) * (bestPos[i] - currentPos[i]);
+        socComp = (r2 * soc) * (gbestPos[i] - currentPos[i]);
+
+        particle->setVelocity( inertiaComp+cogComp+socComp, i);
+    }
 }
 
 void PSO::updatePosition(Particle *particle) {
@@ -46,7 +54,7 @@ void PSO::updatePosition(Particle *particle) {
     particle->getPositionArray(currentPos);
     for (int i=0;i<2;i++)
     {
-        particle->setPositionAtDimension(currentPos[i]+particle->getVelocity(),i);
+        particle->setPositionAtDimension(currentPos[i]+particle->getVelocity(i),i);
     }
 
     if (currentPos[1]==DBL_MAX)
@@ -61,8 +69,10 @@ void PSO::updatePosition(Particle *particle) {
                 {
                     particle->setPositionAtDimension(bounds[0],0);
                 }
+
         }
-    } else
+    }
+    else
         {
             if (checkSpecificBound(bounds[0],bounds[1],particle->getPositionArrayPointer()[0])==false) {
                 int c = checkProximityDistances(bounds[0], bounds[1], particle->getPositionArrayPointer()[0]);
@@ -89,6 +99,7 @@ void PSO::iterate() {
     Particle **swarm;
     int swarmSize;
 
+    ideal = nullptr;
     last=snapshotManager->getLast();
     newIteration=new Snapshot(last);
 
@@ -117,12 +128,12 @@ void PSO::iterate() {
         tmpFit = objectiveFunction->functionInput(currentPos);
         swarm[i]->setFitnessValue(tmpFit);
 
-        if (tmpFit >= swarm[i]->getPersonalBest()) {
+        if (tmpFit <= swarm[i]->getPersonalBest()) {
             swarm[i]->setPersonalBest(tmpFit);
         }
 
         if ((ideal == nullptr) ||
-                (ideal != nullptr && swarm[i]->getPersonalBest() > ideal->getPersonalBest()))
+                (ideal != nullptr && swarm[i]->getPersonalBest() < ideal->getPersonalBest()))
             ideal = swarm[i];
 
         if (printer)
@@ -142,6 +153,14 @@ void PSO::iterate() {
         updateVelocity(swarm[j]);
         updatePosition(swarm[j]);
     }
+    ideal->getPositionArray(currentPos);
+    if(printer)
+    {
+        std::cout << "Best located particle so far was at position: (" << currentPos[0] << ", "
+                  << currentPos[1] << ") with fitness of: " << ideal->getPersonalBest() << std::endl;
+    }
+
+    newIteration->setGBest(ideal);
     snapshotManager->enqueue(newIteration);
 }
 

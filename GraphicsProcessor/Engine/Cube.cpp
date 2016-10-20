@@ -311,6 +311,11 @@ void Cube::setModel()
     model = glm::mat4();
 }
 
+void Cube::setModel(glm::mat4 model)
+{
+    this->model = model;
+}
+
 void Cube::setCamera(Camera* camera)
 {
     this->camera = camera;

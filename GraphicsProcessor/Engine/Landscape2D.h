@@ -10,12 +10,20 @@
 #include "GLSLProgram.h"
 #include "../../OPT/GenOPT/src/ObjectiveFunction.h"
 #include "Camera.h"
+#include "Mesh.h"
 
-class Landscape2D {
+class Landscape2D : public Mesh {
 public:
     Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objective, double* boundaries);
     ~Landscape2D();
     void draw();
+    void activateShader();
+    void deactivateShader();
+    void rotate(GLfloat angle, glm::vec3 rotationVector);
+    void scale(glm::vec3 scaleVector);
+    void translate(glm::vec3 location);
+    void setModel();
+    void setModel(glm::mat4 model);
 
     void setObjective(ObjectiveFunction* objective);
     ObjectiveFunction* getObjective();
@@ -33,26 +41,22 @@ private:
     ObjectiveFunction* objective;
     double* boundaries;
 
-    GLint attribute_coord2d;
     GLint uniform_vertex_transform;
-    GLint uniform_texture_transform;
     GLint uniform_color;
     GLuint texture_id;
     GLint uniform_mytexture;
 
-    float offset_x = 0.0;
-    float offset_y = 0.0;
-    float scale = 1.0;
-
-    bool interpolate = false;
-    bool clamp = false;
-    bool rotate = false;
+    bool interpolate = true;
+    bool clamp = true;
+    bool rotateFactor = false;
     bool polygonoffset = true;
 
     GLuint vbo[3];
 
     double zMin;
     double zMax;
+
+    glm::mat4 model;
 };
 
 

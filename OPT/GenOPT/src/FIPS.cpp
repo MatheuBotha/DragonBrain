@@ -63,8 +63,8 @@ void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexV
             cTemp+=getRandomNumberMT()*(swarm[j]->getFitnessValue());
         }
 
-        double vUP=particle->getVelocity()+constrictionCoefficient*(particle->getVelocity()+((1/k)*cTemp));
-        particle->setVelocity(vUP);
+        double vUP=particle->getVelocity(0)+constrictionCoefficient*(particle->getVelocity(0)+((1/k)*cTemp));
+        particle->setVelocity(vUP, 0);
         particle->setNIndices(tmpVector);
         tmpVector.clear();
 
@@ -104,12 +104,12 @@ void FIPS::iterate() {
         tmpFit = objectiveFunction->functionInput(currentPos);
         swarm[i]->setFitnessValue(tmpFit);
 
-        if (tmpFit >= swarm[i]->getPersonalBest()) {
+        if (tmpFit <= swarm[i]->getPersonalBest()) {
             swarm[i]->setPersonalBest(tmpFit);
         }
 
         if ((ideal == nullptr) ||
-            (ideal != nullptr && swarm[i]->getPersonalBest() > ideal->getPersonalBest()))
+            (ideal != nullptr && swarm[i]->getPersonalBest() < ideal->getPersonalBest()))
             ideal = swarm[i];
 
         if (printer)

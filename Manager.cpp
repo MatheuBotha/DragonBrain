@@ -154,13 +154,13 @@ void Manager::initializeOptimizer() {
         //recently, to actually start something at 1)
         std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm(i+1);
         if (optAlg == "Hill Climbing") {
-            optimizer[i] = new HillClimber(objective, snapMan[i], false, bounds);
+            optimizer[i] = new HillClimber(objective, snapMan[i], true, bounds);
         } else if (optAlg == "Particle Swarm Optimization")
-            optimizer[i] = new PSO(objective, snapMan[i], false, bounds,
+            optimizer[i] = new PSO(objective, snapMan[i], true, bounds,
                                    setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Conical PSO")
-            optimizer[i] = new CPSO(objective, snapMan[i], false,
+            optimizer[i] = new CPSO(objective, snapMan[i], true,
                                     setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getMaxVelocity(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
@@ -223,9 +223,7 @@ void Manager::optimizeInstance(void *instance, int i)
     //testing anyway, it should be visualized in the end
     std::cout << "===============OPTIMIZER " << i << "===========================================\n";
     std::cout << "Best located solution is from particle at coords (" << current[0] <<","
-              << current[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n"
-              << "Particle's best position was (" << bestPos[0] << ","
-              << bestPos[1] << ") with fitness of: " << best->getPersonalBest() << std::endl;
+              << current[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n";
 
 }
 

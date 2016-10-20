@@ -6,7 +6,7 @@
 
 bool OPT_Process::calulateSwarmRadius(Particle** swarm,int swarmS) {
     int swarmSize=swarmS;
-    double bestValue=-1;
+    double bestValue=DBL_MAX;
     int bestIndex=-1;
     vector<double> distanceVector;
     double baseCoordinates[2];
@@ -18,7 +18,7 @@ bool OPT_Process::calulateSwarmRadius(Particle** swarm,int swarmS) {
 
     for (int i=0;i<swarmSize;i++)
     {
-        if (swarm[i]->getFitnessValue()>bestValue) {
+        if (swarm[i]->getFitnessValue()< bestValue) {
             bestValue = swarm[i]->getFitnessValue();
             baseCoordinates[0] = swarm[i]->getPositionArrayPointer()[0];
             baseCoordinates[1] = swarm[i]->getPositionArrayPointer()[1];

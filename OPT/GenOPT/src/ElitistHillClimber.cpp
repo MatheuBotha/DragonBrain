@@ -14,7 +14,7 @@ void ElitistHillClimber::iterate() {
     int swarmSize;
 
     last = snapshotManager->getLast();
-
+    ideal = nullptr;
     newIteration = new Snapshot(last);
     if(printer){
         cout << "NEW ITERATION\n";
@@ -57,6 +57,7 @@ void ElitistHillClimber::iterate() {
     if(printer){
         std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     }
+    newIteration->setGBest(ideal);
     snapshotManager->enqueue(newIteration);
 }
 

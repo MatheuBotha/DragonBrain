@@ -22,6 +22,7 @@ public:
     virtual void translate(glm::vec3 location);
 
     virtual void setModel();
+    virtual void setModel(glm::mat4 model);
 
     virtual void setCamera(Camera* camera);
 };

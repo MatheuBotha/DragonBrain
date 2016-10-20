@@ -8,6 +8,7 @@ void HillClimber::iterate() {
     Particle **swarm;
     int swarmSize;
 
+    ideal = nullptr;
     last = snapshotManager->getLast();
 
     newIteration = new Snapshot(last);
@@ -36,6 +37,7 @@ void HillClimber::iterate() {
     if(printer){
         std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     }
+    newIteration->setGBest(ideal);
     snapshotManager->enqueue(newIteration);
 }
 
