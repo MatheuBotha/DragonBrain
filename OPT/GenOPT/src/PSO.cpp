@@ -117,12 +117,12 @@ void PSO::iterate() {
         tmpFit = objectiveFunction->functionInput(currentPos);
         swarm[i]->setFitnessValue(tmpFit);
 
-        if (tmpFit >= swarm[i]->getPersonalBest()) {
+        if (tmpFit <= swarm[i]->getPersonalBest()) {
             swarm[i]->setPersonalBest(tmpFit);
         }
 
         if ((ideal == nullptr) ||
-                (ideal != nullptr && swarm[i]->getPersonalBest() > ideal->getPersonalBest()))
+                (ideal != nullptr && swarm[i]->getPersonalBest() < ideal->getPersonalBest()))
             ideal = swarm[i];
 
         if (printer)
