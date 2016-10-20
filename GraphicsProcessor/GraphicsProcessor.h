@@ -19,8 +19,8 @@
 class GraphicsProcessor {
 
 public:
-    GraphicsProcessor(ProblemDomainSettingsPackage pdsp);
-    GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager, int width, int height);
+    GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager,
+                      int width, int height, unsigned int animationSpeed);
     ~GraphicsProcessor();
     void run();
 
@@ -50,6 +50,7 @@ private:
     double* boundaries;
 
     ParticleSystem* particleSystem;
+    unsigned int animationSpeed;
 };
 
 

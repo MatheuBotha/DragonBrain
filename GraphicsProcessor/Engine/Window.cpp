@@ -14,6 +14,7 @@ Window::Window()
 
 Window::~Window()
 {
+    SDL_DestroyWindow(_sdlWindow);
 }
 
 int Window::create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) {

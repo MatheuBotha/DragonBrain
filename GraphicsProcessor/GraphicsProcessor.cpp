@@ -27,28 +27,12 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
-GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp) : pdsp(pdsp){
-    std::cout << "Starting Graphics Processor Test" << std::endl;
-    //init SDL stuffz
-    Engine::init();
-
-    //make a window
-    window.create("SwarmVis", 800, 600, 0);
-
-    //Create the shader program
-    shaderProgram.compileShaders("Shaders/landscape2d.vertex.glsl", "Shaders/landscape2d.fragment.glsl");
-    shaderProgram.linkShaders();
-
-    boundaries = new double[4];
-    pdsp.getBoundaries(boundaries);
-
-    this->snapshotManager = NULL;
-}
-
-GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager, int width, int height)
+GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager,
+                                     int width, int height, unsigned int animationSpeed)
 :
 screenWidth(width),
-screenHeight(height)
+screenHeight(height),
+animationSpeed(animationSpeed)
 {
     std::cout << "Starting Graphics Processor Test" << std::endl;
     //init SDL stuffz
@@ -97,7 +81,7 @@ void GraphicsProcessor::run(){
     printf("Making Particle System\n");
     particleSystem = new ParticleSystem(snapshotManager, sphereShaderProgram, &l);
     particleSystem->setCamera(camera);
-    particleSystem->setAnimationSpeed(50);
+    particleSystem->setAnimationSpeed(animationSpeed);
     printf("Finished making particle system\n");
 
     BoundingBox bb(boundingBoxShaderProgram);

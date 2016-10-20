@@ -65,10 +65,12 @@ private:
     OPT_Process** optimizer;
     std::thread* GUI_Thread;
     std::thread** optThreads;
-    GraphicsProcessor* graphicsProcessor;
+    GraphicsProcessor** graphicsProcessor;
+    std::thread** gpThreads;
     double *bounds;
 
     static void optimizeInstance(void *, int i);
+    static void visualizeInstance(void *, int i);
 
 
 public:
@@ -84,6 +86,9 @@ public:
 
     void initializeOptimizer();
     void optimize();
+
+    void initializeGraphicsProcessors();
+    void visualize();
     /*
      * This method creates a new snapshot manager class per request.
      * */
@@ -104,8 +109,6 @@ public:
      * The created graphics pipeline relates directly to a specific graphical pipline
      * and this pipeline provides optimiser services.
      * */
-
-    GraphicsProcessor* getGraphicsProcessor();
 
     void waitForOpts();
 };

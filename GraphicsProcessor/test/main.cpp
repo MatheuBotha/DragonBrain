@@ -95,12 +95,15 @@ int main()
         opt1->iterate();
     }
 
-
-
     //GGGGGGGG
-    GraphicsProcessor gp(pdsp, snapshotManager, 1280, 720);
+    GraphicsProcessor gp(pdsp, snapshotManager, 1280, 720, 50);
     gp.setObjective(objective);
     gp.run();
+
+    while(true)
+    {
+
+    }
 
     delete snapshotManager;
 }
