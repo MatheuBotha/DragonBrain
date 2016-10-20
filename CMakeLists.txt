@@ -3,6 +3,7 @@ project(SwarmViz)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
 
+#set(CMAKE_PREFIX_PATH "/home/lemmus/Qt/5.7/gcc_64")
 add_subdirectory(GUI)
 add_subdirectory(SettingsPackage)
 add_subdirectory(gtest)

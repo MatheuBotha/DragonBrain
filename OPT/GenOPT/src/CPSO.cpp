@@ -12,18 +12,25 @@ CPSO::CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, doub
 
 void CPSO::updateVelocity(Particle *particle) {
     double cogComp,socComp,inertiaComp;
-
     double r1,r2;
-    r1=getRandomNumberMT();
-    r2=getRandomNumberMT();
-    inertiaComp=particle->getVelocity();
-    cogComp=(r1*cog)*(particle->getPersonalBest()-particle->getFitnessValue());
-    socComp=(r2*soc)*(ideal->getPersonalBest() - particle->getFitnessValue());
+    double bestPos[2], currentPos[2], gbestPos[2];
+    double tmpV;
+    particle->getPersonalBestPosition(bestPos);
+    particle->getPositionArray(currentPos);
+    ideal->getPersonalBestPosition(gbestPos);
 
-    double tmpV=(w*inertiaComp)+cogComp+soc;
+    for(int i = 0; i < 2; ++i) {
+        r1 = getRandomNumberMT();
+        r2 = getRandomNumberMT();
+        inertiaComp = particle->getVelocity(i);
 
-    if (tmpV>vMax) tmpV=vMax;
-    if (tmpV<-vMax) tmpV=-vMax;
+        cogComp = (r1 * cog) * (bestPos[i] - currentPos[i]);
+        socComp = (r2 * soc) * (gbestPos[i] - currentPos[i]);
 
-    particle->setVelocity(tmpV);
+        tmpV =(w*inertiaComp)+cogComp+soc;
+
+        if (tmpV>vMax) tmpV=vMax;
+        if (tmpV<-vMax) tmpV=-vMax;
+        particle->setVelocity(tmpV, i);
+    }
 }
