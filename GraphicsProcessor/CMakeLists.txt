@@ -87,7 +87,7 @@ set(SOURCE_FILES
         ../SettingsPackage/src/problemdomainsettingspackage.cpp
         ../OPT/GenOPT/src/WeierstrassObjective.cpp
 
-        Engine/Sphere.cpp Engine/Sphere.h Engine/Sphere2.cpp Engine/Sphere2.h)
+        Engine/Sphere.cpp Engine/Sphere.h Engine/Sphere2.cpp Engine/Sphere2.h Engine/SkyBox.cpp Engine/SkyBox.h)
 add_library(GraphicsProcessor ${SOURCE_FILES})
 
 add_custom_command(TARGET GraphicsProcessor POST_BUILD

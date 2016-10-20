@@ -48,10 +48,14 @@ public:
     GLfloat MovementSpeed;
     GLfloat MouseSensitivity;
     GLfloat Zoom;
+    GLfloat screenWidth;
+    GLfloat screenHeight;
 
     // Constructor with vectors
-    Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW, GLfloat pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+    Camera(GLfloat screenWidth, GLfloat screenHeight, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw = YAW, GLfloat pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
     {
+        this->screenWidth = screenWidth;
+        this->screenHeight = screenHeight;
         this->Position = position;
         this->WorldUp = up;
         this->Yaw = yaw;
@@ -72,6 +76,12 @@ public:
     glm::mat4 getViewMatrix()
     {
         return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
+    }
+
+    // Returns the view matrix calculated using Eular Angles and the LookAt Matrix
+    glm::mat4 getProjectionMatrix()
+    {
+        return glm::perspective(45.0f, 1.0f * screenWidth / screenHeight, 0.1f, 100.0f);
     }
 
     // Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)

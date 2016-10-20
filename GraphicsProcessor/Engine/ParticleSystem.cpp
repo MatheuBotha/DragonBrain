@@ -13,6 +13,7 @@ ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram sha
     this->snapshotManager = snapshotManager;
     this->fromSnapshot = snapshotManager->dequeue();
     this->toSnapshot = snapshotManager->dequeue();
+    currentRotation = new glm::vec3[this->fromSnapshot->getSwarmSize()];
     animationSpeed = 100;
     animationTime = 1;
     this->shaderProgram = shaderProgram;
@@ -42,57 +43,36 @@ void ParticleSystem::draw(GLfloat deltaTime)
 
     for(int i=0; i<fromSnapshot->getSwarmSize(); ++i)
     {
-        glm::vec3 currentPosition = getCurrentPosition(fromSnapshot->getSwarm()[i], toSnapshot->getSwarm()[i]);
-
-//        printf("Comming from\n");
-//        printParticleDetails(fromSnapshot->getSwarm()[i]);
-//
-//        printf("Going to\n");
-//        printParticleDetails(toSnapshot->getSwarm()[i]);
-
-//        printf("Current Position\n");
-//        printf("x = %f\n", currentPosition.x);
-//        printf("y = %f\n", currentPosition.y);
-//        printf("z = %f\n", currentPosition.z);
-
 
         particle->setModel();
-        //particle->translate(glm::vec3(scaleX(-1), scaleZ(-1), scaleY(1)));
-
-        if(
-                animationSpeed == animationTime || fromSnapshot == toSnapshot
-//                getParticleVector(toSnapshot->getSwarm()[i]).x != currentPosition.x ||
-//           getParticleVector(toSnapshot->getSwarm()[i]).y != currentPosition.y ||
-//           getParticleVector(toSnapshot->getSwarm()[i]).z != currentPosition.z
-        )
+        if(animationSpeed == animationTime || fromSnapshot == toSnapshot)
         {
-            //printf("\n\n\n\n\n\n\nDone animating\n\n\n\n\n\n\n");
             particle->translate(scaleParticleVector(getParticleVector(toSnapshot->getSwarm()[i])));
-            stagnantParticles++;
+            particle->translate(glm::vec3(0.0f,0.04f,0.0f));
+            particle->rotate(glm::radians(SDL_GetTicks() / 10.0f), currentRotation[i]);
 
+            stagnantParticles++;
         }
         else
         {
-            //printf("still animating\n");
-            particle->translate(scaleParticleVector(currentPosition));
+            glm::vec3 currentPosition = scaleParticleVector(getCurrentPosition(fromSnapshot->getSwarm()[i], toSnapshot->getSwarm()[i]));
+            currentRotation[i] = glm::vec3(currentPosition.x, 0, currentPosition.z);
+            particle->translate(currentPosition);
+            particle->translate(glm::vec3(0.0f,0.04f,0.0f));
+            particle->rotate(glm::radians(SDL_GetTicks() / 10.0f), currentRotation[i]);
         }
 
         particle->scale(glm::vec3(0.05f));
-        particle->rotate(glm::radians(SDL_GetTicks() / 10.0f), glm::vec3(0.0f, 1.0f, 1.0f));
-        //particle->translate(glm::vec3(0.0f,0.0f,0.3f));
         particle->draw(deltaTime);
-
     }
 
-    if(
-            //stagnantParticles == fromSnapshot->getSwarmSize())
-        animationSpeed == animationTime
-            )
+    if(animationSpeed == animationTime)
     {
         fromSnapshot = toSnapshot;
         toSnapshot = snapshotManager->dequeue();
         animationTime = 0;
-    } else
+    }
+    else
     {
         animationTime++;
     }
@@ -154,16 +134,20 @@ void ParticleSystem::setCamera(Camera* camera)
     particle->setCamera(camera);
 }
 
-glm::vec3 ParticleSystem::getCurrentPosition(Particle* from, Particle* to)
+glm::vec3 ParticleSystem::getCurrentDirection(Particle* from, Particle* to)
 {
     glm::vec3 fromPosition = getParticleVector(from);
 
     glm::vec3 toPosition = getParticleVector(to);
 
-    glm::vec3 direction = toPosition - fromPosition;
-    //direction = direction / 1200.0f;
+    return toPosition - fromPosition;
 
-    glm::vec3 currentPosition = fromPosition + (direction * (float(animationTime)/animationSpeed));
+}
+
+glm::vec3 ParticleSystem::getCurrentPosition(Particle* from, Particle* to)
+{
+    glm::vec3 direction = getCurrentDirection(from, to);
+    glm::vec3 currentPosition = getParticleVector(from) + (direction * (float(animationTime)/animationSpeed));
 
     double params[2];
     params[0] = currentPosition.x;

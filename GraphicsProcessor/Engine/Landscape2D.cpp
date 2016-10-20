@@ -176,6 +176,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 Landscape2D::~Landscape2D(){}
 
 void Landscape2D::draw(){
+    textureProgram.use();
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glUniform1i(uniform_mytexture, 0);
 
@@ -236,6 +237,7 @@ void Landscape2D::draw(){
     glDisableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    textureProgram.unuse();
 }
 
 void Landscape2D::setObjective(ObjectiveFunction* objective)

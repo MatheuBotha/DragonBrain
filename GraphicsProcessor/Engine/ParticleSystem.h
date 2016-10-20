@@ -26,6 +26,8 @@ public:
 
     void setCamera(Camera* camera);
 
+    glm::vec3 getCurrentDirection(Particle* from, Particle* to);
+
     glm::vec3 getCurrentPosition(Particle* from, Particle* to);
 
     glm::vec3 getParticleVector(Particle* particle);
@@ -54,6 +56,8 @@ private:
     glm::vec3 currentPosition;
     unsigned int animationSpeed;
     unsigned int animationTime;
+
+    glm::vec3* currentRotation;
 
 
 };

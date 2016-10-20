@@ -41,6 +41,7 @@ private:
     GLSLProgram particleShaderProgram;
     GLSLProgram sphereShaderProgram;
     GLSLProgram boundingBoxShaderProgram;
+    GLSLProgram skyboxShadingProgram;
     Timer timer;
     SDL_Event event;
 
@@ -51,6 +52,8 @@ private:
 
     ParticleSystem* particleSystem;
     unsigned int animationSpeed;
+
+    bool isFocused;
 };
 
 

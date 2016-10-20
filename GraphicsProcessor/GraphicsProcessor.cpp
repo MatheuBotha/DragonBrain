@@ -13,6 +13,7 @@
 #include "Engine/ParticleSystem.h"
 #include "Engine/Cube.h"
 #include "Engine/BoundingBox.h"
+#include "Engine/SkyBox.h"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -54,15 +55,20 @@ animationSpeed(animationSpeed)
     boundingBoxShaderProgram.compileShaders("Shaders/bounding_box.vertex.glsl", "Shaders/bounding_box.fragment.glsl");
     boundingBoxShaderProgram.linkShaders();
 
+    skyboxShadingProgram.compileShaders("Shaders/sky_box.vertex.glsl", "Shaders/sky_box.fragment.glsl");
+    skyboxShadingProgram.linkShaders();
+
     boundaries = new double[4];
     pdsp.getBoundaries(boundaries);
 
     this->snapshotManager = snapshotManager;
 
-    camera = new Camera(glm::vec3(0.0f, 2.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90, -45);
+    camera = new Camera(screenWidth, screenHeight, glm::vec3(0.0f, 2.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90, -45);
     SDL_ShowCursor(SDL_DISABLE);
 
     timer.setMaxFPS(60.0f);
+
+    isFocused = false;
 }
 
 
@@ -87,6 +93,10 @@ void GraphicsProcessor::run(){
     BoundingBox bb(boundingBoxShaderProgram);
     bb.setCamera(camera);
 
+    SkyBox skybox(skyboxShadingProgram);
+    skybox.setCamera(camera);
+    skybox.scale(glm::vec3(10,10,10));
+
 
     while(true){
         timer.begin();
@@ -98,6 +108,11 @@ void GraphicsProcessor::run(){
             if (event.type == SDL_QUIT)
             {
                 return;
+            }
+
+            if (event.type == SDL_WINDOWEVENT_FOCUS_GAINED)
+            {
+
             }
 
             switch( event.type ){
@@ -128,14 +143,30 @@ void GraphicsProcessor::run(){
                     }
                     break;
                 case SDL_MOUSEMOTION:
-                    cameraPitch = event.motion.x - screenWidth/2;
-                    cameraYaw = screenHeight/2-event.motion.y;  // Reversed since y-coordinates go from bottom to left
+                    if(isFocused)
+                    {
+                        cameraPitch = event.motion.x - screenWidth/2;
+                        cameraYaw = screenHeight/2-event.motion.y;  // Reversed since y-coordinates go from bottom to left
 
-                    SDL_WarpMouseInWindow(window.getWindowInstance(), screenWidth/2, screenHeight/2);
-                    SDL_PumpEvents();
-                    SDL_GetKeyboardState(NULL);
+                        SDL_WarpMouseInWindow(window.getWindowInstance(), screenWidth/2, screenHeight/2);
+                        SDL_PumpEvents();
+                        SDL_GetKeyboardState(NULL);
 
-                    camera->ProcessMouseMovement(cameraPitch, cameraYaw);
+                        camera->ProcessMouseMovement(cameraPitch, cameraYaw);
+                    }
+                    else if(event.motion.x == screenWidth/2 && event.motion.y == screenHeight/2)
+                    {
+                        isFocused=true;
+                    }
+                    else
+                    {
+                        SDL_WarpMouseInWindow(window.getWindowInstance(), screenWidth/2, screenHeight/2);
+                        SDL_PumpEvents();
+                        SDL_GetKeyboardState(NULL);
+                    }
+                    break;
+                case SDL_WINDOWEVENT_ENTER:
+
                     break;
             }
         }
@@ -143,19 +174,17 @@ void GraphicsProcessor::run(){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        
-        shaderProgram.use();
-        l.draw();
-        shaderProgram.unuse();
 
+        skybox.draw(deltaTime);
+        l.draw();
         particleSystem->draw(deltaTime);
 
-        bb.activateShader();
-        bb.setModel();
-        bb.translate(glm::vec3(0.0f, 0.5f, 0.0f));
-        bb.scale(glm::vec3(2.0f, 1.0f, 2.0f));
-        bb.draw(deltaTime);
-        bb.deactivateShader();
+//        bb.activateShader();
+//        bb.setModel();
+//        bb.translate(glm::vec3(0.0f, 0.5f, 0.0f));
+//        bb.scale(glm::vec3(2.0f, 1.0f, 2.0f));
+//        bb.draw(deltaTime);
+//        bb.deactivateShader();
 
         window.swapBuffer();
         //std::cout << "fps = " << timer.end() << std::endl;
