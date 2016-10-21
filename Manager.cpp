@@ -150,26 +150,26 @@ void Manager::initializeOptimizer() {
         if (optAlg == "Hill Climbing") {
             optimizer[i] = new HillClimber(objective, snapMan[i], false, bounds);
         } else if (optAlg == "Particle Swarm Optimization")
-            optimizer[i] = new PSO(objective, snapMan[i], false, bounds,
+            optimizer[i] = new PSO(objective, snapMan[i], false, bounds, setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                    setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Conical PSO")
             optimizer[i] = new CPSO(objective, snapMan[i], false,
-                                    setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+                                    setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                     setPkg->getOptimizerSettingsPackage()->getMaxVelocity(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Fully Informed PSO")
             optimizer[i] = new FIPS(objective, snapMan[i], false,
                                     setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(),
-                                    setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+                                    setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Guaranteed Convergence PSO")
             optimizer[i] = new GCPSO(objective, snapMan[i], false, bounds,
                                      setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
                                      setPkg->getOptimizerSettingsPackage()->getFailCount(),
-                                     setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+                                     setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                      setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                      setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Elitist Hill Climbing")

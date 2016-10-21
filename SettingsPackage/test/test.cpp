@@ -32,7 +32,7 @@ TEST(basic_check, test_OptimizerPackage) {
 
     EXPECT_EQ("HillClimber", oPkg->getAlgorithm(1));
     EXPECT_EQ(21, oPkg->getMaxIterations());
-    EXPECT_EQ(1.0, oPkg->getConstrictionCoefficient());
+    EXPECT_EQ(1.0, oPkg->getInertiaWeight());
     EXPECT_EQ(50.0, oPkg->getMaxVelocity());
     EXPECT_EQ(15, oPkg->getSuccessCount());
     EXPECT_EQ(5, oPkg->getFailCount());

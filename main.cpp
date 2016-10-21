@@ -27,10 +27,11 @@ int main()
         swarmMan->optimize();
 
 
-        swarmMan->initializeGraphicsProcessor();
-        swarmMan->visualize();                                                                                                                                                                                                                                                                          
         //swarmMan->getGraphicsProcessor()->run();
         swarmMan->waitForOpts();
+        swarmMan->initializeGraphicsProcessor();
+        swarmMan->visualize();
+
         swarmMan->cleanMemory();
 
         setts->readyNext(true);

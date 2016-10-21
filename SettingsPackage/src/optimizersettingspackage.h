@@ -19,7 +19,8 @@ private:
     std::string algorithm4;
     double cognitiveCoefficient;
     double socialCoefficient;
-    double constrictionCoefficient;
+    double inertiaWeight;
+
     double maxVelocity;
     int successCount;
     int failCount;
@@ -46,12 +47,6 @@ public:
      * @return Returns a double containing the social coefficient
      */
     double getSocialCoefficient();
-
-    /**
-     * @brief
-     * @return Returns a double containing the constriction coefficient
-     */
-    double getConstrictionCoefficient();
 
 
     /**
@@ -108,13 +103,6 @@ public:
 
 
     /**
-    * @brief Sets the constriction coefficient
-    * @param constrictionCoefficient (double)
-     */
-    void setConstrictionCoefficient(double);
-
-
-    /**
     * @brief Sets the maximum velocity (CPSO)
     * @param maxVelocity (double)
      */
@@ -140,6 +128,9 @@ public:
 
     void setMaxIterations(int);
 
+    void setInertiaWeight(double d);
+
+    double getInertiaWeight();
 };
 
 #endif // OPTIMIZERSETTINGSPACKAGE_H

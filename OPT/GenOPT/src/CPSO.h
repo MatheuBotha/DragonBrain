@@ -8,7 +8,6 @@
 #include "PSO.h"
 class CPSO: public PSO{
 private:
-    double w=0.7968;
     /*Citation
      * Ioan Cristian Trelea.
     The particle swarm optimization algorithm: convergence analysis and parameter selection.

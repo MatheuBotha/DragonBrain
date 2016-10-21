@@ -33,6 +33,7 @@ protected:
     mt19937 generator;
     double cog; //cognitive component
     double soc; //social component
+    double w; // inertia weight
 public:
     /** Default empty constructor
      * */
@@ -40,7 +41,7 @@ public:
 
     /** Specialised constructor
      * */
-    PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4],double s,double c);
+    PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4], double wVal, double s,double c);
 
     /**
      *  Destructor

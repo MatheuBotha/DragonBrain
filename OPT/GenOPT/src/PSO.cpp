@@ -9,12 +9,13 @@ PSO::PSO(bool output,double inBounds[4]) : OPT_Process(output,inBounds) {
 
 }
 
-PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4],double s, double c)
+PSO::PSO(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double inBounds[4], double wVal, double s, double c)
         : OPT_Process(output,inBounds) {
 
     this->objectiveFunction=myObjectiveFunction;
     this->snapshotManager=mySnapshotManager;
     generator.seed((unsigned)time(NULL));
+    w=wVal;
     cog=c;
     soc=s;
 }
@@ -40,7 +41,7 @@ void PSO::updateVelocity(Particle *particle) {
     for(int i = 0; i < 2; ++i) {
         r1 = getRandomNumberMT();
         r2 = getRandomNumberMT();
-        inertiaComp = particle->getVelocity(i);
+        inertiaComp = particle->getVelocity(i) * w;
 
         cogComp = (r1 * cog) * (bestPos[i] - currentPos[i]);
         socComp = (r2 * soc) * (gbestPos[i] - currentPos[i]);

@@ -139,11 +139,11 @@ Page1Form {
             //BEGIN PSO SPECIFIC SECTION
             //
             Label {  wrapMode: Text.WordWrap
-                id: constrictLabel
+                id: inertiaLabel
                 anchors.left: cognitiveCoeff.left
                 anchors.top: socialCoeff.bottom
                 color: "#ffffff"
-                text: qsTr("Constriction Coefficient")
+                text: qsTr("Inertia Weight")
                 visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
                          || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
                font.pixelSize: fontSize
@@ -151,13 +151,13 @@ Page1Form {
             }
 
             TextField { font.pixelSize: fontSize
-                id: constrictCoeff
+                id: inertiaWeight
                 validator: DoubleValidator {
                     locale: "English"
                     decimals: 4
                 }
-                anchors.left: constrictLabel.left
-                anchors.top: constrictLabel.bottom
+                anchors.left: inertiaLabel.left
+                anchors.top: inertiaLabel.bottom
                 width: parent.width * 0.25
                 clip: true
                 color: "#000"
@@ -999,7 +999,7 @@ ComboBox {
                      setPkg.generateSettingsGraphics( resolutionChoice.currentText,  showLinks.checked,
                                            showPaths.checked);
                      setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  secondAlgo.currentText, thirdAlgo.currentText, fourthAlgo.currentText, maxIterations.value, parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text),
-                                            parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
+                                            parseFloat(inertiaWeight.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
              }
         }

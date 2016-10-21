@@ -5,10 +5,9 @@
 #include "GCPSO.h"
 
 GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double boundArr[4], int scVal, int fcVal,double f,double s,double c) :
-        PSO(pFunction, pManager, i, boundArr,s,c) {
+        PSO(pFunction, pManager, i, boundArr,f, s,c) {
     fc=fcVal;
     sc=scVal;
-    constrictionCoefficient=f;
 }
 
 double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
@@ -57,7 +56,7 @@ void GCPSO::calculateSearchParticleVelocity(double bestVelocity,double pt) {
     double r=getRandomNumberMT();
     double tmp;
 
-    tmp=bestVelocity+(constrictionCoefficient*getPastVelocity())+pt*(1-(2*r));
+    tmp=bestVelocity+(w*getPastVelocity())+pt*(1-(2*r));
 
     setPastVelocity(tmp);
 }
