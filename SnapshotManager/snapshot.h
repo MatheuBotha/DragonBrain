@@ -14,7 +14,6 @@ private:
     Particle* gbest;
     int swarmSize;
     int dimensions;
-
 public:
     Snapshot(int swarmSize, int dim, double bounds[4]){
         next = nullptr;

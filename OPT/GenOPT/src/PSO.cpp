@@ -95,6 +95,7 @@ void PSO::updatePosition(Particle *particle) {
 }
 
 void PSO::iterate() {
+
     Snapshot *last;
     Snapshot *newIteration;
     Particle **swarm;
@@ -107,7 +108,6 @@ void PSO::iterate() {
     if(printer)  cout << "NEW ITERATION\n";
 
     swarm = newIteration->getSwarm();
-
     swarmSize = newIteration->getSwarmSize();
 
     /*For each particle in swarm do
@@ -163,5 +163,6 @@ void PSO::iterate() {
 
     newIteration->setGBest(ideal);
     snapshotManager->enqueue(newIteration);
+    currentIteration=currentIteration+1;
 }
 

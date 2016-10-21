@@ -15,8 +15,9 @@ private:
     Snapshot* head;
     Snapshot* temp;
     double bounds[4];
+    int numIterations;
 public:
-    SnapshotManager(int Bound, int i, int dim, double bou[4]) {
+    SnapshotManager(int Bound, int i, int dim, double bou[4],int its) {
         queueSize = 0;
         graphicsPosition = 0;
         bound = Bound;
@@ -26,6 +27,7 @@ public:
         for (int j = 0; j < 4; ++j) {
             bounds[j] = bou[j];
         }
+        numIterations=its;
     }
     ~SnapshotManager() {
         temp = head;
@@ -46,6 +48,7 @@ public:
     Snapshot* dequeue();
     Snapshot* getLast();
     Snapshot *getFirst();
+    int getIterations(){return numIterations;}
 };
 
 

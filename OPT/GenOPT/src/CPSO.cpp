@@ -42,11 +42,59 @@ void CPSO::updateVelocity(Particle *particle) {
 
         cogComp = (r1 * cog) * (bestPos[i] - currentPos[i]);
         socComp = (r2 * soc) * (gbestPos[i] - currentPos[i]);
-
+        decayInertiaWeight(w);
         tmpV =constrictionCoefficient*((w*inertiaComp)+cogComp+socComp);
 
         if (tmpV>vMax) tmpV=vMax;
         if (tmpV<-vMax) tmpV=-vMax;
         particle->setVelocity(tmpV, i);
     }
+}
+
+void CPSO::decayInertiaWeight(double oldInertia)
+{
+    double tmp=oldInertia;
+    switch (snapshotManager->getIterations())
+    {
+        case 10:
+
+            if (currentIteration>=5)
+            {
+                tmp=(-1.0*log(currentIteration)+3.2);
+            }
+            break;
+        case 100:
+            if (currentIteration>=80)
+            {
+                tmp=(-1.0*sqrt(currentIteration))+10.0;
+            }
+            break;
+        case 500:
+            if (currentIteration>=450)
+            {
+                tmp=(-1.0*sqrt(currentIteration))+22.367;
+            }
+            break;
+        case 1000:
+            if (currentIteration>=920)
+            {
+                tmp=(-1.0*sqrt(currentIteration))+31.63;
+            }
+            break;
+        case 5000:
+            if (currentIteration>=4810)
+            {
+                tmp=(-1*sqrt(currentIteration))+70.711;
+            }
+            break;
+        case 10000:
+            if (currentIteration>9760)
+            {
+                tmp=(-1*sqrt(currentIteration))+100;
+            }
+            break;
+        default: tmp=oldInertia;
+            break;
+    }
+    setW(tmp);
 }
