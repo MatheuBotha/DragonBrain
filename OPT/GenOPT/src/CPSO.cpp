@@ -85,13 +85,13 @@ void CPSO::decayInertiaWeight(double oldInertia)
         case 5000:
             if (currentIteration>=4810)
             {
-                tmp=(-1*log(currentIteration))+70.711;
+                tmp=(-1*sqrt(currentIteration))+70.711;
             }
             break;
         case 10000:
             if (currentIteration>9760)
             {
-                tmp=(-1*log(currentIteration))+100;
+                tmp=(-1*sqrt(currentIteration))+100;
             }
             break;
         default: tmp=oldInertia;
