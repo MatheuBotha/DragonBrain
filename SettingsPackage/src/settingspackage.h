@@ -22,6 +22,7 @@ private:
     int numInstances;
     bool locked;
     bool changed;
+    bool closing;
     bool ready;
     GraphicsSettingsPackage* gpPkg;
     OptimizerSettingsPackage* optPkg;
@@ -62,6 +63,12 @@ public:
      */
     Q_INVOKABLE void change(bool);
 
+
+    Q_INVOKABLE void closeNext() { closing = true; }
+    bool readyToClose() { return closing; }
+
+    Q_INVOKABLE void readyNext(bool r) { ready = r; }
+    Q_INVOKABLE bool readyForNext() { return ready; }
     /**
      * @brief
      * @return Returns the swarmsize associated with the entire system

@@ -60,6 +60,8 @@ void Manager::generateSnapshotManager() {
         objective = new SinObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Saddle")
         objective = new SaddleObjective(trans[0], trans[1], trans[2], trans[3]);
+    else if(objFun == "Ackley")
+        objective = new AckleyObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Alpine")
         objective = new AlpineObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Beale")
@@ -108,7 +110,7 @@ void Manager::generateSnapshotManager() {
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
     delete [] trans;
 
- //   graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
+    graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
    // graphicsProcessor->setObjective(objective);
 
     setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);

@@ -7,6 +7,8 @@ SettingsPackage::SettingsPackage()
 {
     changed = false;
     locked = true;
+    closing = false;
+    ready = true;
     gpPkg = new GraphicsSettingsPackage();
     optPkg = new OptimizerSettingsPackage();
     probPkg = new ProblemDomainSettingsPackage();
