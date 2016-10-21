@@ -4,7 +4,7 @@
 
 #include "FIPS.h"
 
-FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, int size,double wA,double boundsD[4]) : PSO(pFunction, pManager, i,boundsD) {
+FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, int size,double wA,double boundsD[4],double s,double c) : PSO(pFunction, pManager, i,boundsD,s,c) {
 nSize=size;
     constrictionCoefficient=wA;
     for(int i=0;i<4;i++)
@@ -57,16 +57,22 @@ void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexV
         }
 
         ///
-        cTemp=0;
-        for(int j=0;j<tmpVector.size();j++)
+        double vUP;
+        for(int d=0;d<2;d++)
         {
-            cTemp+=getRandomNumberMT()*(swarm[j]->getFitnessValue());
+            cTemp=0;
+            for(int j=0;j<tmpVector.size();j++)
+            {
+                cTemp+=getRandomNumberMT()*(swarm[j]->getFitnessValue());
+            }
+            vUP=0;
+            vUP=particle->getVelocity(d)+constrictionCoefficient*(particle->getVelocity(d)+((1/k)*cTemp));
+            particle->setVelocity(vUP,d);
         }
 
-        double vUP=particle->getVelocity()+constrictionCoefficient*(particle->getVelocity()+((1/k)*cTemp));
-        particle->setVelocity(vUP);
-        particle->setNIndices(tmpVector);
-        tmpVector.clear();
+    particle->setNIndices(tmpVector);
+    tmpVector.clear();
+
 
 }
 
@@ -77,8 +83,6 @@ void FIPS::iterate() {
     int swarmSize;
 
     last=snapshotManager->getLast();
-    std::cout << last << std::endl;
-    std::cout << last->getSwarmSize() << std::endl;
     newIteration=new Snapshot(last);
 
     if(printer)  cout << "NEW ITERATION\n";
@@ -106,12 +110,12 @@ void FIPS::iterate() {
         tmpFit = objectiveFunction->functionInput(currentPos);
         swarm[i]->setFitnessValue(tmpFit);
 
-        if (tmpFit >= swarm[i]->getPersonalBest()) {
+        if (tmpFit <= swarm[i]->getPersonalBest()) {
             swarm[i]->setPersonalBest(tmpFit);
         }
 
         if ((ideal == nullptr) ||
-            (ideal != nullptr && swarm[i]->getPersonalBest() > ideal->getPersonalBest()))
+            (ideal != nullptr && swarm[i]->getPersonalBest() < ideal->getPersonalBest()))
             ideal = swarm[i];
 
         if (printer)
@@ -131,7 +135,6 @@ void FIPS::iterate() {
         updateVelocity(swarm[j],swarm,swarmSize,j);
         updatePosition(swarm[j]);
     }
-    std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     snapshotManager->enqueue(newIteration);
 
 }

@@ -9,7 +9,7 @@
 #include "HillClimber.h"
 
 int main() {
-    std::cout << "PROGRAM START\n\n";
+   /* std::cout << "PROGRAM START\n\n";
     double bounds[4]={-10,10,-10,10};
     int maxIteration = 100;
     int swarmSize = 15;
@@ -27,6 +27,6 @@ int main() {
 
     cout << obj1->functionInput(parameters);*/
 
-    std::cout << "\n\nPROGRAM END";
+    //std::cout << "\n\nPROGRAM END";
     return 0;
 }

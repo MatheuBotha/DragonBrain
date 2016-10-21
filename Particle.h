@@ -34,18 +34,16 @@ private:
 
     double positionArray[2]; ///> the array of double values holding the positions per dimension of the particle
     double personalBestPosition[2]; ///>the array that holds the position of the best personal state of the particle.
-    double velocity; ///> the velocity of the particle
-    double fitnessValue=0; ///> The fitness value of the particle in relation to an objective function
-    double personalBest=0; ///> The personal best or memory of each particle
+    double velocity[2]; ///> the velocity of the particle
+    //DBL_MAX is the initial value if the optimiser is searching for the minimum value in the objective.
+    double fitnessValue=DBL_MAX; ///> The fitness value of the particle in relation to an objective function
+    double personalBest=DBL_MAX; ///> The personal best or memory of each particle
     vector<int> neighbourhoodIndices;
 
 public:
-    Particle()
-    {
-
-    }
     Particle(Particle* other){
-        velocity = other->velocity;
+        velocity[0] = other->velocity[1];
+        velocity[1] = other->velocity[1];
         fitnessValue = other->fitnessValue;
         personalBest = other->personalBest;
         for(int i=0; i<2; i++) {
@@ -55,7 +53,8 @@ public:
     }
 
     Particle(const Particle &other){
-        velocity = other.velocity;
+        velocity[0] = other.velocity[0];
+        velocity[1] = other.velocity[1];
         fitnessValue = other.fitnessValue;
         personalBest = other.personalBest;
         for(int i=0; i<2; i++) {
@@ -68,13 +67,13 @@ public:
 
 ///Sets the position array
     void setPositionArray(double *positionArray) {
-        this->positionArray[1] = positionArray[0];
+        this->positionArray[0] = positionArray[0];
         this->positionArray[1] = positionArray[1];
     }
 
     ///Sets the velocity of the particle
-    void setVelocity(double velocity) {
-        Particle::velocity = velocity;
+    void setVelocity(double velocity, int i) {
+        this->velocity[i] = velocity;
     }
 
     ///Sets the position of the particle based on an array input
@@ -106,8 +105,8 @@ public:
         return positionArray;
     }
     ///Gets the velocity
-    double getVelocity() const {
-        return velocity;
+    double getVelocity(int i) const {
+        return velocity[i];
     }
 
 
@@ -120,18 +119,21 @@ public:
     }
 
     ///Constructs a new default Particle
-    Particle(int dimensions) {
-        srand((unsigned)time(NULL));
-        velocity=0.0;
+    Particle(int dimensions, double bounds[4]) {
+        //srand((unsigned)time(NULL));
+        velocity[0]=0.0;
+        velocity[1]=0.0;
         fitnessValue=0.0;
-        personalBest=-1;
+        personalBest=DBL_MAX;
 
-        positionArray[0]=((double)rand()/(double)RAND_MAX);
+        positionArray[0]=(((double)rand()*(bounds[1]-bounds[0])/(double)RAND_MAX)+bounds[0]);
 
         if(dimensions == 2)
-       {
-           positionArray[1] = ((double)rand()/(double)RAND_MAX);
-        }else positionArray[1] = DBL_MAX;
+        {
+            positionArray[1]=(((double)rand()*(bounds[3]-bounds[2])/(double)RAND_MAX)+bounds[2]);
+        }else{
+            positionArray[1] = DBL_MAX;
+        }
 
         for (int j = 0; j <2 ; ++j) {
             personalBestPosition[j] = positionArray[j];
@@ -166,6 +168,11 @@ public:
     double getPersonalBestPosition(double* inArr) const {
         inArr[0] = personalBestPosition[0];
         inArr[1] = personalBestPosition[1];
+    }
+
+    ///Getter for best position pointer
+    double * getPersonalBestPos(){
+        return personalBestPosition;
     }
 
     ///Setter for the best personal positions array
