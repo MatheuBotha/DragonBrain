@@ -170,7 +170,6 @@ The User has 4 main capabilities
 \begin{itemize}
 	\item Changing the parameters of run environment
 	\item Starting the simulation with the currently configured parameters.
-	\item Updating the parameters of the current simulation based on the current (newly configured) parameters.
 	\item Stopping the current simulation.
 \end{itemize}
 
@@ -180,14 +179,8 @@ In terms of the Functional Requirements of the User Interface, the focus is as f
 	\item The user must be able to configure parameters for the system via the GUI.
 	\item The GUI should be capable of sending data to the SettingsPackage in order to generate a SettingsPackage.
 	\item The system should generate a SettingsPackage and start the simulation upon user request.
-	\item The user should be able to edit configuration mid-run
 \end{itemize}
 
-\subsubsection{Activity Diagram}
-Following is an activity diagram for the process involved in starting a run of the project.
-\begin{figure}[H]
-	\includegraphics[scale=0.45]{GUI_Activity.jpg}
-\end{figure}
 
 \section{System Use Cases}
 \subsection{System Usage}
@@ -256,13 +249,10 @@ The project offers functionality in terms of user interaction in two areas
 2) Viewing and Changing the Visualisation
 
 	1. Once the user has started the visualisation process, they can perform the following actions
-		1. Change specific optimiser parameters that will take effect either
-			1. During the next run: these will be configuration parameters such as Cognitive Coefficient
-			2. In real time: these will be visualisation parameters such as viewing links
 
-		2. Change viewing angle -This will happen by rotating the viewing plane or shifting the camera perspective focus
+		1. Change viewing angle -This will happen by rotating the viewing plane or shifting the camera perspective focus
 
-		3. Stop the run and terminate the optimiser in progress
+		2. Stop the run and terminate the optimiser in progress
 
 There are some limitations to what the SwarmViz project can do.
 
@@ -322,7 +312,7 @@ This process is also represented in the following activity diagram
 Below are the algorithm specifics pertinent to each of the Optimiser algorithms currently implemented.
 \subsection{FIPS: Fully Informed Particle Swarm Optimisation}
 \paragraph{•}
-The point of the FIPS adaption of the standard PSO algorithm is to increase the reliability of the results. How this works, is it will increase the influence capacity of other particles to, based on a scalar k, influence others by increasing the influence capacity good nearby particles to influence the particle being considered. The effect of this is that, based on considering size of the scalar value, particles generally avoid worse positions. This comes at a greater cost to the performance of this especially since large capacity swarms could potentially have large neighbourhoods for potential consideration requiring increasingly more run time computation.
+The point of the FIPS adaption of the standard PSO algorithm is to increase the reliability of the results. How this works, is it will increase the influence capacity of other particles to, based on a scalar k, influence others by increasing the influence capacity good nearby particles to influence the particle being considered. The effect of this is that, based on considering size of the scalar value, particles generally avoid worse positions. This comes at a greater cost to the performance of this especially since large capacity swarms could potentially have large neighbourhoods for potential consideration requiring increasingly more run time computation. One of the great benefits to this, is its capacity to be used for problems that involve clustering of data sets.
 \begin{figure}[h]
 	\includegraphics[scale=0.45]{fipsServiceContract.png}
 \end{figure}

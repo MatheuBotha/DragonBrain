@@ -248,7 +248,7 @@ The graphics processor should be able to recover if an error were to occur in ei
 The General Optimiser is much less performance bound than the other system modules because of the use of an intermediary. Generally speaking, the Graphics Processor will faster or slower than the General Optimiser, depending on a variety of factors. Typically, this means that the General Optimiser can afford to, with the appropriate measures, function at a slower speed than the Graphics Processor.
 \subsubsection{Quality Requirements}
 \begin{enumerate}
-\item Flexibility: The user is supposed to be able to configure operational parameters of the General Optimiser during problem solving, that is during the run. There is a limit to the degree that the Optimiser can be changed but in general, the General Optimiser must be flexibility enough in design such that a user parameter configuration change will be handled internally without requiring a program restart or recompile.
+\item Flexibility: The General Optimiser must be flexibility enough in design such that a user parameter configuration change will be handled internally without requiring a program restart or recompile, that is perform runs, and then be able to perform further runs without requiring recompilation of the system.
 \item Performance: As mentioned above, the performance requirements of the General Optimiser are not as stringently defined as with the Graphics Processor. However, the requirement is somewhat implicit in the fact that the optimiser will have to provide the graphics processor with enough data to allow it to animate the landscape smoothly but perhaps a more important performance condition would be the stopping conditions. Being able to accurately predict when a swarm has stagnated will allow for the simulation to exit in a timely manner so that a user does not have to wonder whether or not something is happening.
 \item Reliability: Reliability is an important concern in that the General Optimiser must be reliable in two ways: the first is the component itself should not fail often. In the event of failures, it must be able to recover without compromising the system. The second area, perhaps more critically, is that the results produced by the General Optimiser in terms of the particle positions and values etc must be consistent with the expected problem solving capabilities and capacities of Swarm-based problem solving methods. That is, we should not expect variance in results that would not be possible of a Swarm-based problem solving approach to produce.
 \item Scalability: Scalability is an important concern in that the user has the capacity to perform simultaneous problem solving methods on multiple screens. The General Optimiser must therefore be able to support multiple problem solving runs at the same time.
@@ -264,7 +264,7 @@ The Manager component is the high level component that is the core component tha
 \end{enumerate}
 
 \subsection{User Interface}
-The purpose of the user interface component is to initially allow the user to create the necessary settings package and then allow the user to manipulate the settings packages.
+The purpose of the user interface component is to initially allow the user to create the necessary settings package and then allow the user to run optimisers according to their specifications.
 \subsubsection{Reliability}
 The interface is the primary point of information access for the user. In this respect it should be robust and informative to the user.
 \subsubsection{Usability}
