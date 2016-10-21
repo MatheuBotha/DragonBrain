@@ -9,8 +9,9 @@ import QtQuick.Dialogs 1.2
 ApplicationWindow {
     id: window
     visible: true
-    width: Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableHeight
+    //does this fix multi-monitor issues?
+    width: Screen.width
+    height: Screen.height
     color: "#222222"
     property alias swipeView: swipeView
     property alias page1: page1
@@ -85,7 +86,12 @@ ApplicationWindow {
             MouseArea {
                 height: parent.height
                 width: parent.width
-                onClicked: window.close()
+                onClicked: {
+
+                        setPkg.closeNext();
+                        setPkg.lock(false);
+                        window.close()
+                }
             }
         }
     }

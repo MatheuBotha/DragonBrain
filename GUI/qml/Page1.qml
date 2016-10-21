@@ -7,7 +7,7 @@ import QtQuick.Controls.Styles 1.0
 
 Page1Form {
     scale: 1
-    property int sWid: Screen.desktopAvailableWidth
+    property int sWid: Screen.width
     property int sHei: Screen.desktopAvailableHeight
     property int fontSize: (sWid > 1440) ? 15 : 12
 
@@ -959,7 +959,7 @@ ComboBox {
         transformOrigin: Item.Left
         opacity: 0.8
         clip: true
-        model: [ "Alpine", "Beale", "Bohachevsky", "EggHolder", "GoldSteinPrice", "Griewank", "Levy13",
+        model: [ "Ackley", "Alpine", "Beale", "Bohachevsky", "EggHolder", "GoldSteinPrice", "Griewank", "Levy13",
         "Michalewicz", "Pathological", "Quadric", "Quartic", "Rana", "Rastrigin", "Rosenbrock", "Saddle", "Salomon", "Schwefel22",
          "Schwefel26", "Sin", "SixHumpCamelBack", "SkewRastrigin", "Spherical", "Step", "Weierstrass", "Zakharov"]
         currentIndex: 0
@@ -987,7 +987,11 @@ ComboBox {
         text: qsTr("Optimizer On")
 
         onClicked: {
+            if(setPkg.readyForNext())
+            {
+
                      setPkg.lock(true);
+                     setPkg.readyNext(false);
                      setPkg.change(true);
                      setPkg.generateSettingsGeneral(swarmSize.value, parseInt(numInstances.displayText));
                      setPkg.generateSettingsDomain( objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
@@ -997,6 +1001,7 @@ ComboBox {
                      setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  secondAlgo.currentText, thirdAlgo.currentText, fourthAlgo.currentText, maxIterations.value, parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text),
                                             parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
+             }
         }
 
     }

@@ -13,18 +13,11 @@ Manager::Manager() {
     setPkg = new SettingsPackage();
     snapMan = new SnapshotManager*[4];
     optimizer = new OPT_Process*[4];
-    graphicsProcessor = new GraphicsProcessor*[4];
     objective = nullptr;
     bounds = new double[4];
 }
 
 Manager::~Manager() {
-//    for(int i = 0; i < setPkg->getNumInstances(); i++)
-//    {
-//        delete graphicsProcessor[i];
-//    }
-    delete graphicsProcessor;
-
     delete setPkg;
     if(snapMan != nullptr)
         delete snapMan;
@@ -32,8 +25,6 @@ Manager::~Manager() {
         delete optimizer;
     if(objective != nullptr)
         delete objective;
-
-
 }
 
 void Manager::startGUI() {
@@ -69,6 +60,8 @@ void Manager::generateSnapshotManager() {
         objective = new SinObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Saddle")
         objective = new SaddleObjective(trans[0], trans[1], trans[2], trans[3]);
+    else if(objFun == "Ackley")
+        objective = new AckleyObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Alpine")
         objective = new AlpineObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Beale")
@@ -117,7 +110,8 @@ void Manager::generateSnapshotManager() {
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
     delete [] trans;
 
-
+    graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
+   // graphicsProcessor->setObjective(objective);
 
     setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
     if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
@@ -227,48 +221,8 @@ void Manager::optimizeInstance(void *instance, int i)
 
 }
 
-void Manager::initializeGraphicsProcessors()
+GraphicsProcessor* Manager::getGraphicsProcessor()
 {
-    for(int i = 0; i < setPkg->getNumInstances(); i++)
-    {
-        graphicsProcessor[i] = new GraphicsProcessor(
-                *setPkg->getProblemDomainSettingsPackage(),
-                snapMan[i],
-                setPkg->getGraphicsSettingsPackage()->getResolutionW(),
-                setPkg->getGraphicsSettingsPackage()->getResolutionH(),
-                60
-        );
-        graphicsProcessor[i]->setObjective(objective);
-    }
-}
-
-void Manager::visualize()
-{
-    //gpThreads = new std::thread*[4];
-
-    for(int i = 0; i < setPkg->getNumInstances(); i++)
-    {
-        //gpThreads[i] = new std::thread(&Manager::visualizeInstance, this, i);
-        graphicsProcessor[i]->run();
-    }
-
-    for(int i = 0; i < setPkg->getNumInstances(); i++)
-    {
-        //gpThreads[i]->join();
-        printf("Deleteig\n");
-        delete graphicsProcessor[i];
-        printf("Deleteig\n");
-    }
-}
-
-void Manager::visualizeInstance(void *instance, int i)
-{
-    printf("WHY\n");
-    Manager* mng = static_cast<Manager*>(instance);
-    printf("WHY\n");
-    if(!mng->graphicsProcessor[i]) return;
-    printf("WHY\n");
-    mng->graphicsProcessor[i]->run();
-    printf("WHY\n");
+    return graphicsProcessor;
 }
 

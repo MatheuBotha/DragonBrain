@@ -15,17 +15,22 @@ int main()
     //still needs an alternative for the situation in which a user has not clicked a button
     while(setts->isLocked()) {}
 
-    swarmMan->generateSnapshotManager();
-    swarmMan->initializeOptimizer();
-    swarmMan->optimize();
+    //this one lets the user first chose to close application (without it not finishing execution)
+    while (setts->isLocked()) {}
 
-    //swarmMan->getGraphicsProcessor()->run();
-    swarmMan->waitForOpts();
-    std::cout << "APPLES" << std::endl;
+    while(!setts->readyToClose()) {
+        while (setts->isLocked()) {}
 
-    swarmMan->initializeGraphicsProcessors();
-    swarmMan->visualize();
+        swarmMan->generateSnapshotManager();
+        swarmMan->initializeOptimizer();
+        swarmMan->optimize();
 
+        //swarmMan->getGraphicsProcessor()->run();
+        swarmMan->waitForOpts();
+        setts->readyNext(true);
+        std::cout << "APPLES" << std::endl;
+        setts->lock(true);
+    }
     swarmMan->endGUI();
     delete swarmMan;
     return 0;
