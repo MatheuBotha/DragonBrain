@@ -142,6 +142,9 @@ SettingsPackage *Manager::getSettingsPackage() {
 }
 
 void Manager::initializeOptimizer() {
+    double trans[4];
+    setPkg->getProblemDomainSettingsPackage()->getTransformations(trans);
+//    bounds[0]+=setPkg->getProblemDomainSettingsPackage()->ge
 
     for(int i = 0; i < setPkg->getNumInstances(); ++i) {
         //+1 because getAlgorithm refers to algorithms labeled 1 to 4 (I've clearly used too many funny languages

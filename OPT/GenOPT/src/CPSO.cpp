@@ -43,10 +43,10 @@ void CPSO::updateVelocity(Particle *particle) {
         cogComp = (r1 * cog) * (bestPos[i] - currentPos[i]);
         socComp = (r2 * soc) * (gbestPos[i] - currentPos[i]);
 
-        tmpV =constrictionCoefficient*((w*inertiaComp)+cogComp+soc);
+        tmpV =constrictionCoefficient*((w*inertiaComp)+cogComp+socComp);
 
-        //if (tmpV>vMax) tmpV=vMax;
-        //if (tmpV<-vMax) tmpV=-vMax;
+        if (tmpV>vMax) tmpV=vMax;
+        if (tmpV<-vMax) tmpV=-vMax;
         particle->setVelocity(tmpV, i);
     }
 }

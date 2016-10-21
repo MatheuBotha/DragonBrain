@@ -62,13 +62,16 @@ void HillClimber::mutate(Particle *particle) {
 
         if(newPosition[0] < bounds[0]){
             newPosition[0] = bounds[0];
+
         }else if(newPosition[0] > bounds[1]){
             newPosition[0] = bounds[1];
         }
         if(newPosition[1] < bounds[2]){
             newPosition[1] = bounds[2];
+
         }else if(newPosition[1] > bounds[3]){
             newPosition[1] = bounds[3];
+
         }
     }
 
