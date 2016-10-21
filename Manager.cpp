@@ -125,7 +125,7 @@ void Manager::generateSnapshotManager() {
         snapMan[i] = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
                                          setPkg->getSwarmSize(),
                                          setPkg->getProblemDomainSettingsPackage()->getDimensions(),
-                                         bounds,setPkg->getOptimizerSettingsPackage()->getMaxIterations());
+                                         bounds);
     }
     for(int i = 1; i < setPkg->getNumInstances(); ++i)
     {

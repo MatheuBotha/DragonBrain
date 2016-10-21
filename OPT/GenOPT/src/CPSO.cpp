@@ -55,7 +55,7 @@ void CPSO::updateVelocity(Particle *particle) {
 void CPSO::decayInertiaWeight(double oldInertia)
 {
     double tmp=oldInertia;
-    switch (snapshotManager->getIterations())
+    switch (snapshotManager->getBound())
     {
         case 10:
 
