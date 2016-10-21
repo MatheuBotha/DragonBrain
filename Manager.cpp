@@ -156,13 +156,13 @@ void Manager::initializeOptimizer() {
         //recently, to actually start something at 1)
         std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm(i+1);
         if (optAlg == "Hill Climbing") {
-            optimizer[i] = new HillClimber(objective, snapMan[i], true, bounds);
+            optimizer[i] = new HillClimber(objective, snapMan[i], false, bounds);
         } else if (optAlg == "Particle Swarm Optimization")
-            optimizer[i] = new PSO(objective, snapMan[i], true, bounds,
+            optimizer[i] = new PSO(objective, snapMan[i], false, bounds,
                                    setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Conical PSO")
-            optimizer[i] = new CPSO(objective, snapMan[i], true,
+            optimizer[i] = new CPSO(objective, snapMan[i], false,
                                     setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getMaxVelocity(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
@@ -257,9 +257,11 @@ void Manager::visualize()
     for(int i = 0; i < setPkg->getNumInstances(); i++)
     {
         //gpThreads[i]->join();
-        printf("Deleteig\n");
+        printf("Deleting\n");
         delete graphicsProcessor[i];
-        printf("Deleteig\n");
+        delete snapMan[i];
+        delete optimizer[i];
+        printf("Deleting\n");
     }
 }
 

@@ -1,6 +1,6 @@
-#version 330 core
-in vec3 TexCoords;
-out vec4 color;
+#version 300 es
+in mediump vec3 TexCoords;
+out mediump vec4 color;
 
 uniform samplerCube ourTexture1;
 

@@ -1,6 +1,6 @@
-#version 330 core
-layout (location = 0) in vec3 position;
-out vec3 TexCoords;
+#version 300 es
+layout (location = 0) in  mediump vec3 position;
+out mediump vec3 TexCoords;
 
 uniform mat4 model;
 uniform mat4 projection;
