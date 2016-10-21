@@ -67,7 +67,7 @@ public:
 
 ///Sets the position array
     void setPositionArray(double *positionArray) {
-        this->positionArray[1] = positionArray[0];
+        this->positionArray[0] = positionArray[0];
         this->positionArray[1] = positionArray[1];
     }
 
@@ -170,17 +170,16 @@ public:
         inArr[1] = personalBestPosition[1];
     }
 
-    ///Setter for the best personal positions array
-    void setPersonalBestPosition(double *personalBestPosition) {
-        this->personalBestPosition[0] = personalBestPosition[0];
-        this->personalBestPosition[1] = personalBestPosition[1];
-    }
-
     ///Getter for best position pointer
     double * getPersonalBestPos(){
         return personalBestPosition;
     }
 
+    ///Setter for the best personal positions array
+    void setPersonalBestPosition(double *personalBestPosition) {
+        this->personalBestPosition[0] = personalBestPosition[0];
+        this->personalBestPosition[1] = personalBestPosition[1];
+    }
     ///Gets neighbhourhood indices
     vector<int> getNeighbourhoodIndices()
     {

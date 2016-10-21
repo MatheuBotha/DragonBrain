@@ -37,9 +37,16 @@ int main()
     ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
     //GGGGGGGG
     int maxIteration = 200;
-    int swarmSize = 1;
+    int swarmSize = 200;
     int dimension = 2;
-    SnapshotManager *snapshotManager = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
+    int numInstances = 1;
+    SnapshotManager* masterSnapshot = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
+    SnapshotManager **snapshotManagers = new SnapshotManager*[numInstances];
+
+    for(int i=0; i<numInstances; ++i)
+    {
+        snapshotManagers[i] = masterSnapshot;
+    }
 
     //******************************************************************************************************************
     //  Here Please
@@ -89,16 +96,17 @@ int main()
     //  End: Here Please
     //******************************************************************************************************************
 
-    OPT_Process *opt1 = new HillClimber(objective, snapshotManager, false, boundaries);
+    OPT_Process *opt1 = new HillClimber(objective, masterSnapshot, false, boundaries);
 
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
     }
 
     //GGGGGGGG
-    GraphicsProcessor gp(pdsp, snapshotManager, 1280, 720, 50);
+    GraphicsProcessor gp(pdsp, snapshotManagers, 1280, 720, 50, numInstances);
     gp.setObjective(objective);
     gp.run();
 
-    delete snapshotManager;
+    delete masterSnapshot;
+    delete snapshotManagers;
 }

@@ -129,7 +129,7 @@ void Sphere2::draw(GLfloat deltaTime)
     glm::mat4 projection;
 
     view = camera->getViewMatrix();
-    projection = glm::perspective(45.0f, 1.0f * 800 / 600, 0.1f, 10.0f);
+    projection = camera->getProjectionMatrix();
 
     // Get their uniform location
     GLint modelLoc = shaderProgram.getUniformLocation("model");
@@ -179,6 +179,11 @@ void Sphere2::translate(glm::vec3 location)
 void Sphere2::setModel()
 {
     model = glm::mat4();
+}
+
+void Sphere2::setModel(glm::mat4 model)
+{
+    this->model = model;
 }
 
 void Sphere2::setCamera(Camera* camera)

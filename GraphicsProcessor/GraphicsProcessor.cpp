@@ -28,12 +28,13 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
-GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager* snapshotManager,
-                                     int width, int height, unsigned int animationSpeed)
+GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager** snapshotManagers,
+                                     int width, int height, unsigned int animationSpeed, int numInstances)
 :
 screenWidth(width),
 screenHeight(height),
-animationSpeed(animationSpeed)
+animationSpeed(animationSpeed),
+numInstances(numInstances)
 {
     std::cout << "Starting Graphics Processor Test" << std::endl;
     //init SDL stuffz
@@ -61,7 +62,8 @@ animationSpeed(animationSpeed)
     boundaries = new double[4];
     pdsp.getBoundaries(boundaries);
 
-    this->snapshotManager = snapshotManager;
+    this->snapshotManagers = snapshotManagers;
+    this->particleSystems = new ParticleSystem*[numInstances];
 
     camera = new Camera(screenWidth, screenHeight, glm::vec3(0.0f, 2.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90, -45);
     SDL_ShowCursor(SDL_DISABLE);
@@ -69,6 +71,27 @@ animationSpeed(animationSpeed)
     timer.setMaxFPS(60.0f);
 
     isFocused = false;
+
+    instanceLocations = new glm::vec3*[numInstances];
+
+    if(numInstances == 1)
+    {
+        instanceLocations[0] = new glm::vec3(0,0,0);
+    }
+
+    if(numInstances == 2)
+    {
+        instanceLocations[0] = new glm::vec3(-1,0,0);
+        instanceLocations[1] = new glm::vec3(1,0,0);
+    }
+
+    if(numInstances == 4)
+    {
+        instanceLocations[0] = new glm::vec3(-1,0,-1);
+        instanceLocations[1] = new glm::vec3(1,0,-1);
+        instanceLocations[2] = new glm::vec3(-1,0,1);
+        instanceLocations[3] = new glm::vec3(1,0,1);
+    }
 }
 
 
@@ -77,7 +100,7 @@ GraphicsProcessor::~GraphicsProcessor(){
     shaderProgram.dispose();
     delete camera;
     delete boundaries;
-    delete particleSystem;
+    delete particleSystems;
     std::cout << "Ending Graphics Processor Test" << std::endl;
 }
 
@@ -85,9 +108,12 @@ void GraphicsProcessor::run(){
     Landscape2D l(shaderProgram, objective, boundaries);
     l.setCamera(camera);
     printf("Making Particle System\n");
-    particleSystem = new ParticleSystem(snapshotManager, sphereShaderProgram, &l);
-    particleSystem->setCamera(camera);
-    particleSystem->setAnimationSpeed(animationSpeed);
+    for(int i=0; i<numInstances; ++i)
+    {
+        particleSystems[i] = new ParticleSystem(snapshotManagers[i], sphereShaderProgram, &l);
+        particleSystems[i]->setCamera(camera);
+        particleSystems[i]->setAnimationSpeed(animationSpeed);
+    }
     printf("Finished making particle system\n");
 
     BoundingBox bb(boundingBoxShaderProgram);
@@ -176,8 +202,16 @@ void GraphicsProcessor::run(){
 
 
         skybox.draw(deltaTime);
-        l.draw();
-        particleSystem->draw(deltaTime);
+
+        for(int i=0; i<numInstances; ++i)
+        {
+            l.setModel();
+            l.translate(*instanceLocations[i]);
+            l.draw();
+            particleSystems[i]->setModel();
+            particleSystems[i]->translate(*instanceLocations[i]);
+            particleSystems[i]->draw(deltaTime);
+        }
 
 //        bb.activateShader();
 //        bb.setModel();

@@ -29,6 +29,8 @@ public:
     void translate(glm::vec3 location);
 
     void setModel();
+    void setModel(glm::mat4 model);
+
     void setCamera(Camera* camera);
 protected:
 

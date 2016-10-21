@@ -10,6 +10,7 @@
 
 ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram shaderProgram, Landscape2D* landscape)
 {
+    model = glm::mat4(1.0f);
     this->snapshotManager = snapshotManager;
     this->fromSnapshot = snapshotManager->dequeue();
     this->toSnapshot = snapshotManager->dequeue();
@@ -44,7 +45,7 @@ void ParticleSystem::draw(GLfloat deltaTime)
     for(int i=0; i<fromSnapshot->getSwarmSize(); ++i)
     {
 
-        particle->setModel();
+        particle->setModel(model);
         if(animationSpeed == animationTime || fromSnapshot == toSnapshot)
         {
             particle->translate(scaleParticleVector(getParticleVector(toSnapshot->getSwarm()[i])));
@@ -187,4 +188,39 @@ glm::vec3 ParticleSystem::scaleParticleVector(glm::vec3 particleVector)
 void ParticleSystem::setAnimationSpeed(unsigned int animationSpeed)
 {
     this->animationSpeed = animationSpeed;
+}
+
+void ParticleSystem::activateShader()
+{
+    shaderProgram.use();
+}
+
+void ParticleSystem::deactivateShader()
+{
+    shaderProgram.unuse();
+}
+
+void ParticleSystem::rotate(GLfloat angle, glm::vec3 rotationVector)
+{
+    model = glm::rotate(model, angle, rotationVector);
+}
+
+void ParticleSystem::scale(glm::vec3 scaleVector)
+{
+    model = glm::scale(model, scaleVector);
+}
+
+void ParticleSystem::translate(glm::vec3 location)
+{
+    model = glm::translate(model, location);
+}
+
+void ParticleSystem::setModel()
+{
+    model = glm::mat4();
+}
+
+void ParticleSystem::setModel(glm::mat4 model)
+{
+    this->model = model;
 }

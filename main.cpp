@@ -13,13 +13,14 @@ int main()
     swarmMan->startGUI();
     SettingsPackage* setts = swarmMan->getSettingsPackage();
     //still needs an alternative for the situation in which a user has not clicked a button
+    while(setts->isLocked()) {}
 
     //this one lets the user first chose to close application (without it not finishing execution)
     while (setts->isLocked()) {}
 
     while(!setts->readyToClose()) {
+        while (setts->isLocked()) {}
 
-        setts->lock(true);
         swarmMan->generateSnapshotManager();
         swarmMan->initializeOptimizer();
         swarmMan->optimize();
@@ -27,6 +28,10 @@ int main()
         //swarmMan->getGraphicsProcessor()->run();
         swarmMan->waitForOpts();
 
+        swarmMan->initializeGraphicsProcessor();
+        swarmMan->visualize();
+
+        setts->readyNext(true);
         std::cout << "APPLES" << std::endl;
 
 

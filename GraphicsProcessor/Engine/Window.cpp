@@ -56,13 +56,14 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
     std::printf("***   OpenGL Version: %s   ***\n", glGetString(GL_VERSION));
 
     //Set VSYNC
-    SDL_GL_SetSwapInterval(1);
+
 
     // Enable alpha blend
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_MULTISAMPLE);
     //glEnable(GL_CULL_FACE);
     //glCullFace(GL_BACK);
 

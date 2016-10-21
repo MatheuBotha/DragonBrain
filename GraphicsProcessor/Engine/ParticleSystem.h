@@ -11,11 +11,20 @@
 #include "Mesh.h"
 #include "Landscape2D.h"
 
-class ParticleSystem {
+class ParticleSystem : public Mesh {
 public:
     ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram shaderProgram, Landscape2D* landscape);
     ~ParticleSystem();
     void draw(GLfloat deltaTime);
+    void activateShader();
+    void deactivateShader();
+    void rotate(GLfloat angle, glm::vec3 rotationVector);
+    void scale(glm::vec3 scaleVector);
+    void translate(glm::vec3 location);
+    void setModel();
+    void setModel(glm::mat4 model);
+
+
     void analyzeSnapshotManager();
 
     double scaleX(double value);
@@ -38,8 +47,6 @@ public:
 
     void setAnimationSpeed(unsigned int animationSpeed);
 
-
-
 protected:
 private:
     SnapshotManager* snapshotManager;
@@ -59,6 +66,7 @@ private:
 
     glm::vec3* currentRotation;
 
+    glm::mat4 model;
 
 };
 

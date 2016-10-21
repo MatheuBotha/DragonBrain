@@ -65,14 +65,10 @@ private:
     OPT_Process** optimizer;
     std::thread* GUI_Thread;
     std::thread** optThreads;
-    GraphicsProcessor** graphicsProcessor;
-    std::thread** gpThreads;
+    GraphicsProcessor* graphicsProcessor;
     double *bounds;
 
     static void optimizeInstance(void *, int i);
-    static void visualizeInstance(void *, int i);
-
-
 public:
 
     ///Constructor for the manager objects
@@ -87,7 +83,7 @@ public:
     void initializeOptimizer();
     void optimize();
 
-    void initializeGraphicsProcessors();
+    void initializeGraphicsProcessor();
     void visualize();
     /*
      * This method creates a new snapshot manager class per request.
