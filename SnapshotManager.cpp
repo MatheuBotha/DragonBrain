@@ -25,19 +25,19 @@ bool SnapshotManager::enqueue(Snapshot* snapshot){
 }
 
 Snapshot* SnapshotManager::dequeue(){
-        temp = head;
-        for(int i=0; i<graphicsPosition-1, i<queueSize, i<bound; i++){
-            temp = temp->next;
-        }
-        if(graphicsPosition<queueSize) {
-            graphicsPosition++;
-        }
-        return temp;
+    temp = head;
+    for(int i=0; i<graphicsPosition && i<queueSize-1 && i<bound; i++){
+        temp = temp->next;
+    }
+    if(graphicsPosition<queueSize) {
+        graphicsPosition++;
+    }
+    return temp;
 }
 
 Snapshot *SnapshotManager::getLast() {
     if(head==NULL){
-        head = new Snapshot(swarmSize, dimensions);
+        head = new Snapshot(swarmSize, dimensions, bounds);
     }
     Snapshot* last=head;
     while(last->next != NULL){
@@ -48,7 +48,7 @@ Snapshot *SnapshotManager::getLast() {
 
 Snapshot *SnapshotManager::getFirst() {
     if(head==NULL){
-        head = new Snapshot(swarmSize, dimensions);
+        head = new Snapshot(swarmSize, dimensions, bounds);
     }
     return head;
 }
