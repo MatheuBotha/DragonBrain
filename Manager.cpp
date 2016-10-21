@@ -234,7 +234,7 @@ void Manager::initializeGraphicsProcessor()
     graphicsProcessor->setObjective(objective);
 }
 
-void Manager::visualize()
-{
+void Manager::visualize() {
     graphicsProcessor->run();
     delete graphicsProcessor;
+}

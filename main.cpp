@@ -19,7 +19,8 @@ int main()
     while (setts->isLocked()) {}
 
     while(!setts->readyToClose()) {
-        while (setts->isLocked()) {}
+
+        setts->lock(true);
 
         swarmMan->generateSnapshotManager();
         swarmMan->initializeOptimizer();
@@ -32,15 +33,8 @@ int main()
         swarmMan->visualize();
 
         setts->readyNext(true);
-        std::cout << "APPLES" << std::endl;
 
-
-
-        swarmMan->initializeGraphicsProcessors();
-        swarmMan->visualize();
-        setts->readyNext(true);
         while (setts->isLocked()) {}
-
 
     }
     swarmMan->endGUI();
