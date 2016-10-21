@@ -16,6 +16,7 @@ public:
         char **arger = new char*[1];
         int argc = 1;
             QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+            QCoreApplication::setApplicationName("SwarmViz");
             QGuiApplication app(argc, arger);
 
         QQmlApplicationEngine engine;

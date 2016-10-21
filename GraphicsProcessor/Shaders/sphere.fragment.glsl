@@ -1,8 +1,8 @@
-#version 330 core
+#version 300 es
 
-in vec3 texPos;
+in mediump vec3 texPos;
 
-out vec4 colour;
+out mediump vec4 colour;
 
 uniform sampler2D ourTexture1;
 

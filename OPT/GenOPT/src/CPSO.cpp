@@ -5,9 +5,8 @@
 #include "CPSO.h"
 
 CPSO::CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double wVal, double velMax,double boundArr[4],double s,double c) :
-        PSO(pFunction, pManager, i, boundArr,s,c) {
+        PSO(pFunction, pManager, i, boundArr, wVal, s,c) {
     vMax=velMax;
-    w=wVal;
     calculateConstrictionCoefficient();
 }
 double CPSO::calculateConstrictionCoefficient()
@@ -46,8 +45,8 @@ void CPSO::updateVelocity(Particle *particle) {
         decayInertiaWeight(w);
         tmpV =constrictionCoefficient*((w*inertiaComp)+cogComp+socComp);
 
-        //if (tmpV>vMax) tmpV=vMax;
-        //if (tmpV<-vMax) tmpV=-vMax;
+        if (tmpV>vMax) tmpV=vMax;
+        if (tmpV<-vMax) tmpV=-vMax;
         particle->setVelocity(tmpV, i);
     }
 }

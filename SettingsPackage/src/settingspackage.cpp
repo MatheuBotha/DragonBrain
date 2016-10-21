@@ -56,17 +56,18 @@ void SettingsPackage::generateSettingsGraphics(QString resolution, bool showLink
 }
 
 void SettingsPackage::generateSettingsOptimizer(QString algorithm, QString algo2, QString algo3, QString algo4, int maxIterations, double cog, double soc,
-                                                double constrictionCoeff, double maxVelo, int success, int fail, int neighbourSize)
+                                               double constrict, double inertia, double maxVelo, int success, int fail, int neighbourSize)
 {
     optPkg->setAlgorithms(algorithm.toStdString(), algo2.toStdString(), algo3.toStdString(), algo4.toStdString());
     optPkg->setMaxIterations(maxIterations);
-    optPkg->setConstrictionCoefficient(constrictionCoeff);
+    optPkg->setInertiaWeight(inertia);
     optPkg->setMaxVelocity(maxVelo);
     optPkg->setSuccessCount(success);
     optPkg->setFailCount(fail);
     optPkg->setNeighbourhoodSize(neighbourSize);
     optPkg->setSocialCoefficient(soc);
     optPkg->setCognitiveCoefficient(cog);
+    optPkg->setConstrictionCoefficient(constrict);
 }
 
 

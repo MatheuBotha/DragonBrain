@@ -10,10 +10,10 @@
 class Schwefel26Objective : public ObjectiveFunction{
 public:
 Schwefel26Objective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
-    defaultBounds[0]=-500.0;
-    defaultBounds[1]=500.0;
-    defaultBounds[2]=-500.0;
-    defaultBounds[3]=500.0;
+    defaultBounds[0]=-500.0+x;
+    defaultBounds[1]=500.0+x;
+    defaultBounds[2]=-500.0+y;
+    defaultBounds[3]=500.0+y;
 }
 
 double functionInput(double * parameters);

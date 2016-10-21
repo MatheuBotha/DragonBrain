@@ -1,8 +1,8 @@
-#version 330 core
-in vec3 position;
-in vec2 texCoord;
+#version 300 es
+in mediump vec3 position;
+in mediump vec2 texCoord;
 
-out vec2 TexCoord;
+out mediump vec2 TexCoord;
 
 uniform mat4 model;
 uniform mat4 view;

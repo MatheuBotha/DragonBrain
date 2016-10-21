@@ -10,10 +10,10 @@
 class MichalewiczObjective : public ObjectiveFunction{
 public:
 MichalewiczObjective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
-    defaultBounds[0]=0.0;
-    defaultBounds[1]=M_PI;
-    defaultBounds[2]=0.0;
-    defaultBounds[3]=M_PI;
+    defaultBounds[0]=0.0+x;
+    defaultBounds[1]=M_PI+x;
+    defaultBounds[2]=0.0+y;
+    defaultBounds[3]=M_PI+y;
 }
 
 double functionInput(double * parameters);

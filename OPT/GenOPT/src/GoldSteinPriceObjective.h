@@ -11,10 +11,10 @@
 class GoldSteinPriceObjective : public ObjectiveFunction{
 public:
 GoldSteinPriceObjective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
-    defaultBounds[0]=-2.0;
-    defaultBounds[1]=2.0;
-    defaultBounds[2]=-2.0;
-    defaultBounds[3]=2.0;
+    defaultBounds[0]=-2.0+x;
+    defaultBounds[1]=2.0+x;
+    defaultBounds[2]=-2.0+y;
+    defaultBounds[3]=2.0+y;
 }
 
 double functionInput(double * parameters);

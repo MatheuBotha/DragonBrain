@@ -54,9 +54,6 @@ std::string OptimizerSettingsPackage::getAlgorithm(int i) {
     else return algorithm4;
 }
 
-void OptimizerSettingsPackage::setConstrictionCoefficient(double constrict) {
-    constrictionCoefficient = constrict;
-}
 
 void OptimizerSettingsPackage::setMaxVelocity(double velo) {
     maxVelocity = velo;
@@ -74,9 +71,6 @@ void OptimizerSettingsPackage::setNeighbourhoodSize(int nSize) {
     neighbourhoodSize = nSize;
 }
 
-double OptimizerSettingsPackage::getConstrictionCoefficient() {
-    return constrictionCoefficient;
-}
 
 double OptimizerSettingsPackage::getMaxVelocity() {
     return maxVelocity;
@@ -93,3 +87,21 @@ int OptimizerSettingsPackage::getSuccessCount() {
 int OptimizerSettingsPackage::getNeighbourhoodSize() {
     return neighbourhoodSize;
 }
+
+void OptimizerSettingsPackage::setInertiaWeight(double d) {
+    inertiaWeight = d;
+}
+
+double  OptimizerSettingsPackage::getInertiaWeight() {
+    return inertiaWeight;
+}
+
+void OptimizerSettingsPackage::setConstrictionCoefficient(double d) {
+    constrictionCoefficient = d;
+}
+
+double OptimizerSettingsPackage::getConstrictionCoefficient() {
+    return constrictionCoefficient;
+}
+
+

@@ -111,11 +111,11 @@ public:
       * @brief Generates a OptimizerSettingsPackage using input from the GUI
       */
     Q_INVOKABLE void generateSettingsOptimizer(QString algorithm, QString algo2, QString algo3, QString algo4, int maxIterations, double cog, double soc,
-    double constrictionCoeff, double maxVelo, int success, int fail, int neighbourSize);
+    double constrictCoeff, double inertia, double maxVelo, int success, int fail, int neighbourSize);
     /**
       * @brief Generates a ProblemDomainSettingsPackage using input from the GUI
       */
-    Q_INVOKABLE void generateSettingsDomain(QString, int , double, double, double, double, double, double, double, double);
+    Q_INVOKABLE void generateSettingsDomain(QString, int , double, double,  double, double, double, double, double, double);
 
     void updateSettings(double transA, double transB, double transC, double transD, double maxVelocity, int succ, int fail);
 

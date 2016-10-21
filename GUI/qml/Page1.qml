@@ -82,10 +82,10 @@ Page1Form {
                 {
                     color: "#DDD"
                 }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                visible: (algorithmChoice.displayText == "Conical PSO" ||
                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
 
-                text: "1.0"
+                text: "2.5"
             }
 
             TextField { font.pixelSize: fontSize
@@ -104,9 +104,9 @@ Page1Form {
                 {
                     color: "#DDD"
                 }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                visible: (algorithmChoice.displayText == "Conical PSO" ||
                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
-                text: "1.0"
+                text: "2.5"
             }
 
 
@@ -115,7 +115,7 @@ Page1Form {
                 x: sWid * 0.02
                 y: sHei * 0.155
                 color: "#ffffff"
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                visible: (algorithmChoice.displayText == "Conical PSO" ||
                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                 text: qsTr("Cognitive Coefficient")
                 font.pixelSize: fontSize
@@ -128,7 +128,7 @@ Page1Form {
                 y: sHei * 0.155
                 color: "#ffffff"
                 text: qsTr("Social Coefficient")
-                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
+                 visible: (algorithmChoice.displayText == "Conical PSO" ||
                            algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
                font.pixelSize: fontSize
                 font.bold: true
@@ -139,13 +139,58 @@ Page1Form {
             //BEGIN PSO SPECIFIC SECTION
             //
             Label {  wrapMode: Text.WordWrap
+                id: inertiaLabel
+                anchors.left: cognitiveCoeff.left
+                anchors.top: socialCoeff.bottom
+                color: "#ffffff"
+                text: qsTr("Inertia Weight")
+                visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Particle Swarm Optimization"
+                         || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+               font.pixelSize: fontSize
+                font.bold: true
+            }
+
+            TextField { font.pixelSize: fontSize
+                id: inertiaWeight
+                validator: DoubleValidator {
+                    locale: "English"
+                    decimals: 4
+                }
+                anchors.left: inertiaLabel.left
+                anchors.top: inertiaLabel.bottom
+                width: parent.width * 0.25
+                clip: true
+                color: "#000"
+                background: Rectangle
+                {
+                    color: "#DDD"
+                }
+                visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Particle Swarm Optimization"
+                         || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+
+                text: "0.9"
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//FIPS PLS
+Label {  wrapMode: Text.WordWrap
                 id: constrictLabel
                 anchors.left: cognitiveCoeff.left
                 anchors.top: socialCoeff.bottom
                 color: "#ffffff"
                 text: qsTr("Constriction Coefficient")
-                visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
-                         || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
                font.pixelSize: fontSize
                 font.bold: true
             }
@@ -156,8 +201,8 @@ Page1Form {
                     locale: "English"
                     decimals: 4
                 }
-                anchors.left: constrictLabel.left
-                anchors.top: constrictLabel.bottom
+                anchors.left: inertiaLabel.left
+                anchors.top: inertiaLabel.bottom
                 width: parent.width * 0.25
                 clip: true
                 color: "#000"
@@ -165,13 +210,12 @@ Page1Form {
                 {
                     color: "#DDD"
                 }
-                visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
-                         || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
+                visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
 
-                text: "1.0"
+
+                text: "0.9"
             }
-
-
+            ///
 
             //CPSO
                         Label {  wrapMode: Text.WordWrap
@@ -849,7 +893,7 @@ GroupBox{
         transformOrigin: Item.Left
         opacity: 0.8
         clip: true
-        model: [ "640x480", "1024x789", "1920x1080" ]
+        model: [ "640x480", "1024x789", "1366x768", "1920x1080" ]
         currentIndex: 0
         font.pixelSize: fontSize
     }
@@ -999,7 +1043,7 @@ ComboBox {
                      setPkg.generateSettingsGraphics( resolutionChoice.currentText,  showLinks.checked,
                                            showPaths.checked);
                      setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  secondAlgo.currentText, thirdAlgo.currentText, fourthAlgo.currentText, maxIterations.value, parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text),
-                                            parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
+                                            parseFloat(constrictCoeff.text), parseFloat(inertiaWeight.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
              }
         }

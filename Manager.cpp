@@ -121,6 +121,8 @@ void Manager::generateSnapshotManager() {
         setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
     }
 
+
+
     for(int i = 0; i < setPkg->getNumInstances(); ++i) {
         snapMan[i] = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
                                          setPkg->getSwarmSize(),
@@ -142,20 +144,21 @@ SettingsPackage *Manager::getSettingsPackage() {
 }
 
 void Manager::initializeOptimizer() {
+//    bounds[0]+=setPkg->getProblemDomainSettingsPackage()->ge
 
     for(int i = 0; i < setPkg->getNumInstances(); ++i) {
         //+1 because getAlgorithm refers to algorithms labeled 1 to 4 (I've clearly used too many funny languages
         //recently, to actually start something at 1)
         std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm(i+1);
         if (optAlg == "Hill Climbing") {
-            optimizer[i] = new HillClimber(objective, snapMan[i], true, bounds);
+            optimizer[i] = new HillClimber(objective, snapMan[i], false, bounds);
         } else if (optAlg == "Particle Swarm Optimization")
-            optimizer[i] = new PSO(objective, snapMan[i], true, bounds,
+            optimizer[i] = new PSO(objective, snapMan[i], false, bounds, setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                    setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Conical PSO")
-            optimizer[i] = new CPSO(objective, snapMan[i], true,
-                                    setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+            optimizer[i] = new CPSO(objective, snapMan[i], false,
+                                    setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                     setPkg->getOptimizerSettingsPackage()->getMaxVelocity(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
@@ -169,7 +172,7 @@ void Manager::initializeOptimizer() {
             optimizer[i] = new GCPSO(objective, snapMan[i], false, bounds,
                                      setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
                                      setPkg->getOptimizerSettingsPackage()->getFailCount(),
-                                     setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
+                                     setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                      setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                      setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Elitist Hill Climbing")
@@ -234,8 +237,15 @@ void Manager::initializeGraphicsProcessor()
     graphicsProcessor->setObjective(objective);
 }
 
-void Manager::visualize()
-{
+void Manager::visualize() {
     graphicsProcessor->run();
     delete graphicsProcessor;
+}
+
+void Manager::cleanMemory() {
+    for(int i = 0; i < setPkg->getNumInstances(); ++i)
+    {
+        delete optimizer[i];
+        delete snapMan[i];
+    }
 }

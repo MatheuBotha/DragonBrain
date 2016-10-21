@@ -5,9 +5,10 @@
 #include "Levy13Objective.h"
 double Levy13Objective::functionInput(double *parameters){
     double result;
-    transformInput(parameters);
     double x1 = parameters[0];
     double x2 = parameters[1];
+    x1 = transformX1(x1);
+    x2 = transformX2(x2);
 
     double term1 = pow((sin(3*M_PI*x1)),2);
     double term2 = pow((x1-1),2) * (1+pow((sin(3*M_PI*x2)),2));
