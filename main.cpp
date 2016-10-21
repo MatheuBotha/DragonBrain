@@ -26,11 +26,12 @@ int main()
         swarmMan->initializeOptimizer();
         swarmMan->optimize();
 
-        //swarmMan->getGraphicsProcessor()->run();
-        swarmMan->waitForOpts();
 
         swarmMan->initializeGraphicsProcessor();
-        swarmMan->visualize();
+        swarmMan->visualize();                                                                                                                                                                                                                                                                          
+        //swarmMan->getGraphicsProcessor()->run();
+        swarmMan->waitForOpts();
+        swarmMan->cleanMemory();
 
         setts->readyNext(true);
 

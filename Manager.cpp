@@ -238,3 +238,11 @@ void Manager::visualize() {
     graphicsProcessor->run();
     delete graphicsProcessor;
 }
+
+void Manager::cleanMemory() {
+    for(int i = 0; i < setPkg->getNumInstances(); ++i)
+    {
+        delete optimizer[i];
+        delete snapMan[i];
+    }
+}
