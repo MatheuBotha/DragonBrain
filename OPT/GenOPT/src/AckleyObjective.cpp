@@ -5,9 +5,11 @@
 #include "AckleyObjective.h"
 double AckleyObjective::functionInput(double *parameters){
     double result;
-    transformInput(parameters);
+//    transformInput(parameters);
     double x1 = parameters[0];
     double x2 = parameters[1];
+    x1 = transformX1(x1);
+    x2 = transformX2(x2);
     double a = 20.0;
     double b = 0.2;
     double c = 2*M_PI;
@@ -16,3 +18,4 @@ double AckleyObjective::functionInput(double *parameters){
 
     return transformOutput(result);
 }
+

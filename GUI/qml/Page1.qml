@@ -85,7 +85,7 @@ Page1Form {
                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
 
-                text: "1.0"
+                text: "2.5"
             }
 
             TextField { font.pixelSize: fontSize
@@ -106,7 +106,7 @@ Page1Form {
                 }
                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
-                text: "1.0"
+                text: "2.5"
             }
 
 
@@ -168,7 +168,7 @@ Page1Form {
                 visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
                          || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
 
-                text: "1.0"
+                text: "0.9"
             }
 
 

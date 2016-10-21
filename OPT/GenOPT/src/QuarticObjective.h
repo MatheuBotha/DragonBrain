@@ -9,10 +9,10 @@
 class QuarticObjective : public ObjectiveFunction{
 public:
 QuarticObjective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
-    defaultBounds[0]=-1.28;
-    defaultBounds[1]=1.28;
-    defaultBounds[2]=-1.28;
-    defaultBounds[3]=1.28;
+    defaultBounds[0]=-1.28+x;
+    defaultBounds[1]=1.28+x;
+    defaultBounds[2]=-1.28+y;
+    defaultBounds[3]=1.28+y;
 }
 
 double functionInput(double * parameters);

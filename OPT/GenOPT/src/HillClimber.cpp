@@ -42,7 +42,8 @@ void HillClimber::iterate() {
 }
 
 void HillClimber::mutate(Particle *particle) {
-    double *newPosition = particle->getPositionArrayPointer();
+    double newPosition[2];
+    particle->getPositionArray(newPosition);
     double xRange = bounds[1] - bounds[0];
     double yRange = bounds[3] - bounds[2];
 
@@ -59,12 +60,12 @@ void HillClimber::mutate(Particle *particle) {
 
         newPosition[0]+=(mutationRate*xRange*(((double)rand()/(double)RAND_MAX)-0.5));
         newPosition[1]+=(mutationRate*yRange*(((double)rand()/(double)RAND_MAX)-0.5));
-
         if(newPosition[0] < bounds[0]){
             newPosition[0] = bounds[0];
 
         }else if(newPosition[0] > bounds[1]){
             newPosition[0] = bounds[1];
+
         }
         if(newPosition[1] < bounds[2]){
             newPosition[1] = bounds[2];
@@ -75,15 +76,18 @@ void HillClimber::mutate(Particle *particle) {
         }
     }
 
+    double posTemp[2] = { newPosition[0], newPosition[1] };
+    double bestTemp[2] = { particle->getPersonalBestPos()[0], particle->getPersonalBestPos()[1]};
     double fitness;
     double bestFitness;
-    fitness = objectiveFunction->functionInput(newPosition);
-    bestFitness = objectiveFunction->functionInput(particle->getPersonalBestPos());
+    fitness = objectiveFunction->functionInput(posTemp);
+    bestFitness = objectiveFunction->functionInput(bestTemp);
     particle->setFitnessValue(fitness);
     particle->setPersonalBest(bestFitness);
     if(particle->getFitnessValue() < particle->getPersonalBest()){
         particle->setPersonalBestPosition(newPosition);
         particle->setPersonalBest(particle->getFitnessValue());
+
     }
 
     if(ideal == nullptr ||

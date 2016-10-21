@@ -121,11 +121,13 @@ void Manager::generateSnapshotManager() {
         setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
     }
 
+
+
     for(int i = 0; i < setPkg->getNumInstances(); ++i) {
         snapMan[i] = new SnapshotManager(setPkg->getOptimizerSettingsPackage()->getMaxIterations(),
                                          setPkg->getSwarmSize(),
                                          setPkg->getProblemDomainSettingsPackage()->getDimensions(),
-                                         bounds,setPkg->getOptimizerSettingsPackage()->getMaxIterations());
+                                         bounds);
     }
     for(int i = 1; i < setPkg->getNumInstances(); ++i)
     {
@@ -142,8 +144,6 @@ SettingsPackage *Manager::getSettingsPackage() {
 }
 
 void Manager::initializeOptimizer() {
-    double trans[4];
-    setPkg->getProblemDomainSettingsPackage()->getTransformations(trans);
 //    bounds[0]+=setPkg->getProblemDomainSettingsPackage()->ge
 
     for(int i = 0; i < setPkg->getNumInstances(); ++i) {

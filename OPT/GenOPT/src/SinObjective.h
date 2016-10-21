@@ -11,10 +11,10 @@
 class SinObjective : public ObjectiveFunction{
 public:
     SinObjective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
-        defaultBounds[0]=-8.0;
-        defaultBounds[1]=8.0;
-        defaultBounds[2]=-8.0;
-        defaultBounds[3]=8.0;
+        defaultBounds[0]=-8.0+x;
+        defaultBounds[1]=8.0+x;
+        defaultBounds[2]=-8.0+y;
+        defaultBounds[3]=8.0+y;
     }
 
     double functionInput(double * parameters);
