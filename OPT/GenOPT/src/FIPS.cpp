@@ -34,9 +34,10 @@ void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexV
         cTemp = 0;
 
 
-        for (int r = 0; r < sizeSwarm; r++) {
-            a[r] = r;
-        }
+    for (int r = 0; r < sizeSwarm; r++)
+    {
+       a[r] = r;
+    }
         ///construct local neighbourhood
     int index;
     long double smallestValue = DBL_MAX;
@@ -62,10 +63,17 @@ void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexV
             cTemp=0;
             for(int j=0;j<tmpVector.size();j++)
             {
-                cTemp+=getRandomNumberMT()*(swarm[j]->getFitnessValue());
+                for(int y=0;y<2;y++){
+                cTemp+=getRandomNumberMT()*(swarm[tmpVector.at(j)]->getPersonalBestPos()[y]-particle->getPositionAtDimension(y));
+                }
             }
+<<<<<<< HEAD
             vUP=0;
             vUP=particle->getVelocity(0)+w*(particle->getVelocity(d)+((1/k)*cTemp));
+=======
+            vUP=0.0;
+            vUP=constrictionCoefficient*((particle->getVelocity(d)+((1.0/k)*cTemp)));
+>>>>>>> master
             particle->setVelocity(vUP,d);
         }
 

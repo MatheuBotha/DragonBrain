@@ -15,6 +15,7 @@ private:
     Snapshot* head;
     Snapshot* temp;
     double bounds[4];
+
 public:
     SnapshotManager(int Bound, int i, int dim, double bou[4]) {
         queueSize = 0;
@@ -46,6 +47,7 @@ public:
     Snapshot* dequeue();
     Snapshot* getLast();
     Snapshot *getFirst();
+
 };
 
 
