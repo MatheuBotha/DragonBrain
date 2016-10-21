@@ -28,7 +28,7 @@ void main(void) {
 	graph_coord.z = (texture2D(mytexture, graph_coord.xy / 2.0 + 0.5).r);
 
 
-	gl_Position = vertex_transform * vec4(coord2d.x, graph_coord.z, coord2d.y, 1);
+	gl_Position = vertex_transform * vec4(coord2d.y, graph_coord.z, coord2d.x, 1);
 }
 
 

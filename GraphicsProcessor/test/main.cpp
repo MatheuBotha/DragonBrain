@@ -8,6 +8,7 @@
 #include "../../OPT/GenOPT/src/AckleyObjective.h"
 #include "../../OPT/GenOPT/src/WeierstrassObjective.h"
 #include "../../OPT/GenOPT/src/QuadricObjective.h"
+#include "../../OPT/GenOPT/src/RosenbrockObjective.h"
 #include "../../SettingsPackage/src/problemdomainsettingspackage.h"
 #include "../../SnapshotManager/SnapshotManager.h"
 #include "../../OPT/GenOPT/src/HillClimber.h"
@@ -34,7 +35,7 @@ int main()
     pdsp.setBoundaries(boundaries);
 
 
-    ObjectiveFunction* objective = new SinObjective(1, 0, 0, 0);
+    ObjectiveFunction* objective = new RosenbrockObjective(1, 0, 0, 0);
     //GGGGGGGG
     int maxIteration = 200;
     int swarmSize = 200;
@@ -101,6 +102,7 @@ int main()
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
     }
+
 
     //GGGGGGGG
     GraphicsProcessor gp(pdsp, snapshotManagers, 1280, 720, 50, numInstances);

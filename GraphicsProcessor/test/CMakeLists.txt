@@ -96,6 +96,7 @@ set(SOURCE_FILES
         ../../OPT/GenOPT/src/OPT_Process.cpp
         ../../SnapshotManager/SnapshotManager.cpp
         ../../SnapshotManager/snapshot.cpp
+        ../../OPT/GenOPT/src/RosenbrockObjective.cpp
         )
 add_executable(GraphicsProcessorTest ${SOURCE_FILES})
 
