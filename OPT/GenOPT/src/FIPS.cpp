@@ -4,8 +4,9 @@
 
 #include "FIPS.h"
 
-FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, int size,double wA,double boundsD[4],double s,double c) : PSO(pFunction, pManager, i,boundsD,wA,s,c) {
+FIPS::FIPS(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, int size,double constrict,double boundsD[4],double s,double c) : PSO(pFunction, pManager, i,boundsD,constrict,s,c) {
 nSize=size;
+    constrictionCoefficient = constrict;
     for(int i=0;i<4;i++)
     {
         bounds[i]=boundsD[i];
@@ -67,13 +68,8 @@ void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexV
                 cTemp+=getRandomNumberMT()*(swarm[tmpVector.at(j)]->getPersonalBestPos()[y]-particle->getPositionAtDimension(y));
                 }
             }
-<<<<<<< HEAD
-            vUP=0;
-            vUP=particle->getVelocity(0)+w*(particle->getVelocity(d)+((1/k)*cTemp));
-=======
             vUP=0.0;
             vUP=constrictionCoefficient*((particle->getVelocity(d)+((1.0/k)*cTemp)));
->>>>>>> master
             particle->setVelocity(vUP,d);
         }
 

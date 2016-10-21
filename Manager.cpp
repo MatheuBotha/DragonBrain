@@ -165,7 +165,7 @@ void Manager::initializeOptimizer() {
         else if (optAlg == "Fully Informed PSO")
             optimizer[i] = new FIPS(objective, snapMan[i], false,
                                     setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(),
-                                    setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
+                                    setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Guaranteed Convergence PSO")

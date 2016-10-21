@@ -26,13 +26,13 @@ TEST(basic_check, test_GraphicsPackage) {
 
 TEST(basic_check, test_OptimizerPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsOptimizer("HillClimber", "HillClimber", "HillClimber", "HillClimber",  21, 5.3, 2.6, 1.0, 50.0, 15, 5, 2);
+    setPkg.generateSettingsOptimizer("HillClimber", "HillClimber", "HillClimber", "HillClimber",  21, 5.3, 2.6, 1.1, 1.0, 50.0, 15, 5, 2);
 
     OptimizerSettingsPackage* oPkg = setPkg.getOptimizerSettingsPackage();
 
     EXPECT_EQ("HillClimber", oPkg->getAlgorithm(1));
     EXPECT_EQ(21, oPkg->getMaxIterations());
-    EXPECT_EQ(1.0, oPkg->getInertiaWeight());
+    EXPECT_EQ(1.1, oPkg->getInertiaWeight());
     EXPECT_EQ(50.0, oPkg->getMaxVelocity());
     EXPECT_EQ(15, oPkg->getSuccessCount());
     EXPECT_EQ(5, oPkg->getFailCount());

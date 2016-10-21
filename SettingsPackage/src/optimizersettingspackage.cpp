@@ -96,4 +96,12 @@ double  OptimizerSettingsPackage::getInertiaWeight() {
     return inertiaWeight;
 }
 
+void OptimizerSettingsPackage::setConstrictionCoefficient(double d) {
+    constrictionCoefficient = d;
+}
+
+double OptimizerSettingsPackage::getConstrictionCoefficient() {
+    return constrictionCoefficient;
+}
+
 

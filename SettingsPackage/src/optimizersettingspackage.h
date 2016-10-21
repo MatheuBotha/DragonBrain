@@ -20,6 +20,7 @@ private:
     double cognitiveCoefficient;
     double socialCoefficient;
     double inertiaWeight;
+    double constrictionCoefficient;
 
     double maxVelocity;
     int successCount;
@@ -131,6 +132,11 @@ public:
     void setInertiaWeight(double d);
 
     double getInertiaWeight();
+
+    void setConstrictionCoefficient(double d);
+
+
+    double getConstrictionCoefficient();
 };
 
 #endif // OPTIMIZERSETTINGSPACKAGE_H
