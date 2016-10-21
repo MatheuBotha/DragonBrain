@@ -36,6 +36,12 @@ public:
             head = temp;
         }
     }
+
+    int getBound()
+    {
+        return bound;
+    }
+
     bool enqueue(Snapshot* snapshot);
     Snapshot* dequeue();
     Snapshot* getLast();

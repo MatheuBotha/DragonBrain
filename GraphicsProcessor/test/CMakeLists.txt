@@ -56,6 +56,9 @@ set(SOURCE_FILES
 
         ../Engine/Cube.cpp
 
+        ../Engine/Sphere.cpp
+        ../Engine/Sphere2.cpp
+
         ../Engine/Landscape2D.cpp
 
         ../Engine/Camera.h
@@ -69,12 +72,30 @@ set(SOURCE_FILES
         ../Engine/Texture.cpp
         ../Engine/Texture.h
 
+        ../Engine/ParticleSystem.cpp
+        ../Engine/ParticleSystem.h
+
+        ../Engine/BoundingBox.cpp
+        ../Engine/BoundingBox.h
+
+        ../Engine/SkyBox.cpp
+        ../Engine/SkyBox.h
+
+        ../Engine/Timer.cpp
+        ../Engine/Timer.h
+
         ../../OPT/GenOPT/src/ObjectiveFunction.h
         ../../OPT/GenOPT/src/SaddleObjective.cpp
         ../../OPT/GenOPT/src/SinObjective.cpp
         ../../OPT/GenOPT/src/AckleyObjective.cpp
         ../../SettingsPackage/src/problemdomainsettingspackage.cpp
         ../../OPT/GenOPT/src/WeierstrassObjective.cpp
+        ../../OPT/GenOPT/src/QuadricObjective.cpp
+        ../../OPT/GenOPT/src/HillClimber.cpp
+        ../../OPT/GenOPT/src/ElitistHillClimber.cpp
+        ../../OPT/GenOPT/src/OPT_Process.cpp
+        ../../SnapshotManager/SnapshotManager.cpp
+        ../../SnapshotManager/snapshot.cpp
         )
 add_executable(GraphicsProcessorTest ${SOURCE_FILES})
 

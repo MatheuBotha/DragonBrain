@@ -28,7 +28,12 @@ int main()
         swarmMan->waitForOpts();
         setts->readyNext(true);
         std::cout << "APPLES" << std::endl;
+
+
         setts->lock(true);
+        swarmMan->initializeGraphicsProcessors();
+    swarmMan->visualize();
+
     }
     swarmMan->endGUI();
     delete swarmMan;

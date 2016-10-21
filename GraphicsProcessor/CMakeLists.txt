@@ -71,13 +71,23 @@ set(SOURCE_FILES
         Engine/Texture.cpp
         Engine/Texture.h
 
+        Engine/ParticleSystem.cpp
+        Engine/ParticleSystem.h
+
+        Engine/BoundingBox.cpp
+        Engine/BoundingBox.h
+
+        Engine/Timer.cpp
+        Engine/Timer.h
+
         ../OPT/GenOPT/src/ObjectiveFunction.h
         ../OPT/GenOPT/src/SaddleObjective.cpp
         ../OPT/GenOPT/src/SinObjective.cpp
         ../OPT/GenOPT/src/AckleyObjective.cpp
         ../SettingsPackage/src/problemdomainsettingspackage.cpp
         ../OPT/GenOPT/src/WeierstrassObjective.cpp
-        )
+
+        Engine/Sphere.cpp Engine/Sphere.h Engine/Sphere2.cpp Engine/Sphere2.h Engine/SkyBox.cpp Engine/SkyBox.h)
 add_library(GraphicsProcessor ${SOURCE_FILES})
 
 add_custom_command(TARGET GraphicsProcessor POST_BUILD

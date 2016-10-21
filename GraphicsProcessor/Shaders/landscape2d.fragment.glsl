@@ -1,4 +1,4 @@
-#version 330 core
+#version 130
 //
 ////in vec3 ourColor;
 //in vec2 TexCoord;
@@ -21,14 +21,7 @@ varying vec4 graph_coord;
 uniform vec4 color;
 
 void main(void) {
-	float factor;
-
-	if (gl_FrontFacing)
-		factor = 1.0;
-	else
-		factor = 0.5;
-
-	gl_FragColor = vec4(1 - graph_coord.z, graph_coord.z, 0, 1) * color * factor;
+	gl_FragColor = vec4(1 - graph_coord.z, graph_coord.z, 1, 1) * color;
 }
 
 

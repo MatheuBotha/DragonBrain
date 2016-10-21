@@ -13,18 +13,11 @@ Manager::Manager() {
     setPkg = new SettingsPackage();
     snapMan = new SnapshotManager*[4];
     optimizer = new OPT_Process*[4];
-    graphicsProcessor = new GraphicsProcessor*[4];
     objective = nullptr;
     bounds = new double[4];
 }
 
 Manager::~Manager() {
-//    for(int i = 0; i < setPkg->getNumInstances(); i++)
-//    {
-//        delete graphicsProcessor[i];
-//    }
-    delete graphicsProcessor;
-
     delete setPkg;
     if(snapMan != nullptr)
         delete snapMan;
@@ -32,8 +25,6 @@ Manager::~Manager() {
         delete optimizer;
     if(objective != nullptr)
         delete objective;
-
-
 }
 
 void Manager::startGUI() {
@@ -69,8 +60,6 @@ void Manager::generateSnapshotManager() {
         objective = new SinObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Saddle")
         objective = new SaddleObjective(trans[0], trans[1], trans[2], trans[3]);
-    else if(objFun == "Ackley")
-        objective = new AckleyObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Alpine")
         objective = new AlpineObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Beale")
@@ -117,9 +106,14 @@ void Manager::generateSnapshotManager() {
         objective = new WeierstrassObjective(trans[0], trans[1], trans[2], trans[3]);
     else if(objFun == "Zakharov")
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
+<<<<<<< Updated upstream
     delete [] trans;
 
+ //   graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
+   // graphicsProcessor->setObjective(objective);
+=======
 
+>>>>>>> Stashed changes
 
     setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
     if(bounds[0] == bounds[1] && bounds[1] == bounds[2] && bounds[2] == bounds[3])
@@ -156,13 +150,13 @@ void Manager::initializeOptimizer() {
         //recently, to actually start something at 1)
         std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm(i+1);
         if (optAlg == "Hill Climbing") {
-            optimizer[i] = new HillClimber(objective, snapMan[i], true, bounds);
+            optimizer[i] = new HillClimber(objective, snapMan[i], false, bounds);
         } else if (optAlg == "Particle Swarm Optimization")
-            optimizer[i] = new PSO(objective, snapMan[i], true, bounds,
+            optimizer[i] = new PSO(objective, snapMan[i], false, bounds,
                                    setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
         else if (optAlg == "Conical PSO")
-            optimizer[i] = new CPSO(objective, snapMan[i], true,
+            optimizer[i] = new CPSO(objective, snapMan[i], false,
                                     setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getMaxVelocity(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
@@ -225,52 +219,14 @@ void Manager::optimizeInstance(void *instance, int i)
     //testing anyway, it should be visualized in the end
     std::cout << "===============OPTIMIZER " << i << "===========================================\n";
     std::cout << "Best located solution is from particle at coords (" << current[0] <<","
-              << current[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n";
+              << current[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n"
+              << "Particle's best position was (" << bestPos[0] << ","
+              << bestPos[1] << ") with fitness of: " << best->getPersonalBest() << std::endl;
 
 }
 
-void Manager::initializeGraphicsProcessors()
+GraphicsProcessor* Manager::getGraphicsProcessor()
 {
-    for(int i = 0; i < setPkg->getNumInstances(); i++)
-    {
-        graphicsProcessor[i] = new GraphicsProcessor(
-                *setPkg->getProblemDomainSettingsPackage(),
-                snapMan[i],
-                setPkg->getGraphicsSettingsPackage()->getResolutionW(),
-                setPkg->getGraphicsSettingsPackage()->getResolutionH(),
-                60
-        );
-        graphicsProcessor[i]->setObjective(objective);
-    }
-}
-
-void Manager::visualize()
-{
-    //gpThreads = new std::thread*[4];
-
-    for(int i = 0; i < setPkg->getNumInstances(); i++)
-    {
-        //gpThreads[i] = new std::thread(&Manager::visualizeInstance, this, i);
-        graphicsProcessor[i]->run();
-    }
-
-    for(int i = 0; i < setPkg->getNumInstances(); i++)
-    {
-        //gpThreads[i]->join();
-        printf("Deleteig\n");
-        delete graphicsProcessor[i];
-        printf("Deleteig\n");
-    }
-}
-
-void Manager::visualizeInstance(void *instance, int i)
-{
-    printf("WHY\n");
-    Manager* mng = static_cast<Manager*>(instance);
-    printf("WHY\n");
-    if(!mng->graphicsProcessor[i]) return;
-    printf("WHY\n");
-    mng->graphicsProcessor[i]->run();
-    printf("WHY\n");
+    return graphicsProcessor;
 }
 

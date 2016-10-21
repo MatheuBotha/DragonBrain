@@ -9,6 +9,7 @@
 
 #include "GLSLProgram.h"
 #include "../../OPT/GenOPT/src/ObjectiveFunction.h"
+#include "Camera.h"
 
 class Landscape2D {
 public:
@@ -17,9 +18,18 @@ public:
     void draw();
 
     void setObjective(ObjectiveFunction* objective);
+    ObjectiveFunction* getObjective();
+
+    double* getBoundaries();
+    double getZMin();
+    double getZMax();
+    double normalize(double value);
+
+    void setCamera(Camera* camera);
 
 private:
     GLSLProgram textureProgram;
+    Camera* camera;
     ObjectiveFunction* objective;
     double* boundaries;
 
@@ -40,6 +50,9 @@ private:
     bool polygonoffset = true;
 
     GLuint vbo[3];
+
+    double zMin;
+    double zMax;
 };
 
 

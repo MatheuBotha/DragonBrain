@@ -1,24 +1,18 @@
 //
-// Created by matheu on 9/26/16.
+// Created by matheu on 2016/10/18.
 //
 
-#ifndef LEARNINGOGL_CUBE_H
-#define LEARNINGOGL_CUBE_H
+#ifndef SWARMVIZ_SPHERE_H
+#define SWARMVIZ_SPHERE_H
 
-
-#include <GL/glew.h>
-#include <glm/glm.hpp>
 
 #include "Mesh.h"
 #include "GLSLProgram.h"
-#include "Texture.h"
 
-class Cube : public Mesh {
-
+class Sphere : public Mesh {
 public:
-    Cube(GLSLProgram shaderProgram);
-    Cube(GLSLProgram shaderProgram, Texture* texture1, Texture* texture2);
-    ~Cube();
+    Sphere(GLSLProgram shaderProgram);
+    ~Sphere();
     void draw(GLfloat deltaTime);
 
     void activateShader();
@@ -34,17 +28,17 @@ protected:
 
 private:
     GLSLProgram shaderProgram;
-    Texture* texture1;
-    Texture* texture2;
     Camera* camera;
 
     GLuint _texture1;
     GLuint _texture2;
 
-    GLuint VBO, VAO;
+    GLuint VBO, VAO, VIO;
+    int lats, longs;
+    int numsToDraw;
 
     glm::mat4 model;
 };
 
 
-#endif //LEARNINGOGL_CUBE_H
+#endif //SWARMVIZ_SPHERE_H

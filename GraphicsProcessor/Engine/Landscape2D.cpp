@@ -21,12 +21,11 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 {
     textureProgram.addAttribute("coord2d");
     uniform_vertex_transform = textureProgram.getUniformLocation("vertex_transform");
-    uniform_texture_transform = textureProgram.getUniformLocation("texture_transform");
     uniform_mytexture = textureProgram.getUniformLocation("mytexture");
     uniform_color = textureProgram.getUniformLocation("color");
 
     // Create our datapoints, store it as bytes
-#define N 256
+#define N 1000
 
     //set up graph variables
 
@@ -35,21 +34,21 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     double yMin = boundaries[2];
     double yMax = boundaries[3];
 
-    printf("xMin = %f\n", xMin);
-    printf("xMax = %f\n", xMax);
-    printf("yMin = %f\n", yMin);
-    printf("yMax = %f\n", yMax);
+//    printf("xMin = %f\n", xMin);
+//    printf("xMax = %f\n", xMax);
+//    printf("yMin = %f\n", yMin);
+//    printf("yMax = %f\n", yMax);
 
     double xRange = (xMax - xMin)/(double)N;
     double yRange = (yMax - yMin)/(double)N;
 
-    printf("xMin = %i\n", xMin);
-    printf("xMax = %i\n", xMax);
-    printf("yMin = %i\n", yMin);
-    printf("yMax = %i\n", yMax);
-
-    printf("xRange = %.2f\n", xRange);
-    printf("yRange = %.2f\n", yRange);
+//    printf("xMin = %i\n", xMin);
+//    printf("xMax = %i\n", xMax);
+//    printf("yMin = %i\n", yMin);
+//    printf("yMax = %i\n", yMax);
+//
+//    printf("xRange = %.2f\n", xRange);
+//    printf("yRange = %.2f\n", yRange);
 
     GLfloat results[N][N];
     GLbyte graph[N][N];
@@ -61,13 +60,13 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     double currentX = (double)xMin;
     double currentY = (double)yMin;
 
-    double zMax = DBL_MIN;
-    double zMin = DBL_MAX;
+    zMax = DBL_MIN;
+    zMin = DBL_MAX;
 
-    printf("currentX = %f\n", currentX);
-    printf("currentY = %f\n", currentY);
-
-    printf("Starting Loop\n");
+//    printf("currentX = %f\n", currentX);
+//    printf("currentY = %f\n", currentY);
+//
+//    printf("Starting Loop\n");
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
 
@@ -96,9 +95,9 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 
 
             //printf("%d\t\t-\t\t%i\n", result, (signed)graph[i][j]);
-            printf("currentX = %f\n",currentX);
-            printf("currentY = %f\n",currentY);
-            printf("result = %f\n",results[i][j]);
+//            printf("currentX = %f\n",currentX);
+//            printf("currentY = %f\n",currentY);
+//            printf("result = %f\n",results[i][j]);
             currentY+=yRange;
         }
         currentY = yMin;
@@ -107,7 +106,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            graph[i][j] = roundf(((((1-(-1))*(results[i][j] - zMin))/(zMax - zMin))-1) * 127 + 128);
+            graph[i][j] = roundf(normalize(results[i][j]) * 127 + 128);
         }
     }
 
@@ -116,6 +115,7 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     glGenTextures(1, &texture_id);
     glBindTexture(GL_TEXTURE_2D, texture_id);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, N, N, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, graph);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     // Create two vertex buffer objects
     glGenBuffers(3, vbo);
@@ -176,6 +176,8 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
 Landscape2D::~Landscape2D(){}
 
 void Landscape2D::draw(){
+    textureProgram.use();
+    glBindTexture(GL_TEXTURE_2D, texture_id);
     glUniform1i(uniform_mytexture, 0);
 
     glm::mat4 model;
@@ -185,20 +187,15 @@ void Landscape2D::draw(){
 //
 //    else
 //        model = glm::mat4(1.0f);
-    model = glm::rotate(glm::mat4(1.0f), glm::radians(SDL_GetTicks() / 100.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    //model = glm::rotate(glm::mat4(1.0f), glm::radians(SDL_GetTicks() / 100.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
-
-    glm::mat4 view = glm::lookAt(glm::vec3(0.0, -2.0, 2.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 1.0));
-    glm::mat4 projection = glm::perspective(45.0f, 1.0f * 640 / 480, 0.1f, 10.0f);
+    glm::mat4 view = camera->getViewMatrix();
+    glm::mat4 projection = glm::perspective(45.0f, 1.0f * 800 / 600, 0.1f, 10.0f);
 
     glm::mat4 vertex_transform = projection * view * model;
-    glm::mat4 texture_transform = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, 1)), glm::vec3(offset_x, offset_y, 0));
-
+    //glm::mat4 vertex_transform;
+    //glm::mat4 texture_transform = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, 1)), glm::vec3(offset_x, offset_y, 0));
     glUniformMatrix4fv(uniform_vertex_transform, 1, GL_FALSE, glm::value_ptr(vertex_transform));
-    glUniformMatrix4fv(uniform_texture_transform, 1, GL_FALSE, glm::value_ptr(texture_transform));
-
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     /* Set texture wrapping mode */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, clamp ? GL_CLAMP_TO_EDGE : GL_REPEAT);
@@ -240,9 +237,45 @@ void Landscape2D::draw(){
     glDisableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    textureProgram.unuse();
 }
 
 void Landscape2D::setObjective(ObjectiveFunction* objective)
 {
     this->objective = objective;
+}
+
+ObjectiveFunction* Landscape2D::getObjective()
+{
+    return objective;
+}
+
+double* Landscape2D::getBoundaries()
+{
+    return boundaries;
+}
+
+double Landscape2D::getZMin()
+{
+    return zMin;
+
+//    double* parameters = new double[2];
+//    parameters[0] = currentX;
+//    parameters[1] = currentY;
+//    results[i][j] = objective->functionInput(parameters);
+}
+
+double Landscape2D::getZMax()
+{
+    return zMax;
+}
+
+double Landscape2D::normalize(double value)
+{
+    return ((((1-(-1))*(value - zMin))/(zMax - zMin))+(-1));
+}
+
+void Landscape2D::setCamera(Camera* camera)
+{
+    this->camera = camera;
 }

@@ -1,24 +1,18 @@
 //
-// Created by matheu on 9/26/16.
+// Created by matheu on 2016/10/20.
 //
 
-#ifndef LEARNINGOGL_CUBE_H
-#define LEARNINGOGL_CUBE_H
+#ifndef SWARMVIZ_SKYBOX_H
+#define SWARMVIZ_SKYBOX_H
 
-
-#include <GL/glew.h>
-#include <glm/glm.hpp>
 
 #include "Mesh.h"
 #include "GLSLProgram.h"
-#include "Texture.h"
 
-class Cube : public Mesh {
-
+class SkyBox : public Mesh{
 public:
-    Cube(GLSLProgram shaderProgram);
-    Cube(GLSLProgram shaderProgram, Texture* texture1, Texture* texture2);
-    ~Cube();
+    SkyBox(GLSLProgram shaderProgram);
+    ~SkyBox();
     void draw(GLfloat deltaTime);
 
     void activateShader();
@@ -30,12 +24,12 @@ public:
 
     void setModel();
     void setCamera(Camera* camera);
+
+    GLuint loadCubemap(std::vector<const GLchar*> faces);
 protected:
 
 private:
     GLSLProgram shaderProgram;
-    Texture* texture1;
-    Texture* texture2;
     Camera* camera;
 
     GLuint _texture1;
@@ -44,7 +38,9 @@ private:
     GLuint VBO, VAO;
 
     glm::mat4 model;
+
+    GLuint cubemapTexture;
 };
 
 
-#endif //LEARNINGOGL_CUBE_H
+#endif //SWARMVIZ_SKYBOX_H

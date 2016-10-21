@@ -14,6 +14,7 @@ Window::Window()
 
 Window::~Window()
 {
+    SDL_DestroyWindow(_sdlWindow);
 }
 
 int Window::create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) {
@@ -54,24 +55,25 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
     //Check the OpenGL version
     std::printf("***   OpenGL Version: %s   ***\n", glGetString(GL_VERSION));
 
-    //Set the background color to black
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
     //Set VSYNC
-    SDL_GL_SetSwapInterval(0);
+    SDL_GL_SetSwapInterval(1);
 
     // Enable alpha blend
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glEnable(GL_DEPTH_TEST);
-
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
+    //glEnable(GL_CULL_FACE);
+    //glCullFace(GL_BACK);
 
     return 0;
 }
 
 void Window::swapBuffer() {
     SDL_GL_SwapWindow(_sdlWindow);
+}
+
+SDL_Window* Window::getWindowInstance()
+{
+    return _sdlWindow;
 }
