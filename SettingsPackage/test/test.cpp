@@ -16,11 +16,10 @@ TEST(basic_check, test_GeneralPackage) {
 
 TEST(basic_check, test_GraphicsPackage) {
     SettingsPackage setPkg;
-    setPkg.generateSettingsGraphics("ResolutionString",true, false);
+    setPkg.generateSettingsGraphics("ResolutionString",60);
     GraphicsSettingsPackage* gPkg = setPkg.getGraphicsSettingsPackage();
 
-    EXPECT_TRUE(gPkg->getShowLinks());
-    EXPECT_FALSE(gPkg->getShowPath());
+    EXPECT_EQ(60, gPkg->getRenderSpeed());
 }
 
 

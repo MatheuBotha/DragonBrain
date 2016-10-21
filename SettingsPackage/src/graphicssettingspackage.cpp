@@ -16,15 +16,6 @@ int GraphicsSettingsPackage::getResolutionW()
     return resolutionW;
 }
 
-bool GraphicsSettingsPackage::getShowLinks()
-{
-    return showLinks;
-}
-
-bool GraphicsSettingsPackage::getShowPath()
-{
-    return showPath;
-}
 
 
 void GraphicsSettingsPackage::setResolutionH(int newH)
@@ -38,14 +29,12 @@ void GraphicsSettingsPackage::setResolutionW(int newW)
 }
 
 
-void GraphicsSettingsPackage::setShowLinks(bool links)
-{
-    showLinks = links;
+
+void GraphicsSettingsPackage::setRenderSpeed(int i) {
+    renderSpeed = i;
 }
 
-void GraphicsSettingsPackage::setShowPath(bool path)
-{
-    showPath = path;
+int GraphicsSettingsPackage::getRenderSpeed() {
+    return renderSpeed;
 }
-
 

@@ -106,7 +106,7 @@ public:
       * @brief Generates a GraphicsSettingsPackage using input from the GUI
       */
     Q_INVOKABLE void generateSettingsGraphics(QString,
-                                              bool, bool);
+                                              int);
     /**
       * @brief Generates a OptimizerSettingsPackage using input from the GUI
       */

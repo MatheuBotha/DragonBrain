@@ -231,9 +231,10 @@ void Manager::initializeGraphicsProcessor()
             snapMan,
             setPkg->getGraphicsSettingsPackage()->getResolutionW(),
             setPkg->getGraphicsSettingsPackage()->getResolutionH(),
-            60,//Animation Speed
+            setPkg->getGraphicsSettingsPackage()->getRenderSpeed(),//Animation Speed
             setPkg->getNumInstances()
     );
+    std::cout << setPkg->getGraphicsSettingsPackage()->getRenderSpeed();
     graphicsProcessor->setObjective(objective);
 }
 

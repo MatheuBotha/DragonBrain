@@ -12,8 +12,6 @@ int main()
     Manager* swarmMan = new Manager();
     swarmMan->startGUI();
     SettingsPackage* setts = swarmMan->getSettingsPackage();
-    //still needs an alternative for the situation in which a user has not clicked a button
-    while(setts->isLocked()) {}
 
     //this one lets the user first chose to close application (without it not finishing execution)
     while (setts->isLocked()) {}

@@ -44,15 +44,14 @@ ProblemDomainSettingsPackage* SettingsPackage::getProblemDomainSettingsPackage()
 
 
 // Some manual labour to be done here, nothing special at all
-void SettingsPackage::generateSettingsGraphics(QString resolution, bool showLinks, bool showPath)
+void SettingsPackage::generateSettingsGraphics(QString resolution, int rend)
 {
     std::string res = resolution.toStdString();
     int resW = atoi(res.substr(0,res.find('x')).c_str());
     int resH = atoi(res.substr(res.find('x')+1, res.length()).c_str());
-    gpPkg->setShowLinks(showLinks);
-    gpPkg->setShowPath(showPath);
     gpPkg->setResolutionH(resH);
     gpPkg->setResolutionW(resW);
+    gpPkg->setRenderSpeed(rend);
 }
 
 void SettingsPackage::generateSettingsOptimizer(QString algorithm, QString algo2, QString algo3, QString algo4, int maxIterations, double cog, double soc,

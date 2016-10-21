@@ -15,8 +15,8 @@ private:
 
     int resolutionH;
     int resolutionW;
-    bool showLinks;
-    bool showPath;
+    int renderSpeed;
+
 public:
     /**
      * @brief The default constructor for an OptimizerSettingsPackage
@@ -32,16 +32,6 @@ public:
      * @return Returns the resolution width dimension (an int)
      */
     int getResolutionW();
-    /**
-     * @brief
-     * @return Returns whether links are to be shown or not (a bool)
-     */
-    bool getShowLinks();
-    /**
-     * @brief
-     * @return Returns whether the path is shown or not (a bool)
-     */
-    bool getShowPath();
 
     /**
      * @brief Sets the resolution height
@@ -53,16 +43,11 @@ public:
      * @param ResolutionWidth (int)
      */
     void setResolutionW(int);
-    /**
-     * @brief Sets link showing on or off
-     * @param ShowLink (bool)
-     */
-    void setShowLinks(bool);
-    /**
-     * @brief Sets path showing on or off
-     * @param ShowPath (bool)
-     */
-    void setShowPath(bool);
+
+    void setRenderSpeed(int i);
+
+    int getRenderSpeed();
+
 };
 
 #endif // GRAPHICSSETTINGSPACKAGE_H
