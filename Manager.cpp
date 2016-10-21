@@ -110,7 +110,7 @@ void Manager::generateSnapshotManager() {
         objective = new ZakharovObjective(trans[0], trans[1], trans[2], trans[3]);
     delete [] trans;
 
-    graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
+    //graphicsProcessor = new GraphicsProcessor(*setPkg->getProblemDomainSettingsPackage());
    // graphicsProcessor->setObjective(objective);
 
     setPkg->getProblemDomainSettingsPackage()->getBoundaries(bounds);
@@ -221,8 +221,21 @@ void Manager::optimizeInstance(void *instance, int i)
 
 }
 
-GraphicsProcessor* Manager::getGraphicsProcessor()
+void Manager::initializeGraphicsProcessor()
 {
-    return graphicsProcessor;
+    graphicsProcessor = new GraphicsProcessor(
+            *setPkg->getProblemDomainSettingsPackage(),
+            snapMan,
+            setPkg->getGraphicsSettingsPackage()->getResolutionW(),
+            setPkg->getGraphicsSettingsPackage()->getResolutionH(),
+            60,//Animation Speed
+            setPkg->getNumInstances()
+    );
+    graphicsProcessor->setObjective(objective);
 }
 
+void Manager::visualize()
+{
+    graphicsProcessor->run();
+    delete graphicsProcessor;
+}

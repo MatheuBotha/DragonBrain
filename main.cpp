@@ -27,6 +27,10 @@ int main()
 
         //swarmMan->getGraphicsProcessor()->run();
         swarmMan->waitForOpts();
+
+        swarmMan->initializeGraphicsProcessor();
+        swarmMan->visualize();
+
         setts->readyNext(true);
         std::cout << "APPLES" << std::endl;
         setts->lock(true);

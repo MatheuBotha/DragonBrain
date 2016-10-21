@@ -39,7 +39,7 @@ int main()
     int maxIteration = 200;
     int swarmSize = 200;
     int dimension = 2;
-    int numInstances = 2;
+    int numInstances = 1;
     SnapshotManager* masterSnapshot = new SnapshotManager(maxIteration, swarmSize, dimension, boundaries);
     SnapshotManager **snapshotManagers = new SnapshotManager*[numInstances];
 

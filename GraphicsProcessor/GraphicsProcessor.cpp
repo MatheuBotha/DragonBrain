@@ -201,7 +201,7 @@ void GraphicsProcessor::run(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-        //skybox.draw(deltaTime);
+        skybox.draw(deltaTime);
 
         for(int i=0; i<numInstances; ++i)
         {
