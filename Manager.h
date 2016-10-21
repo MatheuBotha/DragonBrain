@@ -107,6 +107,8 @@ public:
      * */
 
     void waitForOpts();
+
+    void cleanMemory();
 };
 
 
