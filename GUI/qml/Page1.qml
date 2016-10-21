@@ -849,7 +849,7 @@ GroupBox{
         transformOrigin: Item.Left
         opacity: 0.8
         clip: true
-        model: [ "640x480", "1024x789", "1920x1080" ]
+        model: [ "640x480", "1024x789", "1366x768", "1920x1080" ]
         currentIndex: 0
         font.pixelSize: fontSize
     }
