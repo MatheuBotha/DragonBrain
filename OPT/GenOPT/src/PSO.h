@@ -21,6 +21,7 @@
 
 #include "OPT_Process.h"
 #include <random>
+#include <cmath>
 class PSO: public OPT_Process {
 
 protected:
