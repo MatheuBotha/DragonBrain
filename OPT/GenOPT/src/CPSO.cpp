@@ -14,7 +14,13 @@ double CPSO::calculateConstrictionCoefficient()
 {
     double tmp;
     double epsilon=cog+soc;
-    tmp=2.0/abs(2-(epsilon)-sqrt(pow(epsilon,2)-(4*epsilon)));
+
+    if ((pow(epsilon,2)-(4*epsilon))<0)
+    {
+      constrictionCoefficient=1;
+    } else {
+        tmp = 2.0 / abs(2 - (epsilon) - sqrt(sqrt(pow(epsilon, 2) - (4 * epsilon))));
+    }
     constrictionCoefficient=tmp;
 
     /**Convergence will happen at epislon>4.0
@@ -40,8 +46,8 @@ void CPSO::updateVelocity(Particle *particle) {
 
         tmpV =constrictionCoefficient*((w*inertiaComp)+cogComp+soc);
 
-        if (tmpV>vMax) tmpV=vMax;
-        if (tmpV<-vMax) tmpV=-vMax;
+        //if (tmpV>vMax) tmpV=vMax;
+        //if (tmpV<-vMax) tmpV=-vMax;
         particle->setVelocity(tmpV, i);
     }
 }
