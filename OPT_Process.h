@@ -25,7 +25,7 @@
 #include <vector>
 #include "Particle.h"
 #include "ObjectiveFunction.h"
-#include "../../../SnapshotManager/SnapshotManager.h"
+#include "SnapshotManager.h"
 
 
 class OPT_Process {

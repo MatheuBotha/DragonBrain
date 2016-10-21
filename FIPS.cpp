@@ -66,7 +66,7 @@ void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexV
                 cTemp+=getRandomNumberMT()*(swarm[j]->getFitnessValue());
             }
             vUP=0;
-            vUP=particle->getVelocity(0,d)+constrictionCoefficient*(particle->getVelocity(0,d)+((1/k)*cTemp));
+            vUP=particle->getVelocity(d)+constrictionCoefficient*(particle->getVelocity(d)+((1/k)*cTemp));
             particle->setVelocity(vUP,d);
         }
 

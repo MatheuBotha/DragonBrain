@@ -6,7 +6,7 @@
 #define DRAGONBRAIN_SNAPSHOT_H
 
 #include <cstring>
-#include "../OPT/GenOPT/src/Particle.h"
+#include "Particle.h"
 
 class Snapshot {
 private:

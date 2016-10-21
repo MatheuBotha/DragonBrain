@@ -17,7 +17,7 @@ private:
     double bounds[4];
 
 public:
-    SnapshotManager(int Bound, int i, int dim, double bou[4],int its) {
+    SnapshotManager(int Bound, int i, int dim, double bou[4]) {
         queueSize = 0;
         graphicsPosition = 0;
         bound = Bound;
