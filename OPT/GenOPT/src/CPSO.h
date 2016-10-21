@@ -8,8 +8,14 @@
 #include "PSO.h"
 class CPSO: public PSO{
 private:
-    double w;
+    double w=0.7968;
+    /*Citation
+     * Ioan Cristian Trelea.
+    The particle swarm optimization algorithm: convergence analysis and parameter selection.
+    Inf. Process. Lett., 85(6):317-325, 2003.
+     * */
     double vMax;
+    double constrictionCoefficient;
 public:
     CPSO();
 
@@ -36,6 +42,8 @@ public:
     }
 
     virtual void updateVelocity(Particle *particle) override;
+
+    double calculateConstrictionCoefficient();
 };
 
 

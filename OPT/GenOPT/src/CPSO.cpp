@@ -8,8 +8,19 @@ CPSO::CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, doub
         PSO(pFunction, pManager, i, boundArr,s,c) {
     vMax=velMax;
     w=wVal;
+    calculateConstrictionCoefficient();
 }
+double CPSO::calculateConstrictionCoefficient()
+{
+    double tmp;
+    double epsilon=cog+soc;
+    tmp=2.0/abs(2-(epsilon)-sqrt(pow(epsilon,2)-(4*epsilon)));
+    constrictionCoefficient=tmp;
 
+    /**Convergence will happen at epislon>4.0
+     *
+     * */
+}
 void CPSO::updateVelocity(Particle *particle) {
     double cogComp,socComp,inertiaComp;
     double r1,r2;
@@ -27,7 +38,7 @@ void CPSO::updateVelocity(Particle *particle) {
         cogComp = (r1 * cog) * (bestPos[i] - currentPos[i]);
         socComp = (r2 * soc) * (gbestPos[i] - currentPos[i]);
 
-        tmpV =(w*inertiaComp)+cogComp+soc;
+        tmpV =constrictionCoefficient*((w*inertiaComp)+cogComp+soc);
 
         if (tmpV>vMax) tmpV=vMax;
         if (tmpV<-vMax) tmpV=-vMax;

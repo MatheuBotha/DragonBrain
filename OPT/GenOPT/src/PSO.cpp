@@ -30,7 +30,7 @@ double PSO::getRandomNumberMT() {
 }
 
 void PSO::updateVelocity(Particle *particle) {
-double cogComp,socComp,inertiaComp;
+    double cogComp,socComp,inertiaComp;
     double r1,r2;
     double bestPos[2], currentPos[2], gbestPos[2];
     particle->getPersonalBestPosition(bestPos);
