@@ -25,7 +25,7 @@
 #include <vector>
 #include "Particle.h"
 #include "ObjectiveFunction.h"
-#include "SnapshotManager.h"
+#include "../../../SnapshotManager/SnapshotManager.h"
 
 
 class OPT_Process {
@@ -39,7 +39,7 @@ protected:
      * [xmin, xmax , ymin , ymax]
      * */
     double bounds[4];
-
+    int currentIteration=0;
 public:
 
     ///Creates a new OPT_Process
@@ -90,6 +90,7 @@ public:
      *{ distanceLowerToValue > distanceValueToUpper ? 1 : 0;}
      * */
     int checkProximityDistances(double lowerBound,double upperBound,double value);
+    int getCurrentIterationNumber(){return currentIteration;}
 private:
 };
 
