@@ -118,7 +118,7 @@ void PSO::iterate() {
      *  update velocity
      *  update position
     */
-    double tmpFit;
+    double tmpFit=0.0;
     double currentPos[2];
 
     for (int i=0;i<swarmSize;i++) {

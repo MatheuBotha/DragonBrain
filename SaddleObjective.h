@@ -8,7 +8,7 @@
 #include "ObjectiveFunction.h"
 #include <cstdlib>
 
-class SaddleObjective : public ObjectiveFunction {
+class SaddleObjective {
 public:
     SaddleObjective(){
 

@@ -8,7 +8,7 @@
 #include "ObjectiveFunction.h"
 #include <random>
 
-class RandObjective : public ObjectiveFunction {
+class RandObjective{
 public:
     RandObjective(){
 

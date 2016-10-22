@@ -8,7 +8,7 @@
 #include "ObjectiveFunction.h"
 #include "math.h"
 
-class SinObjective : public ObjectiveFunction{
+class SinObjective{
 public:
     SinObjective(){
 
