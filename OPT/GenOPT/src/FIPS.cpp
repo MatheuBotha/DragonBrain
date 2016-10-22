@@ -22,7 +22,7 @@ void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexV
     int sizeSwarm=ss;
     if (sizeSwarm<nSize)
     {
-        k=sizeSwarm;
+        k=sizeSwarm/2;
     } else
         {
             k=nSize;
