@@ -13,6 +13,7 @@
 #include "../SaddleObjective.h"
 #include "../PSO.h"
 #include "../GCPSO.h"
+#include "../AckleyObjective.h"
 #include "../FIPS.h"
 #include "../CPSO.h"
 
@@ -148,7 +149,7 @@ TEST(GCPSO_check,test_sin)
     double bounds2[2]={-10,10};
     int maxIteration = 20;
     int swarmSize = 1000;
-    ObjectiveFunction *obj1 = new SinObjective();
+    ObjectiveFunction *obj1 = new AckleyObjective(bounds2);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,1,bounds2);
     OPT_Process *opt1 = new GCPSO(obj1, snap1, true,bounds2,15,5,0.2,0.5,0.4);
     double best = -1000;
