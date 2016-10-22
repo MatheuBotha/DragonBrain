@@ -221,7 +221,7 @@ void GraphicsProcessor::run(){
 //        bb.deactivateShader();
 
         window.swapBuffer();
-        std::cout << "fps = " << timer.end() << std::endl;
+      //  std::cout << "fps = " << timer.end() << std::endl;
         timer.end();
     }
 

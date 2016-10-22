@@ -14,6 +14,9 @@ ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram sha
     this->snapshotManager = snapshotManager;
     this->fromSnapshot = snapshotManager->dequeue();
     this->toSnapshot = snapshotManager->dequeue();
+
+
+        std::cout << "The thing: " << fromSnapshot->getSwarm()[0]->getPositionAtDimension(1) << std::endl;
     currentRotation = new glm::vec3[this->fromSnapshot->getSwarmSize()];
     animationSpeed = 100;
     animationTime = 1;
@@ -57,6 +60,7 @@ void ParticleSystem::draw(GLfloat deltaTime)
         else
         {
             glm::vec3 currentPosition = scaleParticleVector(getCurrentPosition(fromSnapshot->getSwarm()[i], toSnapshot->getSwarm()[i]));
+
             currentRotation[i] = glm::vec3(currentPosition.x, 0, currentPosition.z);
             particle->translate(currentPosition);
             particle->translate(glm::vec3(0.0f,0.04f,0.0f));

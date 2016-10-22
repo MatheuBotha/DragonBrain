@@ -70,7 +70,6 @@ void PSO::updatePosition(Particle *particle) {
                 {
                     particle->setPositionAtDimension(bounds[0],0);
                 }
-
         }
     }
     else

@@ -118,8 +118,17 @@ void Manager::generateSnapshotManager() {
     {
         objective->getBounds(bounds);
 //        graphicsProcessor->setBounds(bounds);
+
+        //UNCOMMENT THIS LINE AND THE LANDSCAPE BECOMES THE SAME AS Y=0 EVERYWHERE (simulated 2d landscape)
+        //BUT: Particles do not appear to be behaving correctly.
+        //if(setPkg->getProblemDomainSettingsPackage()->getDimensions() == 1)
+        //{
+        //    bounds[2] = 0;
+        //    bounds[3] = 0;
+        //}
         setPkg->getProblemDomainSettingsPackage()->setBoundaries(bounds);
     }
+
 
 
 
@@ -218,9 +227,9 @@ void Manager::optimizeInstance(void *instance, int i)
 
     //There's some small chance this output will get muddled with the other threads ofc. This is only for
     //testing anyway, it should be visualized in the end
-    std::cout << "===============OPTIMIZER " << i << "===========================================\n";
-    std::cout << "Best located solution is from particle at coords (" << current[0] <<","
-              << current[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n";
+    //std::cout << "===============OPTIMIZER " << i << "===========================================\n";
+    //std::cout << "Best located solution is from particle at coords (" << current[0] <<","
+      //        << current[1] << ") and has current fitness of: " << best->getFitnessValue() << "\n";
 
 }
 
@@ -234,7 +243,6 @@ void Manager::initializeGraphicsProcessor()
             setPkg->getGraphicsSettingsPackage()->getRenderSpeed(),//Animation Speed
             setPkg->getNumInstances()
     );
-    std::cout << setPkg->getGraphicsSettingsPackage()->getRenderSpeed();
     graphicsProcessor->setObjective(objective);
 }
 

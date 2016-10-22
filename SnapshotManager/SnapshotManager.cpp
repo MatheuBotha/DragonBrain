@@ -5,7 +5,6 @@ bool SnapshotManager::enqueue(Snapshot* snapshot){
         if(queueSize>=bound){
             return false;
         }
-
         if(head == NULL){
             head = snapshot;
         }else{
@@ -16,7 +15,7 @@ bool SnapshotManager::enqueue(Snapshot* snapshot){
             temp->next = snapshot;
         }
 
-        if(head==NULL){
+    if(head==NULL){
             return false;
         }else{
             queueSize++;
@@ -31,6 +30,12 @@ Snapshot* SnapshotManager::dequeue(){
     }
     if(graphicsPosition<queueSize) {
         graphicsPosition++;
+    }
+
+    if(temp->getSwarm()[0]->getPositionAtDimension(1) == DBL_MAX) {
+        for (int i = 0; i < temp->getSwarmSize(); ++i) {
+            temp->getSwarm()[i]->setPositionAtDimension(0.0, 1);
+        }
     }
     return temp;
 }

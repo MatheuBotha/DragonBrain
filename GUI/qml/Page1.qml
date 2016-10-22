@@ -80,7 +80,10 @@ Page1Form {
                     font.bold: true
                     font.pixelSize: fontSize
                     visible: (numInstances.displayText == "2" || numInstances.displayText == "4")
-
+(algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
                 }
 
 
@@ -857,16 +860,18 @@ ComboBox {
                     visible: (algorithmChoice.displayText == "Conical PSO" ||
                               algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
                               algorithmChoice.displayText == "Particle Swarm Optimization" ||
-                              secondAlgo.displayText == "Conical PSO" ||
+                              (secondAlgo.visible && (secondAlgo.displayText == "Conical PSO" ||
                               secondAlgo.displayText == "Guaranteed Convergence PSO" ||
-                              secondAlgo.displayText == "Particle Swarm Optimization" ||
+                              secondAlgo.displayText == "Particle Swarm Optimization")) ||
+                              (thirdAlgo.visible && (
                               thirdAlgo.displayText == "Conical PSO" ||
                               thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
-                              thirdAlgo.displayText == "Particle Swarm Optimization" ||
+                              thirdAlgo.displayText == "Particle Swarm Optimization")) ||
+                              (fourthAlgo.visible && (
                               fourthAlgo.displayText == "Conical PSO" ||
                               fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
                               fourthAlgo.displayText == "Particle Swarm Optimization"
-                                                ) ? true : false
+                                                ))) ? true : false
                     text: "0.9"
                 }
 
@@ -885,9 +890,10 @@ ComboBox {
                     color: "#ffffff"
                     text: qsTr("Constriction Coefficient")
                     visible: (algorithmChoice.displayText == "Fully Informed PSO" ||
-                               secondAlgo.displayText == "Fully Informed PSO" ||
-                               thirdAlgo.displayText == "Fully Informed PSO" ||
-                               fourthAlgo.displayText == "Fully Informed PSO") ? true : false
+                               (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
+
                    font.pixelSize: fontSize
                     font.bold: true
                 }
@@ -908,9 +914,9 @@ ComboBox {
                         color: "#DDD"
                     }
                     visible: (algorithmChoice.displayText == "Fully Informed PSO" ||
-                               secondAlgo.displayText == "Fully Informed PSO" ||
-                               thirdAlgo.displayText == "Fully Informed PSO" ||
-                               fourthAlgo.displayText == "Fully Informed PSO" ) ? true : false
+                               (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
 
 
                     text: "0.9"
@@ -925,10 +931,10 @@ ComboBox {
                                 anchors.left: maxVelocity.left
                                 color: "#ffffff"
                                 text: qsTr("Maximum Velocity")
-                                 visible: (algorithmChoice.displayText == "Conical PSO" ||
-                                            secondAlgo.displayText == "Conical PSO" ||
-                                            thirdAlgo.displayText == "Conical PSO" ||
-                                            fourthAlgo.displayText == "Conical PSO") ? true : false
+                    visible: (algorithmChoice.displayText == "Conical PSO" ||
+                               (secondAlgo.displayText == "Conical PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Conical PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Conical PSO" && fourthAlgo.visible)) ? true : false
                                font.pixelSize: fontSize
                                 font.bold: true
                 }
@@ -948,11 +954,10 @@ ComboBox {
                                 {
                                     color: "#DDD"
                                 }
-                                 visible: (algorithmChoice.displayText == "Conical PSO" ||
-                                            secondAlgo.displayText == "Conical PSO" ||
-                                            thirdAlgo.displayText == "Conical PSO" ||
-                                            fourthAlgo.displayText == "Conical PSO") ? true : false
-
+                    visible: (algorithmChoice.displayText == "Conical PSO" ||
+                               (secondAlgo.displayText == "Conical PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Conical PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Conical PSO" && fourthAlgo.visible)) ? true : false
                                 text: "50.0"
                             }
 
@@ -964,11 +969,11 @@ ComboBox {
                                 anchors.left: socialCoeff.left
                                 color: "#ffffff"
                                 text: qsTr("Success Count")
-                                visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
-                                          secondAlgo.displayText == "Guaranteed Convergence PSO" ||
-                                          thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
-                                          fourthAlgo.displayText == "Guaranteed Convergence PSO") ? true : false
-                                font.pixelSize: fontSize
+                    visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
+                               font.pixelSize: fontSize
                                 font.bold: true
                 }
                 TextField { font.pixelSize: fontSize
@@ -985,11 +990,10 @@ ComboBox {
                                 {
                                     color: "#DDD"
                                 }
-                                visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
-                                          secondAlgo.displayText == "Guaranteed Convergence PSO" ||
-                                          thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
-                                          fourthAlgo.displayText == "Guaranteed Convergence PSO") ? true : false
-
+                    visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
                                 text: "15"
                             }
 
@@ -1002,10 +1006,10 @@ ComboBox {
                                 anchors.left: failCount.left
                                 color: "#ffffff"
                                 text: qsTr("Fail Count")
-                                visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
-                                          secondAlgo.displayText == "Guaranteed Convergence PSO" ||
-                                          thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
-                                          fourthAlgo.displayText == "Guaranteed Convergence PSO") ? true : false
+                    visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
                                font.pixelSize: fontSize
                                 font.bold: true
                 }
@@ -1023,11 +1027,10 @@ ComboBox {
                                 {
                                     color: "#DDD"
                                 }
-                                visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
-                                          secondAlgo.displayText == "Guaranteed Convergence PSO" ||
-                                          thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
-                                          fourthAlgo.displayText == "Guaranteed Convergence PSO") ? true : false
-
+                    visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
                                 text: "5"
                             }
 
@@ -1042,9 +1045,9 @@ ComboBox {
                                 color: "#ffffff"
                                 text: qsTr("Neighbourhood Size")
                     visible: (algorithmChoice.displayText == "Fully Informed PSO" ||
-                               secondAlgo.displayText == "Fully Informed PSO" ||
-                               thirdAlgo.displayText == "Fully Informed PSO" ||
-                               fourthAlgo.displayText == "Fully Informed PSO") ? true : false
+                               (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
                                font.pixelSize: fontSize
                                 font.bold: true
                 }
@@ -1063,9 +1066,9 @@ ComboBox {
                                     color: "#DDD"
                                 }
                     visible: (algorithmChoice.displayText == "Fully Informed PSO" ||
-                               secondAlgo.displayText == "Fully Informed PSO" ||
-                               thirdAlgo.displayText == "Fully Informed PSO" ||
-                               fourthAlgo.displayText == "Fully Informed PSO") ? true : false
+                               (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
                                 text: "2"
                             }
 
