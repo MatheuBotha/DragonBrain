@@ -61,7 +61,7 @@
                       <li><a href="../optimizers/elitist_hill_climber.html">Elitist Hill Climber</a></li>
                       <li><a href="../optimizers/pso.html">Particle Swarm Optimiser</a></li>
                       <li><a href="../optimizers/gcpso.html">GCPSO</a></li>
-                      <li><a href="../optimizers/cpso.html">CPSO</a></li>
+                      <li><a href="../optimizers/cpso.html">FIPS PSO</a></li>
                       <li><a href="../optimizers/fips_pso.html">FIPS PSO</a></li>
                       <li><a href="../optimizers/gen.html">Genetic Algorithm</a></li>
                     </ul>
@@ -106,18 +106,24 @@
 
         <!-- page content -->
         <div class="right_col">
-        <h1>GCPSO: Guaranteed Convergence PSO</h1>
-        <p>
-        The key issue with optimisation problems is the problem of knowing when a swarm has indeed converged to a point. Generally, the swarm all tending towards a position is an indication of the goodness of that position. However, for a multitude of reasons, there are many instances when a swarm will not converge. Rather, its particles will continue to wander the search space, seemingly unable to all agree to a position to move towards. Once the convergence has happened though, the secondary problem of how to know if the swarm has converged on a global or local optima. GCPSO attempts to remedy this situation.
-        </p>
-        <br/><br/>
-        <h2>The Search for Better</h2>
-        <p>
-        The idea is that once a possible convergence has been detected, the swarm will make use of an additional particle whose job is to determine if, from the point of convergence to the maximal distance away, swarm radius, some better position may be found. Our additional particle will then, search within a radius determined by the current swarm radius if it can achieve some better position than the currently best position of the swarm. 
-        <br/><br/>
-        If it is able to do so,then the swarm must continue to iterate in the hopes of moving away from the local optima. This searching capacity is dynamic as well in that it will widen if the swarm fails to find better positions when convergening to increase the range at which we check and shrink when the swarm does indeed find better positions as it means that we need not seach as far to find improved positions.
-        </p>
-        </div>
+          <h1>Genetic Algorithm Particle Swarm</h1>
+          <p>
+          One book in the library of machine learning is the Genetic Algorithm. If the Neural Network models complex behaviours of complex creatures, and PSOs model the emergent collective behaviour of simple organisms, then the Genetic Algorithm is somewhere in between. Genetic Algorithms are so called because they attempt to model the way in which, on an abstract level, biological cells mutate and develop.
+          </p>
+          <h2>Components of a Cell</h2>
+          <p>
+          In a Genetic Algorithm, you would have cells which are objects whose properties are mutatable and represent candidate solutions to a given problem. Our particles are therefore cells by this definition.
+          </p>
+
+          <h2>The Mechanics</h2>
+          <p>
+            A Genetic Algorithm or GA, makes use of a number of particular behaviours to mutate individual cells, borrowing material from ideally good cells and combining them into new cells who are then mutated. The first process is called Crossover and consists of elements of some particles being chosen to form new cells. The second process, Mutation, is where some randomness mutates the properties of the cell. These are important processes for two reasons. Crossover preserves good material of earlier generations and mutation allows new material to be introduced and thereby explore the search domain. These processes are mediated by a Selection Operator, Tournament Selection in our case, which only chooses the best particles to crossover with to form new particles.
+
+            <br/><br/>
+            Each solution is made by taking 2 high quality parent solutions to make one child, and some random mutations are added to the child. Some solutions are better, some are worse, but only the fittest shall survive in the end. In this way, while each particle largely searches the space on its own, with the best results informing future searches
+          </p>
+
+        </div>        
         <!-- /page content -->
 
         <!-- footer content -->
