@@ -63,6 +63,7 @@ private:
     glm::vec3 currentPosition;
     unsigned int animationSpeed;
     unsigned int animationTime;
+    float globalBestGrowth;
 
     glm::vec3* currentRotation;
 

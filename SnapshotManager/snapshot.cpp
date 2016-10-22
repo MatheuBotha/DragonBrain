@@ -1,10 +1,4 @@
-
-
 #include "snapshot.h"
-
-
-
-
 
 void Snapshot::setSwarm(Particle **swarm){
         this->swarm = swarm;

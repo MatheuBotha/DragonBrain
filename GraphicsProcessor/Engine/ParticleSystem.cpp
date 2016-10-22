@@ -11,7 +11,6 @@ bool twoD = false;
 
 ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram shaderProgram, Landscape2D* landscape)
 {
-
     model = glm::mat4(1.0f);
     this->snapshotManager = snapshotManager;
     this->fromSnapshot = snapshotManager->dequeue();
@@ -20,6 +19,7 @@ ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram sha
     currentRotation = new glm::vec3[this->fromSnapshot->getSwarmSize()];
     animationSpeed = 100;
     animationTime = 1;
+    globalBestGrowth = 0;
     this->shaderProgram = shaderProgram;
     this->landscape = landscape;
 
@@ -49,7 +49,9 @@ void ParticleSystem::draw(GLfloat deltaTime)
 
     for(int i=0; i<fromSnapshot->getSwarmSize(); ++i)
     {
-
+        printf("Particle:\n");
+        printParticleDetails(fromSnapshot->getSwarm()[i]);
+        printf("/Particle\n");
         particle->setModel(model);
         if(animationSpeed == animationTime || fromSnapshot == toSnapshot)
         {
@@ -71,6 +73,37 @@ void ParticleSystem::draw(GLfloat deltaTime)
 
         particle->scale(glm::vec3(0.05f));
         particle->draw(deltaTime);
+    }
+
+    if(fromSnapshot->getGBest())
+    {
+        particle->setModel(model);
+        if(animationSpeed == animationTime || fromSnapshot == toSnapshot)
+        {
+            particle->translate(scaleParticleVector(getParticleVector(toSnapshot->getGBest())));
+            particle->translate(glm::vec3(0.0f,0.04f,0.0f));
+            particle->rotate(glm::radians(SDL_GetTicks() / 10.0f), glm::vec3(1,1,1));
+        }
+        else
+        {
+            glm::vec3 currentPosition = scaleParticleVector(
+                    getCurrentPosition(
+                            fromSnapshot->getGBest(),
+                            toSnapshot->getGBest()
+                    )
+            );
+
+            particle->translate(currentPosition);
+            particle->translate(glm::vec3(0.0f,0.04f,0.0f));
+            particle->rotate(glm::radians(SDL_GetTicks() / 10.0f), glm::vec3(1,1,1));
+        }
+
+        particle->scale(glm::vec3(0.05f) * globalBestGrowth);
+        particle->draw(deltaTime);
+        if(globalBestGrowth < 2)
+        {
+            globalBestGrowth += 0.01;
+        }
     }
 
     if(animationSpeed == animationTime)
