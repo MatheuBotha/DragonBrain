@@ -22,7 +22,7 @@ void FIPS::updateVelocity(Particle *particle,Particle ** swarm,int ss,int indexV
     int sizeSwarm=ss;
     if (sizeSwarm<nSize)
     {
-        k=sizeSwarm;
+        k=sizeSwarm-1;
     } else
         {
             k=nSize;
@@ -115,6 +115,7 @@ void FIPS::iterate() {
 
         if (tmpFit <= swarm[i]->getPersonalBest()) {
             swarm[i]->setPersonalBest(tmpFit);
+            swarm[i]->setPersonalBestPosition(currentPos);
         }
 
         if ((ideal == nullptr) ||

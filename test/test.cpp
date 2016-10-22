@@ -132,11 +132,11 @@ TEST(CPSO_check,test_sin)
 
 TEST(fips_check,test_sin)
 {
-    /*
+
     double bounds[4]={-100,100,-100,100};
-    int maxIteration = 300;
-    int swarmSize = 300;
-    ObjectiveFunction *obj1 = new SinObjective();
+    int maxIteration = 1000;
+    int swarmSize = 1000;
+    ObjectiveFunction *obj1 = new AckleyObjective(1,0,0,0);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
     OPT_Process *opt1 = new FIPS(obj1, snap1, false,5,1.2,bounds,3.5,3.5);
     double best = -1000;
@@ -148,7 +148,7 @@ TEST(fips_check,test_sin)
     delete obj1;
     delete snap1;
     delete opt1;
-    */
+
 }
 TEST(GCPSO_check,test_sin)
 {
