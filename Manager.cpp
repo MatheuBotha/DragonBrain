@@ -188,8 +188,8 @@ void Manager::initializeOptimizer() {
             optimizer[i] = new ElitistHillClimber(objective, snapMan[i], false, bounds);
         else if (optAlg == "Genetic Algorithm")
             optimizer[i] = new GeneticAlgorithm(objective, snapMan[i], false, bounds);
-//        else if (optAlg == "Random Search")
-//            optimizer[i] = new RandomSearch(objective, snapMan[i], false, bounds);
+        else if (optAlg == "Random Search")
+            optimizer[i] = new RandomSearch(objective, snapMan[i], false, bounds);
     }
 }
 

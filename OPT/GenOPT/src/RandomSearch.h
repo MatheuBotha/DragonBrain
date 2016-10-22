@@ -1,41 +1,43 @@
-/**
- * @class RandomSearch
- *
- * The comparative strength of the other search strategies must be bouyed against
- * some manner of search process. Traditionally, Random Searching is a good way
- * to see how well an alternative search process performs because it should, on
- * average, beat the random search by a considerable margin.
- *
- * @note Still in Progress
- *
- * @author Emilio Singh u14006512
- *
- * @version 0.1
- *
- * @date: 2016/07/01 12:16
- *
- * Contact: u14006512@tuks.co.za
- *
- * */
+//
+// Created by gerard on 2016/10/09.
+//
 
-#ifndef OPT_RANDOM_H
-#define OPT_RANDOM_H
+#ifndef SWARMVIZ_RANDOMSEARCH_H
+#define SWARMVIZ_RANDOMSEARCH_H
 #include "OPT_Process.h"
 #include "ObjectiveFunction.h"
+#include "../../../SnapshotManager/SnapshotManager.h"
+#include "../../../SnapshotManager/snapshot.h"
+#include "Particle.h"
+#include <cstdlib>
 
-class RandomSearch: public OPT_Process {
+class RandomSearch : public OPT_Process {
 
 public:
-    //Create a RandomSearch
-    RandomSearch(bool output,double inBounds[4]): OPT_Process(output,inBounds) { }
-    ObjectiveFunction *objectiveFunction;
-    SnapshotManager *snapshotManager;
 
-///The override method for iterate
+    double mutationRate = 0.1;
+
+
+
+///The override method for solve
     virtual void iterate() override;
+
+    RandomSearch(ObjectiveFunction *myObjectiveFunction, SnapshotManager *mySnapshotManager, bool output,double boundsA[4]) : OPT_Process(output,boundsA)
+    {
+
+        objectiveFunction = myObjectiveFunction;
+        snapshotManager = mySnapshotManager;
+        srand((unsigned)time(NULL));
+        /*for(int i=0;i<4;i++) //Already done in abstract constructor.
+        {
+            bounds[i]=boundsA[i];
+        }*/
+    }
+
+    void mutate(Particle *particle);
 
     virtual ~RandomSearch() { }
 };
 
 
-#endif //OPT_RANDOM_H
+#endif //SWARMVIZ_RANDOMSEARCH_H
