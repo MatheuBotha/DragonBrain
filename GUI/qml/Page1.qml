@@ -164,7 +164,7 @@ Page1Form {
             height: sHei * 0.05
             opacity: 0.7
             from: 1
-            value: 1
+            value: 2
             editable: true
             to: 2147483647
         }
@@ -218,7 +218,7 @@ SpinBox {
     editable: true
     from: 1
     to: 2147483647
-    value: 1
+    value: 2
 }
 
 Label {  wrapMode: Text.WordWrap
@@ -728,7 +728,7 @@ ComboBox {
                               fourthAlgo.displayText == "Particle Swarm Optimization"
                                                 ) ? true : false
 
-                    text: "2.5"
+                    text: "0.2"
                 }
 
                 TextField { font.pixelSize: fontSize
@@ -760,7 +760,7 @@ ComboBox {
                               fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
                               fourthAlgo.displayText == "Particle Swarm Optimization"
                                                 ) ? true : false
-                    text: "2.5"
+                    text: "0.2"
                 }
 
 
@@ -868,7 +868,7 @@ ComboBox {
                               fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
                               fourthAlgo.displayText == "Particle Swarm Optimization"
                                                 ))) ? true : false
-                    text: "0.9"
+                    text: "0.8"
                 }
 
 
@@ -915,7 +915,7 @@ ComboBox {
                                (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
 
 
-                    text: "0.9"
+                    text: "0.8"
                 }
                 ///
 
@@ -954,7 +954,7 @@ ComboBox {
                                (secondAlgo.displayText == "Conical PSO" && secondAlgo.visible) ||
                                (thirdAlgo.displayText == "Conical PSO" && thirdAlgo.visible) ||
                                (fourthAlgo.displayText == "Conical PSO" && fourthAlgo.visible)) ? true : false
-                                text: "50.0"
+                                text: "1.5"
                             }
 
 
@@ -1065,7 +1065,7 @@ ComboBox {
                                (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
                                (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
                                (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
-                                text: "2"
+                                text: "20"
                             }
 
 
@@ -1115,10 +1115,10 @@ ComboBox {
         x: sWid * 0.40
         y: sHei * 0.85
         width: sWid * 0.20
-        spacing: 3
+        spacing: 1
         stepSize: 1
         to: 300
-        from: 0
+        from: 1
         snapMode: Slider.SnapAlways
         value: 60
     }
