@@ -61,6 +61,7 @@ public:
 
     double transformX2(double x2)
     {
+        if(x2 == DBL_MAX) return 0;
         return x2 + yShift;
     }
 
