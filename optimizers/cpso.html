@@ -104,7 +104,43 @@
         </div>
 
         <!-- page content -->
-        
+        <div class="right_col">
+          <h1>Variation of PSO: The Canonical PSO</h1>
+          <p>
+            The CPSO is one of the most widely used variations of the PSO. It follows essentially the same kind basic mechanism as a generic PSO but it has a number of <br/>
+            key improvements that makes far more versatile than the basic PSO but also far more reliable. <br/><br/>
+
+            We present the improvements that can be found in a CPSO below:
+            <ul>
+              <li>Velocity Clamping</li>
+              <li>Constriction Coefficients</li>
+              <li>Inertia Weights</li>
+            </ul>
+          </p>
+
+          <h3>Velocity Clamping</h3>
+          <p>
+            Velocity Clamping is a technique where the maximum allowable velocity that a particle can have is limited to a predetermined maximum. <br/>
+            This means that you in effect, limit the total most distance a particle could travel in a single iteration. The effect of this is to try and <br/>
+            prevent particles from moving too far in any single iteration and potentially overshooting good positions. This also has the effect of potentially preventing <br/>
+            a particle from escaping the bounds supplied to it. <br/><br/>
+
+            The issue here is that the chosen velocity limit can strongly influence the travel capacity of the particles and limit their exploration if not chosen carefully. 
+          </p>
+          <h3>Constriction Coefficient</h3>
+          <p>
+            The Constriction Coefficient strategy is one derived from extensive experimental testing and research. It is a value, derived from the Cognitive and Social components of  <br/> the PSO and is multiplied by the final velocity value. The effect of this constrains the velocity by a value related to its capacity for cognitive and social development. <br/> One important caveat on the Constriction Coefficient is that the values of the Social and Cognitive Components needs to be, together, more than <br/>
+            4 or otherwise the behaviour of the swarm will be more erratic as proper constrainment will not happen.
+          </p>
+          <h3>Inertia Weight</h3>
+          <p>
+            The Inertia Component of a Particle is its previous velocity. When sufficiently large, this will impel the particle to continue in the direction it had previously travelled. For moving towards good solutions from bad ones, moving fast is good. However, when approaching good solutions, inertia can cause them to overshoot the good solution by virtue of inertia sufficiency. To overcome this, we make use of the Inertia Weight approach which attempts to damper the inertia component by a value, reducing its capacity to overshoot.
+            <br/><br/>
+            There are generally two ways of making use of Inertia. The first way is to have a static inertia value that is largely problem dependent. This is a basic strategy that can serve well in many situations. However it is not so ideal. The second strategy is to have a dynamic Inertia Weight. With a dynamic Inertia Weight, the value of the Inertia Weight will change over time, either in response to the number of iterations performed or the performance of the swarm. <br/><br/>
+            If the swarm has persisted for a sufficiently long time or is performing badly, the value will be low and the particle will lose a lot of its momentum, bringing it to a stop essentially. If the value is high, particles will move farther than they would normally do. This creates a cycle of explore-exploit that the PSOs use to find optimal solutions.
+          </p>
+
+        </div>
         <!-- /page content -->
 
         <!-- footer content -->
