@@ -147,9 +147,9 @@ TEST(GCPSO_check,test_sin)
 
     double bounds[4]={-10,10,-10,10};
     double bounds2[2]={-10,10};
-    int maxIteration = 20;
-    int swarmSize = 1000;
-    ObjectiveFunction *obj1 = new AckleyObjective(bounds2);
+    int maxIteration = 10;
+    int swarmSize = 10;
+    ObjectiveFunction *obj1 = new AckleyObjective(-10,10,0,0);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,1,bounds2);
     OPT_Process *opt1 = new GCPSO(obj1, snap1, true,bounds2,15,5,0.2,0.5,0.4);
     double best = -1000;

@@ -7,9 +7,11 @@
  *
  * @note Still in Progress
  *
- * @author Emilio Singh u14006512
+ * @authors
+ * Gerard van wyk u14101263
+ * Emilio Singh u14006512
  *
- * @version 0.1
+ * @version 0.4
  *
  * @date: 2016/07/01 12:16
  *
@@ -20,19 +22,66 @@
 #define OPT_OBJECTIVEFUNCTION_H
 
 #include <cmath>
+#include <cfloat>
+#include <iostream>
 using namespace std;
 
 class ObjectiveFunction {
-
 public:
-    ///Creates a new Objection Function
-    ObjectiveFunction() {
+    ///Creates a new Objective Function
+    ObjectiveFunction(double s, double x, double y, double v) {
+        scale = s;
+        xShift = x;
+        yShift = y;
+        vShift = v;
 
+        defaultBounds[0]=-1.0 + x;
+        defaultBounds[1]=1.0 + x;
+        defaultBounds[2]=-1.0 + y;
+        defaultBounds[3]=1.0 + y;
     }
     ///The static function that returns the target output for the given input
-   virtual double functionInput(double * parameters)=0;
+   virtual double functionInput(double parameters[])=0;
 
+   void transformInput(double * input)
+   {
+
+       if(input[1] == DBL_MAX){
+           input[1] = 0;
+       }
+       input[0] += xShift;
+       input[1] += yShift;
+
+   }
+
+    double transformX1(double x1)
+    {
+        return x1 + xShift;
+    }
+
+    double transformX2(double x2)
+    {
+        return x2 + yShift;
+    }
+
+    double transformOutput(double output){
+        return (output + vShift)*scale;
+    }
+
+    void getBounds(double *boundArr)
+    {
+        boundArr[0] = defaultBounds[0];
+        boundArr[1] = defaultBounds[1];
+        boundArr[2] = defaultBounds[2];
+        boundArr[3] = defaultBounds[3];
+    }
 private:
+    double scale;
+    double xShift;
+    double yShift;
+    double vShift;
+protected:
+    double defaultBounds[4];
 
 };
 
