@@ -104,7 +104,20 @@
         </div>
 
         <!-- page content -->
-        
+        <div class="right_col">
+        <h1>FIPS: Fully Informed Particle Swarm Optimisation</h1>
+        <p>
+          FIPS is an interesting variation of the PSO strategy. In a standard PSO, the influence of the best neighbour is generally only considered when determining the social influence on a particle. FIPS proposes to increase the influence of the neighbouring particles significantly, instead, considering the k-nearest neighbours of the particle to better inform the particle's direction.
+        </p>
+        <h2>Neighbourhoods and the power of Community</h2>
+        <p>
+          Neighbourhoods are a concept that relates to how particles are grouped in any particular swarm. Grouping a neighbourhood by spacial information is one way to do it so that the k nearest particles are in a neighbourhood. Instead of simply taking the influence of the best particle, we then take an aggregate influence of good neighbours. This informs our particle to move fully, although at an increased cost, trading performance for accuracy.
+        </p>
+        <h2>Clustering</h2>
+        <p>
+        One of the great effects of the FIPS strategy is how it can be used for clustering. Rather than conventional PSOs that will try to gather all of their particles in the best position, the FIPS strategy will cluster particles together in good positions, helping to better identify local optima
+        </p>
+        </div>        
         <!-- /page content -->
 
         <!-- footer content -->
