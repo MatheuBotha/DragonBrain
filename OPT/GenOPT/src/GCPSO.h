@@ -9,7 +9,7 @@
 class GCPSO: public PSO {
 
 private:
-    double inertia;
+    double constrictionCoefficient;
     int numSucccses=15;
     int numFailures=5;
     int sc;

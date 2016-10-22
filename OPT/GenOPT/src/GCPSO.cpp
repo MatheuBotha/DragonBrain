@@ -8,7 +8,7 @@ GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, do
         PSO(pFunction, pManager, i, boundArr,f, s,c) {
     fc=fcVal;
     sc=scVal;
-    inertia=f;
+    constrictionCoefficient=f;
 }
 
 double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
@@ -67,7 +67,7 @@ void GCPSO::calculateSearchParticleVelocity(double bestVelocity,double pt) {
     double r=getRandomNumberMT();
     double tmp;
 
-    tmp=bestVelocity+(inertia*getPastVelocity())+pt*(1.0-(2.0*r));
+    tmp=bestVelocity+(constrictionCoefficient*getPastVelocity())+pt*(1.0-(2.0*r));
 
     setPastVelocity(tmp);
 }
