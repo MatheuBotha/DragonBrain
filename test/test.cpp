@@ -134,11 +134,11 @@ TEST(fips_check,test_sin)
 {
 
     double bounds[4]={-100,100,-100,100};
-    int maxIteration = 1000;
-    int swarmSize = 1000;
+    int maxIteration = 20;
+    int swarmSize = 40;
     ObjectiveFunction *obj1 = new AckleyObjective(1,0,0,0);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
-    OPT_Process *opt1 = new FIPS(obj1, snap1, false,5,1.2,bounds,3.5,3.5);
+    OPT_Process *opt1 = new FIPS(obj1, snap1, false,100,1.2,bounds,3.5,3.5);
     double best = -1000;
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
