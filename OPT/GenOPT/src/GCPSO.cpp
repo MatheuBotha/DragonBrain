@@ -8,7 +8,6 @@ GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, do
         PSO(pFunction, pManager, i, boundArr,f, s,c) {
     fc=fcVal;
     sc=scVal;
-    constrictionCoefficient=f;
 }
 
 double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
@@ -171,9 +170,6 @@ double GCPSO::getDistanceArray(double *a, double *b) {
     return sqrt(pow(((a[0]*100.0)-(b[0]*100.0)),2)+pow(((a[1]*100.0)-(b[1]*100.0)),2));
 }
 
-double GCPSO::getConstrictionCoefficient() const {
-    return constrictionCoefficient;
-}
 
 int GCPSO::getNumSucccses() const {
     return numSucccses;
@@ -195,9 +191,6 @@ double GCPSO::getPastVelocity() const {
     return pastVelocity;
 }
 
-void GCPSO::setConstrictionCoefficient(double constrictionCoefficient) {
-    GCPSO::constrictionCoefficient = constrictionCoefficient;
-}
 
 void GCPSO::setNumSucccses(int numSucccses) {
     GCPSO::numSucccses = numSucccses;

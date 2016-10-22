@@ -61,7 +61,11 @@ numInstances(numInstances)
 
     boundaries = new double[4];
     pdsp.getBoundaries(boundaries);
-
+    if(pdsp.getDimensions() == 1)
+    {
+        boundaries[2] =  0.000001;
+        boundaries[3] = -0.000001;
+    }
     this->snapshotManagers = snapshotManagers;
     this->particleSystems = new ParticleSystem*[numInstances];
 

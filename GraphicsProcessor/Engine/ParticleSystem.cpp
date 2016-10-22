@@ -7,22 +7,24 @@
 #include "Cube.h"
 #include "Sphere.h"
 #include "Sphere2.h"
+bool twoD = false;
 
 ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram shaderProgram, Landscape2D* landscape)
 {
+
     model = glm::mat4(1.0f);
     this->snapshotManager = snapshotManager;
     this->fromSnapshot = snapshotManager->dequeue();
     this->toSnapshot = snapshotManager->dequeue();
 
-
-        std::cout << "The thing: " << fromSnapshot->getSwarm()[0]->getPositionAtDimension(1) << std::endl;
     currentRotation = new glm::vec3[this->fromSnapshot->getSwarmSize()];
     animationSpeed = 100;
     animationTime = 1;
     this->shaderProgram = shaderProgram;
     this->landscape = landscape;
 
+    if(fromSnapshot->getSwarm()[0]->getPositionAtDimension(1) == DBL_MAX)
+        twoD = true;
     printf("xMin = %f\n", landscape->getBoundaries()[0]);
     printf("xMax = %f\n", landscape->getBoundaries()[1]);
 
@@ -158,7 +160,11 @@ glm::vec3 ParticleSystem::getCurrentPosition(Particle* from, Particle* to)
     params[0] = currentPosition.x;
     params[1] = currentPosition.z;
     currentPosition.y = landscape->getObjective()->functionInput(params);
-
+    if(twoD) {
+        from->setPositionAtDimension(0.0, 1);
+                to->setPositionAtDimension(0.0,1);
+        currentPosition.z = 0;
+    }
     return currentPosition;
 }
 
