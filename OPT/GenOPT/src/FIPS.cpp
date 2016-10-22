@@ -85,6 +85,7 @@ void FIPS::iterate() {
     Particle **swarm;
     int swarmSize;
 
+    ideal = nullptr;
     last=snapshotManager->getLast();
     newIteration=new Snapshot(last);
 
@@ -140,6 +141,7 @@ void FIPS::iterate() {
         updatePosition(swarm[j]);
     }
     snapshotManager->enqueue(newIteration);
+    newIteration->setGBest(ideal);
 
 }
 
