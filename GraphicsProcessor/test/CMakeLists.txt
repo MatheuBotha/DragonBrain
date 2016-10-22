@@ -37,6 +37,10 @@ if (SOIL_FOUND)
     link_libraries(${SOIL_LIBRARIES})
 endif()
 
+find_package(Freetype REQUIRED)
+include_directories(${FREETYPE_INCLUDE_DIRS})
+link_libraries(${FREETYPE_LIBRARIES})
+
 
 set(SOURCE_FILES
 
@@ -84,6 +88,9 @@ set(SOURCE_FILES
         ../Engine/Timer.cpp
         ../Engine/Timer.h
 
+        ../Engine/TextRenderer.cpp
+        ../Engine/TextRenderer.h
+
         ../../OPT/GenOPT/src/ObjectiveFunction.h
         ../../OPT/GenOPT/src/SaddleObjective.cpp
         ../../OPT/GenOPT/src/SinObjective.cpp
@@ -107,3 +114,7 @@ add_custom_command(TARGET GraphicsProcessorTest POST_BUILD
 add_custom_command(TARGET GraphicsProcessorTest POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/GraphicsProcessor/Textures $<TARGET_FILE_DIR:GraphicsProcessorTest>/Textures)
+
+add_custom_command(TARGET GraphicsProcessorTest POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/GraphicsProcessor/Fonts $<TARGET_FILE_DIR:GraphicsProcessorTest>/Fonts)

@@ -14,6 +14,8 @@
 #include "Engine/Cube.h"
 #include "Engine/BoundingBox.h"
 #include "Engine/SkyBox.h"
+#include "Engine/TextRenderer.h"
+#include <sstream>
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -34,7 +36,9 @@ GraphicsProcessor::GraphicsProcessor(ProblemDomainSettingsPackage pdsp, Snapshot
 screenWidth(width),
 screenHeight(height),
 animationSpeed(animationSpeed),
-numInstances(numInstances)
+numInstances(numInstances),
+updateFPS(100),
+currentFPS(0)
 {
     std::cout << "Starting Graphics Processor Test" << std::endl;
     //init SDL stuffz
@@ -58,6 +62,9 @@ numInstances(numInstances)
 
     skyboxShadingProgram.compileShaders("Shaders/sky_box.vertex.glsl", "Shaders/sky_box.fragment.glsl");
     skyboxShadingProgram.linkShaders();
+
+    textShadingProgram.compileShaders("Shaders/text.vertex.glsl", "Shaders/text.fragment.glsl");
+    textShadingProgram.linkShaders();
 
     boundaries = new double[4];
     pdsp.getBoundaries(boundaries);
@@ -85,16 +92,16 @@ numInstances(numInstances)
 
     if(numInstances == 2)
     {
-        instanceLocations[0] = new glm::vec3(-1,0,0);
-        instanceLocations[1] = new glm::vec3(1,0,0);
+        instanceLocations[0] = new glm::vec3(-1.3,0,0);
+        instanceLocations[1] = new glm::vec3(1.3,0,0);
     }
 
     if(numInstances == 4)
     {
-        instanceLocations[0] = new glm::vec3(-1,0,-1);
-        instanceLocations[1] = new glm::vec3(1,0,-1);
-        instanceLocations[2] = new glm::vec3(-1,0,1);
-        instanceLocations[3] = new glm::vec3(1,0,1);
+        instanceLocations[0] = new glm::vec3(-1.3,0,-1.3);
+        instanceLocations[1] = new glm::vec3(1.3,0,-1.3);
+        instanceLocations[2] = new glm::vec3(-1.3,0,1.3);
+        instanceLocations[3] = new glm::vec3(1.3,0,1.3);
     }
 }
 
@@ -126,6 +133,9 @@ void GraphicsProcessor::run(){
     SkyBox skybox(skyboxShadingProgram);
     skybox.setCamera(camera);
     skybox.scale(glm::vec3(10,10,10));
+
+    TextRenderer textRenderer(textShadingProgram);
+    textRenderer.setCamera(camera);
 
 
     while(true){
@@ -215,7 +225,29 @@ void GraphicsProcessor::run(){
             particleSystems[i]->setModel();
             particleSystems[i]->translate(*instanceLocations[i]);
             particleSystems[i]->draw(deltaTime);
+            textRenderer.setModel();
+            textRenderer.translate(*instanceLocations[i]);
+            textRenderer.translate(glm::vec3(1,1,-1));
+            //textRenderer.rotate(glm::radians(-90.0f),glm::vec3(0,1,0));
+            //textRenderer.rotate(glm::radians(-45.0f),glm::vec3(1,0,1));
+            textRenderer.scale(glm::vec3(0.005f));
+            textRenderer.renderText(
+                    snapshotManagers[i]->getAlgorithmName(),
+                    0.0f,
+                    0.0f,
+                    1.0f,
+                    glm::vec3(float(51)/255, float(102)/255, float(255)/255));
         }
+
+
+        updateFPS++;
+        textRenderer.setModel();
+        textRenderer.translate(glm::vec3(-6,0,0));
+        textRenderer.rotate(glm::radians(90.0f),glm::vec3(0,1,0));
+        textRenderer.scale(glm::vec3(0.005f));
+        std::ostringstream buff;
+        buff<<currentFPS;
+        textRenderer.renderText("fps: " + buff.str(), 0.0f, 0.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
 
 //        bb.activateShader();
 //        bb.setModel();
@@ -225,8 +257,16 @@ void GraphicsProcessor::run(){
 //        bb.deactivateShader();
 
         window.swapBuffer();
-      //  std::cout << "fps = " << timer.end() << std::endl;
-        timer.end();
+        //std::cout << "fps = " << timer.end() << std::endl;
+        if(updateFPS > currentFPS/2)
+        {
+            currentFPS = timer.end();
+            updateFPS = 0;
+        }
+        else
+        {
+            timer.end();
+        }
     }
 
 }

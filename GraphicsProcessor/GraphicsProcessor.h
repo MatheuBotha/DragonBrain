@@ -42,6 +42,7 @@ private:
     GLSLProgram sphereShaderProgram;
     GLSLProgram boundingBoxShaderProgram;
     GLSLProgram skyboxShadingProgram;
+    GLSLProgram textShadingProgram;
     Timer timer;
     SDL_Event event;
 
@@ -56,6 +57,9 @@ private:
     bool isFocused;
     int numInstances;
     glm::vec3** instanceLocations;
+
+    float currentFPS;
+    unsigned int updateFPS;
 };
 
 

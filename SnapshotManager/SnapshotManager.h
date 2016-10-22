@@ -15,6 +15,7 @@ private:
     Snapshot* head;
     Snapshot* temp;
     double bounds[4];
+    std::string algorithmName;
 
 public:
     SnapshotManager(int Bound, int i, int dim, double bou[4]) {
@@ -47,6 +48,16 @@ public:
     Snapshot* dequeue();
     Snapshot* getLast();
     Snapshot *getFirst();
+
+    std::string getAlgorithmName()
+    {
+        return algorithmName;
+    }
+
+    void setName(std::string name)
+    {
+        this->algorithmName = name;
+    }
 
 };
 

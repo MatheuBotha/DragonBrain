@@ -159,37 +159,61 @@ void Manager::initializeOptimizer() {
         //+1 because getAlgorithm refers to algorithms labeled 1 to 4 (I've clearly used too many funny languages
         //recently, to actually start something at 1)
         std::string optAlg = setPkg->getOptimizerSettingsPackage()->getAlgorithm(i+1);
-        if (optAlg == "Hill Climbing") {
+        if (optAlg == "Hill Climbing")
+        {
             optimizer[i] = new HillClimber(objective, snapMan[i], false, bounds);
-        } else if (optAlg == "Particle Swarm Optimization")
+            snapMan[i]->setName("Hill Climbing");
+        }
+        else if (optAlg == "Particle Swarm Optimization")
+        {
             optimizer[i] = new PSO(objective, snapMan[i], false, bounds, setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                    setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+            snapMan[i]->setName("Particle Swarm Optimization");
+        }
         else if (optAlg == "Conical PSO")
+        {
             optimizer[i] = new CPSO(objective, snapMan[i], false,
                                     setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                     setPkg->getOptimizerSettingsPackage()->getMaxVelocity(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+            snapMan[i]->setName("Conical PSO");
+        }
         else if (optAlg == "Fully Informed PSO")
+        {
             optimizer[i] = new FIPS(objective, snapMan[i], false,
                                     setPkg->getOptimizerSettingsPackage()->getNeighbourhoodSize(),
                                     setPkg->getOptimizerSettingsPackage()->getConstrictionCoefficient(),
                                     bounds, setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                     setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+            snapMan[i]->setName("Fully Informed PSO");
+        }
         else if (optAlg == "Guaranteed Convergence PSO")
+        {
             optimizer[i] = new GCPSO(objective, snapMan[i], false, bounds,
                                      setPkg->getOptimizerSettingsPackage()->getSuccessCount(),
                                      setPkg->getOptimizerSettingsPackage()->getFailCount(),
                                      setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                      setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                      setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
+            snapMan[i]->setName("Guaranteed Convergence PSO");
+        }
         else if (optAlg == "Elitist Hill Climbing")
+        {
             optimizer[i] = new ElitistHillClimber(objective, snapMan[i], false, bounds);
+            snapMan[i]->setName("Elitist Hill Climbing");
+        }
         else if (optAlg == "Genetic Algorithm")
+        {
             optimizer[i] = new GeneticAlgorithm(objective, snapMan[i], false, bounds);
+            snapMan[i]->setName("Genetic Algorithm");
+        }
         else if (optAlg == "Random Search")
+        {
             optimizer[i] = new RandomSearch(objective, snapMan[i], false, bounds);
+            snapMan[i]->setName("Random Search");
+        }
     }
 }
 

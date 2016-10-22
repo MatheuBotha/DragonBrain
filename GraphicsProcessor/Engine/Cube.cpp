@@ -4,12 +4,9 @@
 
 #include "Cube.h"
 
-#include <SDL2/SDL.h>
 // Other Libs
 #include <SOIL/SOIL.h>
 // GLM Mathematics
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 Cube::Cube(GLSLProgram shaderProgram)

@@ -49,9 +49,9 @@ void ParticleSystem::draw(GLfloat deltaTime)
 
     for(int i=0; i<fromSnapshot->getSwarmSize(); ++i)
     {
-        printf("Particle:\n");
-        printParticleDetails(fromSnapshot->getSwarm()[i]);
-        printf("/Particle\n");
+//        printf("Particle:\n");
+//        printParticleDetails(fromSnapshot->getSwarm()[i]);
+//        printf("/Particle\n");
         particle->setModel(model);
         if(animationSpeed == animationTime || fromSnapshot == toSnapshot)
         {

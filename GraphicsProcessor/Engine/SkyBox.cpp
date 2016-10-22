@@ -75,12 +75,26 @@ SkyBox::SkyBox(GLSLProgram shaderProgram)
 
     // Cubemap (Skybox)
     std::vector<const GLchar*> faces;
-    faces.push_back("Textures/SkyBox/sor_cwd/cwd_rt.JPG");
-    faces.push_back("Textures/SkyBox/sor_cwd/cwd_lf.JPG");
-    faces.push_back("Textures/SkyBox/sor_cwd/cwd_up.JPG");
-    faces.push_back("Textures/SkyBox/sor_cwd/cwd_dn.JPG");
-    faces.push_back("Textures/SkyBox/sor_cwd/cwd_bk.JPG");
-    faces.push_back("Textures/SkyBox/sor_cwd/cwd_ft.JPG");
+    faces.push_back("Textures/SkyBox/medium/sky_pos_x.jpg");
+    faces.push_back("Textures/SkyBox/medium/sky_neg_x.jpg");
+    faces.push_back("Textures/SkyBox/medium/sky_pos_y.jpg");
+    faces.push_back("Textures/SkyBox/medium/sky_neg_y.jpg");
+    faces.push_back("Textures/SkyBox/medium/sky_neg_z.jpg");
+    faces.push_back("Textures/SkyBox/medium/sky_pos_z.jpg");
+//
+//    faces.push_back("Textures/SkyBox/high/sky_pos_x.jpg");
+//    faces.push_back("Textures/SkyBox/high/sky_neg_x.jpg");
+//    faces.push_back("Textures/SkyBox/high/sky_pos_y.jpg");
+//    faces.push_back("Textures/SkyBox/high/sky_neg_y.jpg");
+//    faces.push_back("Textures/SkyBox/high/sky_neg_z.jpg");
+//    faces.push_back("Textures/SkyBox/high/sky_pos_z.jpg");
+
+//    faces.push_back("Textures/SkyBox/sor_cwd/cwd_rt.JPG");
+//    faces.push_back("Textures/SkyBox/sor_cwd/cwd_lf.JPG");
+//    faces.push_back("Textures/SkyBox/sor_cwd/cwd_up.JPG");
+//    faces.push_back("Textures/SkyBox/sor_cwd/cwd_dn.JPG");
+//    faces.push_back("Textures/SkyBox/sor_cwd/cwd_bk.JPG");
+//    faces.push_back("Textures/SkyBox/sor_cwd/cwd_ft.JPG");
 
 //    faces.push_back("Textures/SkyBox/mp_majestic/majestic_rt.tga");
 //    faces.push_back("Textures/SkyBox/mp_majestic/majestic_lf.tga");
