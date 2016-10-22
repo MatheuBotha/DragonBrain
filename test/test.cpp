@@ -18,11 +18,12 @@
 #include "../CPSO.h"
 
 TEST(basic_check, test_SaddleHill) {
-    /*
+
+    double s[2]={0,0};
     double bounds[4]={-10,10,-10,10};
     int maxIteration = 100;
     int swarmSize = 100;
-    ObjectiveFunction *obj1 = new SaddleObjective();
+    ObjectiveFunction *obj1 = new AckleyObjective(-10,10,-10,10);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
     OPT_Process *opt1 = new HillClimber(obj1, snap1, false,bounds);
     double best = -1000;
@@ -34,27 +35,29 @@ TEST(basic_check, test_SaddleHill) {
     delete obj1;
     delete snap1;
     delete opt1;
-     */
+
 }
 
 TEST(basic_check, test_SinHill) {
-    /*
+
+    double s[2]={0,0};
     double bounds[4]={-10,10,-10,10};
     int maxIteration = 100;
     int swarmSize = 100;
-    ObjectiveFunction *obj1 = new SinObjective();
+    ObjectiveFunction *obj1 = new AckleyObjective(-10,10,-10,10);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
     OPT_Process *opt1 = new HillClimber(obj1, snap1, false,bounds);
     double best = -1000;
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
-        EXPECT_LE(best, opt1->getBestSolution()->getPersonalBest());
         best = opt1->getBestSolution()->getPersonalBest();
+        cout<<"GBEST: "<<best<<endl;
+        cout<<"BASELINE: "<<obj1->functionInput(s)<<endl;
     }
     delete obj1;
     delete snap1;
     delete opt1;
-     */
+
 }
 
 
@@ -82,23 +85,25 @@ TEST(basic_check, test_OptimalSin) {
 
 TEST(pso_check,test_sin)
 {
-    /*
+    double s[2]={0,0};
     double bounds[4]={-100,100,-100,100};
     int maxIteration = 20;
-    int swarmSize = 1000;
-    ObjectiveFunction *obj1 = new SinObjective();
+    int swarmSize = 10;
+    ObjectiveFunction *obj1 = new AckleyObjective(-10,10,-10,10);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
-    OPT_Process *opt1 = new PSO(obj1, snap1, false,bounds);
+    OPT_Process *opt1 = new PSO(obj1, snap1, false,bounds,0.9,0.9);
     double best = -1000;
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
-        best = opt1->getBestSolution()->getPersonalBest();
+        best = opt1->getIdeal()->getPersonalBest();
+        cout<<"GBEST: "<<best<<endl;
+        cout<<"BASELINE: "<<obj1->functionInput(s)<<endl;
     }
-   //EXPECT_GT(best,-1000);
+   EXPECT_GT(best,-1000);
     delete obj1;
     delete snap1;
     delete opt1;
-     */
+
 }
 
 TEST(CPSO_check,test_sin)
