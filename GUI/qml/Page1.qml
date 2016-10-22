@@ -80,10 +80,6 @@ Page1Form {
                     font.bold: true
                     font.pixelSize: fontSize
                     visible: (numInstances.displayText == "2" || numInstances.displayText == "4")
-(algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
-                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
-                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
-                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
                 }
 
 
