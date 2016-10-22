@@ -4,11 +4,12 @@
 
 #include "GCPSO.h"
 
-GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double boundArr[4], int scVal, int fcVal,double f,double s,double c) :
+GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double boundArr[4], int scVal, int fcVal,double f,double s,double c):
         PSO(pFunction, pManager, i, boundArr,s,c) {
     fc=fcVal;
     sc=scVal;
     constrictionCoefficient=f;
+
 }
 
 double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
@@ -21,19 +22,29 @@ double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
         twoD=false;
     }
     double tmpDistance;
-    double basePositon[2];
-    basePositon[0]=swarm[0]->getPositionArrayPointer()[0];
-    basePositon[1]=swarm[0]->getPositionArrayPointer()[1];
+    double basePosition[2];
+
+    if (twoD==false)
+    {
+        basePosition[0]=swarm[0]->getPositionArrayPointer()[0];
+
+    }else
+    {
+        basePosition[0]=swarm[0]->getPositionArrayPointer()[0];
+        basePosition[1]=swarm[0]->getPositionArrayPointer()[1];
+
+    }
 
     for (int i=1;i<swarmSize;i++)
     {
 
         if (twoD==false)
         {
-            tmpDistance=getDistance(swarm[i]->getPositionArrayPointer()[0],basePositon[0]);
+            tmpDistance=getDistance(swarm[i]->getPositionArrayPointer()[0],basePosition[0]);
         } else
             {
-                tmpDistance=getDistance(swarm[i]->getPositionArrayPointer(),basePositon);
+
+                tmpDistance=getDistance2(swarm[i]->getPositionArrayPointer(),basePosition);
             }
 
         if (tmpDistance>maxDistance)
@@ -76,7 +87,7 @@ bool GCPSO::guaranteeConvergence(Particle ** swarm,int s) {
 
     for (int i=0;i<swarmSize;i++)
     {
-        if (swarm[i]->getFitnessValue()>tmpBestFitness)
+        if (swarm[i]->getFitnessValue()<tmpBestFitness)
         {
             tmpBestFitness=swarm[i]->getFitnessValue();
             bestParticleIndex=i;
@@ -95,7 +106,7 @@ bool GCPSO::guaranteeConvergence(Particle ** swarm,int s) {
 
             result=objectiveFunction->functionInput(basePosition);
 
-            if (result>tmpBestFitness)
+            if (result<tmpBestFitness)
             {
                 numSucccses++;
                 return true;
@@ -112,7 +123,7 @@ bool GCPSO::guaranteeConvergence(Particle ** swarm,int s) {
         {
             basePosition[0] = swarm[i]->getPositionArrayPointer()[0]+pastVelocity;
             result=objectiveFunction->functionInput(basePosition);
-            if (result>tmpBestFitness)
+            if (result<tmpBestFitness)
             {
                 numSucccses++;
                 return true;
@@ -154,11 +165,11 @@ void GCPSO::iterate() {
 }
 
 double GCPSO::getDistance(double a, double b) {
-    return abs(a*100-b*100);
+    return abs((a*100.0)-(b*100.0));
 }
 
-double GCPSO::getDistance(double *a, double *b) {
-    return sqrt(pow((a[0]*100-b[0]*100),2)+pow((a[1]*100-b[1]*100),2));
+double GCPSO::getDistance2(double *a, double *b) {
+    return sqrt(pow(((a[0]*100.0)-(b[0]*100.0)),2)+pow(((a[1]*100.0)-(b[1]*100.0)),2));
 }
 
 double GCPSO::getConstrictionCoefficient() const {
