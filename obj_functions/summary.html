@@ -547,7 +547,7 @@
                           <div class="block">
                             <div class="block_content">
                               <h2 class="title">
-                                <a>Sin Objective</a>
+                                <a>Griewank</a>
                               </h2>
                               <div class="excerpt">
                                   <div class="row">
@@ -614,7 +614,7 @@
                           <div class="block">
                             <div class="block_content">
                               <h2 class="title">
-                                <a>Sin Objective</a>
+                                <a>Levy 13</a>
                               </h2>
                               <div class="excerpt">
                                   <div class="row">
@@ -626,13 +626,13 @@
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs tabs-left">
                                               <li class="active">
-                                                <a href="#function" data-toggle="tab">Function</a>
+                                                <a href="#function_griewank" data-toggle="tab">Function</a>
                                               </li>
                                               <li>
-                                                <a href="#domain" data-toggle="tab">Domain</a>
+                                                <a href="#domain_griewank" data-toggle="tab">Domain</a>
                                               </li>
                                               <li>
-                                                <a href="#optima" data-toggle="tab">Optima</a>
+                                                <a href="#optima_griewank" data-toggle="tab">Optima</a>
                                               </li>
                                             </ul>
                                           </div>
@@ -640,15 +640,15 @@
                                           <div class="col-xs-9">
                                             <!-- Tab panes -->
                                             <div class="tab-content">
-                                              <div class="tab-pane active" id="function">
-                                                $$ f(x,y) = sin(x) + sin(y) $$
+                                              <div class="tab-pane active" id="function_griewank">
+                                                $$ f(x)=\frac{1}{4000} \sum_{i=1}^{D} {x_{i}^{2}} - \prod_{i=1}^{D}\cos\left (\frac{x_{i}}{\sqrt{i}}  \right ) +1$$
                                               </div>
-                                              <div class="tab-pane" id="domain">
-                                                $$ x,y \in [-8,8] $$
+                                              <div class="tab-pane" id="domain_griewank">
+                                                $$ x_{i} \in [-600,600] $$
                                               </div>
-                                              <div class="tab-pane" id="optima">
-                                                $$ x = \pi/2 $$
-                                                $$ y = \pi/2 $$
+                                              <div class="tab-pane" id="optima_griewank">
+                                                $$f_{grw}^{*} =f_{grw}(0,...,0)=0 $$
+                                                
                                               </div>
                                             </div>
                                           </div>
@@ -680,7 +680,7 @@
                           <div class="block">
                             <div class="block_content">
                               <h2 class="title">
-                                <a>Sin Objective</a>
+                                <a>Michalewicz</a>
                               </h2>
                               <div class="excerpt">
                                   <div class="row">
@@ -692,13 +692,13 @@
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs tabs-left">
                                               <li class="active">
-                                                <a href="#function" data-toggle="tab">Function</a>
+                                                <a href="#function_levy13" data-toggle="tab">Function</a>
                                               </li>
                                               <li>
-                                                <a href="#domain" data-toggle="tab">Domain</a>
+                                                <a href="#domain_levy13" data-toggle="tab">Domain</a>
                                               </li>
                                               <li>
-                                                <a href="#optima" data-toggle="tab">Optima</a>
+                                                <a href="#optima_levy13" data-toggle="tab">Optima</a>
                                               </li>
                                             </ul>
                                           </div>
@@ -706,15 +706,21 @@
                                           <div class="col-xs-9">
                                             <!-- Tab panes -->
                                             <div class="tab-content">
-                                              <div class="tab-pane active" id="function">
-                                                $$ f(x,y) = sin(x) + sin(y) $$
+                                              <div class="tab-pane active" id="function_levy13">
+$$ f(x)= \sum_{i=1}^{D-1}($$
+$$ \sin^{^{2}}(3\pi x_{i}) +$$
+$$ (x_{i}-1)^{2}\left[1+\sin^{2}(3\pi x_{i+1}))\right] +$$
+$$ (x_{i+1}-1)^{2}$$
+$$ \left[1+\sin ^{^{2}}(2\pi^{x_{i+1}}))\right])$$
                                               </div>
-                                              <div class="tab-pane" id="domain">
-                                                $$ x,y \in [-8,8] $$
+                                              <div class="tab-pane" id="domain_levy13">
+                                                $$ x_{i}\in [-10,10] 
+                                                \\
+                                                D >= 2 $$
                                               </div>
-                                              <div class="tab-pane" id="optima">
-                                                $$ x = \pi/2 $$
-                                                $$ y = \pi/2 $$
+                                              <div class="tab-pane" id="optima_levy13">
+                                                $$ f_{lvy}^{*} =f_{lvy}(1,...,1)=0 $$
+                                                
                                               </div>
                                             </div>
                                           </div>
@@ -746,7 +752,7 @@
                           <div class="block">
                             <div class="block_content">
                               <h2 class="title">
-                                <a>Sin Objective</a>
+                                <a>Pathological</a>
                               </h2>
                               <div class="excerpt">
                                   <div class="row">
@@ -758,13 +764,13 @@
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs tabs-left">
                                               <li class="active">
-                                                <a href="#function" data-toggle="tab">Function</a>
+                                                <a href="#function_mich" data-toggle="tab">Function</a>
                                               </li>
                                               <li>
-                                                <a href="#domain" data-toggle="tab">Domain</a>
+                                                <a href="#domain_mich" data-toggle="tab">Domain</a>
                                               </li>
                                               <li>
-                                                <a href="#optima" data-toggle="tab">Optima</a>
+                                                <a href="#optima_mich" data-toggle="tab">Optima</a>
                                               </li>
                                             </ul>
                                           </div>
@@ -772,15 +778,20 @@
                                           <div class="col-xs-9">
                                             <!-- Tab panes -->
                                             <div class="tab-content">
-                                              <div class="tab-pane active" id="function">
-                                                $$ f(x,y) = sin(x) + sin(y) $$
+                                              <div class="tab-pane active" id="function_mich">
+                                                $$ f(x)= -\sum_{i=1}^{D}\sin(x_{i})(\sin(ix_{i}^{2}/\pi))^{2p}$$
                                               </div>
-                                              <div class="tab-pane" id="domain">
-                                                $$ x,y \in [-8,8] $$
+                                              <div class="tab-pane" id="domain_mich">
+                                                $$ x_{i} \in [0,\pi] $$
+                                                $$ \text{for } p= 10$$
                                               </div>
-                                              <div class="tab-pane" id="optima">
-                                                $$ x = \pi/2 $$
-                                                $$ y = \pi/2 $$
+                                              <div class="tab-pane" id="optima_mich">
+                                                
+                                                $$f_{mic}^{*}\approx -1.8013 ( D=2)$$
+                                                $$f_{mic}^{*}\approx -4.6877 ( D=5)$$
+                                                $$f_{mic}^{*}\approx -96602 ( D=10)$$
+                                                $$f_{mic}^{*}\approx -29.6309 ( D=30)$$
+                                                
                                               </div>
                                             </div>
                                           </div>
@@ -811,7 +822,7 @@
                           <div class="block">
                             <div class="block_content">
                               <h2 class="title">
-                                <a>Sin Objective</a>
+                                <a>Quadric(Schwefel 1.2)</a>
                               </h2>
                               <div class="excerpt">
                                   <div class="row">
@@ -823,13 +834,13 @@
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs tabs-left">
                                               <li class="active">
-                                                <a href="#function" data-toggle="tab">Function</a>
+                                                <a href="#function_path" data-toggle="tab">Function</a>
                                               </li>
                                               <li>
-                                                <a href="#domain" data-toggle="tab">Domain</a>
+                                                <a href="#domain_path" data-toggle="tab">Domain</a>
                                               </li>
                                               <li>
-                                                <a href="#optima" data-toggle="tab">Optima</a>
+                                                <a href="#optima_path" data-toggle="tab">Optima</a>
                                               </li>
                                             </ul>
                                           </div>
@@ -837,15 +848,79 @@
                                           <div class="col-xs-9">
                                             <!-- Tab panes -->
                                             <div class="tab-content">
-                                              <div class="tab-pane active" id="function">
-                                                $$ f(x,y) = sin(x) + sin(y) $$
+                                              <div class="tab-pane active" id="function_path">
+                                                $$ f_{pth}(x)=\sum_{i=1}^{D}\left (0.5+\frac{\sin ^{2}\sqrt{(100x_{i}^{2}+x_{i+1}^{2})}-0.5}{1+0.001(x_{i}^{2}-2x_{i+1}x_{i+1}+x_{i+1}^{2})^{2}}\right )$$
                                               </div>
-                                              <div class="tab-pane" id="domain">
-                                                $$ x,y \in [-8,8] $$
+                                              <div class="tab-pane" id="domain_path">
+                                                $$ D >= 2 $$
+                                                $$ x_{i} \in [-100,100]$$
                                               </div>
-                                              <div class="tab-pane" id="optima">
-                                                $$ x = \pi/2 $$
-                                                $$ y = \pi/2 $$
+                                              <div class="tab-pane" id="optima_path">
+                                                $$f_{pth}^{*} =f_{pth}(0,...,0)=0 $$
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                        </div>
+                                      </div>
+                                    </div>                                  
+
+                                  <!-- START image column -->
+                                  <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="">
+                                      <div id="crop-avatar">
+                                        <!-- Current avatar -->
+                                        <img class="img-circle img-responsive avatar-view" src="../images/obj_functions/sin.png" alt="Avatar" title="Change the avatar">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- END image column -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <!-- end bulleted block -->
+                        <!-- start bulleted block -->
+                        <li>
+                          <div class="block">
+                            <div class="block_content">
+                              <h2 class="title">
+                                <a>Quartic</a>
+                              </h2>
+                              <div class="excerpt">
+                                  <div class="row">
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                      <div class="x_panel">
+                                        <div class="x_content">
+                                          <div class="col-xs-3">
+                                            <!-- required for floating -->
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs tabs-left">
+                                              <li class="active">
+                                                <a href="#function_schQ" data-toggle="tab">Function</a>
+                                              </li>
+                                              <li>
+                                                <a href="#domain_schQ" data-toggle="tab">Domain</a>
+                                              </li>
+                                              <li>
+                                                <a href="#optima_schQ" data-toggle="tab">Optima</a>
+                                              </li>
+                                            </ul>
+                                          </div>
+
+                                          <div class="col-xs-9">
+                                            <!-- Tab panes -->
+                                            <div class="tab-content">
+                                              <div class="tab-pane active" id="function_schQ">
+                                                $$ f_{qdr}(x)=\sum_{i=1}^{D}\left (\sum_{j=i}^{i}x_{j} \right )^{2} $$
+                                              </div>
+                                              <div class="tab-pane" id="domain_schQ">
+                                                $$ x_{i} \in [-100,100] $$
+                                              </div>
+                                              <div class="tab-pane" id="optima_schQ">
+                                                $$f_{qdr}^{*} =f_{pth}(0,...,0)=0 $$
+                                                
                                               </div>
                                             </div>
                                           </div>
@@ -887,13 +962,13 @@
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs tabs-left">
                                               <li class="active">
-                                                <a href="#function" data-toggle="tab">Function</a>
+                                                <a href="#function_qtc" data-toggle="tab">Function</a>
                                               </li>
                                               <li>
-                                                <a href="#domain" data-toggle="tab">Domain</a>
+                                                <a href="#domain_qtc" data-toggle="tab">Domain</a>
                                               </li>
                                               <li>
-                                                <a href="#optima" data-toggle="tab">Optima</a>
+                                                <a href="#optima_qtc" data-toggle="tab">Optima</a>
                                               </li>
                                             </ul>
                                           </div>
@@ -901,79 +976,14 @@
                                           <div class="col-xs-9">
                                             <!-- Tab panes -->
                                             <div class="tab-content">
-                                              <div class="tab-pane active" id="function">
-                                                $$ f(x,y) = sin(x) + sin(y) $$
+                                              <div class="tab-pane active" id="function_qtc">
+                                                $$f_{qrt}(x)=\sum_{i=1}^{D}ix_{i}^{4} $$
                                               </div>
-                                              <div class="tab-pane" id="domain">
-                                                $$ x,y \in [-8,8] $$
+                                              <div class="tab-pane" id="domain_qtc">
+                                                $$ x_{i} \in [-1.28,1.28] $$
                                               </div>
-                                              <div class="tab-pane" id="optima">
-                                                $$ x = \pi/2 $$
-                                                $$ y = \pi/2 $$
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="clearfix"></div>
-                                        </div>
-                                      </div>
-                                    </div>                                  
-
-                                  <!-- START image column -->
-                                  <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <div class="">
-                                      <div id="crop-avatar">
-                                        <!-- Current avatar -->
-                                        <img class="img-circle img-responsive avatar-view" src="../images/obj_functions/sin.png" alt="Avatar" title="Change the avatar">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- END image column -->
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                        <!-- end bulleted block -->
-                        <!-- start bulleted block -->
-                        <li>
-                          <div class="block">
-                            <div class="block_content">
-                              <h2 class="title">
-                                <a>Sin Objective</a>
-                              </h2>
-                              <div class="excerpt">
-                                  <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-12">
-                                      <div class="x_panel">
-                                        <div class="x_content">
-                                          <div class="col-xs-3">
-                                            <!-- required for floating -->
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs tabs-left">
-                                              <li class="active">
-                                                <a href="#function" data-toggle="tab">Function</a>
-                                              </li>
-                                              <li>
-                                                <a href="#domain" data-toggle="tab">Domain</a>
-                                              </li>
-                                              <li>
-                                                <a href="#optima" data-toggle="tab">Optima</a>
-                                              </li>
-                                            </ul>
-                                          </div>
-
-                                          <div class="col-xs-9">
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                              <div class="tab-pane active" id="function">
-                                                $$ f(x,y) = sin(x) + sin(y) $$
-                                              </div>
-                                              <div class="tab-pane" id="domain">
-                                                $$ x,y \in [-8,8] $$
-                                              </div>
-                                              <div class="tab-pane" id="optima">
-                                                $$ x = \pi/2 $$
-                                                $$ y = \pi/2 $$
+                                              <div class="tab-pane" id="optima_qtc">
+                                                $$f_{qdr}^{*} =f_{pth}(0,...,0)=0 $$
                                               </div>
                                             </div>
                                           </div>
