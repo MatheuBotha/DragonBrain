@@ -115,6 +115,7 @@ void FIPS::iterate() {
 
         if (tmpFit <= swarm[i]->getPersonalBest()) {
             swarm[i]->setPersonalBest(tmpFit);
+            swarm[i]->setPersonalBestPosition(currentPos);
         }
 
         if ((ideal == nullptr) ||
