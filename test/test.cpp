@@ -134,7 +134,7 @@ TEST(fips_check,test_sin)
 {
 
     double bounds[4]={-100,100,-100,100};
-    int maxIteration = 20;
+    int maxIteration = 100;
     int swarmSize = 40;
     ObjectiveFunction *obj1 = new AckleyObjective(1,0,0,0);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
