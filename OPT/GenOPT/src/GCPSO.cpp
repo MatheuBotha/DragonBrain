@@ -8,6 +8,7 @@ GCPSO::GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, do
         PSO(pFunction, pManager, i, boundArr,f, s,c) {
     fc=fcVal;
     sc=scVal;
+    inertia=f;
 }
 
 double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
@@ -42,7 +43,7 @@ double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
         } else
             {
 
-                tmpDistance=getDistance(swarm[i]->getPositionArrayPointer(),basePosition);
+                tmpDistance=getDistanceArray(swarm[i]->getPositionArrayPointer(),basePosition);
             }
 
         if (tmpDistance>maxDistance)
@@ -53,10 +54,10 @@ double GCPSO::calculatePt(Particle ** swarm, int swarmSize) {
 
     if (numSucccses>sc)
     {
-        return 2*maxDistance;
+        return 2.0*maxDistance;
     }else if (numFailures>fc)
         {
-            return (1/1.5)*maxDistance;
+            return (1.0/1.5)*maxDistance;
         } else return maxDistance;
 
 }
@@ -66,7 +67,7 @@ void GCPSO::calculateSearchParticleVelocity(double bestVelocity,double pt) {
     double r=getRandomNumberMT();
     double tmp;
 
-    tmp=bestVelocity+(w*getPastVelocity())+pt*(1-(2*r));
+    tmp=bestVelocity+(inertia*getPastVelocity())+pt*(1.0-(2.0*r));
 
     setPastVelocity(tmp);
 }
@@ -74,7 +75,7 @@ void GCPSO::calculateSearchParticleVelocity(double bestVelocity,double pt) {
 bool GCPSO::guaranteeConvergence(Particle ** swarm,int s) {
     double basePosition[2];
     int bestParticleIndex;
-    double tmpBestFitness=-1;
+    double tmpBestFitness=DBL_MAX;
     bool twoD=true;
     int swarmSize=s;
     if (swarm[0]->getPositionArrayPointer()[1]==DBL_MAX
@@ -166,7 +167,7 @@ double GCPSO::getDistance(double a, double b) {
     return abs((a*100.0)-(b*100.0));
 }
 
-double GCPSO::getDistance(double *a, double *b) {
+double GCPSO::getDistanceArray(double *a, double *b) {
     return sqrt(pow(((a[0]*100.0)-(b[0]*100.0)),2)+pow(((a[1]*100.0)-(b[1]*100.0)),2));
 }
 

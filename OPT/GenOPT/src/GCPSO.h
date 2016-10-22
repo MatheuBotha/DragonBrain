@@ -9,7 +9,7 @@
 class GCPSO: public PSO {
 
 private:
-    double constrictionCoefficient;
+    double inertia;
     int numSucccses=15;
     int numFailures=5;
     int sc;
@@ -17,7 +17,7 @@ private:
     double pastVelocity=0;
     double calculatePt(Particle ** swarm, int swarmSize);
     double getDistance(double a,double b);
-    double getDistance(double* a,double *b);
+    double getDistanceArray(double* a,double *b);
 public:
 
 
