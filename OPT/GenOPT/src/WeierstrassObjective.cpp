@@ -5,9 +5,10 @@
 #include "WeierstrassObjective.h"
 double WeierstrassObjective::functionInput(double *parameters){
     double result;
-    transformInput(parameters);
     double x1 = parameters[0];
     double x2 = parameters[1];
+    x1 = transformX1(x1);
+    x2 = transformX2(x2);
 
     double sum1 = 0.0;
     double sum2 = 0.0;

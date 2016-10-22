@@ -10,10 +10,10 @@
 class BealeObjective : public ObjectiveFunction{
 public:
     BealeObjective(double s, double x, double y, double v): ObjectiveFunction(s, x, y, v){
-        defaultBounds[0]=-4.5;
-        defaultBounds[1]=4.5;
-        defaultBounds[2]=-4.5;
-        defaultBounds[3]=4.5;
+        defaultBounds[0]=-4.5+x;
+        defaultBounds[1]=4.5+x;
+        defaultBounds[2]=-4.5+y;
+        defaultBounds[3]=4.5+y;
     }
 
     double functionInput(double * parameters);

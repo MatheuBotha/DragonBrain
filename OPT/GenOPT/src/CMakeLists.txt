@@ -20,7 +20,7 @@ set(SOURCE_FILES HillClimber.cpp OPT_Process.cpp Particle.cpp PSO.cpp RandomSear
         SixHumpCamelBackObjective.cpp SixHumpCamelBackObjective.h SkewRastriginObjective.cpp SkewRastriginObjective.h
         SphericalObjective.cpp SphericalObjective.h StepObjective.cpp StepObjective.h WeierstrassObjective.cpp
         WeierstrassObjective.h ZakharovObjective.cpp ZakharovObjective.h AckleyObjective.cpp AckleyObjective.h
-        )
+        ElitistHillClimber.cpp ElitistHillClimber.h GeneticAlgorithm.cpp GeneticAlgorithm.h)
 
 add_library(OPT_SRC ${SOURCE_FILES} ${HEADERS} ${OBJECTIVES_H} ${OBJECTIVES_SRC})
 target_link_libraries(OPT_SRC SnapshotManagerSRC)

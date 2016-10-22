@@ -17,7 +17,7 @@ private:
     //This will become an ObjectiveFunction type once possible
     std::string objectiveFunction;
     int dimensions;
-    int boundaries[4];
+    double boundaries[4];
     double transformations[4];
 public:
     /**
@@ -31,7 +31,7 @@ public:
      * @param Boundaries (int[4])
      * @param Transformations (int[4])
      */
-    ProblemDomainSettingsPackage(std::string, int, int[4], double[3]);
+    ProblemDomainSettingsPackage(std::string, int, double[4], double[3]);
     /**
      * @brief
      * @return Returns the objective function (currently as a string)

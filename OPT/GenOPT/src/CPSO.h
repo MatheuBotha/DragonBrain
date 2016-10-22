@@ -8,12 +8,13 @@
 #include "PSO.h"
 class CPSO: public PSO{
 private:
-    double w;
+    double w=0.7968;
     double vMax;
+    double constrictionCoefficient;
 public:
     CPSO();
 
-    CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,  double wVal, double velMax,double boundArr[4]);
+    CPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i,  double wVal, double velMax,double boundArr[4],double s,double c);
 
     double getW()
     {
@@ -36,6 +37,10 @@ public:
     }
 
     virtual void updateVelocity(Particle *particle) override;
+
+    double calculateConstrictionCoefficient();
+
+    void decayInertiaWeight(double oldInertia);
 };
 
 

@@ -12,19 +12,31 @@ int main()
     Manager* swarmMan = new Manager();
     swarmMan->startGUI();
     SettingsPackage* setts = swarmMan->getSettingsPackage();
-    //still needs an alternative for the situation in which a user has not clicked a button
-    while(setts->isLocked()) {}
 
-    swarmMan->generateSnapshotManager();
-    swarmMan->initializeOptimizer();
-    swarmMan->optimize();
-/*    ObjectiveFunction *obj1 = new SinObjective();
-    OPT_Process *opt1 = new HillClimber(obj1, swarmMan->getSnapshotManager(), true);
+    //this one lets the user first chose to close application (without it not finishing execution)
+    while (setts->isLocked()) {}
 
-    for(int i=0;i<setts->getOptimizerSettingsPackage()->getMaxIterations();i++){
-        opt1->iterate();
+    while(!setts->readyToClose()) {
+
+        setts->lock(true);
+
+        swarmMan->generateSnapshotManager();
+        swarmMan->initializeOptimizer();
+        swarmMan->optimize();
+
+
+        //swarmMan->getGraphicsProcessor()->run();
+        swarmMan->waitForOpts();
+        swarmMan->initializeGraphicsProcessor();
+        swarmMan->visualize();
+
+        swarmMan->cleanMemory();
+
+        setts->readyNext(true);
+
+        while (setts->isLocked()) {}
+
     }
-  */
     swarmMan->endGUI();
     delete swarmMan;
     return 0;

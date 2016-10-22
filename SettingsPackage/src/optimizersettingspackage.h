@@ -14,53 +14,33 @@ class OptimizerSettingsPackage
 {
 private:
     std::string algorithm;
-    std::string particlePlacement;
-    double inertiaWeight;
+    std::string algorithm2;
+    std::string algorithm3;
+    std::string algorithm4;
     double cognitiveCoefficient;
     double socialCoefficient;
+    double inertiaWeight;
     double constrictionCoefficient;
+
     double maxVelocity;
     int successCount;
     int failCount;
     int neighbourhoodSize;
     int maxIterations;
-    int cutoffAcc;
 public:
     /**
      * @brief The default constructor for an OptimizerSettingsPackage
      */
     OptimizerSettingsPackage();
-    /**
-     * @brief Creates a  OptimizerSettingsPackage with specified settings (currently unused)
-     * @param particlePlacement (string pointer)
-     * @param inertiaWeight (double)
-     * @param cognitiveCoefficient (double)
-     * @param socialCoefficient (double)
-     * @param maxIterations (int)
-     * @param cutoffAcc (int)
-     */
-    OptimizerSettingsPackage(std::string, double, double, double, int, int);
 
     /**
      * @brief
-     * @return Returns the string containing the user specified particle placement (or null)
+     * @return Returns the string containing the (i'th) algorithm name
      */
-    std::string getParticlePlacementString();
-
-
-    /**
-     * @brief
-     * @return Returns the string containing the algorithm name
-     */
-    std::string getAlgorithm();
+    std::string getAlgorithm(int i);
     /**
      * @brief
      * @return Returns a double containing the inertia weight
-     */
-    double getInertiaWeight();
-    /**
-     * @brief
-     * @return Returns a double containing the cognitive coefficient
      */
     double getCognitiveCoefficient();
     /**
@@ -68,12 +48,6 @@ public:
      * @return Returns a double containing the social coefficient
      */
     double getSocialCoefficient();
-
-    /**
-     * @brief
-     * @return Returns a double containing the constriction coefficient
-     */
-    double getConstrictionCoefficient();
 
 
     /**
@@ -106,32 +80,16 @@ public:
      * @return Returns an int containing the maximum number of iterations
      */
     int getMaxIterations();
-    /**
-     * @brief
-     * @return Returns an int containing the accuracy at which to halt the optimizer
-     */
-    int getCutoffAcc();
-
 
     /**
      * @brief Sets the Particle Placement
      * @param ParticlePlacement (string pointer)
      */
-    void setAlgorithm(std::string);
+    void setAlgorithms(std::string, std::string, std::string, std::string);
 
     /**
      * @brief Sets the Particle Placement
      * @param ParticlePlacement (string pointer)
-     */
-    void setParticlePlacementString(std::string);
-    /**
-     * @brief Sets the Inertia Weight
-     * @param InertiaWeight (double)
-     */
-    void setInertiaWeight(double);
-    /**
-     * @brief Sets the Cognitive Coefficient
-     * @param cognitiveCoefficient (double)
      */
     void setCognitiveCoefficient(double);
     /**
@@ -143,13 +101,6 @@ public:
      * @brief Sets the maximum number of iterations for the optimizer
      * @param maxIterations (int)
      */
-
-
-    /**
-    * @brief Sets the constriction coefficient
-    * @param constrictionCoefficient (double)
-     */
-    void setConstrictionCoefficient(double);
 
 
     /**
@@ -177,16 +128,15 @@ public:
     void setNeighbourhoodSize(int);
 
     void setMaxIterations(int);
-    /**
-     * @brief Sets the accuracy level at which to halt the optimizer
-     * @param cutoffAcc (int)
-     */
-    void setCutoffAcc(int);
-    
-    
-    
-    
-    
+
+    void setInertiaWeight(double d);
+
+    double getInertiaWeight();
+
+    void setConstrictionCoefficient(double d);
+
+
+    double getConstrictionCoefficient();
 };
 
 #endif // OPTIMIZERSETTINGSPACKAGE_H

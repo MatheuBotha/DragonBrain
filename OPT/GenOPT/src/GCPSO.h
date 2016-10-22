@@ -17,11 +17,11 @@ private:
     double pastVelocity=0;
     double calculatePt(Particle ** swarm, int swarmSize);
     double getDistance(double a,double b);
-    double getDistance(double* a,double *b);
+    double getDistanceArray(double* a,double *b);
 public:
 
 
-    GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double boundArr[4], int a,int b,double w);
+    GCPSO(ObjectiveFunction *pFunction, SnapshotManager *pManager, bool i, double boundArr[4], int a,int b,double w,double s,double c);
     void calculateSearchParticleVelocity(double bestVelocity,double pt);
     bool guaranteeConvergence(Particle ** swarm, int swarmSize);
 

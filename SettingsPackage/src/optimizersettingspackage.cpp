@@ -5,26 +5,7 @@ OptimizerSettingsPackage::OptimizerSettingsPackage()
 
 }
 
-OptimizerSettingsPackage::OptimizerSettingsPackage(std::string particles, double inertia, double cogn, double social, int max, int acc)
-{
-    particlePlacement = particles;
-    inertiaWeight = inertia;
-    cognitiveCoefficient = cogn;
-    socialCoefficient = social;
-    maxIterations = max;
-    cutoffAcc = acc;
 
-}
-
-std::string OptimizerSettingsPackage::getParticlePlacementString()
-{
-    return particlePlacement;
-}
-
-double OptimizerSettingsPackage::getInertiaWeight()
-{
-    return inertiaWeight;
-}
 
 double OptimizerSettingsPackage::getCognitiveCoefficient()
 {
@@ -41,20 +22,6 @@ int OptimizerSettingsPackage::getMaxIterations()
     return maxIterations;
 }
 
-int OptimizerSettingsPackage::getCutoffAcc()
-{
-    return cutoffAcc;
-}
-
-void OptimizerSettingsPackage::setParticlePlacementString(std::string particleString)
-{
-    particlePlacement = particleString;
-}
-
-void OptimizerSettingsPackage::setInertiaWeight(double inertia)
-{
-    inertiaWeight = inertia;
-}
 
 void OptimizerSettingsPackage::setCognitiveCoefficient(double cogn)
 {
@@ -71,22 +38,22 @@ void OptimizerSettingsPackage::setMaxIterations(int max)
     maxIterations = max;
 }
 
-void OptimizerSettingsPackage::setCutoffAcc(int acc)
-{
-    cutoffAcc = acc;
-}
 
-void OptimizerSettingsPackage::setAlgorithm(std::string aly) {
+void OptimizerSettingsPackage::setAlgorithms(std::string aly, std::string aly2, std::string aly3, std::string aly4) {
     algorithm = aly;
+    algorithm2 = aly2;
+    algorithm3 = aly3;
+    algorithm4 = aly4;
 }
 
-std::string OptimizerSettingsPackage::getAlgorithm() {
-    return algorithm;
+std::string OptimizerSettingsPackage::getAlgorithm(int i) {
+    if(i == 1)
+        return algorithm;
+    else if(i == 2) return algorithm2;
+    else if (i == 3) return algorithm3;
+    else return algorithm4;
 }
 
-void OptimizerSettingsPackage::setConstrictionCoefficient(double constrict) {
-    constrictionCoefficient = constrict;
-}
 
 void OptimizerSettingsPackage::setMaxVelocity(double velo) {
     maxVelocity = velo;
@@ -104,9 +71,6 @@ void OptimizerSettingsPackage::setNeighbourhoodSize(int nSize) {
     neighbourhoodSize = nSize;
 }
 
-double OptimizerSettingsPackage::getConstrictionCoefficient() {
-    return constrictionCoefficient;
-}
 
 double OptimizerSettingsPackage::getMaxVelocity() {
     return maxVelocity;
@@ -123,3 +87,21 @@ int OptimizerSettingsPackage::getSuccessCount() {
 int OptimizerSettingsPackage::getNeighbourhoodSize() {
     return neighbourhoodSize;
 }
+
+void OptimizerSettingsPackage::setInertiaWeight(double d) {
+    inertiaWeight = d;
+}
+
+double  OptimizerSettingsPackage::getInertiaWeight() {
+    return inertiaWeight;
+}
+
+void OptimizerSettingsPackage::setConstrictionCoefficient(double d) {
+    constrictionCoefficient = d;
+}
+
+double OptimizerSettingsPackage::getConstrictionCoefficient() {
+    return constrictionCoefficient;
+}
+
+

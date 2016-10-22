@@ -8,90 +8,93 @@ void HillClimber::iterate() {
     Particle **swarm;
     int swarmSize;
 
+    ideal = nullptr;
     last = snapshotManager->getLast();
 
     newIteration = new Snapshot(last);
-  if(printer)  cout << "NEW ITERATION\n";
+  if(printer){
+      cout << "NEW ITERATION\n";
+  }
 
     swarm = newIteration->getSwarm();
 
     swarmSize = newIteration->getSwarmSize();
 
     for(int i=0; i<swarmSize; i++){
-        if(printer)        std::cout << "Particle " << i;
+        if(printer){
+            std::cout << "Particle " << i;
+        }
+
         mutate(swarm[i]);
-        if(printer)        std::cout << " is at coords (" << swarm[i]->getPositionArrayPointer()[0] << ", "
-                                     << swarm[i]->getPositionArrayPointer()[1] << ") has fitness of: "
-                                     << swarm[i]->getFitnessValue() << " and personal best of: "
-                                     << swarm[i]->getPersonalBest() << std::endl;
+
+        if(printer){
+            std::cout << " is at coords (" << swarm[i]->getPositionArrayPointer()[0] << ", "
+                      << swarm[i]->getPositionArrayPointer()[1] << ") has fitness of: "
+                      << swarm[i]->getFitnessValue() << " and personal best of: "
+                      << swarm[i]->getPersonalBest() << std::endl;
+        }
     }
-    std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
+    if(printer){
+        std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
+    }
+    newIteration->setGBest(ideal);
     snapshotManager->enqueue(newIteration);
 }
 
 void HillClimber::mutate(Particle *particle) {
+    double newPosition[2];
+    particle->getPositionArray(newPosition);
+    double xRange = bounds[1] - bounds[0];
+    double yRange = bounds[3] - bounds[2];
 
-    double *newPosition = particle->getPositionArrayPointer();
+    if (newPosition[1]==DBL_MAX){
 
-    for (int i = 0; i < 2; ++i) {
-        newPosition[i]+=(mutationRate*newPosition[i]*(((double)rand()/(double)RAND_MAX)-0.5));
+        newPosition[0]+=(mutationRate*xRange*(((double)rand()/(double)RAND_MAX)-0.5));
+
+        if(newPosition[0]<bounds[0]){
+            newPosition[0]=bounds[0];
+        }else if(newPosition[0]>bounds[1]){
+            newPosition[0]=bounds[1];
+        }
+    }else{
+
+        newPosition[0]+=(mutationRate*xRange*(((double)rand()/(double)RAND_MAX)-0.5));
+        newPosition[1]+=(mutationRate*yRange*(((double)rand()/(double)RAND_MAX)-0.5));
+        if(newPosition[0] < bounds[0]){
+            newPosition[0] = bounds[0];
+
+        }else if(newPosition[0] > bounds[1]){
+            newPosition[0] = bounds[1];
+
+        }
+        if(newPosition[1] < bounds[2]){
+            newPosition[1] = bounds[2];
+
+        }else if(newPosition[1] > bounds[3]){
+            newPosition[1] = bounds[3];
+
+        }
     }
-    if (newPosition[1]==DBL_MAX)
-    {
-        if (checkSpecificBound(bounds[0],bounds[1],newPosition[0])==false)
-        {
-            int c=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);
 
-            if (c==1)
-            {
-                newPosition[0]=bounds[1];
-            } else
-                {
-                    newPosition[0]=bounds[0];
-                }
-        }
-    } else
-        {
-            if (checkSpecificBound(bounds[0],bounds[1],newPosition[0])==false)
-            {
-                int c=checkProximityDistances(bounds[0],bounds[1],newPosition[0]);
-
-                if (c==1)
-                {
-                    newPosition[0]=bounds[1];
-                } else
-                {
-                    newPosition[0]=bounds[0];
-                }
-            }
-            if (checkSpecificBound(bounds[2],bounds[3],newPosition[1])==false)
-            {
-                int c=checkProximityDistances(bounds[2],bounds[3],newPosition[1]);
-
-                if (c==1)
-                {
-                    newPosition[1]=bounds[3];
-                } else
-                {
-                    newPosition[1]=bounds[2];
-                }
-            }
-        }
+    double posTemp[2] = { newPosition[0], newPosition[1] };
+    double bestTemp[2] = { particle->getPersonalBestPos()[0], particle->getPersonalBestPos()[1]};
     double fitness;
-    fitness = objectiveFunction->functionInput(newPosition);
+    double bestFitness;
+    fitness = objectiveFunction->functionInput(posTemp);
+    bestFitness = objectiveFunction->functionInput(bestTemp);
     particle->setFitnessValue(fitness);
-    if(particle->getFitnessValue() > particle->getPersonalBest()){
-        //cout<<"CurrentFitness: "<<particle->getFitnessValue()<<endl;
-        //cout<<"BestFitness: "<<particle->getPersonalBest()<<endl;
+    particle->setPersonalBest(bestFitness);
+    if(particle->getFitnessValue() < particle->getPersonalBest()){
         particle->setPersonalBestPosition(newPosition);
         particle->setPersonalBest(particle->getFitnessValue());
-//    if(printer)
-  //      std::cout<<"New best: "<<fitness<<std::endl;
-        if(ideal == nullptr ||
-                ideal != nullptr && particle->getPersonalBest() > ideal->getPersonalBest())
-            ideal = particle;
+
     }
 
+    if(ideal == nullptr ||
+       ideal != nullptr && particle->getPersonalBest() < ideal->getPersonalBest()) {
+        ideal = particle;
+    }
 
-    particle->setParticlePosition(newPosition);
+    particle->setParticlePosition(particle->getPersonalBestPos());
+    particle->setFitnessValue(particle->getPersonalBest());
 }

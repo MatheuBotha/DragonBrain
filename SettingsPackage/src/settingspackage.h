@@ -19,8 +19,10 @@ class SettingsPackage: public QObject
     Q_OBJECT
 private:
     int swarmSize;
+    int numInstances;
     bool locked;
     bool changed;
+    bool closing;
     bool ready;
     GraphicsSettingsPackage* gpPkg;
     OptimizerSettingsPackage* optPkg;
@@ -61,13 +63,23 @@ public:
      */
     Q_INVOKABLE void change(bool);
 
+
+    Q_INVOKABLE void closeNext() { closing = true; }
+    bool readyToClose() { return closing; }
+
+    Q_INVOKABLE void readyNext(bool r) { ready = r; }
+    Q_INVOKABLE bool readyForNext() { return ready; }
     /**
      * @brief
      * @return Returns the swarmsize associated with the entire system
      */
     int getSwarmSize();
 
+    int getNumInstances();
+
     void setSwarmSize(int a) { swarmSize = a; }
+
+    void setNumInstances(int n) { numInstances = n; }
     /**
      * @brief
      * @return Returns the associated GraphicsSettingsPackage
@@ -89,19 +101,23 @@ public:
       * @brief Sets the swarm size (given by GUI)
       * @param SwarmSize (int)
       */
-    Q_INVOKABLE void generateSettingsGeneral(int);
+    Q_INVOKABLE void generateSettingsGeneral(int, int);
     /**
       * @brief Generates a GraphicsSettingsPackage using input from the GUI
       */
-    Q_INVOKABLE void generateSettingsGraphics(QString, int, bool, bool, int);
+    Q_INVOKABLE void generateSettingsGraphics(QString,
+                                              int);
     /**
       * @brief Generates a OptimizerSettingsPackage using input from the GUI
       */
-    Q_INVOKABLE void generateSettingsOptimizer(QString, bool, QString, double, double, double, int ,int, double, double, int, int, int);
+    Q_INVOKABLE void generateSettingsOptimizer(QString algorithm, QString algo2, QString algo3, QString algo4, int maxIterations, double cog, double soc,
+    double constrictCoeff, double inertia, double maxVelo, int success, int fail, int neighbourSize);
     /**
       * @brief Generates a ProblemDomainSettingsPackage using input from the GUI
       */
-    Q_INVOKABLE void generateSettingsDomain(QString, int , double, double, double, double, double, double, double, double);
+    Q_INVOKABLE void generateSettingsDomain(QString, int , double, double,  double, double, double, double, double, double);
+
+    void updateSettings(double transA, double transB, double transC, double transD, double maxVelocity, int succ, int fail);
 
 };
 

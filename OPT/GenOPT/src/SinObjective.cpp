@@ -7,9 +7,11 @@
 
 double SinObjective::functionInput(double *parameters) {
     double result;
-    transformInput(parameters);
-
-    result = sin(parameters[0])+sin(parameters[1]);
+    double x1 = parameters[0];
+    double x2 = parameters[1];
+    x1 = transformX1(x1);
+    x2 = transformX2(x2);
+    result = sin(x1)+sin(x2);
 
     return transformOutput(result);
 }

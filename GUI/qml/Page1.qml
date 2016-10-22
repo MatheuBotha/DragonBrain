@@ -7,7 +7,7 @@ import QtQuick.Controls.Styles 1.0
 
 Page1Form {
     scale: 1
-    property int sWid: Screen.desktopAvailableWidth
+    property int sWid: Screen.width
     property int sHei: Screen.desktopAvailableHeight
     property int fontSize: (sWid > 1440) ? 15 : 12
 
@@ -41,7 +41,7 @@ Page1Form {
                 opacity: 0.8
                 width: sWid * 0.42
                 clip: true
-                model: [ "Hill Climbing", "Random Search", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
+                model: [ "Hill Climbing", "Random Search", "Elitist Hill Climbing", "Genetic Algorithm", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
                 "Fully Informed PSO"]
                 currentIndex: 0
 
@@ -66,352 +66,113 @@ Page1Form {
 
 
 
-            TextField { font.pixelSize: fontSize
-                id: cognitiveCoeff
-                validator: DoubleValidator {
-                    locale: "English"
-                    decimals: 4
+
+
+
+
+    Label {  wrapMode: Text.WordWrap
+                    id: secAlgoLabel
+                    anchors.left: algorithmChoice.left
+                    anchors.top: algorithmChoice.bottom
+                    y: sHei * 0.08
+                    color: "#ffffff"
+                    text: qsTr("Second Algorithm")
+                    font.bold: true
+                    font.pixelSize: fontSize
+                    visible: (numInstances.displayText == "2" || numInstances.displayText == "4")
                 }
-                x: sWid * 0.02
-                y: sHei * 0.18
-                width: parent.width * 0.25
-                height: sHei * 0.038
-                clip: true
-                color: "#000"
-                background: Rectangle
-                {
-                    color: "#DDD"
+
+
+    ComboBox {
+                    id: secondAlgo
+                    anchors.left: algorithmChoice.left
+                    anchors.top: secAlgoLabel.bottom
+                    opacity: 0.8
+                    width: algorithmChoice.width * 0.3
+                    clip: true
+                model: [ "Hill Climbing", "Random Search", "Elitist Hill Climbing", "Genetic Algorithm", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
+                "Fully Informed PSO"]
+                    currentIndex: 0
+                    visible: (numInstances.displayText == "2" || numInstances.displayText == "4")
                 }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
 
-                text: "1.0"
-            }
-
-            TextField { font.pixelSize: fontSize
-                id: socialCoeff
-                validator: DoubleValidator {
-                    locale: "English"
-                    decimals: 4
+    Label {  wrapMode: Text.WordWrap
+                    id: thirdAlgoLabel
+                    anchors.horizontalCenter: algorithmChoice.horizontalCenter
+                    anchors.top: secAlgoLabel.top
+                    width: algorithmChoice.width * 0.3
+                    color: "#ffffff"
+                    text: qsTr("Third Algorithm")
+                    font.bold: true
+                    font.pixelSize: fontSize
+                      visible: (numInstances.displayText == "4")
                 }
-                x: sWid * 0.02 + (parent.width * 0.35)
-                y: sHei * 0.18
-                width: parent.width * 0.25
-                height: sHei * 0.038
-                clip: true
-                color: "#000"
-                background: Rectangle
-                {
-                    color: "#DDD"
+
+
+    ComboBox {
+                    id: thirdAlgo
+                    anchors.horizontalCenter: algorithmChoice.horizontalCenter
+                    anchors.top: thirdAlgoLabel.bottom
+                    opacity: 0.8
+                    width: algorithmChoice.width * 0.3
+                    clip: true
+                model: [ "Hill Climbing", "Random Search", "Elitist Hill Climbing", "Genetic Algorithm", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
+                "Fully Informed PSO"]
+                    currentIndex: 0
+                    visible: (numInstances.displayText == "4")
                 }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
-                text: "1.0"
-            }
-
-            TextField { font.pixelSize: fontSize
-                id: inertia
-
-                validator: DoubleValidator {
-                    locale: "English"
-                    decimals: 4
+    Label {  wrapMode: Text.WordWrap
+                    id: fourthAlgoLabel
+                    anchors.right: algorithmChoice.right
+                    anchors.top: algorithmChoice.bottom
+                    width: algorithmChoice.width * 0.3
+                    y: sHei * 0.08
+                    color: "#ffffff"
+                    text: qsTr("Fourth Algorithm")
+                    font.bold: true
+                    font.pixelSize: fontSize
+                    visible: (numInstances.displayText == "4")
                 }
-                anchors.right: algorithmChoice.right
-                y: sHei * 0.18
-                width: parent.width * 0.25
-                height: sHei * 0.038
-                clip: true
-                color: "#000"
-                background: Rectangle
-                {
-                    color: "#DDD"
+
+
+    ComboBox {
+                    id: fourthAlgo
+                    anchors.right: fourthAlgoLabel.right
+                    anchors.top: thirdAlgo.top
+                    opacity: 0.8
+                    width: algorithmChoice.width * 0.3
+                    clip: true
+                model: [ "Hill Climbing", "Random Search", "Elitist Hill Climbing", "Genetic Algorithm", "Particle Swarm Optimization", "Conical PSO", "Guaranteed Convergence PSO",
+                "Fully Informed PSO"]
+                    currentIndex: 0
+                    visible: (numInstances.displayText == "4")
                 }
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
-                text: "1.0"
-
-            }
-
-            Label {  wrapMode: Text.WordWrap
-                id: cognitiveLabel
-                x: sWid * 0.02
-                y: sHei * 0.155
-                color: "#ffffff"
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
-                text: qsTr("Cognitive Coefficient")
-                font.pixelSize: fontSize
-                font.bold: true
-            }
-
-            Label {  wrapMode: Text.WordWrap
-                id: inertiaLabel
-                anchors.left: inertia.left
-                y: sHei * 0.155
-                color: "#ffffff"
-                text: qsTr("Inertia")
-                visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                          algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
-                font.pixelSize: fontSize
-                font.bold: true
-            }
-
-            Label {  wrapMode: Text.WordWrap
-                id: socialLabel1
-                x: sWid * 0.02 + (parent.width * 0.35)
-                y: sHei * 0.155
-                color: "#ffffff"
-                text: qsTr("Social Coefficient")
-                 visible: (algorithmChoice.displayText == "Fully Informed PSO" || algorithmChoice.displayText == "Conical PSO" ||
-                           algorithmChoice.displayText == "Guaranteed Convergence PSO" || algorithmChoice.displayText == "Particle Swarm Optimization") ? true : false
-               font.pixelSize: fontSize
-                font.bold: true
-            }
-            //
-            //
-            //
-            //BEGIN PSO SPECIFIC SECTION
-            //
-            Label {  wrapMode: Text.WordWrap
-                id: constrictLabel
-                anchors.left: cognitiveCoeff.left
-                anchors.top: inertia.bottom
-                color: "#ffffff"
-                text: qsTr("Constriction Coefficient")
-                visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
-                         || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
-               font.pixelSize: fontSize
-                font.bold: true
-            }
-
-            TextField { font.pixelSize: fontSize
-                id: constrictCoeff
-                validator: DoubleValidator {
-                    locale: "English"
-                    decimals: 4
-                }
-                anchors.left: constrictLabel.left
-                anchors.top: constrictLabel.bottom
-                width: parent.width * 0.25
-                clip: true
-                color: "#000"
-                background: Rectangle
-                {
-                    color: "#DDD"
-                }
-                visible: (algorithmChoice.displayText == "Conical PSO" || algorithmChoice.displayText == "Fully Informed PSO"
-                         || algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
-
-                text: "1.0"
-            }
-
-
-
-            //CPSO
-                        Label {  wrapMode: Text.WordWrap
-                            id: veloLabel
-                            x: sWid * 0.02 + (parent.width * 0.6)
-                            anchors.top: inertia.bottom
-                            anchors.left: socialCoeff.left
-                            color: "#ffffff"
-                            text: qsTr("Maximum Velocity")
-                             visible: (algorithmChoice.displayText == "Conical PSO") ? true : false
-                           font.pixelSize: fontSize
-                            font.bold: true
-            }
-            TextField { font.pixelSize: fontSize
-                            id: maxVelocity
-                            validator: DoubleValidator {
-                                locale: "English"
-                                decimals: 4
-                            }
-                            anchors.left: veloLabel.left
-                            anchors.top: veloLabel.bottom
-                            width: parent.width * 0.25
-                            clip: true
-                            color: "#000"
-                            background: Rectangle
-                            {
-                                color: "#DDD"
-                            }
-                            visible: (algorithmChoice.displayText == "Conical PSO") ? true : false
-
-                            text: "50.0"
-                        }
-
-
-
-        //ENDCPSO
-            //GCPSO
-                        Label {  wrapMode: Text.WordWrap
-                            id: successLabel
-                            anchors.top: inertia.bottom
-                            anchors.left: socialCoeff.left
-                            color: "#ffffff"
-                            text: qsTr("Success Count")
-                            visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
-                            font.pixelSize: fontSize
-                            font.bold: true
-            }
-            TextField { font.pixelSize: fontSize
-                            id: successCount
-                            validator: IntValidator{
-                                locale: "English"
-                            }
-                            anchors.left: successLabel.left
-                            anchors.top: successLabel.bottom
-                            width: parent.width * 0.25
-                            clip: true
-                            color: "#000"
-                            background: Rectangle
-                            {
-                                color: "#DDD"
-                            }
-                            visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
-
-                            text: "15"
-                        }
 
 
 
 
-                        Label {  wrapMode: Text.WordWrap
-                            id: failLabel
-                            anchors.top: inertia.bottom
-                            anchors.left: inertia.left
-                            color: "#ffffff"
-                            text: qsTr("Fail Count")
-                            visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
-                           font.pixelSize: fontSize
-                            font.bold: true
-            }
-            TextField { font.pixelSize: fontSize
-                            id: failCount
-                            validator: IntValidator {
-                                locale: "English"
-                            }
-                            anchors.left: failLabel.left
-                            anchors.top: failLabel.bottom
-                            width: parent.width * 0.25
-                            clip: true
-                            color: "#000"
-                            background: Rectangle
-                            {
-                                color: "#DDD"
-                            }
-                            visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO") ? true : false
-
-                            text: "5"
-                        }
 
 
-        //ENDGCPSO
-            //FIPS
-
-                        Label {  wrapMode: Text.WordWrap
-                            id: neighbourLabel
-                            anchors.top: inertia.bottom
-                            anchors.left: socialCoeff.left
-                            color: "#ffffff"
-                            text: qsTr("Neighbourhood Size")
-                            visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
-                            font.pixelSize: fontSize
-                            font.bold: true
-            }
-            TextField { font.pixelSize: fontSize
-                            id: neighbourSize
-                            validator: IntValidator{
-                                locale: "English"
-                            }
-                            anchors.left: neighbourLabel.left
-                            anchors.top: neighbourLabel.bottom
-                            width: parent.width * 0.25
-                            clip: true
-                            color: "#000"
-                            background: Rectangle
-                            {
-                                color: "#DDD"
-                            }
-                            visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
-
-                            text: "2"
-                        }
 
 
-        //ENDFIPS
-        //END PSO SPECIFIC SECTION
-        CheckBox {
-            id: showLinks
-            anchors.left: targetAcc.left
-            anchors.top: targetAcc.bottom
-            text: qsTr("")
-            scale: 1.3
-            visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
-        }
-
-            Label {  wrapMode: Text.WordWrap
-            id: showLinksLabel
-            anchors.left: showLinks.right
-    //x: 0.25 * sWid
-            anchors.verticalCenter: showLinks.verticalCenter
-            width: 0.094 * sWid
-            color: "#ffffff"
-            text: qsTr("Show Links")
-            font.pixelSize: fontSize
-            horizontalAlignment: Text.AlignLeft
-            font.bold: true
-            visible: (algorithmChoice.displayText == "Fully Informed PSO") ? true : false
-        }
-
-        CheckBox {
-            id: showPaths
-            x: 0.02 * sWid
-            anchors.top: targetAcc.bottom
-            text: qsTr("")
-            scale: 1.3
-        }
-
-            Label {  wrapMode: Text.WordWrap
-                id: showPathLabel
-                 anchors.left: showPaths.right
-            anchors.verticalCenter: showLinks.verticalCenter
-                 width: 0.094 * sWid
-                color: "#ffffff"
-                text: qsTr("Show Paths")
-                horizontalAlignment: Text.AlignLeft
-                font.pixelSize: fontSize
-            font.bold: true
-        }
 
         SpinBox {
             id: maxIterations
-            anchors.left: cognitiveCoeff.left
-            anchors.top: accuracyLabel.bottom
-            width: algorithmChoice.width * 0.45
+            anchors.left: algorithmLabel.left
+            anchors.top: iterationLabel.bottom
+            width: algorithmChoice.width
             height: sHei * 0.05
             opacity: 0.7
             from: 1
-            value: 1
+            value: 2
             editable: true
             to: 2147483647
         }
 
-        SpinBox {
-            id: targetAcc
-            anchors.right: inertia.right
-            anchors.top: accuracyLabel.bottom
-            width: algorithmChoice.width * 0.45
-            height: sHei * 0.05
-            opacity: 0.7
-            from: 1
-            value: 1
-            editable: true
-            to: 100
-        }
 
         Label {  wrapMode: Text.WordWrap
             id: iterationLabel
-            anchors.left: cognitiveCoeff.left
+            anchors.left: maxIterations.left
             y: sHei * 0.28
             color: "#ffffff"
             text: qsTr("Max Iterations")
@@ -420,16 +181,6 @@ Page1Form {
             font.bold: true
          }
 
-        Label {  wrapMode: Text.WordWrap
-            id: accuracyLabel
-            anchors.left: targetAcc.left
-            y: sHei * 0.28
-            color: "#ffffff"
-            text: qsTr("Accuracy cutoff (%)")
-            horizontalAlignment: Text.AlignLeft
-            font.pixelSize: fontSize
-            font.bold: true
-        }
 }
 
 Label {  wrapMode: Text.WordWrap
@@ -467,7 +218,7 @@ SpinBox {
     editable: true
     from: 1
     to: 2147483647
-    value: 1
+    value: 2
 }
 
 Label {  wrapMode: Text.WordWrap
@@ -678,45 +429,30 @@ Label {  wrapMode: Text.WordWrap
         height: sHei * 0.175
 
         Label {  wrapMode: Text.WordWrap
-            id: startPosLabel
+            id: instancesLabel
             x: 0
-            y: 0
+            y: 20
             color: "#ffffff"
-            text: qsTr("Initialization")
+            text: qsTr("Num. Optimizers")
             font.pixelSize: fontSize
             font.bold: true
         }
 
-        RadioButton {
-            id: randomPosbutton
-            x: 0
-            y: parent.height * 0.33
 
-            checked: true
-            Text {
-                x: 48
-                y: 11
-                color: "#ffffff"
-                text: qsTr("Random")
-                font.pixelSize: fontSize
-                font.bold: true
-            }
-        }
+    ComboBox {
+        id: numInstances
+        anchors.top: instancesLabel.bottom
+        anchors.left: instancesLabel.left
 
-        RadioButton {
-            id: userPosbutton
-            x: 0
-            y: parent.height * 0.66
-            Text {
-                x: 48
-                y: 11
-                color: "#ffffff"
-                text: qsTr("Specified")
-                font.pixelSize: fontSize
-                font.bold: true
-            }
-        }
+        model: [ 1, 2, 4 ]
 
+        width: objectiveChoice.width /3
+        height: objectiveChoice.height
+        opacity: 0.7
+
+        font.pixelSize: fontSize+2  
+
+    }
 
     }
 
@@ -901,161 +637,447 @@ GroupBox{
     Label {  wrapMode: Text.WordWrap
         id: resolutionLabel
         anchors.left: resolutionChoice.left
-        y: parent.height * 0.2
+        anchors.top: objectiveChoice.bottom
         color: "#ffffff"
         text: qsTr("Resolution")
         font.bold: true
-        font.pixelSize: fontSize
-    }
-
-    Label {  wrapMode: Text.WordWrap
-        id: instancesLabel
-        anchors.left: numInstances.left
-        y: parent.height * 0.2
-        color: "#ffffff"
-        text: qsTr("Number of simultaneous instances")
-        font.bold: true
-        font.pixelSize: fontSize
+        font.pixelSize: fontSize+2
     }
 
     ComboBox {
         id: resolutionChoice
-        x: parent.width * 0.1
-        y: parent.height * 0.25
-        width: 0.12 * sWid
-        height: 0.037 * sHei
+        x: parent.width * 0.05
+        anchors.top: resolutionLabel.bottom
+
+        width: objectiveChoice.width
+        height: objectiveChoice.height
         transformOrigin: Item.Left
         opacity: 0.8
         clip: true
-        model: [ "640x480", "1024x789", "1920x1080" ]
+        model: [ "640x480", "1024x789", "1366x768", "1920x1080" ]
         currentIndex: 0
         font.pixelSize: fontSize
     }
 
 
 
-    SpinBox {
-        id: numInstances
-        x: parent.width * 0.5
-        y: parent.height * 0.25
-        width: 0.12 * sWid
-        height: 0.037 * sHei
-        opacity: 0.7
-        editable: true
-        from: 1
-        to: 4
-        value: 1
-        font.pixelSize: fontSize
 
-    }
 
-    Slider {
-        id: renderSlider
-        x: 0.1 * parent.width
-        y: 0.5* parent.height
-        width: 0.75 * parent.width
-        height: 0.2 * parent.height
-        spacing: 3
-        stepSize: 1
-        to: 120
-        from: 0
-        snapMode: Slider.SnapAlways
-        value: 60
-    }
 
-    Label {  wrapMode: Text.WordWrap
-        id: renderLabel
-        anchors.horizontalCenter: renderSlider.horizontalCenter
-        anchors.bottom: renderValLabel.top
+   Label {
+        id: objectiveLabel
+        anchors.left: objectiveChoice.left
+        y: 0.05 * Screen.desktopAvailableHeight
         color: "#ffffff"
-        text: qsTr("Render Speed - ")
-        font.pixelSize: fontSize
+        text: qsTr("Objective Function")
         font.bold: true
+        font.pixelSize: 15
     }
 
+
+ComboBox {
+        id: objectiveChoice
+        anchors.top: objectiveLabel.bottom
+        anchors.left: resolutionChoice.left
+        width: 0.9 * parent.width
+        height: 0.1 * Screen.desktopAvailablHeight
+
+        transformOrigin: Item.Left
+        opacity: 0.8
+        clip: true
+        model: [ "Ackley", "Alpine", "Beale", "Bohachevsky", "EggHolder", "GoldSteinPrice", "Griewank", "Levy13",
+        "Michalewicz", "Pathological", "Quadric", "Quartic", "Rana", "Rastrigin", "Rosenbrock", "Saddle", "Salomon", "Schwefel22",
+         "Schwefel26", "Sin", "SixHumpCamelBack", "SkewRastrigin", "Spherical", "Step", "Weierstrass", "Zakharov"]
+        currentIndex: 0
+        font.pixelSize: 20
+        font.bold: true
+        font.family: "Helvetica"
+
+    }
+
+
+
+
+                TextField { font.pixelSize: fontSize
+                    id: cognitiveCoeff
+                    validator: DoubleValidator {
+                        locale: "English"
+                        decimals: 4
+                    }
+                    anchors.left: resolutionChoice.left
+                    anchors.top: cognitiveLabel.bottom
+                    width: parent.width * 0.25
+                    height: sHei * 0.038
+                    clip: true
+                    color: "#000"
+                    background: Rectangle
+                    {
+                        color: "#DDD"
+                    }
+                    visible: (algorithmChoice.displayText == "Conical PSO" ||
+                              algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                              algorithmChoice.displayText == "Particle Swarm Optimization" ||
+                              secondAlgo.displayText == "Conical PSO" ||
+                              secondAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              secondAlgo.displayText == "Particle Swarm Optimization" ||
+                              thirdAlgo.displayText == "Conical PSO" ||
+                              thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              thirdAlgo.displayText == "Particle Swarm Optimization" ||
+                              fourthAlgo.displayText == "Conical PSO" ||
+                              fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              fourthAlgo.displayText == "Particle Swarm Optimization"
+                                                ) ? true : false
+
+                    text: "0.2"
+                }
+
+                TextField { font.pixelSize: fontSize
+                    id: socialCoeff
+                    validator: DoubleValidator {
+                        locale: "English"
+                        decimals: 4
+                    }
+                    anchors.top: socialLabel.bottom
+                    anchors.right: resolutionChoice.right
+                    width: parent.width * 0.25
+                    height: sHei * 0.038
+                    clip: true
+                    color: "#000"
+                    background: Rectangle
+                    {
+                        color: "#DDD"
+                    }
+                    visible: (algorithmChoice.displayText == "Conical PSO" ||
+                              algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                              algorithmChoice.displayText == "Particle Swarm Optimization" ||
+                              secondAlgo.displayText == "Conical PSO" ||
+                              secondAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              secondAlgo.displayText == "Particle Swarm Optimization" ||
+                              thirdAlgo.displayText == "Conical PSO" ||
+                              thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              thirdAlgo.displayText == "Particle Swarm Optimization" ||
+                              fourthAlgo.displayText == "Conical PSO" ||
+                              fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              fourthAlgo.displayText == "Particle Swarm Optimization"
+                                                ) ? true : false
+                    text: "0.2"
+                }
+
+
+                Label {  wrapMode: Text.WordWrap
+                    id: cognitiveLabel
+                    anchors.left: resolutionChoice.left
+                    anchors.top: resolutionChoice.bottom
+                    color: "#ffffff"
+                    visible: (algorithmChoice.displayText == "Conical PSO" ||
+                              algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                              algorithmChoice.displayText == "Particle Swarm Optimization" ||
+                              secondAlgo.displayText == "Conical PSO" ||
+                              secondAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              secondAlgo.displayText == "Particle Swarm Optimization" ||
+                              thirdAlgo.displayText == "Conical PSO" ||
+                              thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              thirdAlgo.displayText == "Particle Swarm Optimization" ||
+                              fourthAlgo.displayText == "Conical PSO" ||
+                              fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              fourthAlgo.displayText == "Particle Swarm Optimization"
+                                                ) ? true : false
+                    text: qsTr("Cognitive Coefficient")
+                    font.pixelSize: fontSize
+                    font.bold: true
+                }
+
+                Label {  wrapMode: Text.WordWrap
+                    id: socialLabel
+                    anchors.right: resolutionChoice.right
+                    anchors.top: resolutionChoice.bottom
+                    color: "#ffffff"
+
+                    text: qsTr("Social Coefficient")
+                      visible: (algorithmChoice.displayText == "Conical PSO" ||
+                                algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                                algorithmChoice.displayText == "Particle Swarm Optimization" ||
+                                secondAlgo.displayText == "Conical PSO" ||
+                                secondAlgo.displayText == "Guaranteed Convergence PSO" ||
+                                secondAlgo.displayText == "Particle Swarm Optimization" ||
+                                thirdAlgo.displayText == "Conical PSO" ||
+                                thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
+                                thirdAlgo.displayText == "Particle Swarm Optimization" ||
+                                fourthAlgo.displayText == "Conical PSO" ||
+                                fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
+                                fourthAlgo.displayText == "Particle Swarm Optimization"
+                                                  ) ? true : false
+                   font.pixelSize: fontSize
+                    font.bold: true
+                }
+                //
+                //
+                //
+                //BEGIN PSO SPECIFIC SECTION
+                //
+                Label {  wrapMode: Text.WordWrap
+                    id: inertiaLabel
+                    anchors.left: cognitiveCoeff.left
+                    anchors.top: socialCoeff.bottom
+                    color: "#ffffff"
+                    text: qsTr("Inertia Weight")
+                                visible: (algorithmChoice.displayText == "Conical PSO" ||
+                                          algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                                          algorithmChoice.displayText == "Particle Swarm Optimization" ||
+                                          secondAlgo.displayText == "Conical PSO" ||
+                                          secondAlgo.displayText == "Guaranteed Convergence PSO" ||
+                                          secondAlgo.displayText == "Particle Swarm Optimization" ||
+                                          thirdAlgo.displayText == "Conical PSO" ||
+                                          thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
+                                          thirdAlgo.displayText == "Particle Swarm Optimization" ||
+                                          fourthAlgo.displayText == "Conical PSO" ||
+                                          fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
+                                          fourthAlgo.displayText == "Particle Swarm Optimization"
+                                                            ) ? true : false
+                                                                   font.pixelSize: fontSize
+                    font.bold: true
+                }
+
+                TextField { font.pixelSize: fontSize
+                    id: inertiaWeight
+                    validator: DoubleValidator {
+                        locale: "English"
+                        decimals: 4
+                    }
+                    anchors.left: inertiaLabel.left
+                    anchors.top: inertiaLabel.bottom
+                    width: parent.width * 0.25
+                    clip: true
+                    color: "#000"
+                    background: Rectangle
+                    {
+                        color: "#DDD"
+                    }
+                    visible: (algorithmChoice.displayText == "Conical PSO" ||
+                              algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                              algorithmChoice.displayText == "Particle Swarm Optimization" ||
+                              (secondAlgo.visible && (secondAlgo.displayText == "Conical PSO" ||
+                              secondAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              secondAlgo.displayText == "Particle Swarm Optimization")) ||
+                              (thirdAlgo.visible && (
+                              thirdAlgo.displayText == "Conical PSO" ||
+                              thirdAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              thirdAlgo.displayText == "Particle Swarm Optimization")) ||
+                              (fourthAlgo.visible && (
+                              fourthAlgo.displayText == "Conical PSO" ||
+                              fourthAlgo.displayText == "Guaranteed Convergence PSO" ||
+                              fourthAlgo.displayText == "Particle Swarm Optimization"
+                                                ))) ? true : false
+                    text: "0.8"
+                }
+
+
+
+
+
+
+
+
+    //FIPS PLS
     Label {  wrapMode: Text.WordWrap
-        id: ramLabel
-        anchors.horizontalCenter: ramSlider.horizontalCenter
-        anchors.bottom: ramValLabel.top
-        anchors.top: renderSlider.bottom
-        y: 274
-        color: "#ffffff"
-        text: qsTr("Max Ram Use - ")
-        font.pixelSize: fontSize
-        font.bold: true
-    }
+                    id: constrictLabel
+                    anchors.left: cognitiveCoeff.left
+                    anchors.top: neighbourLabel.top
+                    color: "#ffffff"
+                    text: qsTr("Constriction Coefficient")
+                    visible: (algorithmChoice.displayText == "Fully Informed PSO" ||
+                               (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
 
-    Slider {
-        id: ramSlider
-        x: 0.1 * parent.width
-        y: 0.7 * parent.height
-        width: 0.75 * parent.width
-        height: 0.2 * parent.height
-        stepSize: 1
-        snapMode: Slider.SnapAlways
-        to: 2048
-        from: 0
-        value: 512
+                   font.pixelSize: fontSize
+                    font.bold: true
+                }
 
-    }
+                TextField { font.pixelSize: fontSize
+                    id: constrictCoeff
+                    validator: DoubleValidator {
+                        locale: "English"
+                        decimals: 4
+                    }
+                    anchors.left: inertiaLabel.left
+                    anchors.top: constrictLabel.bottom
+                    width: parent.width * 0.25
+                    clip: true
+                    color: "#000"
+                    background: Rectangle
+                    {
+                        color: "#DDD"
+                    }
+                    visible: (algorithmChoice.displayText == "Fully Informed PSO" ||
+                               (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
 
-    Label {  wrapMode: Text.WordWrap
-        id: renderValLabel
-        anchors.horizontalCenter: renderSlider.horizontalCenter
-        anchors.bottom: renderSlider.top
-        color: "#ffffff"
-        text: qsTr(renderSlider.value.toString())
-        font.pixelSize: fontSize
-        font.bold: true
 
-    }
+                    text: "0.8"
+                }
+                ///
 
-    Label {  wrapMode: Text.WordWrap
-        id: ramValLabel
-        anchors.horizontalCenter: ramSlider.horizontalCenter
-        anchors.bottom: ramSlider.top
-        color: "#ffffff"
-        text: qsTr(ramSlider.value.toString())
-        font.pixelSize: fontSize
-        font.bold: true
+                //CPSO
+                            Label {  wrapMode: Text.WordWrap
+                                id: veloLabel
+                                x: sWid * 0.02 + (parent.width * 0.6)
+                                anchors.top: socialLabel.top
+                                anchors.left: maxVelocity.left
+                                color: "#ffffff"
+                                text: qsTr("Maximum Velocity")
+                    visible: (algorithmChoice.displayText == "Conical PSO" ||
+                               (secondAlgo.displayText == "Conical PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Conical PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Conical PSO" && fourthAlgo.visible)) ? true : false
+                               font.pixelSize: fontSize
+                                font.bold: true
+                }
+                TextField { font.pixelSize: fontSize
+                                id: maxVelocity
+                                validator: DoubleValidator {
+                                    locale: "English"
+                                    decimals: 4
+                                }
+                                anchors.horizontalCenter: resolutionChoice.horizontalCenter
 
-    }
+                                anchors.top: veloLabel.bottom
+                                width: parent.width * 0.25
+                                clip: true
+                                color: "#000"
+                                background: Rectangle
+                                {
+                                    color: "#DDD"
+                                }
+                    visible: (algorithmChoice.displayText == "Conical PSO" ||
+                               (secondAlgo.displayText == "Conical PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Conical PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Conical PSO" && fourthAlgo.visible)) ? true : false
+                                text: "1.5"
+                            }
+
+
+
+                            Label {  wrapMode: Text.WordWrap
+                                id: successLabel
+                                anchors.top: socialCoeff.bottom
+                                anchors.left: socialCoeff.left
+                                color: "#ffffff"
+                                text: qsTr("Success Count")
+                    visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
+                               font.pixelSize: fontSize
+                                font.bold: true
+                }
+                TextField { font.pixelSize: fontSize
+                                id: successCount
+                                validator: IntValidator{
+                                    locale: "English"
+                                }
+                                anchors.left: successLabel.left
+                                anchors.top: successLabel.bottom
+                                width: parent.width * 0.25
+                                clip: true
+                                color: "#000"
+                                background: Rectangle
+                                {
+                                    color: "#DDD"
+                                }
+                    visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
+                                text: "15"
+                            }
+
+
+
+
+                            Label {  wrapMode: Text.WordWrap
+                                id: failLabel
+                                anchors.top: socialCoeff.bottom
+                                anchors.left: failCount.left
+                                color: "#ffffff"
+                                text: qsTr("Fail Count")
+                    visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
+                               font.pixelSize: fontSize
+                                font.bold: true
+                }
+                TextField { font.pixelSize: fontSize
+                                id: failCount
+                                validator: IntValidator {
+                                    locale: "English"
+                                }
+                                anchors.horizontalCenter: resolutionChoice.horizontalCenter
+                                anchors.top: failLabel.bottom
+                                width: parent.width * 0.25
+                                clip: true
+                                color: "#000"
+                                background: Rectangle
+                                {
+                                    color: "#DDD"
+                                }
+                    visible: (algorithmChoice.displayText == "Guaranteed Convergence PSO" ||
+                               (secondAlgo.displayText == "Guaranteed Convergence PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Guaranteed Convergence PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Guaranteed Convergence PSO" && fourthAlgo.visible)) ? true : false
+                                text: "5"
+                            }
+
+
+            //ENDGCPSO
+                //FIPS
+
+                            Label {  wrapMode: Text.WordWrap
+                                id: neighbourLabel
+                                anchors.top: failCount.bottom
+                                anchors.left: socialCoeff.left
+                                color: "#ffffff"
+                                text: qsTr("Neighbourhood Size")
+                    visible: (algorithmChoice.displayText == "Fully Informed PSO" ||
+                               (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
+                               font.pixelSize: fontSize
+                                font.bold: true
+                }
+                TextField { font.pixelSize: fontSize
+                                id: neighbourSize
+                                validator: IntValidator{
+                                    locale: "English"
+                                }
+                                anchors.left: neighbourLabel.left
+                                anchors.top: neighbourLabel.bottom
+                                width: parent.width * 0.25
+                                clip: true
+                                color: "#000"
+                                background: Rectangle
+                                {
+                                    color: "#DDD"
+                                }
+                    visible: (algorithmChoice.displayText == "Fully Informed PSO" ||
+                               (secondAlgo.displayText == "Fully Informed PSO" && secondAlgo.visible) ||
+                               (thirdAlgo.displayText == "Fully Informed PSO" && thirdAlgo.visible) ||
+                               (fourthAlgo.displayText == "Fully Informed PSO" && fourthAlgo.visible)) ? true : false
+                                text: "20"
+                            }
+
+
+            //ENDFIPS
+            //END PSO SPECIFIC SECTION
+
 }
 
-/*
-Button {
-    id: positionFile
-    x: 44
-    y: 395
-    width: 157
-    height: 40
-    text: qsTr("Positions Text File")
-    opacity: 0.7
-    onClicked: fileChooser.visible = true;
-    visible: userPosbutton.checked
-}
 
-TextField { font.pixelSize: fontSize
-    id: positionText
-    x: 217
-    y: 395
-    width: 398
-    height: 40
-    color: "#ffffff"
-    font.pixelSize: fontSize
-    font.bold: true
-    visible: userPosbutton.checked
-}
 
-FileDialog {
-   id: fileChooser
-   title: "Please choose a file"
-   folder: shortcuts.home
-   onAccepted: {
-       positionText.text = ""+fileChooser.fileUrls;
-   }
-   visible: false
-}*/
+
+
 
 
 
@@ -1069,45 +1091,57 @@ FileDialog {
         text: qsTr("Optimizer On")
 
         onClicked: {
+            if(setPkg.readyForNext())
+            {
+
                      setPkg.lock(true);
+                     setPkg.readyNext(false);
                      setPkg.change(true);
-                     setPkg.generateSettingsGeneral(swarmSize.value);
-                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
+                     setPkg.generateSettingsGeneral(swarmSize.value, parseInt(numInstances.displayText));
+                     setPkg.generateSettingsDomain( objectiveChoice.currentText, (oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
                                            parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
-                     setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value, showLinks.checked,
-                                           showPaths.checked,  ramSlider.value);
-                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value,
-                                            parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
+                     setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value);
+                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  secondAlgo.currentText, thirdAlgo.currentText, fourthAlgo.currentText, maxIterations.value, parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text),
+                                            parseFloat(constrictCoeff.text), parseFloat(inertiaWeight.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
                      setPkg.lock(false);
+             }
         }
 
     }
 
 
-    Button {
-        id: updateButton
+    Slider {
+        id: renderSlider
         x: sWid * 0.40
         y: sHei * 0.85
         width: sWid * 0.20
-        height: sHei * 0.05
-        text: qsTr("Update Parameters")
-
-        font.family: "Garamond"
-        font.pixelSize: 20
-        onClicked: {
-          /*           setPkg.lock(true);
-                     setPkg.change(true);
-                     setPkg.generateSettingsGeneral( swarmSize.value);
-                     setPkg.generateSettingsDomain( page2.objectiveChoice.currentText, ( oneD_button.checked ? 1 : 2), parseFloat( x1_min.text), parseFloat( x1_max.text), parseFloat( x2_min.text),
-                                           parseFloat( x2_max.text), parseFloat( transformationA.text), parseFloat( transformationB.text), parseFloat( transformationC.text), parseFloat( transformationD.text ));
-                     setPkg.generateSettingsGraphics( resolutionChoice.currentText,  renderSlider.value, showLinks.checked,
-                                           showPaths.checked,  ramSlider.value);
-                     setPkg.generateSettingsOptimizer(algorithmChoice.currentText,  userPosbutton.checked, "Placeholder", parseFloat(inertia.text), parseFloat(cognitiveCoeff.text), parseFloat(socialCoeff.text), maxIterations.value, targetAcc.value,
-                                            parseFloat(constrictCoeff.text), parseFloat(maxVelocity.text), parseInt(successCount.text), parseInt(failCount.text), parseInt(neighbourSize.text));
-                     setPkg.lock(false);
-
-            */        }
-        opacity: 0.7
+        spacing: 1
+        stepSize: 1
+        to: 300
+        from: 1
+        snapMode: Slider.SnapAlways
+        value: 60
     }
 
+    Label {  wrapMode: Text.WordWrap
+            id: renderValLabel
+            anchors.horizontalCenter: renderSlider.horizontalCenter
+            anchors.bottom: renderSlider.top
+            color: "#ffffff"
+            text: qsTr(renderSlider.value.toString())
+            font.pixelSize: 15
+            font.bold: true
+
+        }
+
+
+    Label {  wrapMode: Text.WordWrap
+            id: renderLabel
+            anchors.horizontalCenter: renderSlider.horizontalCenter
+            anchors.bottom: renderValLabel.top
+            color: "#ffffff"
+            text: qsTr("Render Speed - ")
+            font.pixelSize: 15
+            font.bold: true
+        }
 }

@@ -35,13 +35,13 @@ public:
         yShift = y;
         vShift = v;
 
-        defaultBounds[0]=-1.0;
-        defaultBounds[1]=1.0;
-        defaultBounds[2]=-1.0;
-        defaultBounds[3]=1.0;
+        defaultBounds[0]=-1.0 + x;
+        defaultBounds[1]=1.0 + x;
+        defaultBounds[2]=-1.0 + y;
+        defaultBounds[3]=1.0 + y;
     }
     ///The static function that returns the target output for the given input
-   virtual double functionInput(double * parameters)=0;
+   virtual double functionInput(double parameters[])=0;
 
    void transformInput(double * input)
    {
@@ -53,6 +53,17 @@ public:
        input[1] += yShift;
 
    }
+
+    double transformX1(double x1)
+    {
+        return x1 + xShift;
+    }
+
+    double transformX2(double x2)
+    {
+        if(x2 == DBL_MAX) return 0;
+        return x2 + yShift;
+    }
 
     double transformOutput(double output){
         return (output + vShift)*scale;

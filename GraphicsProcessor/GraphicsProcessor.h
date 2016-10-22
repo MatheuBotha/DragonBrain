@@ -1,64 +1,66 @@
 //
-// Created by matheu on 9/7/16.
+// Created by matheu on 2016/10/04.
 //
 
-#ifndef DRAGONBRAIN_GRAPHICSPROCESSOR_H
-#define DRAGONBRAIN_GRAPHICSPROCESSOR_H
+#ifndef SWARMVIZ_GRAPHICSPROCESSOR_H
+#define SWARMVIZ_GRAPHICSPROCESSOR_H
 
-#include "GraphicsEngine/Window.h"
-#include "GraphicsEngine/GLSLProgram.h"
-#include "GraphicsEngine/Camera2D.h"
-#include "GraphicsEngine/InputManager.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include "Engine/Window.h"
+#include "Engine/GLSLProgram.h"
+#include "../OPT/GenOPT/src/ObjectiveFunction.h"
+#include "../SettingsPackage/src/problemdomainsettingspackage.h"
+#include "../SnapshotManager/SnapshotManager.h"
+#include "Engine/ParticleSystem.h"
+#include "Engine/Camera.h"
+#include "Engine/Timer.h"
 
-#include "LandscapeEngine/Landscape.h"
 
-enum class RunState {
-    PLAY,
-    EXIT
-};
+class GraphicsProcessor {
 
-class GraphicsProcessor
-{
 public:
-    GraphicsProcessor();
+    GraphicsProcessor(ProblemDomainSettingsPackage pdsp, SnapshotManager** snapshotManagers,
+                      int width, int height, unsigned int animationSpeed, int numInstances);
     ~GraphicsProcessor();
-
-    /// Runs the game
     void run();
 
+    void setObjective(ObjectiveFunction* objective);
+    void setBounds(double* boundaries);
+
+
+
+protected:
 private:
-    /// Initializes the core systems
-    void initSystems();
+    int screenWidth;
+    int screenHeight;
+    Window window;
+    Camera* camera;
+    GLfloat cameraYaw;
+    GLfloat cameraPitch;
+    GLSLProgram shaderProgram;
+    GLSLProgram particleShaderProgram;
+    GLSLProgram sphereShaderProgram;
+    GLSLProgram boundingBoxShaderProgram;
+    GLSLProgram skyboxShadingProgram;
+    GLSLProgram textShadingProgram;
+    Timer timer;
+    SDL_Event event;
 
-    /// Initializes the landscape
-    void initLandscape();
+    ProblemDomainSettingsPackage pdsp;
+    SnapshotManager** snapshotManagers;
+    ObjectiveFunction* objective;
+    double* boundaries;
 
-    /// Initializes the shaders
-    void initShaders();
+    ParticleSystem** particleSystems;
+    unsigned int animationSpeed;
 
-    /// Main game loop for the program
-    void loop();
+    bool isFocused;
+    int numInstances;
+    glm::vec3** instanceLocations;
 
-    /// Handles input processing
-    void processInput();
-
-    /// Renders the game
-    void draw();
-
-    /// Member Variables
-    GraphicsEngine::Window _window; ///< The game window
-
-    GraphicsEngine::GLSLProgram _textureProgram; ///< The shader program
-
-    GraphicsEngine::InputManager _inputManager; ///< Handles input
-
-    GraphicsEngine::Camera2D _camera; ///< Main Camera
-
-    int _screenWidth, _screenHeight, _fps;
-
-    RunState _runState;
-
-    Landscape* _landscape;
+    float currentFPS;
+    unsigned int updateFPS;
 };
 
-#endif //DRAGONBRAIN_GRAPHICSPROCESSOR_H
+
+#endif //SWARMVIZ_GRAPHICSPROCESSOR_H

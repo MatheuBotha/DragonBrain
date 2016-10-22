@@ -5,9 +5,10 @@
 #include "Schwefel26Objective.h"
 double Schwefel26Objective::functionInput(double *parameters){
     double result;
-    transformInput(parameters);
     double x1 = parameters[0];
     double x2 = parameters[1];
+    x1 = transformX1(x1);
+    x2 = transformX2(x2);
 
     result = -((x1*sin(sqrt(abs(x1))))+(x2*sin(sqrt(abs(x2)))));
 

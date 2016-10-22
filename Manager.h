@@ -54,15 +54,21 @@
 #include "OPT/GenOPT/src/WeierstrassObjective.h"
 #include "OPT/GenOPT/src/ZakharovObjective.h"
 #include "OPT/GenOPT/src/AckleyObjective.h"
+#include "GraphicsProcessor/GraphicsProcessor.h"
 
 
 class Manager {
 private:
     SettingsPackage* setPkg;
-    SnapshotManager* snapMan;
+    SnapshotManager** snapMan;
     ObjectiveFunction* objective;
-    OPT_Process* optimizer;
+    OPT_Process** optimizer;
     std::thread* GUI_Thread;
+    std::thread** optThreads;
+    GraphicsProcessor* graphicsProcessor;
+    double *bounds;
+
+    static void optimizeInstance(void *, int i);
 public:
 
     ///Constructor for the manager objects
@@ -76,6 +82,9 @@ public:
 
     void initializeOptimizer();
     void optimize();
+
+    void initializeGraphicsProcessor();
+    void visualize();
     /*
      * This method creates a new snapshot manager class per request.
      * */
@@ -96,6 +105,10 @@ public:
      * The created graphics pipeline relates directly to a specific graphical pipline
      * and this pipeline provides optimiser services.
      * */
+
+    void waitForOpts();
+
+    void cleanMemory();
 };
 
 
