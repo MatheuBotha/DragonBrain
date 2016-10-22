@@ -109,23 +109,25 @@ TEST(pso_check,test_sin)
 
 TEST(CPSO_check,test_sin)
 {
-    /*
+    double s[2]={0.5,0.5};
     double bounds[4]={-10,10,-10,10};
     int maxIteration = 20;
-    int swarmSize = 1000;
-    ObjectiveFunction *obj1 = new SinObjective();
-    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2);
-    OPT_Process *opt1 = new CPSO(obj1, snap1, false,0.2,50,bounds);
-    float best = -1000;
+    int swarmSize = 10;
+    ObjectiveFunction *obj1 = new AckleyObjective(1,0,0,0);
+    SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
+    OPT_Process *opt1 = new CPSO(obj1, snap1,true,5,1.2,bounds,5,5);
+    double best = -1000;
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
-        best = opt1->getBestSolution()->getPersonalBest();
+        best = opt1->getIdeal()->getPersonalBest();
+        cout<<"GBEST: "<<best<<endl;
+        cout<<"BASELINE: "<<obj1->functionInput(s)<<endl;
+
     }
     EXPECT_GT(best,-1000);
     delete obj1;
     delete snap1;
     delete opt1;
-     */
 }
 
 TEST(fips_check,test_sin)
