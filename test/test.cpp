@@ -42,11 +42,11 @@ TEST(basic_check, test_SinHill) {
 
     double s[2]={0,0};
     double bounds[4]={-10,10,-10,10};
-    int maxIteration = 100;
-    int swarmSize = 100;
-    ObjectiveFunction *obj1 = new AckleyObjective(-10,10,-10,10);
+    int maxIteration = 20;
+    int swarmSize = 10;
+    ObjectiveFunction *obj1 = new AckleyObjective(1,0,0,0);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
-    OPT_Process *opt1 = new HillClimber(obj1, snap1, false,bounds);
+    OPT_Process *opt1 = new HillClimber(obj1, snap1, true,bounds);
     double best = -1000;
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
@@ -85,19 +85,20 @@ TEST(basic_check, test_OptimalSin) {
 
 TEST(pso_check,test_sin)
 {
-    double s[2]={0,0};
-    double bounds[4]={-100,100,-100,100};
+    double s[2]={0.5,0.5};
+    double bounds[4]={-10,10,-10,10};
     int maxIteration = 20;
     int swarmSize = 10;
-    ObjectiveFunction *obj1 = new AckleyObjective(-10,10,-10,10);
+    ObjectiveFunction *obj1 = new AckleyObjective(1,0,0,0);
     SnapshotManager *snap1 = new SnapshotManager(maxIteration, swarmSize,2,bounds);
-    OPT_Process *opt1 = new PSO(obj1, snap1, false,bounds,0.9,0.9);
+    OPT_Process *opt1 = new PSO(obj1, snap1, true,bounds,0.2,1.2);
     double best = -1000;
     for(int i=0;i<maxIteration;i++){
         opt1->iterate();
         best = opt1->getIdeal()->getPersonalBest();
         cout<<"GBEST: "<<best<<endl;
         cout<<"BASELINE: "<<obj1->functionInput(s)<<endl;
+
     }
    EXPECT_GT(best,-1000);
     delete obj1;

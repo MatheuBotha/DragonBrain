@@ -35,7 +35,7 @@ void PSO::updateVelocity(Particle *particle) {
     double bestPos[2], currentPos[2], gbestPos[2];
     particle->getPersonalBestPosition(bestPos);
     particle->getPositionArray(currentPos);
-    ideal->getPersonalBestPosition(gbestPos);
+
 
     for(int i = 0; i < 2; ++i) {
         r1 = getRandomNumberMT();
@@ -43,7 +43,7 @@ void PSO::updateVelocity(Particle *particle) {
         inertiaComp = particle->getVelocity(i);
 
         cogComp = (r1 * cog) * (bestPos[i] - currentPos[i]);
-        socComp = (r2 * soc) * (gbestPos[i] - currentPos[i]);
+        socComp = (r2 * soc) * (ideal->getPositionArrayPointer()[i] - currentPos[i]);
 
         particle->setVelocity( inertiaComp+cogComp+socComp, i);
     }
@@ -130,6 +130,7 @@ void PSO::iterate() {
 
         if (tmpFit <= swarm[i]->getPersonalBest()) {
             swarm[i]->setPersonalBest(tmpFit);
+            swarm[i]->setPersonalBestPosition(swarm[i]->getPositionArrayPointer());
         }
 
         if ((ideal == nullptr) ||
