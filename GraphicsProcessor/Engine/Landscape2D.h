@@ -57,6 +57,8 @@ private:
     double zMax;
 
     glm::mat4 model;
+
+    const unsigned int N = 1200;
 };
 
 

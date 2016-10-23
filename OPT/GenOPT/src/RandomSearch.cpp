@@ -14,7 +14,7 @@ void RandomSearch::iterate() {
     int swarmSize;
 
     last = snapshotManager->getLast();
-    ideal = nullptr;
+    //ideal = nullptr;
     newIteration = new Snapshot(last);
     if(printer){
         cout << "NEW ITERATION\n";
@@ -23,16 +23,6 @@ void RandomSearch::iterate() {
     swarm = newIteration->getSwarm();
 
     swarmSize = newIteration->getSwarmSize();
-
-    //Get best particle
-    Particle * elite = swarm[0];
-    for(int j=0; j<swarmSize; j++) {
-        if(swarm[j]->getFitnessValue() < elite->getFitnessValue()){
-            elite = swarm[j];
-        }
-    }
-    elite->setFitnessValue(objectiveFunction->functionInput(elite->getPositionArrayPointer()));
-    elite = new Particle(elite);
 
 
     //Mutate all the particles to be completely different
@@ -53,10 +43,7 @@ void RandomSearch::iterate() {
     if(printer){
         std::cout << "ITERATION COMPLETE. CURRENT BEST: " << ideal->getPersonalBest() << std::endl;
     }
-    delete swarm[0];
-    swarm[0] = new Particle(elite);
 
-    delete elite;
     newIteration->setGBest(ideal);
     snapshotManager->enqueue(newIteration);
 }

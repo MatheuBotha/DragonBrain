@@ -225,29 +225,30 @@ void GraphicsProcessor::run(){
             particleSystems[i]->setModel();
             particleSystems[i]->translate(*instanceLocations[i]);
             particleSystems[i]->draw(deltaTime);
-            textRenderer.setModel();
-            textRenderer.translate(*instanceLocations[i]);
-            textRenderer.translate(glm::vec3(1,1,-1));
-            //textRenderer.rotate(glm::radians(-90.0f),glm::vec3(0,1,0));
-            //textRenderer.rotate(glm::radians(-45.0f),glm::vec3(1,0,1));
-            textRenderer.scale(glm::vec3(0.005f));
-            textRenderer.renderText(
-                    snapshotManagers[i]->getAlgorithmName(),
-                    0.0f,
-                    0.0f,
-                    1.0f,
-                    glm::vec3(float(51)/255, float(102)/255, float(255)/255));
+//            textRenderer.setModel();
+//            textRenderer.translate(*instanceLocations[i]);
+//            textRenderer.translate(glm::vec3(1,1,-1));
+//            //textRenderer.rotate(glm::radians(-90.0f),glm::vec3(0,1,0));
+//            //textRenderer.rotate(glm::radians(-45.0f),glm::vec3(1,0,1));
+//            textRenderer.scale(glm::vec3(0.005f));
+//            textRenderer.renderText(
+//                    snapshotManagers[i]->getAlgorithmName(),
+//                    0.0f,
+//                    0.0f,
+//                    1.0f,
+//                    glm::vec3(float(51)/255, float(102)/255, float(255)/255)
+//            );
         }
 
 
-        updateFPS++;
-        textRenderer.setModel();
-        textRenderer.translate(glm::vec3(-6,0,0));
-        textRenderer.rotate(glm::radians(90.0f),glm::vec3(0,1,0));
-        textRenderer.scale(glm::vec3(0.005f));
-        std::ostringstream buff;
-        buff<<currentFPS;
-        textRenderer.renderText("fps: " + buff.str(), 0.0f, 0.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+//        updateFPS++;
+//        textRenderer.setModel();
+//        textRenderer.translate(glm::vec3(-6,0,0));
+//        textRenderer.rotate(glm::radians(90.0f),glm::vec3(0,1,0));
+//        textRenderer.scale(glm::vec3(0.005f));
+//        std::ostringstream buff;
+//        buff<<currentFPS;
+//        textRenderer.renderText("fps: " + buff.str(), 0.0f, 0.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
 
 //        bb.activateShader();
 //        bb.setModel();
@@ -255,6 +256,7 @@ void GraphicsProcessor::run(){
 //        bb.scale(glm::vec3(2.0f, 1.0f, 2.0f));
 //        bb.draw(deltaTime);
 //        bb.deactivateShader();
+
 
         window.swapBuffer();
         //std::cout << "fps = " << timer.end() << std::endl;
