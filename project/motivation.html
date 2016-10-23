@@ -50,6 +50,7 @@
                       <li><a href="../project/summary.html">Summary</a></li>
                       <li><a href="../project/documentation.html">Documentation</a></li>
                       <li><a href="../project/motivation.html">Prize Motivation</a></li>
+                      <li><a href="../project/project_features.html">Project Features</a></li>
                     </ul>
                   </li>
 
@@ -106,24 +107,82 @@
         <h1>Prize Motivational Page</h1>
         <p>Presented below will be the motivations for why we believe we would be worthy of the prize consideration for the COS 301 Main project.</p>
 
-        <h2>Innovation</h2>
+        <h1>Prize: Innovation</h1>
         <p>
-          
+        There is a lot of innovation to be seen in the Swarm Viz project. In many ways, it is the first project of its kind to be so inclusive of so many optimisation strategies, include an existing library of objective functions and be extensible and flexible enough to allow the user the freedom to transform these functions to their specific needs. 
+        <br/><br/>
+        <h3>The Uniqueness of the System</h3>
+        Swarm-based optimisation systems have existed for a long time but in a very specific context. They were typically purpose built exclusively for some very specific application and only for that application. They were designed to solve the problem in as efficient as possible and were not meant to guide their users' thinking by helping them to perceive the complex emergent behaviours they were using. Rather, it was up to the capacity of their user to understand from numerical reports and outputs, what behaviours were occuring and how to proceed from there. In this respect, the creation of a general purpose, extensible, graphical real-time visualiser is something of a first.
+        <br/><br/>
+        <h3>Innovative Solutions to Complex Problems</h3>
+        Another aspect of why our project may be considered innovative is the lack of reliance on external libraries for system critical components. Excepting the GUI, the Optimisers, Objective Functions and Graphics Processor were coded by us, for us and these components alone highlight the great leaps that we have made towards creating a new and useful system for academics and amateurs alike.
+        <br/><br/>
+        Our project is innovative because it creates an extremely powerful tool that can be used by people to visually see the mathematical performance of a swarm-based optimisation process. A free tool that is available for anyone to make use of to understand and employ swarm-based methods without having to be experts in data analysis.
+
         </p>
         <br/>
-        <h2>Architectural Awareness</h2>
+        <h1>Prize: Architectural Awareness</h1>
         <p>
-          
+        A great deal of the current state of the project is due to its initial design. Many of the features such as the ability to concurrently operate optimisers or the synchronisation of actual optimisers and graphics processing is to the effective, efficient and careful design of the architecture of the system and how that architectural specification was realised in the system.
+        <br/>
+        To illustrate this, we will present specific aspects of the system and explain how the architectural designs wre realised in the code and informed the development.
+        <br/>
+        <h3>System Design and the MVC</h3>
+        Consider first, the use of the MVC Pattern. We have made use of a modified variant of the MVC architecture but the essence of the pattern is easily seen in the system in terms of the mapping between Model,View and Controller to Snapshot Manager(Data Store), Graphical Display and Manager component. We have very clearly followed the essence of the MVC pattern to create a response system that realises the scalability and performance goals outlined in the initial project specification.
+        <br/>
+        <h3>Event Driven System</h3>
+        The second most important aspect would be the realisation of an Event-Driven system. Our system operates fundamentally on a process described as <br/>
+          <ul>
+            <li>An Optimiser produces a System State(Snapshot)</li>
+            <li>The snapshot is stored in our data store</li>
+            <li>The Graphics processor removes a snapshot and renders it</li>
+          </ul>   
+          <br/>
+          Here we clearly see an example of creating Events(a snapshot), and how the system processing the event realises the behaviour we require. Without this implementation of this particular architectural idea, the project would not perform nearly as well as this allows us to synchronise the performance of Optimiser and Graphics Processor together even though they operate at generally different speeds.
+        <br/><br/>
+        <h3>Hierarchies and Extensibility</h3>
+        Finally, our project shows good use of appropriate design patterns to achieve the goals of flexibility and extensibility. The use of hierarchial designs for Optimisers and Objective Functions means that new objective functions can easily added to the system without major code rewrites. Furthermore, it also means that, due to a separation of concerns between levels in the hierarchy, modifications to existing optimisers and objective functions can be done without forcing extensive changes.
+        </p>
+
+        <br/>
+        <h1>Prize: Software Engineering Excellence</h1>
+        <p>
+        We at Team Dragon Brain have always held the Agile Development model in high regard. To reflect this, the project has always followed Agile development principles and goals so as to realise the best possible system in the time, resources and capacities available to us. To best illustrate this, we will highlight how we have best served some of the Agile Principles and Methods
+        <ul>
+          <li>
+            Working Software: 
+            <br/>
+            <p>
+            We have always committed to showing our client software demos instead of documentation. As far as possible, throughout the development cycle, we have delivered prototypical instances of software and components to demonstrate our development progress. Showing and presenting working software has always been more important to use than reliance on documentation and we still stand by our commitment.
+            </p>
+          </li>
+          <li>
+            Responding to Change: 
+            <br/>
+            <p>
+            Agile espouses responsive development that changes as and when the requirements do. Similarly, we have committed to ensuring that our development focus is never too narrow that we cannot adapt to changing demands or challenges. We have shown this by our project undergoing several drastic changes in design throughout its lifespan but instead of requiring us to restart, we would adapt our model and continue to develop.
+            </p>
+          </li>
+          <li>
+            Motivated, Committed Workers: 
+            <br/>
+            <p>
+            We at Team Dragon Brain have always believed in the value of the project and each of our members has been exceedingly motivated to see it brought to fruition regardless of the many challenges that we have had to face. This motivation and drive stems from a deepseated passion for the field Artificial Intelligence and the great joy to be had in high quality graphics.
+            </p>
+          </li>
+        </ul>          
         </p>
         <br/>
-        <h2>Software Engineering Excellence</h2>
+        <h1>Prize: User Experience</h1>
         <p>
-          
-        </p>
+        The user experience offered by our application is as minimalist and as pleasant as can be. From the beginning, we wanted to craft a user experience that was as simple and intuitive to use as possible. Therefore, our application makes use of a simple but very effective GUI designed in accordance with conventional usability standards. All options are clearly labelled to the user, there are convenient default values available for all optimisers and functions and with a single press of a button, the user will be introduced to a well rendered, visually appealing 3D environment. 
         <br/>
-        <h2>User Experience</h2>
-        <p>
-          
+        Scaling the experience is even easier as with a quick number input, multiple optimisers can be created and run across multiple screens without any effort on the user's part.
+        <br/>
+        We have tried to craft a viewing environment as pleasant as possible. To that end, we have made use of a mild and relaxing colour palette for landscapes that is also vibrant with easily identifiable particles.
+        <br/>
+        The effect of all of these features is to create a pleasant, easy to use application that is still capable of use as an advanced scientific tool by both novice and advanced users.
+
         </p>
         <br/>
 
