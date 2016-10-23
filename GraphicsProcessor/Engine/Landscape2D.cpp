@@ -26,7 +26,6 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     uniform_color = textureProgram.getUniformLocation("color");
 
     // Create our datapoints, store it as bytes
-#define N 1000
 
     //set up graph variables
 
@@ -58,8 +57,8 @@ Landscape2D::Landscape2D(GLSLProgram textureProgram, ObjectiveFunction* objectiv
     int cx = 0;
     int cy = 0;
 
-    double currentX = (double)xMin;
-    double currentY = (double)yMin;
+    double currentX = xMin;
+    double currentY = yMin;
 
     zMax = DBL_MIN;
     zMin = DBL_MAX;
