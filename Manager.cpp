@@ -169,7 +169,7 @@ void Manager::initializeOptimizer() {
             optimizer[i] = new PSO(objective, snapMan[i], false, bounds, setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                    setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                    setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
-            snapMan[i]->setName("Particle Swarm Optimization");
+            snapMan[i]->setName("PSO");
         }
         else if (optAlg == "Conical PSO")
         {
@@ -197,7 +197,7 @@ void Manager::initializeOptimizer() {
                                      setPkg->getOptimizerSettingsPackage()->getInertiaWeight(),
                                      setPkg->getOptimizerSettingsPackage()->getSocialCoefficient(),
                                      setPkg->getOptimizerSettingsPackage()->getCognitiveCoefficient());
-            snapMan[i]->setName("Guaranteed Convergence PSO");
+            snapMan[i]->setName("GCPSO");
         }
         else if (optAlg == "Elitist Hill Climbing")
         {
