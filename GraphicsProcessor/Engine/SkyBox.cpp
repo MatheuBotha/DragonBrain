@@ -103,7 +103,7 @@ SkyBox::SkyBox(GLSLProgram shaderProgram)
 //    faces.push_back("Textures/SkyBox/mp_majestic/majestic_bk.tga");
 //    faces.push_back("Textures/SkyBox/mp_majestic/majestic_ft.tga");
     cubemapTexture = loadCubemap(faces);
-    printf("loaded cubemap\n");
+    //printf("loaded cubemap\n");
 }
 
 SkyBox::~SkyBox()

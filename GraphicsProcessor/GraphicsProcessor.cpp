@@ -40,7 +40,7 @@ numInstances(numInstances),
 updateFPS(100),
 currentFPS(0)
 {
-    std::cout << "Starting Graphics Processor Test" << std::endl;
+    //std::cout << "Starting Graphics Processor Test" << std::endl;
     //init SDL stuffz
     Engine::init();
 
@@ -112,20 +112,20 @@ GraphicsProcessor::~GraphicsProcessor(){
     delete camera;
     delete boundaries;
     delete particleSystems;
-    std::cout << "Ending Graphics Processor Test" << std::endl;
+    //std::cout << "Ending Graphics Processor Test" << std::endl;
 }
 
 void GraphicsProcessor::run(){
     Landscape2D l(shaderProgram, objective, boundaries);
     l.setCamera(camera);
-    printf("Making Particle System\n");
+//    printf("Making Particle System\n");
     for(int i=0; i<numInstances; ++i)
     {
         particleSystems[i] = new ParticleSystem(snapshotManagers[i], sphereShaderProgram, &l);
         particleSystems[i]->setCamera(camera);
         particleSystems[i]->setAnimationSpeed(animationSpeed);
     }
-    printf("Finished making particle system\n");
+//    printf("Finished making particle system\n");
 
     BoundingBox bb(boundingBoxShaderProgram);
     bb.setCamera(camera);

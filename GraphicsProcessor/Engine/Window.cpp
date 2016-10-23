@@ -53,7 +53,7 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
     }
 
     //Check the OpenGL version
-    std::printf("***   OpenGL Version: %s   ***\n", glGetString(GL_VERSION));
+    //std::printf("***   OpenGL Version: %s   ***\n", glGetString(GL_VERSION));
 
     //Set VSYNC
 

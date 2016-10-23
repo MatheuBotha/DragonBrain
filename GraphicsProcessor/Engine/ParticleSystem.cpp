@@ -25,14 +25,14 @@ ParticleSystem::ParticleSystem(SnapshotManager* snapshotManager, GLSLProgram sha
 
     if(fromSnapshot->getSwarm()[0]->getPositionAtDimension(1) == DBL_MAX)
         twoD = true;
-    printf("xMin = %f\n", landscape->getBoundaries()[0]);
-    printf("xMax = %f\n", landscape->getBoundaries()[1]);
-
-    printf("yMin = %f\n", landscape->getBoundaries()[2]);
-    printf("yMax = %f\n", landscape->getBoundaries()[3]);
-
-    printf("zMin = %f\n", landscape->getZMin());
-    printf("zMax = %f\n", landscape->getZMax());
+//    printf("xMin = %f\n", landscape->getBoundaries()[0]);
+//    printf("xMax = %f\n", landscape->getBoundaries()[1]);
+//
+//    printf("yMin = %f\n", landscape->getBoundaries()[2]);
+//    printf("yMax = %f\n", landscape->getBoundaries()[3]);
+//
+//    printf("zMin = %f\n", landscape->getZMin());
+//    printf("zMax = %f\n", landscape->getZMax());
 
 
     particle = new Sphere2(shaderProgram);
@@ -214,9 +214,9 @@ void ParticleSystem::printParticleDetails(Particle* particle)
 {
     glm::vec3 currentPos = getParticleVector(particle);
 
-    printf("x = %f\n", currentPos.x);
-    printf("y = %f\n", currentPos.y);
-    printf("z = %f\n", currentPos.z);
+//    printf("x = %f\n", currentPos.x);
+//    printf("y = %f\n", currentPos.y);
+//    printf("z = %f\n", currentPos.z);
 }
 
 glm::vec3 ParticleSystem::scaleParticleVector(glm::vec3 particleVector)
