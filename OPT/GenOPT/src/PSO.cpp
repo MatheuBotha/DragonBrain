@@ -100,7 +100,7 @@ void PSO::iterate() {
     Particle **swarm;
     int swarmSize;
 
-    ideal = nullptr;
+    //ideal = nullptr;
     last=snapshotManager->getLast();
     newIteration=new Snapshot(last);
 

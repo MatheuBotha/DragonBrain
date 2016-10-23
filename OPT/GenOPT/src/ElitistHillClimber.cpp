@@ -14,7 +14,7 @@ void ElitistHillClimber::iterate() {
     int swarmSize;
 
     last = snapshotManager->getLast();
-    ideal = nullptr;
+    //ideal = nullptr;
     newIteration = new Snapshot(last);
     if(printer){
         cout << "NEW ITERATION\n";
