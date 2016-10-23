@@ -257,6 +257,7 @@ void GraphicsProcessor::run(){
 //        bb.draw(deltaTime);
 //        bb.deactivateShader();
 
+
         window.swapBuffer();
         //std::cout << "fps = " << timer.end() << std::endl;
         if(updateFPS > currentFPS/2)
